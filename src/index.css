@@ -1,0 +1,113 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+  --font-inter: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  
+  /* Shared Neutrals */
+  --bg-main: #F8FAFC;
+  --bg-card: #FFFFFF;
+  --bg-subtle: #F1F5F9;
+  --border-light: #E2E8F0;
+  --border-subtle: #CBD5E1;
+  --text-primary: #0F172A;
+  --text-secondary: #475569;
+  --text-muted: #94A3B8;
+  
+  /* Role Themes */
+  --role-student: #6366F1;
+  --role-student-light: #EEF2FF;
+  --role-student-border: #C7D2FE;
+  
+  --role-industry: #2563EB;
+  --role-industry-light: #EFF6FF;
+  --role-industry-border: #BFDBFE;
+  
+  --role-academician: #059669;
+  --role-academician-light: #ECFDF5;
+  --role-academician-border: #A7F3D0;
+  
+  --role-institution: #7C3AED;
+  --role-institution-light: #F5F3FF;
+  --role-institution-border: #DDD6FE;
+  
+  --role-superadmin: #0F172A;
+  --role-superadmin-light: #F8FAFC;
+  --role-superadmin-border: #94A3B8;
+  
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(15, 23, 42, 0.06), 0 2px 4px -2px rgba(15, 23, 42, 0.04);
+  --shadow-lg: 0 10px 15px -3px rgba(15, 23, 42, 0.08), 0 4px 6px -4px rgba(15, 23, 42, 0.03);
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-full: 9999px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: var(--font-inter);
+}
+
+body {
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94A3B8;
+}
+
+/* Utility Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Badge Styles */
+.badge-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.badge-success { background: #ECFDF5; color: #059669; border: 1px solid #A7F3D0; }
+.badge-warning { background: #FFFBEB; color: #D97706; border: 1px solid #FDE68A; }
+.badge-danger  { background: #FEF2F2; color: #DC2626; border: 1px solid #FECACA; }
+.badge-info    { background: #EFF6FF; color: #2563EB; border: 1px solid #BFDBFE; }
+.badge-purple  { background: #F5F3FF; color: #7C3AED; border: 1px solid #DDD6FE; }
+
+/* Interactive Elements */
+button {
+  font-family: var(--font-inter);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+button:active {
+  transform: scale(0.98);
+}
