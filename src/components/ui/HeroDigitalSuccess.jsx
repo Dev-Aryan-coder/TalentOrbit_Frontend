@@ -1,7 +1,7 @@
 ﻿import React, { useRef } from 'react';
 import { TimelineAnimation } from './TimelineAnimation';
 import { useMediaQuery } from '../../hooks/useMediaQuery';
-import logoImg from '../../assets/Futuristic Orbit T Emblem.png';
+import logoImg from '../../assets/logo.png';
 
 export function HeroDigitalSuccess({
   title = "Transforming Academia & Industry",
@@ -215,3 +215,4 @@ export function HeroDigitalSuccess({
 }
 
 export default HeroDigitalSuccess;
+
