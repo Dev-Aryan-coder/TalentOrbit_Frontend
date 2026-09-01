@@ -1,20 +1,20 @@
-﻿import React, { Suspense, useRef } from 'react';
+﻿import React, { useRef } from 'react';
 import { TimelineAnimation } from './TimelineAnimation';
 import { useMediaQuery } from '../../hooks/useMediaQuery';
 
 export const HeroDigitalSuccess = ({
-  title = "Accelerating",
-  highlightText = "Digital Success",
-  description = "TalentOrbit bridges students, recruiters, academicians, and institutions with AI-powered skill matching, real-time demand analytics, and verified digital credentials.",
+  title = "Transforming Academia & Industry",
+  highlightText = "Collaboration",
+  description = "TalentOrbit (SIH Problem #26044) empowers Students with AI skill diagnostic assessments, Recruiters with explainable talent scouting, Academicians with research grants & FDPs, and Institutions with real-time NIRF/NAAC placement intelligence.",
   primaryActionText = "Explore Student Portal",
   onPrimaryAction,
-  secondaryActionText = "Recruiter ATS",
+  secondaryActionText = "Recruiter ATS & Talent Pool",
   onSecondaryAction,
   stats = [
-    { label: "AI Matching Engine", sub: "Deterministic & Explainable" },
-    { label: "Verified Skill Genome", sub: "SHA-256 Tamper Proof" },
-    { label: "Institution Heatmaps", sub: "NIRF Metric 5.2.1 / NAAC" },
-    { label: "Faculty Immersion", sub: "FDPs & Sabbaticals" }
+    { label: "AI Matching Engine", sub: "Deterministic & Weighted" },
+    { label: "Verified Skill Genome", sub: "SHA-256 Tamper-Proof" },
+    { label: "Skill Deficit Heatmaps", sub: "NIRF Metric 5.2.1 / NAAC" },
+    { label: "Faculty Immersion", sub: "AICTE FDPs & Sabbaticals" }
   ]
 }) => {
   const timelineRef = useRef(null);
@@ -50,30 +50,30 @@ export const HeroDigitalSuccess = ({
         />
         {/* Subtle Cyber Grid Overlay */}
         <div 
-          className="absolute inset-0 opacity-[0.12]"
+          className="absolute inset-0 opacity-15"
           style={{
-            backgroundImage: `radial-gradient(rgba(255, 255, 255, 0.2) 1px, transparent 1px)`,
+            backgroundImage: `radial-gradient(rgba(255, 255, 255, 0.25) 1px, transparent 1px)`,
             backgroundSize: '32px 32px'
           }}
         />
       </div>
 
       {/* Top Navigation Header */}
-      <header className="relative z-10 flex items-center justify-between px-8 md:px-16 py-6 backdrop-blur-sm border-b border-white/10 bg-black/10">
+      <header className="relative z-10 flex items-center justify-between px-8 md:px-16 py-6 backdrop-blur-md border-b border-white/10 bg-black/20">
         <TimelineAnimation
           once={true}
           animationNum={1}
           timelineRef={timelineRef}
           className="flex items-center gap-3 cursor-pointer"
         >
-          <div className="w-10 h-10 rounded-xl bg-linear-to-br from-[#92dbe0] via-[#0b7bff] to-[#3865cf] flex items-center justify-center font-bold text-white shadow-[0_0_20px_rgba(11,123,255,0.6)]">
+          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#92dbe0] via-[#0b7bff] to-[#3865cf] flex items-center justify-center font-extrabold text-white text-base shadow-[0_0_20px_rgba(11,123,255,0.6)]">
             TO
           </div>
           <div className="flex flex-col">
-            <span className="font-bold text-lg tracking-tight bg-clip-text text-transparent bg-linear-to-r from-white via-slate-100 to-slate-300">
+            <span className="font-bold text-lg tracking-tight text-white">
               TalentOrbit
             </span>
-            <span className="text-[10px] tracking-widest text-[#92dbe0] font-mono uppercase">
+            <span className="text-[10px] tracking-widest text-[#92dbe0] font-mono uppercase font-semibold">
               SIH Problem #26044
             </span>
           </div>
@@ -100,7 +100,7 @@ export const HeroDigitalSuccess = ({
           animationNum={3}
           timelineRef={timelineRef}
           onClick={onPrimaryAction}
-          className="flex items-center gap-2 px-6 py-2.5 rounded-full font-medium text-sm bg-white/10 hover:bg-white/20 border border-white/20 backdrop-blur-md transition cursor-pointer shadow-[0_0_15px_rgba(11,123,255,0.3)]"
+          className="flex items-center gap-2 px-6 py-2.5 rounded-full font-medium text-sm bg-white/10 hover:bg-white/20 border border-white/20 backdrop-blur-md transition cursor-pointer shadow-[0_0_15px_rgba(11,123,255,0.3)] hover:border-white/40"
         >
           <span className="w-2 h-2 rounded-full bg-[#92dbe0] animate-ping" />
           <span>Launch Platform</span>
@@ -113,10 +113,10 @@ export const HeroDigitalSuccess = ({
           once={true}
           animationNum={4}
           timelineRef={timelineRef}
-          className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold tracking-tight leading-[1.05] pb-6"
+          className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight leading-[1.08] pb-6"
         >
           {title}{" "}
-          <span className="bg-clip-text text-transparent bg-linear-to-r from-[#92dbe0] via-[#0b7bff] to-[#3865cf] drop-shadow-[0_0_35px_rgba(11,123,255,0.4)]">
+          <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#92dbe0] via-[#0b7bff] to-[#3865cf] drop-shadow-[0_0_35px_rgba(11,123,255,0.5)] block lg:inline-block">
             {highlightText}
           </span>
         </TimelineAnimation>
@@ -126,22 +126,22 @@ export const HeroDigitalSuccess = ({
           as="p"
           animationNum={5}
           timelineRef={timelineRef}
-          className="max-w-2xl text-slate-300 text-lg sm:text-xl font-light leading-relaxed mb-10"
+          className="max-w-3xl text-slate-300 text-lg sm:text-xl font-light leading-relaxed mb-10"
         >
           {description}
         </TimelineAnimation>
 
-        <div className="flex flex-wrap items-center gap-4">
+        <div className="flex flex-wrap items-center gap-5">
           <TimelineAnimation
             once={true}
             as="button"
             animationNum={6}
             timelineRef={timelineRef}
             onClick={onPrimaryAction}
-            className="cursor-pointer group relative overflow-hidden bg-linear-to-r from-[#92dbe0] via-[#0b7bff] to-[#3865cf] text-white px-8 py-4 rounded-full font-semibold text-base flex items-center gap-3 shadow-[0_0_30px_rgba(11,123,255,0.5)] hover:shadow-[0_0_40px_rgba(146,219,224,0.7)] transition-all transform hover:-translate-y-0.5"
+            className="cursor-pointer group relative overflow-hidden bg-gradient-to-r from-[#92dbe0] via-[#0b7bff] to-[#3865cf] text-white px-8 py-4 rounded-full font-semibold text-base flex items-center gap-3 shadow-[0_0_30px_rgba(11,123,255,0.5)] hover:shadow-[0_0_40px_rgba(146,219,224,0.8)] transition-all transform hover:-translate-y-0.5"
           >
             <span>{primaryActionText}</span>
-            <span className="transition-transform group-hover:translate-x-1">→</span>
+            <span className="transition-transform group-hover:translate-x-1 font-bold">→</span>
           </TimelineAnimation>
 
           <TimelineAnimation
@@ -150,7 +150,7 @@ export const HeroDigitalSuccess = ({
             animationNum={7}
             timelineRef={timelineRef}
             onClick={onSecondaryAction}
-            className="cursor-pointer border border-white/20 bg-white/5 hover:bg-white/10 backdrop-blur-md px-8 py-4 rounded-full font-medium text-base text-slate-200 transition"
+            className="cursor-pointer border border-white/20 bg-white/5 hover:bg-white/10 backdrop-blur-md px-8 py-4 rounded-full font-medium text-base text-slate-200 transition hover:border-white/40"
           >
             {secondaryActionText}
           </TimelineAnimation>
@@ -158,7 +158,7 @@ export const HeroDigitalSuccess = ({
       </div>
 
       {/* Footer Pill Metrics */}
-      <div className="relative z-10 p-8 md:px-20">
+      <div className="relative z-10 p-8 md:px-20 pb-12">
         <TimelineAnimation
           once={true}
           animationNum={8}
@@ -166,9 +166,9 @@ export const HeroDigitalSuccess = ({
           className="grid grid-cols-2 md:grid-cols-4 gap-4 bg-black/40 backdrop-blur-xl border border-white/10 p-6 rounded-2xl max-w-7xl mx-auto shadow-[0_8px_32px_rgba(0,0,0,0.5)]"
         >
           {stats.map((item, idx) => (
-            <div key={idx} className="border-l border-white/10 pl-4">
-              <p className="text-white font-semibold text-sm">{item.label}</p>
-              <p className="text-slate-400 text-xs mt-0.5">{item.sub}</p>
+            <div key={idx} className="border-l-2 border-[#0b7bff]/60 pl-4">
+              <p className="text-white font-semibold text-sm sm:text-base">{item.label}</p>
+              <p className="text-slate-400 text-xs sm:text-sm mt-0.5">{item.sub}</p>
             </div>
           ))}
         </TimelineAnimation>

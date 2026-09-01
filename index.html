@@ -1,12 +1,39 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>talentorbit</title>
+    <title>TalentOrbit - AI Skill & Career Intelligence Platform</title>
+    <!-- Tailwind CSS CDN for instant styling and zero-dependency rendering -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              brand: {
+                cyan: '#92dbe0',
+                blue: '#0b7bff',
+                indigo: '#3865cf',
+                dark: '#050811'
+              }
+            }
+          }
+        }
+      }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+      * {
+        font-family: 'Inter', sans-serif;
+      }
+    </style>
   </head>
-  <body>
+  <body class="bg-[#050811] text-white antialiased overflow-x-hidden">
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
