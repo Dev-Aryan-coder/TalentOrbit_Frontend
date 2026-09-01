@@ -5,7 +5,7 @@ import logoImg from '../../assets/logo.png';
 export function HeroDigitalSuccess({
   title = "Transforming Academia & Industry",
   highlightText = "Collaboration",
-  description = "TalentOrbit (SIH Problem #26044) empowers Students with AI skill diagnostic assessments, Recruiters with explainable talent scouting, Academicians with research grants & FDPs, and Institutions with real-time NIRF/NAAC placement intelligence.",
+  description = "TalentOrbit empowers Students with AI skill diagnostic assessments, Recruiters with explainable talent scouting, Academicians with research grants & FDPs, and Institutions with real-time NIRF/NAAC placement intelligence.",
   primaryActionText = "Explore Student Portal",
   onPrimaryAction,
   secondaryActionText = "Recruiter ATS & Talent Pool",
@@ -34,7 +34,7 @@ export function HeroDigitalSuccess({
           </div>
           <div className="hero-brand-text">
             <span className="hero-brand-name">TalentOrbit</span>
-            <span className="hero-brand-tag">SIH Problem #26044</span>
+            <span className="hero-brand-tag">Career & Skill Intelligence</span>
           </div>
         </div>
 
@@ -95,3 +95,5 @@ export function HeroDigitalSuccess({
 }
 
 export default HeroDigitalSuccess;
+
+

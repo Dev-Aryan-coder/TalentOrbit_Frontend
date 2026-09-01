@@ -77,7 +77,7 @@ export function HomePage({ onNavigateRole }) {
       <HeroDigitalSuccess
         title="Transforming Academia & Industry"
         highlightText="Collaboration"
-        description="TalentOrbit (SIH Problem #26044) is the National Career & Higher Education Intelligence Platform bridging Students, Recruiters, Academicians, and Institutions with explainable AI benchmarking and verified placement analytics."
+        description="TalentOrbit is the National Career & Higher Education Intelligence Platform bridging Students, Recruiters, Academicians, and Institutions with explainable AI benchmarking and verified placement analytics."
         primaryActionText="Explore Student Portal"
         onPrimaryAction={() => onNavigateRole ? onNavigateRole('student') : console.log('student')}
         secondaryActionText="Recruiter ATS & Talent Pool"
@@ -88,7 +88,7 @@ export function HomePage({ onNavigateRole }) {
       <section id="features" className="section-features">
         <div className="section-container">
           <div className="section-header">
-            <div className="section-pill-tag">SIH Problem #26044 Solution Architecture</div>
+            <div className="section-pill-tag">Career & Skill Intelligence Solution Architecture</div>
             <h2 className="section-title">Built For National Impact</h2>
             <p className="section-subtitle">
               Bridging the 45% industry-academia skill gap with deterministic AI diagnostics, verified student genomes, and university accreditation intelligence.
@@ -288,7 +288,7 @@ export function HomePage({ onNavigateRole }) {
         </div>
 
         <div className="footer-bottom">
-          <span>© 2026 TalentOrbit. Built for National Higher Education & Industry Innovation (SIH #26044).</span>
+          <span>© 2026 TalentOrbit. Built for National Higher Education & Industry Innovation .</span>
           <span style={{ color: '#7ce8ff' }}>Production Architecture Verified</span>
         </div>
       </footer>
@@ -297,3 +297,5 @@ export function HomePage({ onNavigateRole }) {
 }
 
 export default HomePage;
+
+
