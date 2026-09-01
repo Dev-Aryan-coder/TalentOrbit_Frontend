@@ -1,6 +1,7 @@
 ﻿import React, { useRef } from 'react';
 import { TimelineAnimation } from './TimelineAnimation';
 import { useMediaQuery } from '../../hooks/useMediaQuery';
+import logoImg from '../../assets/Futuristic Orbit T Emblem.png';
 
 export function HeroDigitalSuccess({
   title = "Transforming Academia & Industry",
@@ -50,17 +51,22 @@ export function HeroDigitalSuccess({
         />
       </div>
 
-      {/* Top Header with Left-Aligned Logo and Pill Navigation */}
+      {/* Top Header with Futuristic Emblem Logo and Pill Navigation */}
       <header className="relative z-20 w-full max-w-7xl mx-auto px-6 md:px-12 py-6 flex items-center justify-between">
-        {/* Left Section: TalentOrbit Brand Logo */}
+        {/* Left Section: Futuristic Orbit T Emblem Logo */}
         <TimelineAnimation
           once={true}
           animationNum={1}
           timelineRef={timelineRef}
-          className="flex items-center gap-3.5 cursor-pointer select-none"
+          className="flex items-center gap-3 cursor-pointer select-none group"
         >
-          <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-[#92dbe0] via-[#0b7bff] to-[#3865cf] flex items-center justify-center font-extrabold text-white text-lg shadow-[0_0_24px_rgba(11,123,255,0.65)]">
-            TO
+          <div className="relative flex items-center justify-center">
+            <div className="absolute -inset-1 rounded-2xl bg-gradient-to-r from-[#92dbe0] to-[#0b7bff] opacity-50 blur-sm group-hover:opacity-100 transition duration-300" />
+            <img 
+              src={logoImg} 
+              alt="TalentOrbit Emblem" 
+              className="relative w-11 h-11 object-contain rounded-xl drop-shadow-[0_0_15px_rgba(11,123,255,0.7)]"
+            />
           </div>
           <div className="flex flex-col text-left">
             <span className="font-extrabold text-xl tracking-tight text-white leading-tight">
