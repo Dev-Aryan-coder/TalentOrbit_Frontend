@@ -2,19 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer utilities {
-  .font-display-serif {
-    font-family: 'Playfair Display', 'Instrument Serif', Georgia, serif;
-  }
-}
-
-* {
+*, *::before, *::after {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-body {
+html, body, #root {
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
   background-color: #050811;
-  color: #FFFFFF;
+  color: #ffffff;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
 }

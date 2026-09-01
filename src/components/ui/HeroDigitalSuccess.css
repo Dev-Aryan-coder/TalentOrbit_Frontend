@@ -94,20 +94,21 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 46px;
-  height: 46px;
+  width: 44px;
+  height: 44px;
   border-radius: 12px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  box-shadow: 0 0 20px rgba(11, 123, 255, 0.5);
-  padding: 4px;
+  background: transparent;
+  border: none;
+  overflow: hidden;
 }
 
 .hero-logo-img {
-  width: 36px;
-  height: 36px;
+  width: 40px;
+  height: 40px;
   object-fit: contain;
   display: block;
+  mix-blend-mode: screen;
+  filter: drop-shadow(0 0 12px rgba(11, 123, 255, 0.7));
 }
 
 .hero-brand-text {
@@ -366,3 +367,4 @@
   .hero-footer { padding: 0 20px 24px 20px; }
   .hero-stats-grid { grid-template-columns: 1fr; }
 }
+
