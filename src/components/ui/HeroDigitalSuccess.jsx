@@ -34,7 +34,7 @@ export const HeroDigitalSuccess = ({
         />
         <div 
           className="absolute top-1/3 -right-32 w-[750px] h-[750px] rounded-full blur-[160px] opacity-60"
-          style={{ background: 'radial-gradient(circle, #3865cf 0%, #0b7bff 50%, transparent 80%)' }}
+          style={{ background: 'radial-gradient(circle, #ff3366 0%, #3865cf 50%, transparent 80%)' }}
         />
         <div 
           className="absolute -bottom-40 left-1/4 w-[850px] h-[650px] rounded-full blur-[180px] opacity-50"
@@ -113,16 +113,16 @@ export const HeroDigitalSuccess = ({
           <span>Next-Gen Higher Education & Industry Alignment</span>
         </TimelineAnimation>
 
-        {/* Hero Title with the exact Serif font style */}
+        {/* Hero Headline with Playfair Display & Instrument Serif + uppercase + tracking-[0.1em] */}
         <TimelineAnimation
           once={true}
           as="h1"
           animationNum={5}
           timelineRef={timelineRef}
-          className="font-serif-luxury text-4xl sm:text-6xl md:text-7xl lg:text-8xl tracking-[0.03em] leading-[1.12] pb-6"
+          className="font-display-serif uppercase tracking-[0.1em] text-4xl sm:text-6xl md:text-7xl lg:text-8xl leading-[1.12] pb-6 font-normal drop-shadow-[0_10px_30px_rgba(0,0,0,0.8)]"
         >
-          <span className="text-white drop-shadow-[0_8px_20px_rgba(0,0,0,0.6)]">{title}</span>{" "}
-          <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#92dbe0] via-[#0b7bff] to-[#3865cf] drop-shadow-[0_0_35px_rgba(11,123,255,0.5)] block lg:inline-block font-normal">
+          <span className="text-white">{title}</span>{" "}
+          <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#92dbe0] via-[#0b7bff] to-[#3865cf] drop-shadow-[0_0_35px_rgba(11,123,255,0.5)] block lg:inline-block">
             {highlightText}
           </span>
         </TimelineAnimation>
