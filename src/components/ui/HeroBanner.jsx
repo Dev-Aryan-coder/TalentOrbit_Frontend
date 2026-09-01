@@ -19,40 +19,42 @@ export default function HeroBanner({
 }) {
   return (
     <div className="hero-banner-root">
-      {/* 1. Top Navigation Header */}
-      <header className="hero-nav-header">
-        {/* Left: Brand Logo & Title */}
-        <div className="hero-brand-group">
-          <div className="hero-brand-logo-box">
-            <img 
-              src={logoImg} 
-              alt="TalentOrbit" 
-              className="hero-brand-logo-img"
-              style={{ width: '34px', height: '34px', maxWidth: '34px', maxHeight: '34px', objectFit: 'contain', display: 'block' }}
-            />
+      {/* 1. Sticky Floating Glassmorphic + Neomorphic Pill Header */}
+      <div className="hero-sticky-header-wrapper">
+        <header className="hero-nav-header">
+          {/* Left: Brand Logo & Title */}
+          <div className="hero-brand-group">
+            <div className="hero-brand-logo-box">
+              <img 
+                src={logoImg} 
+                alt="TalentOrbit" 
+                className="hero-brand-logo-img"
+                style={{ width: '32px', height: '32px', maxWidth: '32px', maxHeight: '32px', objectFit: 'contain', display: 'block' }}
+              />
+            </div>
+            <div className="hero-brand-text-col">
+              <span className="hero-brand-title-text">TalentOrbit</span>
+              <span className="hero-brand-subtag-text">
+                CONNECT <span className="dot-teal">•</span> GROW <span className="dot-blue">•</span> SUCCEED
+              </span>
+            </div>
           </div>
-          <div className="hero-brand-text-col">
-            <span className="hero-brand-title-text">TalentOrbit</span>
-            <span className="hero-brand-subtag-text">
-              CONNECT <span className="dot-teal">•</span> GROW <span className="dot-blue">•</span> SUCCEED
-            </span>
-          </div>
-        </div>
 
-        {/* Center: Frosted Glass Floating Pill Navbar */}
-        <nav className="hero-center-pill-nav">
-          <a href="#how-it-works" className="hero-pill-link">How It Works</a>
-          <a href="#features" className="hero-pill-link">Features</a>
-          <a href="#about" className="hero-pill-link">About Us</a>
-          <a href="#contact" className="hero-pill-link">Contact</a>
-        </nav>
+          {/* Center: Frosted Glass Floating Pill Navbar */}
+          <nav className="hero-center-pill-nav">
+            <a href="#how-it-works" className="hero-pill-link">How It Works</a>
+            <a href="#features" className="hero-pill-link">Features</a>
+            <a href="#about" className="hero-pill-link">About Us</a>
+            <a href="#contact" className="hero-pill-link">Contact</a>
+          </nav>
 
-        {/* Right: Launch Button */}
-        <button type="button" onClick={onPrimaryAction} className="hero-header-launch-btn">
-          <span className="hero-btn-pulse-dot" />
-          <span>Launch Platform</span>
-        </button>
-      </header>
+          {/* Right: Launch Button */}
+          <button type="button" onClick={onPrimaryAction} className="hero-header-launch-btn">
+            <span className="hero-btn-pulse-dot" />
+            <span>Launch Platform</span>
+          </button>
+        </header>
+      </div>
 
       {/* 2. Main Center Content */}
       <div className="hero-main-stage">

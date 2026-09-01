@@ -11,56 +11,83 @@
   justify-content: space-between;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   color: #041638;
-  overflow: hidden;
   box-sizing: border-box;
 }
 
-/* Header Container */
-.hero-nav-header {
-  position: relative;
-  z-index: 30;
+/* Sticky Header Bar across all scrolling */
+.hero-sticky-header-wrapper {
+  position: sticky;
+  top: 14px;
+  z-index: 1000;
   width: 100%;
   max-width: 1320px;
   margin: 0 auto;
-  padding: 24px 32px;
+  padding: 0 24px;
+  box-sizing: border-box;
+  pointer-events: none; /* Allows click-through outside the pills */
+}
+
+.hero-nav-header {
+  pointer-events: auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  box-sizing: border-box;
+  padding: 8px 16px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  /* Glassmorphism + Neomorphism Dual Glow & Inset Highlights */
+  box-shadow: 
+    0 12px 35px rgba(0, 50, 150, 0.12),
+    0 2px 6px rgba(0, 50, 150, 0.08),
+    inset 0 1px 1px rgba(255, 255, 255, 0.9),
+    inset 0 -1px 2px rgba(0, 50, 150, 0.05);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Brand Logo + Name + Tagline */
+.hero-nav-header:hover {
+  background: rgba(255, 255, 255, 0.78);
+  box-shadow: 
+    0 16px 45px rgba(0, 50, 150, 0.16),
+    0 4px 10px rgba(0, 50, 150, 0.08),
+    inset 0 1px 2px rgba(255, 255, 255, 1);
+}
+
+/* Left: Brand Logo & Title */
 .hero-brand-group {
   display: flex;
   align-items: center;
   gap: 12px;
   cursor: pointer;
   text-decoration: none;
+  padding-left: 6px;
 }
 
 .hero-brand-logo-box {
-  width: 44px;
-  height: 44px;
-  min-width: 44px;
-  max-width: 44px;
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  max-width: 40px;
   border-radius: 12px;
-  background: rgba(255, 255, 255, 0.8);
-  border: 1px solid rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  box-shadow: 0 4px 16px rgba(0, 50, 150, 0.12);
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(255, 255, 255, 1);
+  box-shadow: 
+    3px 3px 8px rgba(0, 50, 150, 0.12),
+    -2px -2px 6px rgba(255, 255, 255, 0.9);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 4px;
+  padding: 3px;
   box-sizing: border-box;
 }
 
 .hero-brand-logo-img {
-  width: 34px !important;
-  height: 34px !important;
-  max-width: 34px !important;
-  max-height: 34px !important;
+  width: 32px !important;
+  height: 32px !important;
+  max-width: 32px !important;
+  max-height: 32px !important;
   object-fit: contain !important;
   display: block !important;
 }
@@ -73,7 +100,7 @@
 
 .hero-brand-title-text {
   font-weight: 800;
-  font-size: 22px;
+  font-size: 20px;
   color: #041638;
   line-height: 1.1;
   letter-spacing: -0.02em;
@@ -83,12 +110,12 @@
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  font-size: 9px;
+  font-size: 8.5px;
   font-weight: 700;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.2em;
   color: #1e293b;
   text-transform: uppercase;
-  margin-top: 3px;
+  margin-top: 2px;
   line-height: 1;
 }
 
@@ -104,33 +131,34 @@
   line-height: 0;
 }
 
-/* Pill Navigation Bar */
+/* Center: Neomorphic Pill Navbar Links */
 .hero-center-pill-nav {
   display: flex;
   align-items: center;
   gap: 4px;
-  padding: 6px 14px;
+  padding: 4px 8px;
   border-radius: 9999px;
-  background: rgba(255, 255, 255, 0.75);
-  border: 1px solid rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(32px);
-  -webkit-backdrop-filter: blur(32px);
-  box-shadow: 0 10px 30px rgba(0, 50, 150, 0.1);
+  background: rgba(255, 255, 255, 0.5);
+  box-shadow: inset 1px 1px 3px rgba(0, 50, 150, 0.08), inset -1px -1px 3px rgba(255, 255, 255, 0.8);
 }
 
 .hero-pill-link {
-  padding: 8px 18px;
+  padding: 8px 16px;
   border-radius: 9999px;
-  font-size: 14px;
+  font-size: 13.5px;
   font-weight: 600;
   color: #041638;
   text-decoration: none;
-  transition: all 0.2s ease;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .hero-pill-link:hover {
-  background: rgba(255, 255, 255, 0.95);
+  background: #ffffff;
   color: #0055ff;
+  box-shadow: 
+    2px 2px 6px rgba(0, 50, 150, 0.1),
+    -2px -2px 6px rgba(255, 255, 255, 0.9);
+  transform: translateY(-1px);
 }
 
 /* Header Launch Button */
@@ -138,15 +166,17 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 10px 24px;
+  padding: 10px 22px;
   border-radius: 9999px;
-  font-size: 14px;
+  font-size: 13.5px;
   font-weight: 700;
   color: #ffffff;
   background: #041638;
   border: 1px solid #041638;
   cursor: pointer;
-  box-shadow: 0 4px 18px rgba(4, 22, 56, 0.35);
+  box-shadow: 
+    0 4px 14px rgba(4, 22, 56, 0.35),
+    inset 0 1px 1px rgba(255, 255, 255, 0.2);
   transition: all 0.25s ease;
 }
 
@@ -154,11 +184,12 @@
   background: #003399;
   border-color: #003399;
   transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(0, 51, 153, 0.45);
 }
 
 .hero-btn-pulse-dot {
-  width: 8px;
-  height: 8px;
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
   background-color: #7ce8ff;
   box-shadow: 0 0 8px #7ce8ff;
@@ -167,11 +198,11 @@
 /* Center Stage Content */
 .hero-main-stage {
   position: relative;
-  z-index: 20;
+  z-index: 10;
   width: 100%;
   max-width: 1320px;
   margin: 0 auto;
-  padding: 36px 32px;
+  padding: 48px 32px;
   text-align: left;
   box-sizing: border-box;
 }
@@ -189,7 +220,9 @@
   font-weight: 700;
   color: #041638;
   margin-bottom: 20px;
-  box-shadow: 0 4px 15px rgba(0, 50, 150, 0.08);
+  box-shadow: 
+    0 4px 15px rgba(0, 50, 150, 0.08),
+    inset 0 1px 1px #ffffff;
 }
 
 .hero-badge-marker {
@@ -249,7 +282,9 @@
   background: #041638;
   border: none;
   cursor: pointer;
-  box-shadow: 0 8px 25px rgba(4, 22, 56, 0.4);
+  box-shadow: 
+    0 8px 25px rgba(4, 22, 56, 0.4),
+    inset 0 1px 1px rgba(255, 255, 255, 0.2);
   transition: all 0.3s ease;
 }
 
@@ -269,6 +304,9 @@
   border: 1px solid rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(20px);
   cursor: pointer;
+  box-shadow: 
+    0 4px 15px rgba(0, 50, 150, 0.08),
+    inset 0 1px 1px #ffffff;
   transition: all 0.25s ease;
 }
 
@@ -280,7 +318,7 @@
 /* Bottom Metrics Cards */
 .hero-bottom-metrics {
   position: relative;
-  z-index: 20;
+  z-index: 10;
   width: 100%;
   max-width: 1320px;
   margin: 0 auto;
@@ -297,7 +335,9 @@
   background: rgba(255, 255, 255, 0.75);
   border: 1px solid rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(32px);
-  box-shadow: 0 10px 30px rgba(0, 50, 150, 0.1);
+  box-shadow: 
+    0 10px 30px rgba(0, 50, 150, 0.1),
+    inset 0 1px 1px #ffffff;
 }
 
 .hero-metric-item {
@@ -319,8 +359,8 @@
   margin: 4px 0 0 0;
 }
 
-@media (max-width: 768px) {
-  .hero-nav-header { padding: 16px 20px; }
+@media (max-width: 900px) {
+  .hero-nav-header { padding: 8px 12px; }
   .hero-center-pill-nav { display: none; }
   .hero-main-stage { padding: 24px 20px; }
   .hero-stage-actions { flex-direction: column; align-items: stretch; }
