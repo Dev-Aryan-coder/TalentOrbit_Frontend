@@ -1,0 +1,368 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+
+.hero-container {
+  position: relative;
+  min-height: 100vh;
+  background-color: #050811;
+  color: #ffffff;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* Glowing Mesh Orbs */
+.hero-bg-orbs {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.hero-orb-1 {
+  position: absolute;
+  top: -150px;
+  left: -150px;
+  width: 700px;
+  height: 700px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(146, 219, 224, 0.65) 0%, rgba(11, 123, 255, 0.5) 55%, transparent 75%);
+  filter: blur(140px);
+  animation: pulseOrb 8s infinite alternate ease-in-out;
+}
+
+.hero-orb-2 {
+  position: absolute;
+  top: 25%;
+  right: -150px;
+  width: 750px;
+  height: 750px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 51, 102, 0.45) 0%, rgba(56, 101, 207, 0.6) 50%, transparent 75%);
+  filter: blur(150px);
+}
+
+.hero-orb-3 {
+  position: absolute;
+  bottom: -200px;
+  left: 20%;
+  width: 850px;
+  height: 650px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(29, 78, 216, 0.5) 0%, rgba(146, 219, 224, 0.35) 45%, transparent 70%);
+  filter: blur(160px);
+}
+
+.hero-grid-overlay {
+  position: absolute;
+  inset: 0;
+  opacity: 0.15;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.3) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+@keyframes pulseOrb {
+  0% { transform: scale(1) translate(0, 0); }
+  100% { transform: scale(1.15) translate(30px, 30px); }
+}
+
+/* Header & Navigation */
+.hero-header {
+  position: relative;
+  z-index: 20;
+  width: 100%;
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 24px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.hero-brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.hero-logo-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 20px rgba(11, 123, 255, 0.5);
+  padding: 4px;
+}
+
+.hero-logo-img {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+  display: block;
+}
+
+.hero-brand-text {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.hero-brand-name {
+  font-weight: 800;
+  font-size: 20px;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+  line-height: 1.1;
+}
+
+.hero-brand-tag {
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  color: #92dbe0;
+  font-family: monospace;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-top: 2px;
+}
+
+/* Floating Pill Navigation */
+.hero-pill-nav {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+  transition: all 0.3s ease;
+}
+
+.hero-pill-nav:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+.hero-nav-link {
+  padding: 8px 18px;
+  border-radius: 9999px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #cbd5e1;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.hero-nav-link:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.12);
+  text-shadow: 0 0 12px rgba(255, 255, 255, 0.5);
+}
+
+/* Header Action Button */
+.hero-btn-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 22px;
+  border-radius: 9999px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(12px);
+  cursor: pointer;
+  box-shadow: 0 0 15px rgba(11, 123, 255, 0.25);
+  transition: all 0.25s ease;
+}
+
+.hero-btn-header:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: translateY(-1px);
+}
+
+.hero-ping-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #92dbe0;
+  box-shadow: 0 0 8px #92dbe0;
+}
+
+/* Hero Center Content */
+.hero-center {
+  position: relative;
+  z-index: 10;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 1320px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 48px 32px;
+  text-align: left;
+}
+
+.hero-pill-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  font-size: 13px;
+  font-weight: 500;
+  color: #92dbe0;
+  width: fit-content;
+  margin-bottom: 24px;
+}
+
+.hero-badge-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #0b7bff;
+}
+
+/* Headline with Playfair Display & Instrument Serif */
+.hero-headline {
+  font-family: 'Playfair Display', 'Instrument Serif', Georgia, serif;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: clamp(2.5rem, 5.5vw, 5.2rem);
+  line-height: 1.12;
+  font-weight: 400;
+  margin: 0 0 24px 0;
+  text-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+}
+
+.hero-headline-highlight {
+  background: linear-gradient(90deg, #92dbe0 0%, #0b7bff 50%, #3865cf 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+.hero-description {
+  max-width: 780px;
+  font-size: clamp(1rem, 1.2vw, 1.25rem);
+  font-weight: 300;
+  line-height: 1.7;
+  color: #94a3b8;
+  margin: 0 0 40px 0;
+}
+
+/* Action Buttons */
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 20px;
+}
+
+.hero-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 36px;
+  border-radius: 9999px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #ffffff;
+  background: linear-gradient(90deg, #92dbe0 0%, #0b7bff 50%, #3865cf 100%);
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 0 35px rgba(11, 123, 255, 0.55);
+  transition: all 0.3s ease;
+}
+
+.hero-btn-primary:hover {
+  box-shadow: 0 0 45px rgba(146, 219, 224, 0.85);
+  transform: translateY(-2px);
+}
+
+.hero-btn-secondary {
+  padding: 16px 32px;
+  border-radius: 9999px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #e2e8f0;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(12px);
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.hero-btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.4);
+  color: #ffffff;
+}
+
+/* Footer Metrics Grid */
+.hero-footer {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 32px 36px 32px;
+}
+
+.hero-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  padding: 24px 32px;
+  border-radius: 20px;
+  background: rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(24px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+}
+
+.hero-stat-card {
+  border-left: 2px solid rgba(11, 123, 255, 0.7);
+  padding-left: 16px;
+}
+
+.hero-stat-label {
+  font-size: 15px;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0;
+}
+
+.hero-stat-sub {
+  font-size: 13px;
+  color: #94a3b8;
+  margin: 4px 0 0 0;
+}
+
+/* Responsive Breakpoints */
+@media (max-width: 768px) {
+  .hero-header { padding: 16px 20px; }
+  .hero-pill-nav { display: none; }
+  .hero-center { padding: 32px 20px; }
+  .hero-actions { flex-direction: column; align-items: stretch; }
+  .hero-btn-primary, .hero-btn-secondary { justify-content: center; width: 100%; }
+  .hero-footer { padding: 0 20px 24px 20px; }
+  .hero-stats-grid { grid-template-columns: 1fr; }
+}
