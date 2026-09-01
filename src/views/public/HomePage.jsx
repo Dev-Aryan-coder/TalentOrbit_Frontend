@@ -1,5 +1,5 @@
 ﻿import React, { useState } from 'react';
-import HeroDigitalSuccess from '../../components/ui/HeroDigitalSuccess';
+import HeroBanner from '../../components/ui/HeroBanner';
 import './HomePage.css';
 import logoImg from '../../assets/logo.png';
 
@@ -74,7 +74,7 @@ export function HomePage({ onNavigateRole }) {
   return (
     <div className="landing-page">
       {/* 1. Hero Banner with Fluid Silk Cyan Background & Floating Pill Navbar */}
-      <HeroDigitalSuccess
+      <HeroBanner
         title="Transforming Academia & Industry"
         highlightText="Collaboration"
         description="TalentOrbit is the National Career & Higher Education Intelligence Platform bridging Students, Recruiters, Academicians, and Institutions with explainable AI benchmarking and verified placement analytics."
@@ -302,6 +302,7 @@ export function HomePage({ onNavigateRole }) {
 }
 
 export default HomePage;
+
 
 
 
