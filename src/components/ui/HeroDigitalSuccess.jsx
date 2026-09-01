@@ -3,10 +3,10 @@ import { TimelineAnimation } from './TimelineAnimation';
 import { useMediaQuery } from '../../hooks/useMediaQuery';
 
 export const HeroDigitalSuccess = ({
-  headline = "REFRESHING",
-  subtitle = "The Next Generation Career & Skill Intelligence Network",
-  description = "TalentOrbit breaks conventional placement barriers with verifiable AI skill benchmarking, explainable recruiter matching, faculty research synergy, and national NIRF/NAAC analytics.",
-  primaryActionText = "Launch Student Portal",
+  title = "Transforming Academia & Industry",
+  highlightText = "Collaboration",
+  description = "TalentOrbit (SIH Problem #26044) empowers Students with AI skill diagnostic assessments, Recruiters with explainable talent scouting, Academicians with research grants & FDPs, and Institutions with real-time NIRF/NAAC placement intelligence.",
+  primaryActionText = "Explore Student Portal",
   onPrimaryAction,
   secondaryActionText = "Recruiter ATS & Talent Pool",
   onSecondaryAction,
@@ -34,7 +34,7 @@ export const HeroDigitalSuccess = ({
         />
         <div 
           className="absolute top-1/3 -right-32 w-[750px] h-[750px] rounded-full blur-[160px] opacity-60"
-          style={{ background: 'radial-gradient(circle, #ff3366 0%, #3865cf 50%, transparent 80%)' }}
+          style={{ background: 'radial-gradient(circle, #3865cf 0%, #0b7bff 50%, transparent 80%)' }}
         />
         <div 
           className="absolute -bottom-40 left-1/4 w-[850px] h-[650px] rounded-full blur-[180px] opacity-50"
@@ -113,42 +113,27 @@ export const HeroDigitalSuccess = ({
           <span>Next-Gen Higher Education & Industry Alignment</span>
         </TimelineAnimation>
 
-        {/* Big Editorial Serif Title: REFRESHING */}
-        <div className="relative inline-block mb-6">
-          {/* Subtle background colorful accent blocks behind text (like the image) */}
-          <div className="absolute -left-3 top-2 w-12 h-14 bg-gradient-to-tr from-pink-500 to-rose-400 rounded-sm opacity-60 blur-xs -z-10" />
-          <div className="absolute left-[28%] -top-3 w-16 h-16 bg-gradient-to-tr from-cyan-400 to-blue-500 rounded-sm opacity-60 blur-xs -z-10" />
-          <div className="absolute left-[65%] top-6 w-14 h-14 bg-gradient-to-tr from-orange-500 to-amber-400 rounded-sm opacity-60 blur-xs -z-10" />
-          <div className="absolute right-0 -bottom-2 w-12 h-12 bg-gradient-to-tr from-indigo-500 to-purple-500 rounded-sm opacity-60 blur-xs -z-10" />
-
-          <TimelineAnimation
-            once={true}
-            animationNum={5}
-            timelineRef={timelineRef}
-            className="font-display-serif text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-normal text-white uppercase tracking-[0.1em] drop-shadow-[0_10px_30px_rgba(0,0,0,0.8)] select-none"
-          >
-            {headline}
-          </TimelineAnimation>
-        </div>
-
-        {/* Subtitle */}
+        {/* Hero Title with the exact Serif font style */}
         <TimelineAnimation
           once={true}
-          as="h2"
-          animationNum={6}
+          as="h1"
+          animationNum={5}
           timelineRef={timelineRef}
-          className="text-xl sm:text-2xl md:text-3xl font-light text-slate-200 tracking-wide mb-6 max-w-3xl"
+          className="font-serif-luxury text-4xl sm:text-6xl md:text-7xl lg:text-8xl tracking-[0.03em] leading-[1.12] pb-6"
         >
-          {subtitle}
+          <span className="text-white drop-shadow-[0_8px_20px_rgba(0,0,0,0.6)]">{title}</span>{" "}
+          <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#92dbe0] via-[#0b7bff] to-[#3865cf] drop-shadow-[0_0_35px_rgba(11,123,255,0.5)] block lg:inline-block font-normal">
+            {highlightText}
+          </span>
         </TimelineAnimation>
 
         {/* Description */}
         <TimelineAnimation
           once={true}
           as="p"
-          animationNum={7}
+          animationNum={6}
           timelineRef={timelineRef}
-          className="max-w-2xl text-slate-400 text-base sm:text-lg font-light leading-relaxed mb-10"
+          className="max-w-2xl text-slate-300 text-lg sm:text-xl font-light leading-relaxed mb-10"
         >
           {description}
         </TimelineAnimation>
@@ -158,7 +143,7 @@ export const HeroDigitalSuccess = ({
           <TimelineAnimation
             once={true}
             as="button"
-            animationNum={8}
+            animationNum={7}
             timelineRef={timelineRef}
             onClick={onPrimaryAction}
             className="cursor-pointer group relative overflow-hidden bg-gradient-to-r from-[#92dbe0] via-[#0b7bff] to-[#3865cf] text-white px-8 py-4 rounded-full font-semibold text-base flex items-center gap-3 shadow-[0_0_30px_rgba(11,123,255,0.5)] hover:shadow-[0_0_40px_rgba(146,219,224,0.8)] transition-all transform hover:-translate-y-0.5"
@@ -170,7 +155,7 @@ export const HeroDigitalSuccess = ({
           <TimelineAnimation
             once={true}
             as="button"
-            animationNum={9}
+            animationNum={8}
             timelineRef={timelineRef}
             onClick={onSecondaryAction}
             className="cursor-pointer border border-white/20 bg-white/5 hover:bg-white/10 backdrop-blur-md px-8 py-4 rounded-full font-medium text-base text-slate-200 transition hover:border-white/40"
@@ -184,7 +169,7 @@ export const HeroDigitalSuccess = ({
       <div className="relative z-10 p-6 md:px-20 pb-10">
         <TimelineAnimation
           once={true}
-          animationNum={10}
+          animationNum={9}
           timelineRef={timelineRef}
           className="grid grid-cols-2 md:grid-cols-4 gap-4 bg-black/40 backdrop-blur-xl border border-white/10 p-6 rounded-2xl max-w-7xl mx-auto shadow-[0_8px_32px_rgba(0,0,0,0.5)]"
         >
