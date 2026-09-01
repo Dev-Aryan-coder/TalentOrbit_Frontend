@@ -2,7 +2,7 @@
 import { TimelineAnimation } from './TimelineAnimation';
 import { useMediaQuery } from '../../hooks/useMediaQuery';
 
-export const HeroDigitalSuccess = ({
+export function HeroDigitalSuccess({
   title = "Transforming Academia & Industry",
   highlightText = "Collaboration",
   description = "TalentOrbit (SIH Problem #26044) empowers Students with AI skill diagnostic assessments, Recruiters with explainable talent scouting, Academicians with research grants & FDPs, and Institutions with real-time NIRF/NAAC placement intelligence.",
@@ -16,7 +16,7 @@ export const HeroDigitalSuccess = ({
     { label: "Skill Deficit Heatmaps", sub: "NIRF Metric 5.2.1 / NAAC" },
     { label: "Faculty Immersion", sub: "AICTE FDPs & Sabbaticals" }
   ]
-}) => {
+}) {
   const timelineRef = useRef(null);
   const isMobile = useMediaQuery('(max-width: 768px)');
 
@@ -50,23 +50,23 @@ export const HeroDigitalSuccess = ({
         />
       </div>
 
-      {/* Top Header with Floating Pill-Shaped Navbar */}
-      <header className="relative z-10 flex items-center justify-between px-6 md:px-16 py-6">
-        {/* Left: Brand Logo */}
+      {/* Top Header with Left-Aligned Logo and Pill Navigation */}
+      <header className="relative z-20 w-full max-w-7xl mx-auto px-6 md:px-12 py-6 flex items-center justify-between">
+        {/* Left Section: TalentOrbit Brand Logo */}
         <TimelineAnimation
           once={true}
           animationNum={1}
           timelineRef={timelineRef}
-          className="flex items-center gap-3 cursor-pointer"
+          className="flex items-center gap-3.5 cursor-pointer select-none"
         >
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#92dbe0] via-[#0b7bff] to-[#3865cf] flex items-center justify-center font-extrabold text-white text-base shadow-[0_0_20px_rgba(11,123,255,0.6)]">
+          <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-[#92dbe0] via-[#0b7bff] to-[#3865cf] flex items-center justify-center font-extrabold text-white text-lg shadow-[0_0_24px_rgba(11,123,255,0.65)]">
             TO
           </div>
-          <div className="flex flex-col">
-            <span className="font-bold text-lg tracking-tight text-white">
+          <div className="flex flex-col text-left">
+            <span className="font-extrabold text-xl tracking-tight text-white leading-tight">
               TalentOrbit
             </span>
-            <span className="text-[10px] tracking-widest text-[#92dbe0] font-mono uppercase font-semibold">
+            <span className="text-[10px] tracking-wider text-[#92dbe0] font-mono uppercase font-semibold">
               SIH Problem #26044
             </span>
           </div>
@@ -79,36 +79,36 @@ export const HeroDigitalSuccess = ({
             as="nav"
             animationNum={2}
             timelineRef={timelineRef}
-            className="flex items-center gap-1 px-4 py-2 rounded-full bg-white/[0.08] hover:bg-white/[0.12] border border-white/15 backdrop-blur-2xl shadow-[0_8px_32px_rgba(0,0,0,0.37)] transition-all duration-300"
+            className="flex items-center gap-1.5 px-4 py-2 rounded-full bg-white/[0.08] hover:bg-white/[0.12] border border-white/15 backdrop-blur-2xl shadow-[0_8px_32px_rgba(0,0,0,0.37)] transition-all duration-300"
           >
             <a 
               href="#how-it-works" 
-              className="px-4 py-1.5 rounded-full text-sm font-medium text-slate-300 hover:text-white hover:bg-white/10 transition-all duration-200"
+              className="px-4 py-1.5 rounded-full text-sm font-medium text-slate-200 hover:text-white hover:bg-white/10 transition-all duration-200"
             >
               How It Works
             </a>
             <a 
               href="#features" 
-              className="px-4 py-1.5 rounded-full text-sm font-medium text-slate-300 hover:text-white hover:bg-white/10 transition-all duration-200"
+              className="px-4 py-1.5 rounded-full text-sm font-medium text-slate-200 hover:text-white hover:bg-white/10 transition-all duration-200"
             >
               Features
             </a>
             <a 
               href="#about" 
-              className="px-4 py-1.5 rounded-full text-sm font-medium text-slate-300 hover:text-white hover:bg-white/10 transition-all duration-200"
+              className="px-4 py-1.5 rounded-full text-sm font-medium text-slate-200 hover:text-white hover:bg-white/10 transition-all duration-200"
             >
               About Us
             </a>
             <a 
               href="#contact" 
-              className="px-4 py-1.5 rounded-full text-sm font-medium text-slate-300 hover:text-white hover:bg-white/10 transition-all duration-200"
+              className="px-4 py-1.5 rounded-full text-sm font-medium text-slate-200 hover:text-white hover:bg-white/10 transition-all duration-200"
             >
               Contact
             </a>
           </TimelineAnimation>
         )}
 
-        {/* Right: Launch Button */}
+        {/* Right Section: Action Button */}
         <TimelineAnimation
           once={true}
           as="button"
@@ -123,7 +123,7 @@ export const HeroDigitalSuccess = ({
       </header>
 
       {/* Center Stage Hero Content */}
-      <div className="relative z-10 grow flex flex-col justify-center px-6 md:px-20 max-w-7xl mx-auto py-16 w-full">
+      <div className="relative z-10 grow flex flex-col justify-center px-6 md:px-12 max-w-7xl mx-auto py-12 w-full text-left">
         
         {/* Pill Tag */}
         <TimelineAnimation
@@ -156,7 +156,7 @@ export const HeroDigitalSuccess = ({
           as="p"
           animationNum={6}
           timelineRef={timelineRef}
-          className="max-w-2xl text-slate-300 text-lg sm:text-xl font-light leading-relaxed mb-10"
+          className="max-w-3xl text-slate-300 text-lg sm:text-xl font-light leading-relaxed mb-10"
         >
           {description}
         </TimelineAnimation>
@@ -189,15 +189,15 @@ export const HeroDigitalSuccess = ({
       </div>
 
       {/* Footer Metrics */}
-      <div className="relative z-10 p-6 md:px-20 pb-10">
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 pb-10">
         <TimelineAnimation
           once={true}
           animationNum={9}
           timelineRef={timelineRef}
-          className="grid grid-cols-2 md:grid-cols-4 gap-4 bg-black/40 backdrop-blur-xl border border-white/10 p-6 rounded-2xl max-w-7xl mx-auto shadow-[0_8px_32px_rgba(0,0,0,0.5)]"
+          className="grid grid-cols-2 md:grid-cols-4 gap-4 bg-black/40 backdrop-blur-xl border border-white/10 p-6 rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.5)]"
         >
           {stats.map((item, idx) => (
-            <div key={idx} className="border-l-2 border-[#0b7bff]/60 pl-4">
+            <div key={idx} className="border-l-2 border-[#0b7bff]/60 pl-4 text-left">
               <p className="text-white font-semibold text-sm sm:text-base">{item.label}</p>
               <p className="text-slate-400 text-xs sm:text-sm mt-0.5">{item.sub}</p>
             </div>
@@ -206,6 +206,6 @@ export const HeroDigitalSuccess = ({
       </div>
     </section>
   );
-};
+}
 
 export default HeroDigitalSuccess;

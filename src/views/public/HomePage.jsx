@@ -1,7 +1,7 @@
 ﻿import React from 'react';
-import { HeroDigitalSuccess } from '../../components/ui/HeroDigitalSuccess';
+import HeroDigitalSuccess from '../../components/ui/HeroDigitalSuccess';
 
-export default function HomePage({ onNavigateRole }) {
+export function HomePage({ onNavigateRole }) {
   return (
     <div className="min-h-screen bg-[#050811] text-white">
       <HeroDigitalSuccess
@@ -16,3 +16,5 @@ export default function HomePage({ onNavigateRole }) {
     </div>
   );
 }
+
+export default HomePage;
