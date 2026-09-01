@@ -50,8 +50,9 @@ export const HeroDigitalSuccess = ({
         />
       </div>
 
-      {/* Top Header */}
-      <header className="relative z-10 flex items-center justify-between px-8 md:px-16 py-6 backdrop-blur-md border-b border-white/10 bg-black/20">
+      {/* Top Header with Floating Pill-Shaped Navbar */}
+      <header className="relative z-10 flex items-center justify-between px-6 md:px-16 py-6">
+        {/* Left: Brand Logo */}
         <TimelineAnimation
           once={true}
           animationNum={1}
@@ -71,21 +72,43 @@ export const HeroDigitalSuccess = ({
           </div>
         </TimelineAnimation>
 
+        {/* Center: Frosted Glass Pill-Shaped Navigation Bar */}
         {!isMobile && (
           <TimelineAnimation
             once={true}
             as="nav"
             animationNum={2}
             timelineRef={timelineRef}
-            className="flex items-center gap-8 text-sm font-medium text-slate-300"
+            className="flex items-center gap-1 px-4 py-2 rounded-full bg-white/[0.08] hover:bg-white/[0.12] border border-white/15 backdrop-blur-2xl shadow-[0_8px_32px_rgba(0,0,0,0.37)] transition-all duration-300"
           >
-            <a href="#how-it-works" className="hover:text-white transition hover:drop-shadow-[0_0_8px_rgba(146,219,224,0.8)]">How It Works</a>
-            <a href="#features" className="hover:text-white transition hover:drop-shadow-[0_0_8px_rgba(146,219,224,0.8)]">Features</a>
-            <a href="#about" className="hover:text-white transition hover:drop-shadow-[0_0_8px_rgba(146,219,224,0.8)]">About Us</a>
-            <a href="#contact" className="hover:text-white transition hover:drop-shadow-[0_0_8px_rgba(146,219,224,0.8)]">Contact</a>
+            <a 
+              href="#how-it-works" 
+              className="px-4 py-1.5 rounded-full text-sm font-medium text-slate-300 hover:text-white hover:bg-white/10 transition-all duration-200"
+            >
+              How It Works
+            </a>
+            <a 
+              href="#features" 
+              className="px-4 py-1.5 rounded-full text-sm font-medium text-slate-300 hover:text-white hover:bg-white/10 transition-all duration-200"
+            >
+              Features
+            </a>
+            <a 
+              href="#about" 
+              className="px-4 py-1.5 rounded-full text-sm font-medium text-slate-300 hover:text-white hover:bg-white/10 transition-all duration-200"
+            >
+              About Us
+            </a>
+            <a 
+              href="#contact" 
+              className="px-4 py-1.5 rounded-full text-sm font-medium text-slate-300 hover:text-white hover:bg-white/10 transition-all duration-200"
+            >
+              Contact
+            </a>
           </TimelineAnimation>
         )}
 
+        {/* Right: Launch Button */}
         <TimelineAnimation
           once={true}
           as="button"
