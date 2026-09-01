@@ -1,9 +1,14 @@
-﻿import React from 'react';
+﻿import React, { useState } from 'react';
+import HomePage from './views/public/HomePage';
 
 export default function App() {
+  const [currentView, setCurrentView] = useState('home');
+
   return (
-    <div className="min-h-screen bg-slate-50 flex items-center justify-center p-4">
-      <h1 className="text-3xl font-bold text-slate-800">TalentOrbit</h1>
+    <div className="min-h-screen bg-[#050811]">
+      {currentView === 'home' && (
+        <HomePage onNavigateRole={(role) => setCurrentView(role)} />
+      )}
     </div>
   );
 }
