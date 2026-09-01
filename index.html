@@ -5,13 +5,18 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TalentOrbit - AI Skill & Career Intelligence Platform</title>
-    <!-- Tailwind CSS CDN for instant styling and zero-dependency rendering -->
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
         darkMode: 'class',
         theme: {
           extend: {
+            fontFamily: {
+              serif: ['Playfair Display', 'serif'],
+              sans: ['Inter', 'sans-serif'],
+              display: ['Instrument Serif', 'serif']
+            },
             colors: {
               brand: {
                 cyan: '#92dbe0',
@@ -26,10 +31,11 @@
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
     <style>
-      * {
-        font-family: 'Inter', sans-serif;
+      .font-display-serif {
+        font-family: 'Playfair Display', Georgia, serif;
+        letter-spacing: 0.08em;
       }
     </style>
   </head>

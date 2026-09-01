@@ -3,10 +3,10 @@ import { TimelineAnimation } from './TimelineAnimation';
 import { useMediaQuery } from '../../hooks/useMediaQuery';
 
 export const HeroDigitalSuccess = ({
-  title = "Transforming Academia & Industry",
-  highlightText = "Collaboration",
-  description = "TalentOrbit (SIH Problem #26044) empowers Students with AI skill diagnostic assessments, Recruiters with explainable talent scouting, Academicians with research grants & FDPs, and Institutions with real-time NIRF/NAAC placement intelligence.",
-  primaryActionText = "Explore Student Portal",
+  headline = "REFRESHING",
+  subtitle = "The Next Generation Career & Skill Intelligence Network",
+  description = "TalentOrbit breaks conventional placement barriers with verifiable AI skill benchmarking, explainable recruiter matching, faculty research synergy, and national NIRF/NAAC analytics.",
+  primaryActionText = "Launch Student Portal",
   onPrimaryAction,
   secondaryActionText = "Recruiter ATS & Talent Pool",
   onSecondaryAction,
@@ -27,28 +27,20 @@ export const HeroDigitalSuccess = ({
     >
       {/* Interactive Mesh Shader Gradient Background */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        {/* Glowing Radial Orb 1 */}
+        {/* Glowing Radial Orbs */}
         <div 
-          className="absolute -top-32 -left-32 w-[650px] h-[650px] rounded-full blur-[140px] opacity-70 animate-pulse"
-          style={{
-            background: 'radial-gradient(circle, #92dbe0 0%, #0b7bff 60%, transparent 80%)'
-          }}
+          className="absolute -top-32 -left-32 w-[700px] h-[700px] rounded-full blur-[140px] opacity-70 animate-pulse"
+          style={{ background: 'radial-gradient(circle, #92dbe0 0%, #0b7bff 60%, transparent 80%)' }}
         />
-        {/* Glowing Radial Orb 2 */}
         <div 
-          className="absolute top-1/3 -right-32 w-[700px] h-[700px] rounded-full blur-[160px] opacity-60"
-          style={{
-            background: 'radial-gradient(circle, #3865cf 0%, #0b7bff 50%, transparent 80%)'
-          }}
+          className="absolute top-1/3 -right-32 w-[750px] h-[750px] rounded-full blur-[160px] opacity-60"
+          style={{ background: 'radial-gradient(circle, #ff3366 0%, #3865cf 50%, transparent 80%)' }}
         />
-        {/* Glowing Radial Orb 3 */}
         <div 
-          className="absolute -bottom-40 left-1/4 w-[800px] h-[600px] rounded-full blur-[180px] opacity-50"
-          style={{
-            background: 'radial-gradient(circle, #1d4ed8 0%, #92dbe0 40%, transparent 70%)'
-          }}
+          className="absolute -bottom-40 left-1/4 w-[850px] h-[650px] rounded-full blur-[180px] opacity-50"
+          style={{ background: 'radial-gradient(circle, #1d4ed8 0%, #92dbe0 40%, transparent 70%)' }}
         />
-        {/* Subtle Cyber Grid Overlay */}
+        {/* Cyber Grid Overlay */}
         <div 
           className="absolute inset-0 opacity-15"
           style={{
@@ -58,7 +50,7 @@ export const HeroDigitalSuccess = ({
         />
       </div>
 
-      {/* Top Navigation Header */}
+      {/* Top Header */}
       <header className="relative z-10 flex items-center justify-between px-8 md:px-16 py-6 backdrop-blur-md border-b border-white/10 bg-black/20">
         <TimelineAnimation
           once={true}
@@ -108,34 +100,65 @@ export const HeroDigitalSuccess = ({
       </header>
 
       {/* Center Stage Hero Content */}
-      <div className="relative z-10 grow flex flex-col justify-center px-8 md:px-20 max-w-7xl mx-auto py-16">
+      <div className="relative z-10 grow flex flex-col justify-center px-6 md:px-20 max-w-7xl mx-auto py-16 w-full">
+        
+        {/* Pill Tag */}
         <TimelineAnimation
           once={true}
           animationNum={4}
           timelineRef={timelineRef}
-          className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight leading-[1.08] pb-6"
+          className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 border border-white/15 backdrop-blur-md text-xs sm:text-sm font-medium text-[#92dbe0] mb-6 w-fit"
         >
-          {title}{" "}
-          <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#92dbe0] via-[#0b7bff] to-[#3865cf] drop-shadow-[0_0_35px_rgba(11,123,255,0.5)] block lg:inline-block">
-            {highlightText}
-          </span>
+          <span className="w-1.5 h-1.5 rounded-full bg-[#0b7bff]" />
+          <span>Next-Gen Higher Education & Industry Alignment</span>
         </TimelineAnimation>
 
+        {/* Big Editorial Serif Title: REFRESHING */}
+        <div className="relative inline-block mb-6">
+          {/* Subtle background colorful accent blocks behind text (like the image) */}
+          <div className="absolute -left-3 top-2 w-12 h-14 bg-gradient-to-tr from-pink-500 to-rose-400 rounded-sm opacity-60 blur-xs -z-10" />
+          <div className="absolute left-[28%] -top-3 w-16 h-16 bg-gradient-to-tr from-cyan-400 to-blue-500 rounded-sm opacity-60 blur-xs -z-10" />
+          <div className="absolute left-[65%] top-6 w-14 h-14 bg-gradient-to-tr from-orange-500 to-amber-400 rounded-sm opacity-60 blur-xs -z-10" />
+          <div className="absolute right-0 -bottom-2 w-12 h-12 bg-gradient-to-tr from-indigo-500 to-purple-500 rounded-sm opacity-60 blur-xs -z-10" />
+
+          <TimelineAnimation
+            once={true}
+            animationNum={5}
+            timelineRef={timelineRef}
+            className="font-display-serif text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-normal text-white uppercase tracking-[0.1em] drop-shadow-[0_10px_30px_rgba(0,0,0,0.8)] select-none"
+          >
+            {headline}
+          </TimelineAnimation>
+        </div>
+
+        {/* Subtitle */}
+        <TimelineAnimation
+          once={true}
+          as="h2"
+          animationNum={6}
+          timelineRef={timelineRef}
+          className="text-xl sm:text-2xl md:text-3xl font-light text-slate-200 tracking-wide mb-6 max-w-3xl"
+        >
+          {subtitle}
+        </TimelineAnimation>
+
+        {/* Description */}
         <TimelineAnimation
           once={true}
           as="p"
-          animationNum={5}
+          animationNum={7}
           timelineRef={timelineRef}
-          className="max-w-3xl text-slate-300 text-lg sm:text-xl font-light leading-relaxed mb-10"
+          className="max-w-2xl text-slate-400 text-base sm:text-lg font-light leading-relaxed mb-10"
         >
           {description}
         </TimelineAnimation>
 
+        {/* Action Buttons */}
         <div className="flex flex-wrap items-center gap-5">
           <TimelineAnimation
             once={true}
             as="button"
-            animationNum={6}
+            animationNum={8}
             timelineRef={timelineRef}
             onClick={onPrimaryAction}
             className="cursor-pointer group relative overflow-hidden bg-gradient-to-r from-[#92dbe0] via-[#0b7bff] to-[#3865cf] text-white px-8 py-4 rounded-full font-semibold text-base flex items-center gap-3 shadow-[0_0_30px_rgba(11,123,255,0.5)] hover:shadow-[0_0_40px_rgba(146,219,224,0.8)] transition-all transform hover:-translate-y-0.5"
@@ -147,7 +170,7 @@ export const HeroDigitalSuccess = ({
           <TimelineAnimation
             once={true}
             as="button"
-            animationNum={7}
+            animationNum={9}
             timelineRef={timelineRef}
             onClick={onSecondaryAction}
             className="cursor-pointer border border-white/20 bg-white/5 hover:bg-white/10 backdrop-blur-md px-8 py-4 rounded-full font-medium text-base text-slate-200 transition hover:border-white/40"
@@ -157,11 +180,11 @@ export const HeroDigitalSuccess = ({
         </div>
       </div>
 
-      {/* Footer Pill Metrics */}
-      <div className="relative z-10 p-8 md:px-20 pb-12">
+      {/* Footer Metrics */}
+      <div className="relative z-10 p-6 md:px-20 pb-10">
         <TimelineAnimation
           once={true}
-          animationNum={8}
+          animationNum={10}
           timelineRef={timelineRef}
           className="grid grid-cols-2 md:grid-cols-4 gap-4 bg-black/40 backdrop-blur-xl border border-white/10 p-6 rounded-2xl max-w-7xl mx-auto shadow-[0_8px_32px_rgba(0,0,0,0.5)]"
         >
