@@ -73,13 +73,28 @@
 }
 
 .hero-brand-tag {
-  font-size: 11px;
-  letter-spacing: 0.14em;
-  color: #0044aa;
-  font-family: monospace;
-  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 9.5px;
+  letter-spacing: 0.22em;
+  color: #2b3a55;
   font-weight: 700;
-  margin-top: 2px;
+  text-transform: uppercase;
+  margin-top: 3px;
+  line-height: 1;
+}
+
+.tag-dot-teal {
+  color: #14b8a6;
+  font-size: 12px;
+  line-height: 0;
+}
+
+.tag-dot-blue {
+  color: #2563eb;
+  font-size: 12px;
+  line-height: 0;
 }
 
 /* Crystal Frosted Floating Pill Navigation */
@@ -315,3 +330,4 @@
   .hero-footer { padding: 0 20px 20px 20px; }
   .hero-stats-grid { grid-template-columns: 1fr; }
 }
+

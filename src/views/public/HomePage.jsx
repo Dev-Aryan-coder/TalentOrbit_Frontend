@@ -247,7 +247,12 @@ export function HomePage({ onNavigateRole }) {
           <div className="footer-brand">
             <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '14px' }}>
               <img src={logoImg} alt="TalentOrbit Emblem" style={{ width: '32px', height: '32px', objectFit: 'contain' }} />
-              <span className="footer-brand-title" style={{ margin: 0 }}>TalentOrbit</span>
+              <div style={{ display: 'flex', flexDirection: 'column' }}>
+                <span className="footer-brand-title" style={{ margin: 0, lineHeight: 1.1 }}>TalentOrbit</span>
+                <span style={{ fontSize: '9px', letterSpacing: '0.2em', color: '#7ce8ff', fontWeight: 700, textTransform: 'uppercase', marginTop: '3px' }}>
+                  CONNECT • GROW • SUCCEED
+                </span>
+              </div>
             </div>
             <p className="footer-brand-desc">
               National Higher Education & Industry Career Intelligence Network designed for Smart India Hackathon Problem Statement #26044.
@@ -297,5 +302,6 @@ export function HomePage({ onNavigateRole }) {
 }
 
 export default HomePage;
+
 
 

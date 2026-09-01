@@ -34,7 +34,9 @@ export function HeroDigitalSuccess({
           </div>
           <div className="hero-brand-text">
             <span className="hero-brand-name">TalentOrbit</span>
-            <span className="hero-brand-tag">Career & Skill Intelligence</span>
+            <span className="hero-brand-tag">
+              CONNECT <span className="tag-dot-teal">•</span> GROW <span className="tag-dot-blue">•</span> SUCCEED
+            </span>
           </div>
         </div>
 
@@ -95,5 +97,6 @@ export function HeroDigitalSuccess({
 }
 
 export default HeroDigitalSuccess;
+
 
 
