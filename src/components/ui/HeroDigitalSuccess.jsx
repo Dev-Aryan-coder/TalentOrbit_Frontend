@@ -1,7 +1,6 @@
 ﻿import React, { useRef } from 'react';
 import './HeroDigitalSuccess.css';
 import logoImg from '../../assets/logo.png';
-import heroBgImg from '../../assets/hero-bg.png';
 
 export function HeroDigitalSuccess({
   title = "Transforming Academia & Industry",
@@ -22,38 +21,15 @@ export function HeroDigitalSuccess({
 
   return (
     <section ref={timelineRef} className="hero-container">
-      {/* 100% Pure Vibrant Silk Cyan Gradient Background */}
-      <div 
-        className="hero-bg-layer"
-        style={{
-          position: 'absolute',
-          inset: 0,
-          backgroundImage: `url(${heroBgImg})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat',
-          opacity: 1,
-          zIndex: 1
-        }}
-      />
-
       {/* Top Header */}
       <header className="hero-header">
-        {/* Left: Brand Logo & SIH ID */}
+        {/* Left: Brand Logo */}
         <div className="hero-brand">
           <div className="hero-logo-wrapper">
             <img 
               src={logoImg} 
               alt="TalentOrbit Emblem" 
               className="hero-logo-img"
-              style={{
-                width: '36px',
-                height: '36px',
-                maxWidth: '36px',
-                maxHeight: '36px',
-                objectFit: 'contain',
-                display: 'block'
-              }}
             />
           </div>
           <div className="hero-brand-text">
@@ -62,7 +38,7 @@ export function HeroDigitalSuccess({
           </div>
         </div>
 
-        {/* Center: Frosted Glass Floating Pill-Shaped Navigation */}
+        {/* Center: Frosted Glass Floating Pill Navigation */}
         <nav className="hero-pill-nav">
           <a href="#how-it-works" className="hero-nav-link">How It Works</a>
           <a href="#features" className="hero-nav-link">Features</a>
@@ -79,22 +55,18 @@ export function HeroDigitalSuccess({
 
       {/* Center Hero Stage Content */}
       <div className="hero-center">
-        {/* Pill Tag */}
         <div className="hero-pill-badge">
           <span className="hero-badge-dot" />
           <span>Next-Gen Higher Education & Industry Alignment</span>
         </div>
 
-        {/* Uppercase High-Contrast Serif Headline */}
         <h1 className="hero-headline">
           <span>{title}</span>{" "}
           <span className="hero-headline-highlight">{highlightText}</span>
         </h1>
 
-        {/* Description */}
         <p className="hero-description">{description}</p>
 
-        {/* Action Buttons */}
         <div className="hero-actions">
           <button type="button" onClick={onPrimaryAction} className="hero-btn-primary">
             <span>{primaryActionText}</span>
