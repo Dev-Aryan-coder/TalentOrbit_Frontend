@@ -21,13 +21,10 @@ export function HeroDigitalSuccess({
 
   return (
     <section ref={timelineRef} className="hero-container">
-      {/* Interactive Glowing Mesh Orbs & Grid Background */}
-      <div className="hero-bg-orbs">
-        <div className="hero-orb-1" />
-        <div className="hero-orb-2" />
-        <div className="hero-orb-3" />
-        <div className="hero-grid-overlay" />
-      </div>
+      {/* Luminous Silk Cyan-Blue Fluid Gradient & Vignette Overlay */}
+      <div className="hero-bg-layer" />
+      <div className="hero-vignette-overlay" />
+      <div className="hero-grid-overlay" />
 
       {/* Top Header */}
       <header className="hero-header">
