@@ -301,12 +301,12 @@ export function HeroBanner({
             fontFamily: "'Playfair Display', 'Instrument Serif', Georgia, serif",
             textTransform: 'uppercase',
             letterSpacing: '0.06em',
-            fontSize: 'clamp(1.75rem, 2.6vw, 2.75rem)',
-            maxWidth: '680px',
-            lineHeight: 1.22,
+            fontSize: 'clamp(2.1rem, 3.4vw, 3.4rem)',
+            maxWidth: '820px',
+            lineHeight: 1.18,
             fontWeight: 700,
             color: '#041638',
-            margin: '0 0 20px 0',
+            margin: '0 0 22px 0',
             textShadow: '0 2px 10px rgba(255, 255, 255, 0.6)'
           }}
         >
@@ -417,6 +417,7 @@ export function HeroBanner({
 
 
 export default HeroBanner;
+
 
 
 
