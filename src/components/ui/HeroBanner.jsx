@@ -301,26 +301,15 @@ export function HeroBanner({
             fontFamily: "'Playfair Display', 'Instrument Serif', Georgia, serif",
             textTransform: 'uppercase',
             letterSpacing: '0.08em',
-            fontSize: 'clamp(2.3rem, 5vw, 4.6rem)', lineHeight: 1.12, fontWeight: 700,
+            fontSize: 'clamp(2.3rem, 5vw, 4.6rem)',
+            lineHeight: 1.12,
+            fontWeight: 700,
             color: '#041638',
             margin: '0 0 20px 0',
             textShadow: '0 2px 10px rgba(255, 255, 255, 0.6)'
           }}
         >
-          <span>{title}</span>{" "}
-          <span 
-            className="hero-headline-italic"
-            style={{
-              color: '#003db3',
-              display: 'inline-block',
-              fontStyle: 'italic',
-              textDecoration: 'underline',
-              textDecorationColor: 'rgba(0, 85, 255, 0.4)',
-              textUnderlineOffset: '8px'
-            }}
-          >
-            {highlightText}
-          </span>
+          {title} {highlightText}
         </h1>
 
         <p 
@@ -427,6 +416,7 @@ export function HeroBanner({
 
 
 export default HeroBanner;
+
 
 
 
