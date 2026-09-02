@@ -8,6 +8,10 @@
   padding: 0;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 html, body, #root {
   width: 100%;
   min-height: 100vh;
@@ -15,8 +19,8 @@ html, body, #root {
   padding: 0;
   border: 0;
   outline: 0;
-  background-color: #050811;
-  color: #ffffff;
+  background-color: #0077ee;
+  color: #041638;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
 }
