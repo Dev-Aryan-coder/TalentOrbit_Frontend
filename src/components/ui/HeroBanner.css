@@ -16,17 +16,21 @@
 
 /* Sticky Header Bar across all scrolling */
 .hero-sticky-header-wrapper {
-  position: sticky;
+  position: fixed;
   top: 16px;
-  z-index: 1000;
+  left: 0;
+  right: 0;
+  z-index: 9999;
   width: 100%;
   max-width: 1320px;
   margin: 0 auto;
   padding: 0 32px;
   box-sizing: border-box;
+  pointer-events: none;
 }
 
 .hero-nav-header {
+  pointer-events: auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -362,7 +366,19 @@
 }
 
 @media (max-width: 900px) {
-  .hero-sticky-header-wrapper { padding: 0 16px; }
+  .hero-sticky-header-wrapper {
+  position: fixed;
+  top: 16px;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  width: 100%;
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 32px;
+  box-sizing: border-box;
+  pointer-events: none;
+}
   .hero-center-pill-nav { display: none; }
   .hero-main-stage { padding: 24px 20px; }
   .hero-stage-actions { flex-direction: column; align-items: stretch; }
@@ -370,4 +386,5 @@
   .hero-bottom-metrics { padding: 0 20px 20px 20px; }
   .hero-metrics-grid { grid-template-columns: 1fr; }
 }
+
 

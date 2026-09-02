@@ -39,8 +39,11 @@ export function HeroBanner({
       <div 
         className="hero-sticky-header-wrapper"
         style={{
-          position: 'sticky',
+          position: 'fixed',
           top: '16px',
+          left: 0,
+          right: 0,
+          pointerEvents: 'none',
           zIndex: 1000,
           width: '100%',
           maxWidth: '1320px',
@@ -55,6 +58,7 @@ export function HeroBanner({
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
+            pointerEvents: 'auto',
             background: 'transparent',
             border: 'none',
             padding: 0,
@@ -242,7 +246,7 @@ export function HeroBanner({
           width: '100%',
           maxWidth: '1320px',
           margin: '0 auto',
-          padding: '40px 32px',
+          padding: '110px 32px 40px 32px',
           textAlign: 'left',
           boxSizing: 'border-box'
         }}
@@ -414,5 +418,6 @@ export function HeroBanner({
 
 
 export default HeroBanner;
+
 
 
