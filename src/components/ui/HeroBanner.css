@@ -272,12 +272,10 @@
 }
 
 .hero-headline-italic {
-  color: #003db3;
+  color: #041638;
   display: inline-block;
-  font-style: italic;
-  text-decoration: underline;
-  text-decoration-color: rgba(0, 85, 255, 0.4);
-  text-underline-offset: 8px;
+  font-style: normal;
+  text-decoration: none;
 }
 
 .hero-stage-desc {
@@ -402,3 +400,4 @@
   .hero-bottom-metrics { padding: 0 16px 16px 16px; }
   .hero-metrics-grid { grid-template-columns: 1fr; }
 }
+
