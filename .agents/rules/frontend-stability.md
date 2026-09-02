@@ -28,3 +28,8 @@
 ## 6. Transparent File Change Reporting
 - In every response where code or configuration is modified, ALWAYS explicitly list every edited file using clickable GitHub-style markdown links (e.g. `[filename](file:///absolute/path/to/file)`).
 - Provide a brief summary of what exact changes were made in each file.
+
+## 7. Absolute Zero Emojis Rule
+- NEVER use emojis anywhere in TalentOrbit (UI labels, buttons, cards, headings, tabs, or badges).
+- Use clean modern typography, sleek inline SVG vector icons, or numerical indicators (e.g., 01, 02) instead of emojis.
+- Always maintain an institutional, premium enterprise aesthetic.

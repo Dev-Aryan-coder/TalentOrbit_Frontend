@@ -90,7 +90,7 @@ export default function HomePage({ onNavigateRole, onNavigateHome, onLogin, onRe
         <div className="section-container">
           <div className="section-header" style={{ marginBottom: '44px' }}>
             <div className="section-pill-tag">About TalentOrbit</div>
-            <h2 className="section-title">Who We Are</h2>
+            <h2 className="section-title">Who We Are ?</h2>
             <p className="section-subtitle">
               Pioneering India's unified academia-industry intelligence ecosystem to bridge the 45% skill deficit.
             </p>
@@ -99,9 +99,9 @@ export default function HomePage({ onNavigateRole, onNavigateHome, onLogin, onRe
           <div className="who-we-are-layout">
             {/* Left: Article Image */}
             <div className="who-we-are-image-wrapper">
-              <img 
-                src={whoWeAreImg} 
-                alt="TalentOrbit University & Industry Synergy" 
+              <img
+                src={whoWeAreImg}
+                alt="TalentOrbit University & Industry Synergy"
                 className="who-we-are-img"
               />
             </div>
@@ -114,7 +114,7 @@ export default function HomePage({ onNavigateRole, onNavigateHome, onLogin, onRe
 
               <div className="who-we-are-features-list">
                 <div className="who-we-are-feature-item">
-                  <span className="who-we-are-icon">🎯</span>
+                  <span className="who-we-are-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0055ff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></span>
                   <div>
                     <h4 className="who-we-are-item-title">Deterministic Skill Diagnostics</h4>
                     <p className="who-we-are-item-desc">
@@ -124,7 +124,7 @@ export default function HomePage({ onNavigateRole, onNavigateHome, onLogin, onRe
                 </div>
 
                 <div className="who-we-are-feature-item">
-                  <span className="who-we-are-icon">🔒</span>
+                  <span className="who-we-are-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0055ff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
                   <div>
                     <h4 className="who-we-are-item-title">Verified Skill Genomes</h4>
                     <p className="who-we-are-item-desc">
@@ -134,7 +134,7 @@ export default function HomePage({ onNavigateRole, onNavigateHome, onLogin, onRe
                 </div>
 
                 <div className="who-we-are-feature-item">
-                  <span className="who-we-are-icon">🏛️</span>
+                  <span className="who-we-are-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0055ff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 21h18M3 10h18M5 10v11M19 10v11M9 10v11M15 10v11M12 2L2 7h20L12 2z"/></svg></span>
                   <div>
                     <h4 className="who-we-are-item-title">NIRF & Accreditation Intelligence</h4>
                     <p className="who-we-are-item-desc">
@@ -160,7 +160,7 @@ export default function HomePage({ onNavigateRole, onNavigateHome, onLogin, onRe
 
           <div className="features-grid">
             <div className="feature-card">
-              <div className="feature-icon-box">🧠</div>
+              <div className="feature-icon-box"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0055ff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2a4 4 0 0 0-4 4v1H7a4 4 0 0 0-4 4v1a4 4 0 0 0 4 4h1v1a4 4 0 0 0 4 4 4 4 0 0 0 4-4v-1h1a4 4 0 0 0 4-4v-1a4 4 0 0 0-4-4h-1V6a4 4 0 0 0-4-4z"/></svg></div>
               <h3 className="feature-card-title">Dynamic AI Diagnostics</h3>
               <p className="feature-card-desc">
                 Generates on-demand technical diagnostic MCQs for any IT topic using Groq LLM, caching questions permanently into MySQL with mathematical confidence gap evaluation.
@@ -168,7 +168,7 @@ export default function HomePage({ onNavigateRole, onNavigateHome, onLogin, onRe
             </div>
 
             <div className="feature-card">
-              <div className="feature-icon-box">🔒</div>
+              <div className="feature-icon-box"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0055ff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
               <h3 className="feature-card-title">SHA-256 Verified Genome</h3>
               <p className="feature-card-desc">
                 Passed assessments generate tamper-proof cryptographic hashes in MySQL, preventing resume fabrication and guaranteeing authenticity for recruiters.
@@ -176,7 +176,7 @@ export default function HomePage({ onNavigateRole, onNavigateHome, onLogin, onRe
             </div>
 
             <div className="feature-card">
-              <div className="feature-icon-box">⚖️</div>
+              <div className="feature-icon-box"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0055ff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 16v1a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h11a2 2 0 0 1 2 2v1"/><polyline points="18 8 22 12 18 16"/><line x1="6" y1="12" x2="22" y2="12"/></svg></div>
               <h3 className="feature-card-title">Explainable Match Engine</h3>
               <p className="feature-card-desc">
                 Calculates exact student-job overlap percentages based on recruiter-defined weights, explicitly showing matched versus missing technical prerequisites.
@@ -184,7 +184,7 @@ export default function HomePage({ onNavigateRole, onNavigateHome, onLogin, onRe
             </div>
 
             <div className="feature-card">
-              <div className="feature-icon-box">📊</div>
+              <div className="feature-icon-box"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0055ff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>
               <h3 className="feature-card-title">NIRF 5.2.1 Intelligence</h3>
               <p className="feature-card-desc">
                 Aggregates real-time median package, total placement offers, and batch skill heatmaps to empower University TPOs with automated accreditation compliance.
@@ -192,7 +192,7 @@ export default function HomePage({ onNavigateRole, onNavigateHome, onLogin, onRe
             </div>
 
             <div className="feature-card">
-              <div className="feature-icon-box">🤝</div>
+              <div className="feature-icon-box"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0055ff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
               <h3 className="feature-card-title">Faculty R&D Grants</h3>
               <p className="feature-card-desc">
                 Connects university professors with corporate sponsored research projects, consulting contracts, and AICTE industry immersion programs.
@@ -200,7 +200,7 @@ export default function HomePage({ onNavigateRole, onNavigateHome, onLogin, onRe
             </div>
 
             <div className="feature-card">
-              <div className="feature-icon-box">🛡️</div>
+              <div className="feature-icon-box"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0055ff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 14 14"/></svg></div>
               <h3 className="feature-card-title">Platform Moderation & Audit</h3>
               <p className="feature-card-desc">
                 Full SuperAdmin governance with real client IP tracking, system audit logs, automated dispute moderation, and university verification checks.
@@ -225,33 +225,33 @@ export default function HomePage({ onNavigateRole, onNavigateHome, onLogin, onRe
 
           {/* Role Switcher Pills */}
           <div className="role-tab-buttons">
-            <button 
+            <button
               type="button"
               className={`role-tab-btn ${activeRoleTab === 'student' ? 'active' : ''}`}
               onClick={() => setActiveRoleTab('student')}
             >
-              🎓 Student Portal
+              Student Portal
             </button>
-            <button 
+            <button
               type="button"
               className={`role-tab-btn ${activeRoleTab === 'industry' ? 'active' : ''}`}
               onClick={() => setActiveRoleTab('industry')}
             >
-              🏢 Industry Recruiter
+              Industry Recruiter
             </button>
-            <button 
+            <button
               type="button"
               className={`role-tab-btn ${activeRoleTab === 'academician' ? 'active' : ''}`}
               onClick={() => setActiveRoleTab('academician')}
             >
-              👨‍🏫 Faculty & Research
+              Faculty & Research
             </button>
-            <button 
+            <button
               type="button"
               className={`role-tab-btn ${activeRoleTab === 'institution' ? 'active' : ''}`}
               onClick={() => setActiveRoleTab('institution')}
             >
-              🏫 Institution TPO
+              Institution TPO
             </button>
           </div>
 
@@ -261,7 +261,7 @@ export default function HomePage({ onNavigateRole, onNavigateHome, onLogin, onRe
               <div className="showcase-badge">{currentShowcase.tag}</div>
               <h3 className="showcase-heading">{currentShowcase.title}</h3>
               <p className="showcase-text">{currentShowcase.desc}</p>
-              
+
               <ul className="showcase-list">
                 {currentShowcase.points.map((pt, i) => (
                   <li key={i} className="showcase-list-item">
@@ -271,8 +271,8 @@ export default function HomePage({ onNavigateRole, onNavigateHome, onLogin, onRe
                 ))}
               </ul>
 
-              <button 
-                type="button" 
+              <button
+                type="button"
                 onClick={currentShowcase.action}
                 className="hero-btn-primary"
                 style={{ padding: '14px 32px', fontSize: '15px' }}
@@ -287,7 +287,7 @@ export default function HomePage({ onNavigateRole, onNavigateHome, onLogin, onRe
                 <span style={{ fontSize: '13px', color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Live Intelligence Telemetry</span>
                 <span style={{ fontSize: '12px', padding: '4px 10px', borderRadius: '9999px', background: 'rgba(16, 185, 129, 0.2)', color: '#34d399', fontWeight: 'bold' }}>Active Session</span>
               </div>
-              
+
               <div style={{ fontSize: '42px', fontWeight: '900', color: '#7ce8ff', lineHeight: '1', marginBottom: '8px' }}>
                 {currentShowcase.previewStat}
               </div>
@@ -365,4 +365,5 @@ export default function HomePage({ onNavigateRole, onNavigateHome, onLogin, onRe
 }
 
 export { HomePage };
+
 
