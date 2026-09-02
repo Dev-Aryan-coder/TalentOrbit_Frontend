@@ -146,6 +146,68 @@ export function HomePage({ onNavigateRole, onNavigateHome, onLogin, onRegister }
           </div>
         </div>
       </section>
+      {/* 2B. Cloned Solution Architecture & Ecosystem Section */}
+      <section id="capabilities" className="section-features" style={{ paddingTop: '20px' }}>
+        <div className="section-container">
+          <div className="section-header">
+            <div className="section-pill-tag">Career & Skill Intelligence Solution Architecture</div>
+            <h2 className="section-title">Built For National Impact</h2>
+            <p className="section-subtitle">
+              Bridging the 45% industry-academia skill gap with deterministic AI diagnostics, verified student genomes, and university accreditation intelligence.
+            </p>
+          </div>
+
+          <div className="features-grid">
+            <div className="feature-card">
+              <div className="feature-icon-box">🧠</div>
+              <h3 className="feature-card-title">Dynamic AI Diagnostics</h3>
+              <p className="feature-card-desc">
+                Generates on-demand technical diagnostic MCQs for any IT topic using Groq LLM, caching questions permanently into MySQL with mathematical confidence gap evaluation.
+              </p>
+            </div>
+
+            <div className="feature-card">
+              <div className="feature-icon-box">🔒</div>
+              <h3 className="feature-card-title">SHA-256 Verified Genome</h3>
+              <p className="feature-card-desc">
+                Passed assessments generate tamper-proof cryptographic hashes in MySQL, preventing resume fabrication and guaranteeing authenticity for recruiters.
+              </p>
+            </div>
+
+            <div className="feature-card">
+              <div className="feature-icon-box">⚖️</div>
+              <h3 className="feature-card-title">Explainable Match Engine</h3>
+              <p className="feature-card-desc">
+                Calculates exact student-job overlap percentages based on recruiter-defined weights, explicitly showing matched versus missing technical prerequisites.
+              </p>
+            </div>
+
+            <div className="feature-card">
+              <div className="feature-icon-box">📊</div>
+              <h3 className="feature-card-title">NIRF 5.2.1 Intelligence</h3>
+              <p className="feature-card-desc">
+                Aggregates real-time median package, total placement offers, and batch skill heatmaps to empower University TPOs with automated accreditation compliance.
+              </p>
+            </div>
+
+            <div className="feature-card">
+              <div className="feature-icon-box">🤝</div>
+              <h3 className="feature-card-title">Faculty R&D Grants</h3>
+              <p className="feature-card-desc">
+                Connects university professors with corporate sponsored research projects, consulting contracts, and AICTE industry immersion programs.
+              </p>
+            </div>
+
+            <div className="feature-card">
+              <div className="feature-icon-box">🛡️</div>
+              <h3 className="feature-card-title">Platform Moderation & Audit</h3>
+              <p className="feature-card-desc">
+                Full SuperAdmin governance with real client IP tracking, system audit logs, automated dispute moderation, and university verification checks.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* 3. Interactive 4-Role Portal Showcase */}
       <section id="how-it-works" className="section-showcase">
@@ -302,6 +364,7 @@ export function HomePage({ onNavigateRole, onNavigateHome, onLogin, onRegister }
 }
 
 export default HomePage;
+
 
 
 
