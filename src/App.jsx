@@ -1,5 +1,5 @@
 ﻿import React, { useState } from 'react';
-import HomePage from './views/public/HomePage';
+import { HomePage } from './views/public/HomePage';
 
 export default function App() {
   const [currentView, setCurrentView] = useState('home');
@@ -21,4 +21,5 @@ export default function App() {
     </div>
   );
 }
+
 
