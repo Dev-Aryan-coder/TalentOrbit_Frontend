@@ -111,13 +111,13 @@ export function HeroBanner({
             <div className="hero-brand-text-col" style={{ display: 'flex', flexDirection: 'column', textAlign: 'left' }}>
               <span 
                 className="hero-brand-title-text"
-                style={{ fontWeight: 800, fontSize: '22px', color: '#041638', lineHeight: 1.1, letterSpacing: '-0.02em' }}
+                style={{ fontWeight: 400, fontSize: '22px', color: '#041638', lineHeight: 1.1, letterSpacing: '-0.02em' }}
               >
                 TalentOrbit
               </span>
               <span 
                 className="hero-brand-subtag-text"
-                style={{ display: 'inline-flex', alignItems: 'center', gap: '4px', fontSize: '9px', fontWeight: 700, letterSpacing: '0.22em', color: '#092350', textTransform: 'uppercase', marginTop: '3px', lineHeight: 1 }}
+                style={{ display: 'inline-flex', alignItems: 'center', gap: '4px', fontSize: '9px', fontWeight: 400, letterSpacing: '0.22em', color: '#092350', textTransform: 'uppercase', marginTop: '3px', lineHeight: 1 }}
               >
                 CONNECT <span className="dot-teal" style={{ color: '#14b8a6', fontSize: '11px', lineHeight: 0 }}>•</span> GROW <span className="dot-blue" style={{ color: '#2563eb', fontSize: '11px', lineHeight: 0 }}>•</span> SUCCEED
               </span>
@@ -148,7 +148,7 @@ export function HeroBanner({
                 padding: '8px 20px',
                 borderRadius: '9999px',
                 fontSize: '14.5px',
-                fontWeight: 600,
+                fontWeight: 400,
                 color: '#041638',
                 textDecoration: 'none',
                 whiteSpace: 'nowrap',
@@ -165,7 +165,7 @@ export function HeroBanner({
                 padding: '8px 20px',
                 borderRadius: '9999px',
                 fontSize: '14.5px',
-                fontWeight: 600,
+                fontWeight: 400,
                 color: '#041638',
                 textDecoration: 'none',
                 whiteSpace: 'nowrap',
@@ -182,7 +182,7 @@ export function HeroBanner({
                 padding: '8px 20px',
                 borderRadius: '9999px',
                 fontSize: '14.5px',
-                fontWeight: 600,
+                fontWeight: 400,
                 color: '#041638',
                 textDecoration: 'none',
                 whiteSpace: 'nowrap',
@@ -199,7 +199,7 @@ export function HeroBanner({
                 padding: '8px 20px',
                 borderRadius: '9999px',
                 fontSize: '14.5px',
-                fontWeight: 600,
+                fontWeight: 400,
                 color: '#041638',
                 textDecoration: 'none',
                 whiteSpace: 'nowrap',
@@ -223,7 +223,7 @@ export function HeroBanner({
                 padding: '9px 22px',
                 borderRadius: '9999px',
                 fontSize: '14px',
-                fontWeight: 600,
+                fontWeight: 400,
                 color: '#041638',
                 background: 'transparent',
                 border: '1px solid rgba(255, 255, 255, 0.75)',
@@ -243,7 +243,7 @@ export function HeroBanner({
                 padding: '9px 22px',
                 borderRadius: '9999px',
                 fontSize: '14px',
-                fontWeight: 700,
+                fontWeight: 400,
                 color: '#041638',
                 background: 'transparent',
                 border: '1.5px solid rgba(4, 22, 56, 0.75)',
@@ -285,7 +285,7 @@ export function HeroBanner({
             border: '1px solid rgba(255, 255, 255, 0.95)',
             backdropFilter: 'blur(20px)',
             fontSize: '13px',
-            fontWeight: 700,
+            fontWeight: 400,
             color: '#041638',
             marginBottom: '20px',
             boxShadow: '0 4px 15px rgba(0, 50, 150, 0.08)'
@@ -304,9 +304,7 @@ export function HeroBanner({
             fontFamily: "'Playfair Display', 'Instrument Serif', Georgia, serif",
             textTransform: 'uppercase',
             letterSpacing: '0.08em',
-            fontSize: 'clamp(2.3rem, 5vw, 4.6rem)',
-            lineHeight: 1.12,
-            fontWeight: 700,
+            fontSize: 'clamp(2.3rem, 5vw, 4.6rem)', lineHeight: 1.12, fontWeight: 700,
             color: '#041638',
             margin: '0 0 20px 0',
             textShadow: '0 2px 10px rgba(255, 255, 255, 0.6)'
@@ -333,7 +331,7 @@ export function HeroBanner({
           style={{
             maxWidth: '780px',
             fontSize: 'clamp(1rem, 1.2vw, 1.25rem)',
-            fontWeight: 500,
+            fontWeight: 400,
             lineHeight: 1.65,
             color: '#092350',
             margin: '0 0 32px 0'
@@ -357,7 +355,7 @@ export function HeroBanner({
               padding: '16px 36px',
               borderRadius: '9999px',
               fontSize: '16px',
-              fontWeight: 700,
+              fontWeight: 400,
               color: '#ffffff',
               background: '#041638',
               border: 'none',
@@ -377,7 +375,7 @@ export function HeroBanner({
               padding: '16px 32px',
               borderRadius: '9999px',
               fontSize: '16px',
-              fontWeight: 600,
+              fontWeight: 400,
               color: '#041638',
               background: 'rgba(255, 255, 255, 0.8)',
               border: '1px solid rgba(255, 255, 255, 0.95)',
@@ -424,10 +422,10 @@ export function HeroBanner({
               className="hero-metric-item"
               style={{ borderLeft: '2px solid #0055ff', paddingLeft: '14px', textAlign: 'left' }}
             >
-              <p className="hero-metric-title" style={{ fontSize: '15px', fontWeight: 800, color: '#041638', margin: 0 }}>
+              <p className="hero-metric-title" style={{ fontSize: '15px', fontWeight: 400, color: '#041638', margin: 0 }}>
                 {item.label}
               </p>
-              <p className="hero-metric-subtitle" style={{ fontSize: '13px', fontWeight: 500, color: '#09285a', margin: '4px 0 0 0' }}>
+              <p className="hero-metric-subtitle" style={{ fontSize: '13px', fontWeight: 400, color: '#09285a', margin: '4px 0 0 0' }}>
                 {item.sub}
               </p>
             </div>
@@ -440,6 +438,7 @@ export function HeroBanner({
 
 
 export default HeroBanner;
+
 
 
 

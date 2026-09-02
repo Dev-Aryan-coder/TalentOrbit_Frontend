@@ -88,7 +88,7 @@
 }
 
 .hero-brand-title-text {
-  font-weight: 800;
+  font-weight: 500;
   font-size: 22px;
   color: #041638;
   line-height: 1.1;
@@ -101,7 +101,7 @@
   align-items: center;
   gap: 4px;
   font-size: 9px;
-  font-weight: 700;
+  font-weight: 500;
   letter-spacing: 0.22em;
   color: #092350;
   text-transform: uppercase;
@@ -153,7 +153,7 @@
   padding: 8px 18px;
   border-radius: 9999px;
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 400;
   color: #041638;
   text-decoration: none;
   text-shadow: 0 1px 3px rgba(255, 255, 255, 0.5);
@@ -180,7 +180,7 @@
   padding: 9px 22px;
   border-radius: 9999px;
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 400;
   color: #041638;
   background: transparent;
   border: 1px solid rgba(255, 255, 255, 0.65);
@@ -204,7 +204,7 @@
   padding: 9px 22px;
   border-radius: 9999px;
   font-size: 14px;
-  font-weight: 700;
+  font-weight: 500;
   color: #041638;
   background: transparent;
   border: 1.5px solid rgba(4, 22, 56, 0.7);
@@ -245,7 +245,7 @@
   border: 1px solid rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(20px);
   font-size: 13px;
-  font-weight: 700;
+  font-weight: 500;
   color: #041638;
   margin-bottom: 20px;
   box-shadow: 
@@ -305,7 +305,7 @@
   padding: 16px 36px;
   border-radius: 9999px;
   font-size: 16px;
-  font-weight: 700;
+  font-weight: 500;
   color: #ffffff;
   background: #041638;
   border: none;
@@ -326,7 +326,7 @@
   padding: 16px 32px;
   border-radius: 9999px;
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 400;
   color: #041638;
   background: rgba(255, 255, 255, 0.8);
   border: 1px solid rgba(255, 255, 255, 0.95);
@@ -375,7 +375,7 @@
 
 .hero-metric-title {
   font-size: 15px;
-  font-weight: 800;
+  font-weight: 500;
   color: #041638;
   margin: 0;
 }
@@ -408,6 +408,9 @@
   .hero-bottom-metrics { padding: 0 20px 20px 20px; }
   .hero-metrics-grid { grid-template-columns: 1fr; }
 }
+
+
+
 
 
 

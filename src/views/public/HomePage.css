@@ -52,7 +52,7 @@
   border: 1px solid rgba(0, 85, 255, 0.2);
   color: #0055ff;
   font-size: 13px;
-  font-weight: 700;
+  font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   margin-bottom: 16px;
@@ -116,7 +116,7 @@
 
 .feature-card-title {
   font-size: 20px;
-  font-weight: 800;
+  font-weight: 500;
   color: #041638;
   margin-bottom: 12px;
 }
@@ -147,7 +147,7 @@
   padding: 12px 28px;
   border-radius: 9999px;
   font-size: 15px;
-  font-weight: 600;
+  font-weight: 400;
   color: #94a3b8;
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(255, 255, 255, 0.12);
@@ -178,7 +178,7 @@
 .showcase-badge {
   color: #7ce8ff;
   font-size: 12px;
-  font-weight: 700;
+  font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   margin-bottom: 12px;
@@ -187,7 +187,7 @@
 .showcase-heading {
   font-family: var(--font-serif);
   font-size: clamp(1.8rem, 3vw, 2.6rem);
-  font-weight: 700;
+  font-weight: 500;
   color: #ffffff;
   margin-bottom: 16px;
   line-height: 1.2;
@@ -260,7 +260,7 @@
 }
 
 .footer-brand-title {
-  font-weight: 800;
+  font-weight: 500;
   font-size: 22px;
   color: #ffffff;
   margin-bottom: 12px;
@@ -278,7 +278,7 @@
 }
 
 .footer-col-title {
-  font-weight: 700;
+  font-weight: 500;
   font-size: 14px;
   color: #ffffff;
   text-transform: uppercase;
@@ -322,4 +322,7 @@
   .showcase-display-box { grid-template-columns: 1fr; }
   .footer-links-group { gap: 32px; }
 }
+
+
+
 
