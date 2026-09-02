@@ -4,6 +4,7 @@ import logoImg from '../../assets/logo.png';
 import heroBgImg from '../../assets/hero-bg.png';
 
 export function HeroBanner({
+  onNavigateHome,
   title = "Transforming Academia & Industry",
   highlightText = "Collaboration",
   description = "TalentOrbit empowers Students with AI skill diagnostic assessments, Recruiters with explainable talent scouting, Academicians with research grants & FDPs, and Institutions with real-time NIRF/NAAC placement intelligence.",
@@ -61,7 +62,17 @@ export function HeroBanner({
           }}
         >
           {/* Left: Brand Logo & Title */}
-          <div 
+          <a 
+            href="/"
+            onClick={(e) => {
+              e.preventDefault();
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+              if (onNavigateHome) {
+                onNavigateHome();
+              } else {
+                window.history.pushState(null, '', '/');
+              }
+            }}
             className="hero-brand-group"
             style={{ display: 'flex', alignItems: 'center', gap: '12px', cursor: 'pointer', textDecoration: 'none' }}
           >
@@ -105,7 +116,7 @@ export function HeroBanner({
                 CONNECT <span className="dot-teal" style={{ color: '#14b8a6', fontSize: '11px', lineHeight: 0 }}>•</span> GROW <span className="dot-blue" style={{ color: '#2563eb', fontSize: '11px', lineHeight: 0 }}>•</span> SUCCEED
               </span>
             </div>
-          </div>
+          </a>
 
           {/* CENTER: Dedicated Frosted Glassmorphic Pill Navbar with Clean Spacing */}
           <nav 
@@ -403,4 +414,5 @@ export function HeroBanner({
 
 
 export default HeroBanner;
+
 
