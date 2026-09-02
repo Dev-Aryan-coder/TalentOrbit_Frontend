@@ -33,3 +33,7 @@
 - NEVER use emojis anywhere in TalentOrbit (UI labels, buttons, cards, headings, tabs, or badges).
 - Use clean modern typography, sleek inline SVG vector icons, or numerical indicators (e.g., 01, 02) instead of emojis.
 - Always maintain an institutional, premium enterprise aesthetic.
+### 8. Dedicated CSS File for Every JSX File (MANDATORY)
+- **Zero Heavy Inline Styles**: Every `.jsx` component/view MUST have its own corresponding dedicated `.css` file (e.g., `FooComponent.jsx` -> `FooComponent.css`).
+- **Clean Class Architecture**: All layout, typography, flexbox/grid, hover effects, and responsive media queries must reside within that component's dedicated `.css` file.
+- **Import Explicitness**: The `.jsx` file must explicitly import its dedicated stylesheet at the top: `import './FooComponent.css';`.

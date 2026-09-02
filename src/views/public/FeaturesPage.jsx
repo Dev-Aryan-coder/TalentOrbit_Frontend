@@ -1,5 +1,6 @@
 import React from 'react';
 import PublicNavbar from '../../components/layout/PublicNavbar';
+import './FeaturesPage.css';
 
 export default function FeaturesPage({ onNavigateHome, onNavigatePage, onNavigateRole, onLogin, onRegister }) {
   const features = [
@@ -42,7 +43,7 @@ export default function FeaturesPage({ onNavigateHome, onNavigatePage, onNavigat
   ];
 
   return (
-    <div className="min-h-screen bg-white" style={{ fontFamily: "'Poppins', sans-serif", color: '#041638', overflowX: 'hidden' }}>
+    <div className="features-page">
       <PublicNavbar 
         activePage="features" 
         onNavigateHome={onNavigateHome} 
@@ -51,55 +52,43 @@ export default function FeaturesPage({ onNavigateHome, onNavigatePage, onNavigat
         onRegister={onRegister} 
       />
 
-      <main style={{ maxWidth: '1280px', margin: '0 auto', padding: '140px 32px 100px 32px' }}>
+      <main className="features-main">
         {/* Header */}
-        <div style={{ textAlign: 'center', maxWidth: '820px', margin: '0 auto 64px auto' }}>
-          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '6px 18px', borderRadius: '9999px', background: 'rgba(0, 85, 255, 0.08)', border: '1px solid rgba(0, 85, 255, 0.2)', color: '#0055ff', fontSize: '13px', fontWeight: 500, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '16px' }}>
+        <div className="features-header">
+          <div className="features-tag">
             Enterprise Capabilities
           </div>
-          <h1 style={{ fontFamily: "'Playfair Display', 'Instrument Serif', Georgia, serif", fontSize: 'clamp(2.4rem, 4vw, 3.6rem)', fontWeight: 700, color: '#041638', lineHeight: 1.15, textTransform: 'uppercase', letterSpacing: '0.04em', margin: '0 0 20px 0' }}>
+          <h1 className="features-title">
             Platform Feature Architecture
           </h1>
-          <p style={{ fontSize: '16px', color: '#64748b', lineHeight: 1.7, margin: 0 }}>
+          <p className="features-desc">
             Comprehensive architectural breakdown of TalentOrbit's 6 core technical pillars engineered for national higher education and corporate recruitment synergy.
           </p>
         </div>
 
         {/* Feature Cards Grid */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '30px', marginBottom: '80px' }}>
+        <div className="features-grid">
           {features.map((feat, idx) => (
-            <div 
-              key={idx} 
-              style={{
-                background: '#ffffff',
-                border: '1px solid #e2e8f0',
-                borderRadius: '24px',
-                padding: '36px 32px',
-                boxShadow: '0 8px 30px rgba(0, 50, 150, 0.05)',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'space-between'
-              }}
-            >
+            <div key={idx} className="features-card">
               <div>
-                <span style={{ fontSize: '12px', padding: '4px 12px', borderRadius: '9999px', background: 'rgba(0, 85, 255, 0.08)', color: '#0055ff', fontWeight: 500, display: 'inline-block', marginBottom: '16px' }}>
+                <span className="features-card-tag">
                   {feat.tag}
                 </span>
-                <h3 style={{ fontSize: '21px', fontWeight: 500, color: '#041638', margin: '0 0 14px 0', lineHeight: 1.3 }}>
+                <h3 className="features-card-title">
                   {feat.title}
                 </h3>
-                <p style={{ fontSize: '14.5px', color: '#64748b', lineHeight: 1.65, margin: '0 0 24px 0' }}>
+                <p className="features-card-desc">
                   {feat.desc}
                 </p>
               </div>
 
-              <div style={{ paddingTop: '20px', borderTop: '1px solid #f1f5f9' }}>
-                <div style={{ fontSize: '12px', color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '10px', fontWeight: 500 }}>
+              <div className="features-specs-wrap">
+                <div className="features-specs-title">
                   Technical Specifications
                 </div>
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+                <div className="features-specs-tags">
                   {feat.specs.map((sp, i) => (
-                    <span key={i} style={{ fontSize: '12.5px', padding: '4px 10px', borderRadius: '8px', background: '#f8fafc', border: '1px solid #e2e8f0', color: '#334155' }}>
+                    <span key={i} className="features-spec-pill">
                       {sp}
                     </span>
                   ))}
@@ -110,11 +99,11 @@ export default function FeaturesPage({ onNavigateHome, onNavigatePage, onNavigat
         </div>
 
         {/* CTA */}
-        <div style={{ textAlign: 'center' }}>
+        <div className="features-cta-wrap">
           <button 
             type="button" 
             onClick={onNavigateHome}
-            style={{ padding: '14px 34px', borderRadius: '9999px', background: '#041638', color: '#ffffff', border: 'none', fontSize: '15px', fontWeight: 500, cursor: 'pointer', boxShadow: '0 6px 20px rgba(4, 22, 56, 0.25)' }}
+            className="features-cta-btn"
           >
             Return to Home Overview
           </button>

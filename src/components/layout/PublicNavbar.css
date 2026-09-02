@@ -1,0 +1,163 @@
+/* PublicNavbar.css */
+.public-navbar-wrapper {
+  position: fixed;
+  top: 16px;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  width: 100%;
+  max-width: 1520px;
+  margin: 0 auto;
+  padding: 0 20px;
+  box-sizing: border-box;
+  pointer-events: none;
+}
+
+.public-nav-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  pointer-events: auto;
+  border: none;
+  padding: 0;
+  width: 100%;
+}
+
+.public-brand-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.public-brand-logo-box {
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  max-width: 44px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(16px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  box-sizing: border-box;
+  box-shadow: 0 6px 18px rgba(0, 50, 150, 0.12);
+}
+
+.public-brand-logo-img {
+  width: 32px;
+  height: 32px;
+  max-width: 32px;
+  max-height: 32px;
+  object-fit: contain;
+  display: block;
+}
+
+.public-brand-title {
+  font-weight: 500;
+  font-size: 22px;
+  color: #041638;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.public-brand-subtag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 9px;
+  font-weight: 400;
+  letter-spacing: 0.22em;
+  color: #092350;
+  text-transform: uppercase;
+  margin-top: 3px;
+  line-height: 1;
+}
+
+.public-center-pill-nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 8px 32px 0 rgba(0, 50, 150, 0.12);
+}
+
+.public-pill-btn {
+  display: inline-block;
+  padding: 8px 20px;
+  border-radius: 9999px;
+  font-size: 14.5px;
+  font-weight: 400;
+  color: #041638;
+  background: transparent;
+  border: 1px solid transparent;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.public-pill-btn:hover {
+  background: rgba(0, 85, 255, 0.06);
+  color: #0055ff;
+}
+
+.public-pill-btn.active {
+  font-weight: 500;
+  color: #0055ff;
+  background: rgba(0, 85, 255, 0.1);
+  border-color: rgba(0, 85, 255, 0.2);
+}
+
+.public-header-auth-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.public-login-btn {
+  padding: 9px 20px;
+  border-radius: 9999px;
+  font-size: 14px;
+  font-weight: 400;
+  color: #041638;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.public-login-btn:hover {
+  color: #0055ff;
+}
+
+.public-register-btn {
+  padding: 9px 22px;
+  border-radius: 9999px;
+  font-size: 14px;
+  font-weight: 400;
+  color: #041638;
+  background: transparent;
+  border: 1.5px solid rgba(4, 22, 56, 0.7);
+  backdrop-filter: blur(16px);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.public-register-btn:hover {
+  background: rgba(4, 22, 56, 0.05);
+}
+
+@media (max-width: 900px) {
+  .public-center-pill-nav {
+    display: none;
+  }
+}

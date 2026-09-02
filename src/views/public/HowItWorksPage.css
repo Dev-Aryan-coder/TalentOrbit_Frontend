@@ -1,0 +1,203 @@
+/* HowItWorksPage.css */
+.hiw-page {
+  min-height: 100vh;
+  background-color: #ffffff;
+  font-family: 'Poppins', sans-serif;
+  color: #041638;
+  overflow-x: hidden;
+}
+
+.hiw-main {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 140px 32px 100px 32px;
+  box-sizing: border-box;
+}
+
+.hiw-header {
+  text-align: center;
+  max-width: 820px;
+  margin: 0 auto 64px auto;
+}
+
+.hiw-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 18px;
+  border-radius: 9999px;
+  background: rgba(0, 85, 255, 0.08);
+  border: 1px solid rgba(0, 85, 255, 0.2);
+  color: #0055ff;
+  font-size: 13px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 16px;
+}
+
+.hiw-title {
+  font-family: 'Playfair Display', 'Instrument Serif', Georgia, serif;
+  font-size: clamp(2.4rem, 4vw, 3.6rem);
+  font-weight: 700;
+  color: #041638;
+  line-height: 1.15;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin: 0 0 20px 0;
+}
+
+.hiw-desc {
+  font-size: 16px;
+  color: #64748b;
+  line-height: 1.7;
+  margin: 0;
+}
+
+.hiw-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 28px;
+  margin-bottom: 80px;
+}
+
+.hiw-card {
+  position: relative;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 24px;
+  padding: 36px 30px;
+  box-shadow: 0 8px 30px rgba(0, 50, 150, 0.05);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all 0.3s ease;
+}
+
+.hiw-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(0, 50, 150, 0.08);
+  border-color: rgba(0, 85, 255, 0.3);
+}
+
+.hiw-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.hiw-card-tag {
+  font-size: 12px;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  background: rgba(0, 85, 255, 0.08);
+  color: #0055ff;
+  font-weight: 500;
+}
+
+.hiw-card-num {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: #94a3b8;
+}
+
+.hiw-card-title {
+  font-size: 19px;
+  font-weight: 500;
+  color: #041638;
+  line-height: 1.35;
+  margin: 0 0 14px 0;
+}
+
+.hiw-card-desc {
+  font-size: 14.5px;
+  color: #64748b;
+  line-height: 1.65;
+  margin: 0;
+}
+
+.hiw-card-footer {
+  margin-top: 28px;
+  padding-top: 16px;
+  border-top: 1px solid #f1f5f9;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.hiw-card-metric {
+  font-size: 12.5px;
+  color: #0055ff;
+  font-weight: 500;
+}
+
+.hiw-card-arrow {
+  font-size: 14px;
+  color: #94a3b8;
+}
+
+.hiw-action-callout {
+  background: linear-gradient(135deg, #041638 0%, #0a2560 100%);
+  border-radius: 28px;
+  padding: 56px 48px;
+  color: #ffffff;
+  text-align: center;
+  box-shadow: 0 20px 50px rgba(4, 22, 56, 0.25);
+}
+
+.hiw-callout-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  font-weight: 700;
+  margin: 0 0 16px 0;
+}
+
+.hiw-callout-desc {
+  max-width: 640px;
+  margin: 0 auto 32px auto;
+  font-size: 16px;
+  color: #94a3b8;
+  line-height: 1.65;
+}
+
+.hiw-callout-actions {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.hiw-btn-primary {
+  padding: 14px 32px;
+  border-radius: 9999px;
+  background: #0055ff;
+  color: #ffffff;
+  border: none;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(0, 85, 255, 0.4);
+  transition: all 0.2s ease;
+}
+
+.hiw-btn-primary:hover {
+  background: #0044cc;
+}
+
+.hiw-btn-secondary {
+  padding: 14px 30px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  font-size: 15px;
+  font-weight: 400;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.hiw-btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.18);
+}
