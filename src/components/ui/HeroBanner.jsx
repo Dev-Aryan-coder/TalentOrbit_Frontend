@@ -389,8 +389,8 @@ export function HeroBanner({
         </div>
       </div>
 
-      {/* Atmospheric bottom gradient transition to connect seamlessly to next section */}
-      <div className="hero-bottom-transition-fade" />
+      
+      
 
       {/* 3. Bottom Metrics Grid */}
       <div 
@@ -401,7 +401,7 @@ export function HeroBanner({
           width: '100%',
           maxWidth: '1320px',
           margin: '0 auto',
-          padding: '0 32px 32px 32px',
+          padding: '0 32px 24px 32px',
           boxSizing: 'border-box'
         }}
       >
@@ -441,6 +441,7 @@ export function HeroBanner({
 
 
 export default HeroBanner;
+
 
 
 

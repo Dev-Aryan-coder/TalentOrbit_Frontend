@@ -5,7 +5,15 @@
   position: relative;
   width: 100%;
   min-height: 100vh;
-  background: #0077ee url('../../assets/hero-bg.png') no-repeat center center;
+  background: 
+    linear-gradient(180deg, 
+      rgba(0, 119, 238, 0) 0%, 
+      rgba(0, 119, 238, 0) 55%, 
+      rgba(255, 255, 255, 0.35) 75%, 
+      rgba(255, 255, 255, 0.85) 90%, 
+      #ffffff 100%
+    ),
+    url('../../assets/hero-bg.png') no-repeat center center;
   background-size: cover;
   display: flex;
   flex-direction: column;
@@ -418,20 +426,6 @@
 
 
 
-/* Seamless Transition Gradient at Bottom of Hero to Pure White */
-.hero-bottom-transition-fade {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 240px;
-  background: linear-gradient(180deg, 
-    rgba(0, 119, 238, 0) 0%, 
-    rgba(255, 255, 255, 0.25) 30%,
-    rgba(255, 255, 255, 0.8) 65%, 
-    #ffffff 100%
-  );
-  pointer-events: none;
-  z-index: 2;
-}
+
+
 
