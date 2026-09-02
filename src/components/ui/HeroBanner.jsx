@@ -395,8 +395,8 @@ export function HeroBanner({
           bottom: 0,
           left: 0,
           right: 0,
-          height: '220px',
-          background: 'linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.4) 40%, rgba(255, 255, 255, 0.85) 75%, #ffffff 100%)',
+          height: '110px',
+          background: 'linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.6) 60%, #ffffff 100%)',
           pointerEvents: 'none',
           zIndex: 1
         }}
@@ -427,6 +427,7 @@ export function HeroBanner({
 
 
 export default HeroBanner;
+
 
 
 
