@@ -1,9 +1,10 @@
-﻿import React from 'react';
+import React from 'react';
 import './HeroBanner.css';
 import logoImg from '../../assets/logo.png';
 import heroBgImg from '../../assets/hero-bg.png';
 
 export function HeroBanner({
+  onNavigatePage,
   onNavigateHome,
   onLogin,
   onRegister,
@@ -23,6 +24,18 @@ export function HeroBanner({
 }) {
   const handleNavClick = (e, targetId) => {
     e.preventDefault();
+    if (onNavigatePage) {
+      const pageMap = {
+        'how-it-works': 'how-it-works',
+        'features': 'features',
+        'about': 'about-us',
+        'contact': 'contact'
+      };
+      const targetPage = pageMap[targetId] || targetId;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      onNavigatePage(targetPage);
+      return;
+    }
     const element = document.getElementById(targetId);
     if (element) {
       const headerOffset = 90;
