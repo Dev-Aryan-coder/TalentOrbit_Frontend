@@ -300,9 +300,10 @@ export function HeroBanner({
           style={{
             fontFamily: "'Playfair Display', 'Instrument Serif', Georgia, serif",
             textTransform: 'uppercase',
-            letterSpacing: '0.08em',
-            fontSize: 'clamp(2.3rem, 5vw, 4.6rem)',
-            lineHeight: 1.12,
+            letterSpacing: '0.06em',
+            fontSize: 'clamp(1.75rem, 2.6vw, 2.75rem)',
+            maxWidth: '680px',
+            lineHeight: 1.22,
             fontWeight: 700,
             color: '#041638',
             margin: '0 0 20px 0',
@@ -416,6 +417,7 @@ export function HeroBanner({
 
 
 export default HeroBanner;
+
 
 
 

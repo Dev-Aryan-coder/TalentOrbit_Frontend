@@ -262,9 +262,10 @@
 .hero-display-headline {
   font-family: 'Playfair Display', 'Instrument Serif', Georgia, serif;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
-  font-size: clamp(2.3rem, 5vw, 4.6rem);
-  line-height: 1.12;
+  letter-spacing: 0.06em;
+  font-size: clamp(1.75rem, 2.6vw, 2.75rem);
+  max-width: 680px;
+  line-height: 1.22;
   font-weight: 700;
   color: #041638;
   margin: 0 0 20px 0;
@@ -400,4 +401,5 @@
   .hero-bottom-metrics { padding: 0 16px 16px 16px; }
   .hero-metrics-grid { grid-template-columns: 1fr; }
 }
+
 
