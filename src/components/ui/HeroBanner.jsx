@@ -387,32 +387,7 @@ export function HeroBanner({
       
       
 
-      {/* Organic Curved Wave Transition into Features Section */}
-      <div 
-        className="hero-bottom-wave-divider"
-        style={{
-          position: 'absolute',
-          bottom: 0,
-          left: 0,
-          right: 0,
-          width: '100%',
-          overflow: 'hidden',
-          lineHeight: 0,
-          pointerEvents: 'none',
-          zIndex: 4
-        }}
-      >
-        <svg 
-          viewBox="0 0 1440 80" 
-          fill="none" 
-          preserveAspectRatio="none" 
-          style={{ display: 'block', width: '100%', height: '65px' }}
-        >
-          <path d="M0,0 C380,65 1060,65 1440,0 L1440,80 L0,80 Z" fill="#ffffff" />
-        </svg>
-      </div>
-
-            {/* Seamless Gradient Fade to White at Bottom of Hero */}
+      {/* Seamless Soft Gradient Fade into White Section */}
       <div 
         className="hero-bottom-gradient-fade"
         style={{
@@ -420,14 +395,14 @@ export function HeroBanner({
           bottom: 0,
           left: 0,
           right: 0,
-          height: '200px',
-          background: 'linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.45) 50%, rgba(255, 255, 255, 0.9) 85%, #ffffff 100%)',
+          height: '220px',
+          background: 'linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.4) 40%, rgba(255, 255, 255, 0.85) 75%, #ffffff 100%)',
           pointerEvents: 'none',
-          zIndex: 2
+          zIndex: 1
         }}
       />
 
-      {/* 3. Bottom Metrics Grid Bridging the Transition */}
+      {/* 3. Bottom Metrics Grid */}
       <div 
         className="hero-bottom-metrics"
         style={{
@@ -436,8 +411,7 @@ export function HeroBanner({
           width: '100%',
           maxWidth: '1320px',
           margin: '0 auto',
-          padding: '0 32px',
-          marginBottom: '-28px',
+          padding: '0 32px 32px 32px',
           boxSizing: 'border-box'
         }}
       >
@@ -476,6 +450,7 @@ export function HeroBanner({
 
 
 export default HeroBanner;
+
 
 
 

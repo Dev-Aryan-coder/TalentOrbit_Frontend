@@ -11,7 +11,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#050811]">
+    <div className="min-h-screen bg-white">
       {currentView === 'home' && (
         <HomePage 
           onNavigateRole={(role) => setCurrentView(role)} 
@@ -21,3 +21,4 @@ export default function App() {
     </div>
   );
 }
+
