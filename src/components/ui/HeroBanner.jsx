@@ -28,8 +28,6 @@ export function HeroBanner({
         position: 'relative',
         width: '100%',
         minHeight: '100vh',
-        background: `#0077ee url(${heroBgImg}) no-repeat center center`,
-        backgroundSize: 'cover',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between',
@@ -61,7 +59,6 @@ export function HeroBanner({
             alignItems: 'center',
             justifyContent: 'space-between',
             pointerEvents: 'auto',
-            background: 'transparent',
             border: 'none',
             padding: 0,
             width: '100%'
@@ -90,7 +87,6 @@ export function HeroBanner({
                 minWidth: '44px',
                 maxWidth: '44px',
                 borderRadius: '12px',
-                background: 'rgba(255, 255, 255, 0.85)',
                 border: '1px solid rgba(255, 255, 255, 0.95)',
                 backdropFilter: 'blur(16px)',
                 display: 'flex',
@@ -133,7 +129,6 @@ export function HeroBanner({
               gap: '8px',
               padding: '6px 12px',
               borderRadius: '9999px',
-              background: 'rgba(255, 255, 255, 0.55)',
               border: '1px solid rgba(255, 255, 255, 0.8)',
               backdropFilter: 'blur(20px)',
               WebkitBackdropFilter: 'blur(20px)',
@@ -225,7 +220,6 @@ export function HeroBanner({
                 fontSize: '14px',
                 fontWeight: 400,
                 color: '#041638',
-                background: 'transparent',
                 border: '1px solid rgba(255, 255, 255, 0.75)',
                 backdropFilter: 'blur(16px)',
                 cursor: 'pointer',
@@ -245,7 +239,6 @@ export function HeroBanner({
                 fontSize: '14px',
                 fontWeight: 400,
                 color: '#041638',
-                background: 'transparent',
                 border: '1.5px solid rgba(4, 22, 56, 0.75)',
                 backdropFilter: 'blur(16px)',
                 cursor: 'pointer',
@@ -281,7 +274,6 @@ export function HeroBanner({
             gap: '8px',
             padding: '6px 18px',
             borderRadius: '9999px',
-            background: 'rgba(255, 255, 255, 0.8)',
             border: '1px solid rgba(255, 255, 255, 0.95)',
             backdropFilter: 'blur(20px)',
             fontSize: '13px',
@@ -357,7 +349,6 @@ export function HeroBanner({
               fontSize: '16px',
               fontWeight: 400,
               color: '#ffffff',
-              background: '#041638',
               border: 'none',
               cursor: 'pointer',
               boxShadow: '0 8px 25px rgba(4, 22, 56, 0.4)'
@@ -377,7 +368,6 @@ export function HeroBanner({
               fontSize: '16px',
               fontWeight: 400,
               color: '#041638',
-              background: 'rgba(255, 255, 255, 0.8)',
               border: '1px solid rgba(255, 255, 255, 0.95)',
               backdropFilter: 'blur(20px)',
               cursor: 'pointer',
@@ -413,7 +403,6 @@ export function HeroBanner({
             gap: '18px',
             padding: '20px 28px',
             borderRadius: '20px',
-            background: 'rgba(255, 255, 255, 0.75)',
             border: '1px solid rgba(255, 255, 255, 0.95)',
             backdropFilter: 'blur(32px)',
             boxShadow: '0 10px 30px rgba(0, 50, 150, 0.1)'
@@ -441,6 +430,7 @@ export function HeroBanner({
 
 
 export default HeroBanner;
+
 
 
 
