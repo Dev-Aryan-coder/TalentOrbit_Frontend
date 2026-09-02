@@ -347,8 +347,9 @@
   z-index: 10;
   width: 100%;
   max-width: 1320px;
-  margin: 16px auto 0 auto;
-  padding: 0 32px 24px 32px;
+  margin: 64px auto 0 auto;
+  padding: 0 32px 32px 32px;
+  transform: translateY(28px);
   box-sizing: border-box;
 }
 
@@ -401,6 +402,7 @@
   .hero-bottom-metrics { padding: 0 16px 16px 16px; }
   .hero-metrics-grid { grid-template-columns: 1fr; }
 }
+
 
 
 
