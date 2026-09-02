@@ -107,25 +107,90 @@ export default function HeroBanner({
             </div>
           </div>
 
-          {/* CENTER: Ultra-Premium Liquid Glassmorphic Pill Navbar */}
+          {/* CENTER: Dedicated Frosted Glassmorphic Pill Navbar with Clean Spacing */}
           <nav 
             className="hero-center-pill-nav"
             style={{
               display: 'flex',
               alignItems: 'center',
-              gap: '6px',
-              padding: '8px 18px',
+              gap: '8px',
+              padding: '6px 12px',
               borderRadius: '9999px',
-              background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0.15) 100%)',
-              border: '1px solid rgba(255, 255, 255, 0.6)',
-              backdropFilter: 'blur(24px) saturate(190%)',
-              boxShadow: '0 12px 36px 0 rgba(0, 40, 130, 0.15), 0 2px 8px 0 rgba(0, 40, 130, 0.08), inset 0 1.5px 1px 0 rgba(255, 255, 255, 0.9), inset 0 -1.5px 2px 0 rgba(0, 40, 130, 0.06)'
+              background: 'rgba(255, 255, 255, 0.55)',
+              border: '1px solid rgba(255, 255, 255, 0.8)',
+              backdropFilter: 'blur(20px)',
+              WebkitBackdropFilter: 'blur(20px)',
+              boxShadow: '0 8px 32px 0 rgba(0, 50, 150, 0.12), inset 0 1px 1px 0 rgba(255, 255, 255, 0.9)'
             }}
           >
-            <a href="#how-it-works" className="hero-pill-link">How It Works</a>
-            <a href="#features" className="hero-pill-link">Features</a>
-            <a href="#about" className="hero-pill-link">About Us</a>
-            <a href="#contact" className="hero-pill-link">Contact</a>
+            <a 
+              href="#how-it-works" 
+              className="hero-pill-link"
+              style={{
+                display: 'inline-block',
+                padding: '8px 20px',
+                borderRadius: '9999px',
+                fontSize: '14.5px',
+                fontWeight: 600,
+                color: '#041638',
+                textDecoration: 'none',
+                whiteSpace: 'nowrap',
+                transition: 'all 0.2s ease'
+              }}
+            >
+              How It Works
+            </a>
+            <a 
+              href="#features" 
+              className="hero-pill-link"
+              style={{
+                display: 'inline-block',
+                padding: '8px 20px',
+                borderRadius: '9999px',
+                fontSize: '14.5px',
+                fontWeight: 600,
+                color: '#041638',
+                textDecoration: 'none',
+                whiteSpace: 'nowrap',
+                transition: 'all 0.2s ease'
+              }}
+            >
+              Features
+            </a>
+            <a 
+              href="#about" 
+              className="hero-pill-link"
+              style={{
+                display: 'inline-block',
+                padding: '8px 20px',
+                borderRadius: '9999px',
+                fontSize: '14.5px',
+                fontWeight: 600,
+                color: '#041638',
+                textDecoration: 'none',
+                whiteSpace: 'nowrap',
+                transition: 'all 0.2s ease'
+              }}
+            >
+              About Us
+            </a>
+            <a 
+              href="#contact" 
+              className="hero-pill-link"
+              style={{
+                display: 'inline-block',
+                padding: '8px 20px',
+                borderRadius: '9999px',
+                fontSize: '14.5px',
+                fontWeight: 600,
+                color: '#041638',
+                textDecoration: 'none',
+                whiteSpace: 'nowrap',
+                transition: 'all 0.2s ease'
+              }}
+            >
+              Contact
+            </a>
           </nav>
 
           {/* Right: Launch Button */}
