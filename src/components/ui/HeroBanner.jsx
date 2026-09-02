@@ -21,13 +21,18 @@ export function HeroBanner({
     { label: "Faculty Industry R&D", sub: "Corporate Research & Grants" }
   ]
 }) {
-  return (
+    return (
     <div 
       className="hero-banner-root"
       style={{
         position: 'relative',
         width: '100%',
         minHeight: '100vh',
+        backgroundColor: '#0077ee',
+        backgroundImage: `url(${heroBgImg})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center top',
+        backgroundRepeat: 'no-repeat',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between',
@@ -407,6 +412,21 @@ export function HeroBanner({
         </svg>
       </div>
 
+            {/* Seamless Gradient Fade to White at Bottom of Hero */}
+      <div 
+        className="hero-bottom-gradient-fade"
+        style={{
+          position: 'absolute',
+          bottom: 0,
+          left: 0,
+          right: 0,
+          height: '200px',
+          background: 'linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.45) 50%, rgba(255, 255, 255, 0.9) 85%, #ffffff 100%)',
+          pointerEvents: 'none',
+          zIndex: 2
+        }}
+      />
+
       {/* 3. Bottom Metrics Grid Bridging the Transition */}
       <div 
         className="hero-bottom-metrics"
@@ -456,6 +476,7 @@ export function HeroBanner({
 
 
 export default HeroBanner;
+
 
 
 

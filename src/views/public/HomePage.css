@@ -18,7 +18,7 @@
 /* Base resets & Typography */
 .landing-page {
   font-family: var(--font-sans);
-  background-color: var(--bg-dark);
+  background-color: #ffffff;
   color: #041638;
   overflow-x: hidden;
 }
@@ -322,6 +322,7 @@
   .showcase-display-box { grid-template-columns: 1fr; }
   .footer-links-group { gap: 32px; }
 }
+
 
 
 
