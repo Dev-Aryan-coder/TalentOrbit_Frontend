@@ -168,40 +168,66 @@
     inset 0 1px 1px rgba(255, 255, 255, 0.9);
   transform: translateY(-1px);
 }
-/* Right: Launch Button */
-.hero-header-launch-btn {
+/* Right: Glassmorphic Auth Buttons Group */
+.hero-header-auth-group {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 11px 26px;
+  gap: 10px;
+}
+
+.hero-btn-glass-login {
+  padding: 9px 22px;
   border-radius: 9999px;
-  font-size: 14px;
-  font-weight: 700;
-  color: #ffffff;
-  background: #041638;
-  border: 1px solid #041638;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #041638;
+  background: rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
   cursor: pointer;
   box-shadow: 
-    0 6px 20px rgba(4, 22, 56, 0.35),
-    inset 0 1px 1px rgba(255, 255, 255, 0.25);
-  transition: all 0.25s ease;
+    0 4px 16px rgba(0, 50, 150, 0.1),
+    inset 0 1px 1px #ffffff;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  white-space: nowrap;
 }
 
-.hero-header-launch-btn:hover {
-  background: #003399;
-  border-color: #003399;
+.hero-btn-glass-login:hover {
+  background: rgba(255, 255, 255, 0.85);
+  color: #0055ff;
+  box-shadow: 
+    0 6px 20px rgba(0, 50, 150, 0.16),
+    inset 0 1.5px 1.5px #ffffff;
   transform: translateY(-1px);
-  box-shadow: 0 8px 25px rgba(0, 51, 153, 0.45);
 }
 
-.hero-btn-pulse-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background-color: #7ce8ff;
-  box-shadow: 0 0 8px #7ce8ff;
+.hero-btn-glass-signup {
+  padding: 9px 22px;
+  border-radius: 9999px;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #ffffff;
+  background: linear-gradient(135deg, rgba(4, 22, 56, 0.88) 0%, rgba(0, 60, 180, 0.75) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  cursor: pointer;
+  box-shadow: 
+    0 6px 22px rgba(4, 22, 56, 0.3),
+    inset 0 1px 1px rgba(255, 255, 255, 0.3);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  white-space: nowrap;
 }
 
+.hero-btn-glass-signup:hover {
+  background: linear-gradient(135deg, rgba(0, 51, 153, 0.95) 0%, rgba(0, 85, 255, 0.85) 100%);
+  border-color: rgba(255, 255, 255, 0.8);
+  box-shadow: 
+    0 8px 28px rgba(0, 60, 180, 0.4),
+    inset 0 1px 1px rgba(255, 255, 255, 0.5);
+  transform: translateY(-1px);
+}
 /* Center Stage Content */
 .hero-main-stage {
   position: relative;
@@ -387,6 +413,7 @@
   .hero-bottom-metrics { padding: 0 20px 20px 20px; }
   .hero-metrics-grid { grid-template-columns: 1fr; }
 }
+
 
 
 

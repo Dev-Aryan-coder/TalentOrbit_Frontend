@@ -5,6 +5,8 @@ import heroBgImg from '../../assets/hero-bg.png';
 
 export function HeroBanner({
   onNavigateHome,
+  onLogin,
+  onRegister,
   title = "Transforming Academia & Industry",
   highlightText = "Collaboration",
   description = "TalentOrbit empowers Students with AI skill diagnostic assessments, Recruiters with explainable talent scouting, Academicians with research grants & FDPs, and Institutions with real-time NIRF/NAAC placement intelligence.",
@@ -208,32 +210,52 @@ export function HeroBanner({
             </a>
           </nav>
 
-          {/* Right: Launch Button */}
-          <button 
-            type="button" 
-            onClick={onPrimaryAction} 
-            className="hero-header-launch-btn"
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '8px',
-              padding: '11px 26px',
-              borderRadius: '9999px',
-              fontSize: '14px',
-              fontWeight: 700,
-              color: '#ffffff',
-              background: '#041638',
-              border: '1px solid #041638',
-              cursor: 'pointer',
-              boxShadow: '0 6px 20px rgba(4, 22, 56, 0.35)'
-            }}
+          {/* Right: Full Glassmorphism Auth Buttons */}
+          <div 
+            className="hero-header-auth-group"
+            style={{ display: 'flex', alignItems: 'center', gap: '10px' }}
           >
-            <span 
-              className="hero-btn-pulse-dot"
-              style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#7ce8ff', boxShadow: '0 0 8px #7ce8ff' }}
-            />
-            <span>Launch Platform</span>
-          </button>
+            <button 
+              type="button" 
+              onClick={onLogin} 
+              className="hero-btn-glass-login"
+              style={{
+                padding: '9px 22px',
+                borderRadius: '9999px',
+                fontSize: '13.5px',
+                fontWeight: 600,
+                color: '#041638',
+                background: 'rgba(255, 255, 255, 0.5)',
+                border: '1px solid rgba(255, 255, 255, 0.85)',
+                backdropFilter: 'blur(24px) saturate(180%)',
+                cursor: 'pointer',
+                boxShadow: '0 4px 16px rgba(0, 50, 150, 0.1)',
+                whiteSpace: 'nowrap'
+              }}
+            >
+              Log In
+            </button>
+            <button 
+              type="button" 
+              onClick={onRegister} 
+              className="hero-btn-glass-signup"
+              style={{
+                padding: '9px 22px',
+                borderRadius: '9999px',
+                fontSize: '13.5px',
+                fontWeight: 700,
+                color: '#ffffff',
+                background: 'linear-gradient(135deg, rgba(4, 22, 56, 0.88) 0%, rgba(0, 60, 180, 0.75) 100%)',
+                border: '1px solid rgba(255, 255, 255, 0.5)',
+                backdropFilter: 'blur(24px) saturate(180%)',
+                cursor: 'pointer',
+                boxShadow: '0 6px 22px rgba(4, 22, 56, 0.3)',
+                whiteSpace: 'nowrap'
+              }}
+            >
+              Sign Up / Register
+            </button>
+          </div>
         </header>
       </div>
 
@@ -418,6 +440,7 @@ export function HeroBanner({
 
 
 export default HeroBanner;
+
 
 
 

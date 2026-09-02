@@ -3,7 +3,7 @@ import HeroBanner, { HeroBanner as HeroBannerNamed } from '../../components/ui/H
 import './HomePage.css';
 import logoImg from '../../assets/logo.png';
 
-export function HomePage({ onNavigateRole, onNavigateHome }) {
+export function HomePage({ onNavigateRole, onNavigateHome, onLogin, onRegister }) {
   const [activeRoleTab, setActiveRoleTab] = useState('student');
 
   const roleShowcases = {
@@ -74,7 +74,7 @@ export function HomePage({ onNavigateRole, onNavigateHome }) {
   return (
     <div className="landing-page">
       {/* 1. Hero Banner with Fluid Silk Cyan Background & Floating Pill Navbar */}
-      <HeroBanner onNavigateHome={onNavigateHome || (() => { window.scrollTo({ top: 0, behavior: 'smooth' }); window.history.pushState(null, '', '/'); })}
+      <HeroBanner onLogin={onLogin} onRegister={onRegister} onNavigateHome={onNavigateHome || (() => { window.scrollTo({ top: 0, behavior: 'smooth' }); window.history.pushState(null, '', '/'); })}
         title="Transforming Academia & Industry"
         highlightText="Collaboration"
         description="TalentOrbit is the National Career & Higher Education Intelligence Platform bridging Students, Recruiters, Academicians, and Institutions with explainable AI benchmarking and verified placement analytics."
@@ -302,6 +302,7 @@ export function HomePage({ onNavigateRole, onNavigateHome }) {
 }
 
 export default HomePage;
+
 
 
 
