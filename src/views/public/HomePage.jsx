@@ -147,7 +147,13 @@ export function HomePage({ onNavigateRole, onNavigateHome, onLogin, onRegister }
           </div>
         </div>
       </section>
-      {/* 2B. Cloned Solution Architecture & Ecosystem Section */}
+
+      {/* Horizontal Divider Line */}
+      <div className="section-divider-wrapper">
+        <div className="section-divider" />
+      </div>
+
+      {/* 3. Career & Skill Intelligence Solution Architecture Section */}
       <section id="features" className="section-features">
         <div className="section-container">
           <div className="section-header">
@@ -365,4 +371,5 @@ export function HomePage({ onNavigateRole, onNavigateHome, onLogin, onRegister }
 }
 
 export default HomePage;
+
 
