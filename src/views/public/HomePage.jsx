@@ -1,5 +1,5 @@
 ﻿import React, { useState } from 'react';
-import HeroBanner from '../../components/ui/HeroBanner';
+import HeroBanner, { HeroBanner as HeroBannerNamed } from '../../components/ui/HeroBanner';
 import './HomePage.css';
 import logoImg from '../../assets/logo.png';
 
@@ -302,6 +302,7 @@ export function HomePage({ onNavigateRole }) {
 }
 
 export default HomePage;
+
 
 
 

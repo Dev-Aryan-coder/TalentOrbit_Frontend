@@ -3,7 +3,7 @@ import './HeroBanner.css';
 import logoImg from '../../assets/logo.png';
 import heroBgImg from '../../assets/hero-bg.png';
 
-export default function HeroBanner({
+export function HeroBanner({
   title = "Transforming Academia & Industry",
   highlightText = "Collaboration",
   description = "TalentOrbit empowers Students with AI skill diagnostic assessments, Recruiters with explainable talent scouting, Academicians with research grants & FDPs, and Institutions with real-time NIRF/NAAC placement intelligence.",
@@ -400,3 +400,7 @@ export default function HeroBanner({
     </div>
   );
 }
+
+
+export default HeroBanner;
+
