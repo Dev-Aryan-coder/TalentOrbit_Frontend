@@ -24,3 +24,7 @@
 
 ## 5. Mandatory Verification Protocol
 - Run `npm run build` synchronously on every single frontend code change before reporting completion to ensure zero parsing, syntax, or bundling errors.
+
+## 6. Transparent File Change Reporting
+- In every response where code or configuration is modified, ALWAYS explicitly list every edited file using clickable GitHub-style markdown links (e.g. `[filename](file:///absolute/path/to/file)`).
+- Provide a brief summary of what exact changes were made in each file.
