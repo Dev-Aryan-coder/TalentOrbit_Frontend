@@ -15,10 +15,10 @@ export function HeroBanner({
   secondaryActionText = "Recruiter ATS & Talent Pool",
   onSecondaryAction,
   stats = [
-    { label: "AI Matching Engine", sub: "Deterministic & Weighted" },
-    { label: "Verified Skill Genome", sub: "SHA-256 Tamper-Proof" },
-    { label: "Skill Deficit Heatmaps", sub: "NIRF Metric 5.2.1 / NAAC" },
-    { label: "Faculty Immersion", sub: "AICTE FDPs & Sabbaticals" }
+    { label: "AI Skill Testing", sub: "Live Groq Diagnostic MCQs" },
+    { label: "Smart Job Matching", sub: "Weighted Skill Compatibility" },
+    { label: "Placement Analytics", sub: "Real-Time College Reports" },
+    { label: "Faculty Industry R&D", sub: "Corporate Research & Grants" }
   ]
 }) {
   return (
@@ -440,6 +440,7 @@ export function HeroBanner({
 
 
 export default HeroBanner;
+
 
 
 
