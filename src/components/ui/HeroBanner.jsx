@@ -29,7 +29,7 @@ export function HeroBanner({
         width: '100%',
         minHeight: '100vh',
         backgroundColor: '#0077ee',
-        backgroundImage: `url(${heroBgImg})`,
+        backgroundImage: `linear-gradient(180deg, rgba(3, 18, 50, 0.20) 0%, rgba(0, 60, 170, 0.15) 50%, rgba(4, 22, 56, 0.24) 100%), url(${heroBgImg})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center top',
         backgroundRepeat: 'no-repeat',
@@ -417,6 +417,7 @@ export function HeroBanner({
 
 
 export default HeroBanner;
+
 
 
 
