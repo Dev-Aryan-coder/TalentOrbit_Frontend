@@ -21,6 +21,21 @@ export function HeroBanner({
     { label: "Faculty Industry R&D", sub: "Corporate Research & Grants" }
   ]
 }) {
+  const handleNavClick = (e, targetId) => {
+    e.preventDefault();
+    const element = document.getElementById(targetId);
+    if (element) {
+      const headerOffset = 90;
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+      window.history.pushState(null, '', `#${targetId}`);
+    }
+  };
+
     return (
     <div 
       className="hero-banner-root"
@@ -142,6 +157,7 @@ export function HeroBanner({
           >
             <a 
               href="#how-it-works" 
+              onClick={(e) => handleNavClick(e, 'how-it-works')}
               className="hero-pill-link"
               style={{
                 display: 'inline-block',
@@ -159,6 +175,7 @@ export function HeroBanner({
             </a>
             <a 
               href="#features" 
+              onClick={(e) => handleNavClick(e, 'features')}
               className="hero-pill-link"
               style={{
                 display: 'inline-block',
@@ -176,6 +193,7 @@ export function HeroBanner({
             </a>
             <a 
               href="#about" 
+              onClick={(e) => handleNavClick(e, 'about')}
               className="hero-pill-link"
               style={{
                 display: 'inline-block',
@@ -193,6 +211,7 @@ export function HeroBanner({
             </a>
             <a 
               href="#contact" 
+              onClick={(e) => handleNavClick(e, 'contact')}
               className="hero-pill-link"
               style={{
                 display: 'inline-block',
@@ -417,6 +436,7 @@ export function HeroBanner({
 
 
 export default HeroBanner;
+
 
 
 

@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import HeroBanner from '../../components/ui/HeroBanner';
 import './HomePage.css';
 import logoImg from '../../assets/logo.png';
@@ -311,7 +311,7 @@ export function HomePage({ onNavigateRole, onNavigateHome, onLogin, onRegister }
       </section>
 
       {/* 4. Senior Global Footer */}
-      <footer id="about" className="landing-footer">
+      <footer id="contact" className="landing-footer">
         <div className="footer-top">
           <div className="footer-brand">
             <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '14px' }}>
