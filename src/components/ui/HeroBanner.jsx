@@ -403,31 +403,8 @@ export function HeroBanner({
       />
 
       {/* 3. Bottom Metrics Grid */}
-      <div 
-        className="hero-bottom-metrics"
-        style={{
-          position: 'relative',
-          zIndex: 10,
-          width: '100%',
-          maxWidth: '1320px',
-          margin: '0 auto',
-          padding: '0 32px 32px 32px',
-          boxSizing: 'border-box'
-        }}
-      >
-        <div 
-          className="hero-metrics-grid"
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
-            gap: '18px',
-            padding: '20px 28px',
-            borderRadius: '20px',
-            border: '1px solid rgba(255, 255, 255, 0.95)',
-            backdropFilter: 'blur(32px)',
-            boxShadow: '0 10px 30px rgba(0, 50, 150, 0.1)'
-          }}
-        >
+      <div className="hero-bottom-metrics">
+        <div className="hero-metrics-grid">
           {stats.map((item, idx) => (
             <div 
               key={idx} 
@@ -450,6 +427,7 @@ export function HeroBanner({
 
 
 export default HeroBanner;
+
 
 
 
