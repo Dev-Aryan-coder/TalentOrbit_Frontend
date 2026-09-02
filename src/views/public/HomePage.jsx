@@ -4,7 +4,7 @@ import './HomePage.css';
 import logoImg from '../../assets/logo.png';
 import whoWeAreImg from '../../assets/who-we-are.jpg';
 
-export function HomePage({ onNavigateRole, onNavigateHome, onLogin, onRegister }) {
+export default function HomePage({ onNavigateRole, onNavigateHome, onLogin, onRegister }) {
   const [activeRoleTab, setActiveRoleTab] = useState('student');
 
   const roleShowcases = {
@@ -364,15 +364,5 @@ export function HomePage({ onNavigateRole, onNavigateHome, onLogin, onRegister }
   );
 }
 
-export default HomePage;
-
-
-
-
-
-
-
-
-
-
+export { HomePage };
 
