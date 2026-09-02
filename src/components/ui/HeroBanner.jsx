@@ -382,7 +382,32 @@ export function HeroBanner({
       
       
 
-      {/* 3. Bottom Metrics Grid */}
+      {/* Organic Curved Wave Transition into Features Section */}
+      <div 
+        className="hero-bottom-wave-divider"
+        style={{
+          position: 'absolute',
+          bottom: 0,
+          left: 0,
+          right: 0,
+          width: '100%',
+          overflow: 'hidden',
+          lineHeight: 0,
+          pointerEvents: 'none',
+          zIndex: 4
+        }}
+      >
+        <svg 
+          viewBox="0 0 1440 80" 
+          fill="none" 
+          preserveAspectRatio="none" 
+          style={{ display: 'block', width: '100%', height: '65px' }}
+        >
+          <path d="M0,0 C380,65 1060,65 1440,0 L1440,80 L0,80 Z" fill="#ffffff" />
+        </svg>
+      </div>
+
+      {/* 3. Bottom Metrics Grid Bridging the Transition */}
       <div 
         className="hero-bottom-metrics"
         style={{
@@ -391,7 +416,8 @@ export function HeroBanner({
           width: '100%',
           maxWidth: '1320px',
           margin: '0 auto',
-          padding: '0 32px 24px 32px',
+          padding: '0 32px',
+          marginBottom: '-28px',
           boxSizing: 'border-box'
         }}
       >
@@ -430,5 +456,6 @@ export function HeroBanner({
 
 
 export default HeroBanner;
+
 
 

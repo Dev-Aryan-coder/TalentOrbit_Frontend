@@ -27,8 +27,8 @@
 .section-features {
   position: relative;
   background: #ffffff;
-  padding: 40px 32px 100px 32px;
-  z-index: 10;
+  padding: 70px 32px 100px 32px;
+  z-index: 5;
 }
 
 .section-container {
@@ -322,6 +322,7 @@
   .showcase-display-box { grid-template-columns: 1fr; }
   .footer-links-group { gap: 32px; }
 }
+
 
 
 
