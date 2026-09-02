@@ -46,9 +46,9 @@ export function HeroBanner({
           pointerEvents: 'none',
           zIndex: 1000,
           width: '100%',
-          maxWidth: '1320px',
+          maxWidth: '1520px',
           margin: '0 auto',
-          padding: '0 32px',
+          padding: '0 20px',
           boxSizing: 'border-box'
         }}
       >
@@ -418,6 +418,7 @@ export function HeroBanner({
 
 
 export default HeroBanner;
+
 
 
 

@@ -22,9 +22,9 @@
   right: 0;
   z-index: 9999;
   width: 100%;
-  max-width: 1320px;
+  max-width: 1520px;
   margin: 0 auto;
-  padding: 0 32px;
+  padding: 0 20px;
   box-sizing: border-box;
   pointer-events: none;
 }
@@ -48,6 +48,7 @@
   gap: 12px;
   cursor: pointer;
   text-decoration: none;
+  margin-left: 0;
 }
 
 .hero-brand-logo-box {
@@ -373,9 +374,9 @@
   right: 0;
   z-index: 9999;
   width: 100%;
-  max-width: 1320px;
+  max-width: 1520px;
   margin: 0 auto;
-  padding: 0 32px;
+  padding: 0 20px;
   box-sizing: border-box;
   pointer-events: none;
 }
@@ -386,5 +387,6 @@
   .hero-bottom-metrics { padding: 0 20px 20px 20px; }
   .hero-metrics-grid { grid-template-columns: 1fr; }
 }
+
 
 
