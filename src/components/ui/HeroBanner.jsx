@@ -222,14 +222,14 @@ export function HeroBanner({
               style={{
                 padding: '9px 22px',
                 borderRadius: '9999px',
-                fontSize: '13.5px',
+                fontSize: '14px',
                 fontWeight: 600,
                 color: '#041638',
-                background: 'rgba(255, 255, 255, 0.5)',
-                border: '1px solid rgba(255, 255, 255, 0.85)',
-                backdropFilter: 'blur(24px) saturate(180%)',
+                background: 'transparent',
+                border: '1px solid rgba(255, 255, 255, 0.75)',
+                backdropFilter: 'blur(16px)',
                 cursor: 'pointer',
-                boxShadow: '0 4px 16px rgba(0, 50, 150, 0.1)',
+                boxShadow: '0 4px 14px rgba(0, 50, 150, 0.06)',
                 whiteSpace: 'nowrap'
               }}
             >
@@ -242,14 +242,14 @@ export function HeroBanner({
               style={{
                 padding: '9px 22px',
                 borderRadius: '9999px',
-                fontSize: '13.5px',
+                fontSize: '14px',
                 fontWeight: 700,
-                color: '#ffffff',
-                background: 'linear-gradient(135deg, rgba(4, 22, 56, 0.88) 0%, rgba(0, 60, 180, 0.75) 100%)',
-                border: '1px solid rgba(255, 255, 255, 0.5)',
-                backdropFilter: 'blur(24px) saturate(180%)',
+                color: '#041638',
+                background: 'transparent',
+                border: '1.5px solid rgba(4, 22, 56, 0.75)',
+                backdropFilter: 'blur(16px)',
                 cursor: 'pointer',
-                boxShadow: '0 6px 22px rgba(4, 22, 56, 0.3)',
+                boxShadow: '0 4px 14px rgba(0, 50, 150, 0.08)',
                 whiteSpace: 'nowrap'
               }}
             >
@@ -440,6 +440,7 @@ export function HeroBanner({
 
 
 export default HeroBanner;
+
 
 
 
