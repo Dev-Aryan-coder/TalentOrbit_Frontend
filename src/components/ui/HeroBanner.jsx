@@ -266,7 +266,7 @@ export function HeroBanner({
           width: '100%',
           maxWidth: '1320px',
           margin: '0 auto',
-          padding: '110px 32px 40px 32px',
+          padding: '160px 32px 30px 32px',
           textAlign: 'left',
           boxSizing: 'border-box'
         }}
@@ -417,6 +417,7 @@ export function HeroBanner({
 
 
 export default HeroBanner;
+
 
 
 
