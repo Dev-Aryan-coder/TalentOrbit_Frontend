@@ -2,6 +2,7 @@
 import HeroBanner from '../../components/ui/HeroBanner';
 import './HomePage.css';
 import logoImg from '../../assets/logo.png';
+import whoWeAreImg from '../../assets/who-we-are.jpg';
 
 export function HomePage({ onNavigateRole, onNavigateHome, onLogin, onRegister }) {
   const [activeRoleTab, setActiveRoleTab] = useState('student');
@@ -84,70 +85,70 @@ export function HomePage({ onNavigateRole, onNavigateHome, onLogin, onRegister }
         onSecondaryAction={() => onNavigateRole ? onNavigateRole('industry') : console.log('industry')}
       />
 
-      {/* 2. Problem Statement #26044 Core Pillars Section */}
-      <section id="features" className="section-features">
+      {/* 2. Who We Are Section */}
+      <section id="about" className="section-who-we-are">
         <div className="section-container">
-          <div className="section-header">
-            <div className="section-pill-tag">Career & Skill Intelligence Solution Architecture</div>
-            <h2 className="section-title">Built For National Impact</h2>
+          <div className="section-header" style={{ marginBottom: '44px' }}>
+            <div className="section-pill-tag">About TalentOrbit</div>
+            <h2 className="section-title">Who We Are</h2>
             <p className="section-subtitle">
-              Bridging the 45% industry-academia skill gap with deterministic AI diagnostics, verified student genomes, and university accreditation intelligence.
+              Pioneering India's unified academia-industry intelligence ecosystem to bridge the 45% skill deficit.
             </p>
           </div>
 
-          <div className="features-grid">
-            <div className="feature-card">
-              <div className="feature-icon-box">🧠</div>
-              <h3 className="feature-card-title">Dynamic AI Diagnostics</h3>
-              <p className="feature-card-desc">
-                Generates on-demand technical diagnostic MCQs for any IT topic using Groq LLM, caching questions permanently into MySQL with mathematical confidence gap evaluation.
-              </p>
+          <div className="who-we-are-layout">
+            {/* Left: Article Image */}
+            <div className="who-we-are-image-wrapper">
+              <img 
+                src={whoWeAreImg} 
+                alt="TalentOrbit University & Industry Synergy" 
+                className="who-we-are-img"
+              />
             </div>
 
-            <div className="feature-card">
-              <div className="feature-icon-box">🔒</div>
-              <h3 className="feature-card-title">SHA-256 Verified Genome</h3>
-              <p className="feature-card-desc">
-                Passed assessments generate tamper-proof cryptographic hashes in MySQL, preventing resume fabrication and guaranteeing authenticity for recruiters.
+            {/* Right: Article Content */}
+            <div className="who-we-are-content">
+              <p className="who-we-are-lead">
+                TalentOrbit is an advanced AI-powered career and skill intelligence platform designed to seamlessly align students, academic institutions, and corporate recruiters.
               </p>
-            </div>
 
-            <div className="feature-card">
-              <div className="feature-icon-box">⚖️</div>
-              <h3 className="feature-card-title">Explainable Match Engine</h3>
-              <p className="feature-card-desc">
-                Calculates exact student-job overlap percentages based on recruiter-defined weights, explicitly showing matched versus missing technical prerequisites.
-              </p>
-            </div>
+              <div className="who-we-are-features-list">
+                <div className="who-we-are-feature-item">
+                  <span className="who-we-are-icon">🎯</span>
+                  <div>
+                    <h4 className="who-we-are-item-title">Deterministic Skill Diagnostics</h4>
+                    <p className="who-we-are-item-desc">
+                      Moving beyond static resumes with live Groq AI assessments, topic-level mastery heatmaps, and mathematical confidence gap metrics.
+                    </p>
+                  </div>
+                </div>
 
-            <div className="feature-card">
-              <div className="feature-icon-box">📊</div>
-              <h3 className="feature-card-title">NIRF 5.2.1 Intelligence</h3>
-              <p className="feature-card-desc">
-                Aggregates real-time median package, total placement offers, and batch skill heatmaps to empower University TPOs with automated accreditation compliance.
-              </p>
-            </div>
+                <div className="who-we-are-feature-item">
+                  <span className="who-we-are-icon">🔒</span>
+                  <div>
+                    <h4 className="who-we-are-item-title">Verified Skill Genomes</h4>
+                    <p className="who-we-are-item-desc">
+                      Cryptographically verified assessment records stored in MySQL to guarantee credential authenticity and eradicate resume exaggeration.
+                    </p>
+                  </div>
+                </div>
 
-            <div className="feature-card">
-              <div className="feature-icon-box">🤝</div>
-              <h3 className="feature-card-title">Faculty R&D Grants</h3>
-              <p className="feature-card-desc">
-                Connects university professors with corporate sponsored research projects, consulting contracts, and AICTE industry immersion programs.
-              </p>
-            </div>
-
-            <div className="feature-card">
-              <div className="feature-icon-box">🛡️</div>
-              <h3 className="feature-card-title">Platform Moderation & Audit</h3>
-              <p className="feature-card-desc">
-                Full SuperAdmin governance with real client IP tracking, system audit logs, automated dispute moderation, and university verification checks.
-              </p>
+                <div className="who-we-are-feature-item">
+                  <span className="who-we-are-icon">🏛️</span>
+                  <div>
+                    <h4 className="who-we-are-item-title">NIRF & Accreditation Intelligence</h4>
+                    <p className="who-we-are-item-desc">
+                      Automating NIRF Metric 5.2.1 and NAAC Criterion 5 compliance for college TPOs through real-time placement and skill gap analytics.
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </section>
       {/* 2B. Cloned Solution Architecture & Ecosystem Section */}
-      <section id="capabilities" className="section-features" style={{ paddingTop: '20px' }}>
+      <section id="features" className="section-features">
         <div className="section-container">
           <div className="section-header">
             <div className="section-pill-tag">Career & Skill Intelligence Solution Architecture</div>
@@ -364,6 +365,7 @@ export function HomePage({ onNavigateRole, onNavigateHome, onLogin, onRegister }
 }
 
 export default HomePage;
+
 
 
 
