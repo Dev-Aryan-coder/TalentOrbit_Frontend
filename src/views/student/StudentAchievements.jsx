@@ -180,7 +180,7 @@ export default function StudentAchievements({ onNavigateHome, onNavigatePage, on
   return (
     <div className="achieve-page">
       <PublicNavbar 
-        activePage="how-it-works"
+        activePage="student"
         onNavigateHome={onNavigateHome}
         onNavigatePage={onNavigatePage}
         onLogin={onLogin}
@@ -188,14 +188,38 @@ export default function StudentAchievements({ onNavigateHome, onNavigatePage, on
       />
 
       <main className="achieve-main">
-        {/* Header */}
+        {/* Header with Navigation Breadcrumb */}
         <div className="achieve-header">
-          <div className="achieve-top-badge">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-              <path d="m9 12 2 2 4-4"/>
-            </svg>
-            <span>National Credential Registry</span>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '16px' }}>
+            <button
+              type="button"
+              onClick={onNavigateHome}
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '6px',
+                background: 'none',
+                border: 'none',
+                color: '#0055ff',
+                fontSize: '13.5px',
+                fontWeight: 500,
+                cursor: 'pointer',
+                padding: 0
+              }}
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="m15 18-6-6 6-6"/>
+              </svg>
+              <span>Back to Home Overview</span>
+            </button>
+            <span style={{ color: '#cbd5e1' }}>•</span>
+            <div className="achieve-top-badge" style={{ marginBottom: 0 }}>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                <path d="m9 12 2 2 4-4"/>
+              </svg>
+              <span>National Credential Registry</span>
+            </div>
           </div>
           <h1 className="achieve-title">Verified Skill Badges & Achievements</h1>
           <p className="achieve-subtitle">
