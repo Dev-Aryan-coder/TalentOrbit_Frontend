@@ -1,4 +1,4 @@
-/* PublicNavbar.css */
+﻿/* PublicNavbar.css */
 .public-navbar-wrapper {
   position: fixed;
   top: 16px;
@@ -32,27 +32,27 @@
 }
 
 .public-brand-logo-box {
-  width: 44px;
-  height: 44px;
-  min-width: 44px;
-  max-width: 44px;
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.9);
-  border: 1px solid rgba(255, 255, 255, 0.95);
+  width: 52px;
+  height: 52px;
+  min-width: 52px;
+  max-width: 52px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid rgba(255, 255, 255, 1);
   backdrop-filter: blur(16px);
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 4px;
   box-sizing: border-box;
-  box-shadow: 0 6px 18px rgba(0, 50, 150, 0.12);
+  box-shadow: 0 8px 24px rgba(0, 50, 150, 0.18);
 }
 
 .public-brand-logo-img {
-  width: 32px;
-  height: 32px;
-  max-width: 32px;
-  max-height: 32px;
+  width: 40px;
+  height: 40px;
+  max-width: 40px;
+  max-height: 40px;
   object-fit: contain;
   display: block;
 }
