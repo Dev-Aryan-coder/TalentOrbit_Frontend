@@ -154,62 +154,63 @@ export function HomePage({ onNavigateRole, onNavigateHome, onNavigatePage, onLog
       </div>
 
       {/* 3. Career & Skill Intelligence Solution Architecture Section */}
+            {/* 3. Core Features Section */}
       <section id="features" className="section-features">
         <div className="section-container">
           <div className="section-header">
-            <div className="section-pill-tag">Career & Skill Intelligence Solution Architecture</div>
-            <h2 className="section-title">Built For National Impact</h2>
+            <div className="section-pill-tag">Core Platform Features</div>
+            <h2 className="section-title">Built For Students, Colleges & Companies</h2>
             <p className="section-subtitle">
-              Bridging the 45% industry-academia skill gap with deterministic AI diagnostics, verified student genomes, and university accreditation intelligence.
+              A simple, all-in-one platform connecting students with top companies, helping colleges track placements, and enabling teachers to collaborate with industry.
             </p>
           </div>
 
           <div className="features-grid">
             <div className="feature-card">
-              <div className="feature-icon-box"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0055ff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2a4 4 0 0 0-4 4v1H7a4 4 0 0 0-4 4v1a4 4 0 0 0 4 4h1v1a4 4 0 0 0 4 4 4 4 0 0 0 4-4v-1h1a4 4 0 0 0 4-4v-1a4 4 0 0 0-4-4h-1V6a4 4 0 0 0-4-4z"/></svg></div>
-              <h3 className="feature-card-title">Dynamic AI Diagnostics</h3>
+              <div className="feature-icon-box"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0055ff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg></div>
+              <h3 className="feature-card-title">Smart Skill Assessments</h3>
               <p className="feature-card-desc">
-                Generates on-demand technical diagnostic MCQs for any IT topic using Groq LLM, caching questions permanently into MySQL with mathematical confidence gap evaluation.
+                Students can take quick online quizzes in topics like Python, Java, or Web Development to test their practical skills and get instant feedback on what to learn next.
               </p>
             </div>
 
             <div className="feature-card">
-              <div className="feature-icon-box"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0055ff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-              <h3 className="feature-card-title">SHA-256 Verified Genome</h3>
+              <div className="feature-icon-box"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0055ff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg></div>
+              <h3 className="feature-card-title">100% Genuine Verified Skills</h3>
               <p className="feature-card-desc">
-                Passed assessments generate tamper-proof cryptographic hashes in MySQL, preventing resume fabrication and guaranteeing authenticity for recruiters.
+                Passed test scores are permanently locked and verified, giving companies confidence that student abilities are real with zero fake resumes or false certificates.
               </p>
             </div>
 
             <div className="feature-card">
-              <div className="feature-icon-box"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0055ff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 16v1a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h11a2 2 0 0 1 2 2v1"/><polyline points="18 8 22 12 18 16"/><line x1="6" y1="12" x2="22" y2="12"/></svg></div>
-              <h3 className="feature-card-title">Explainable Match Engine</h3>
+              <div className="feature-icon-box"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0055ff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div>
+              <h3 className="feature-card-title">Direct Job & Internship Match</h3>
               <p className="feature-card-desc">
-                Calculates exact student-job overlap percentages based on recruiter-defined weights, explicitly showing matched versus missing technical prerequisites.
+                Companies find the right talent immediately, while students get matched directly with relevant job and internship openings based on their real abilities.
               </p>
             </div>
 
             <div className="feature-card">
               <div className="feature-icon-box"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0055ff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>
-              <h3 className="feature-card-title">NIRF 5.2.1 Intelligence</h3>
+              <h3 className="feature-card-title">Campus Placement Reports</h3>
               <p className="feature-card-desc">
-                Aggregates real-time median package, total placement offers, and batch skill heatmaps to empower University TPOs with automated accreditation compliance.
+                College placement cells can easily monitor student hiring rates, view salary package stats, and see which skills are currently most wanted by hiring companies.
               </p>
             </div>
 
             <div className="feature-card">
               <div className="feature-icon-box"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0055ff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
-              <h3 className="feature-card-title">Faculty R&D Grants</h3>
+              <h3 className="feature-card-title">Teacher & Industry Collaboration</h3>
               <p className="feature-card-desc">
-                Connects university professors with corporate sponsored research projects, consulting contracts, and AICTE industry immersion programs.
+                College professors can connect with companies for sponsored research projects, corporate consulting, and industry teacher training programs.
               </p>
             </div>
 
             <div className="feature-card">
-              <div className="feature-icon-box"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0055ff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 14 14"/></svg></div>
-              <h3 className="feature-card-title">Platform Moderation & Audit</h3>
+              <div className="feature-icon-box"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0055ff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+              <h3 className="feature-card-title">Safe & Trusted Community</h3>
               <p className="feature-card-desc">
-                Full SuperAdmin governance with real client IP tracking, system audit logs, automated dispute moderation, and university verification checks.
+                Every student, company, college, and job listing is thoroughly checked to provide a secure, transparent, and spam-free space for everyone.
               </p>
             </div>
           </div>
