@@ -45,8 +45,8 @@ export const authAPI = {
     return apiClient.post('/auth/login', { email, password });
   },
 
-  signup: (email, password, role) => {
-    return apiClient.post('/auth/signup', { email, password, role });
+  signup: (email, password, role, fullName) => {
+    return apiClient.post('/auth/signup', { email, password, role, fullName });
   },
 };
 

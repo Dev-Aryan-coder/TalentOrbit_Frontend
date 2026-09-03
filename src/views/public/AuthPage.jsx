@@ -14,6 +14,7 @@ export function AuthPage({
 }) {
   const [isLogin, setIsLogin] = useState(initialMode === 'login');
   const [role, setRole] = useState('STUDENT'); // 'STUDENT' | 'INDUSTRY' | 'ACADEMICIAN' | 'INSTITUTION_ADMIN'
+  const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -32,6 +33,17 @@ export function AuthPage({
     setErrorMessage('');
     setSuccessMessage('');
 
+    if (!isLogin && !fullName.trim()) {
+      setErrorMessage(
+        role === 'INDUSTRY'
+          ? 'Please enter your company / organization name.'
+          : role === 'INSTITUTION_ADMIN'
+          ? 'Please enter your institution / college name.'
+          : 'Please enter your full name.'
+      );
+      return;
+    }
+
     if (!email.trim() || !password.trim()) {
       setErrorMessage('Please enter both your email address and password.');
       return;
@@ -43,10 +55,10 @@ export function AuthPage({
       let userData;
       if (isLogin) {
         userData = await authAPI.login(email.trim(), password);
-        setSuccessMessage('Authentication successful! Loading your verified dashboard...');
+        setSuccessMessage(`Welcome back${userData.fullName ? ', ' + userData.fullName : ''}! Loading dashboard...`);
       } else {
-        userData = await authAPI.signup(email.trim(), password, role);
-        setSuccessMessage('Account created successfully in database! Status: PENDING_VERIFICATION.');
+        userData = await authAPI.signup(email.trim(), password, role, fullName.trim());
+        setSuccessMessage(`Account created for ${userData.fullName || fullName}! Status: PENDING_VERIFICATION.`);
       }
 
       setTimeout(() => {
@@ -155,6 +167,36 @@ export function AuthPage({
 
           {/* Form */}
           <form onSubmit={handleSubmit}>
+            {!isLogin && (
+              <div className="auth-field-group">
+                <Label htmlFor="fullName">
+                  {role === 'INDUSTRY' 
+                    ? 'Company / Organization Name' 
+                    : role === 'INSTITUTION_ADMIN'
+                    ? 'Institution / College Name'
+                    : role === 'ACADEMICIAN'
+                    ? 'Full Name & Academic Title'
+                    : 'Full Name'}
+                </Label>
+                <Input
+                  id="fullName"
+                  type="text"
+                  placeholder={
+                    role === 'INDUSTRY'
+                      ? 'e.g. Infosys Technologies'
+                      : role === 'INSTITUTION_ADMIN'
+                      ? 'e.g. Vidyalankar School of Information Technology'
+                      : role === 'ACADEMICIAN'
+                      ? 'e.g. Dr. Rajesh Sharma, Ph.D.'
+                      : 'e.g. Aryan Sharma'
+                  }
+                  value={fullName}
+                  onChange={(e) => setFullName(e.target.value)}
+                  required={!isLogin}
+                />
+              </div>
+            )}
+
             <div className="auth-field-group">
               <Label htmlFor="email">Email Address</Label>
               <Input
