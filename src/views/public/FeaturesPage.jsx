@@ -5,40 +5,40 @@ import './FeaturesPage.css';
 export default function FeaturesPage({ onNavigateHome, onNavigatePage, onNavigateRole, onLogin, onRegister }) {
   const features = [
     {
-      title: "Dynamic AI Diagnostics",
-      tag: "Assessment Engine",
-      desc: "Instantaneous generation of technical MCQs for any developer skill using Groq LLM. Categorizes questions by Tech Type (Language, Framework, Library, Tool), tracking student knowledge gaps with mathematical confidence scoring.",
-      specs: ["Groq LLM Sub-Second Latency", "MySQL Dynamic Caching", "Confidence Gap Analysis", "Adaptive Difficulty"]
+      title: "Smart Skill Assessments",
+      tag: "For Students",
+      desc: "Students can take quick online quizzes in topics like Python, Java, or Web Development to test their practical skills and get instant feedback on what to learn next.",
+      specs: ["Instant Quiz Generation", "Covers Top Tech Skills", "Strength & Weakness Feedback", "Learn at Your Own Pace"]
     },
     {
-      title: "SHA-256 Verified Genome",
-      tag: "Security & Trust",
-      desc: "Each successfully completed evaluation produces a deterministic SHA-256 cryptographic hash stored directly in MySQL. Recruiters verify candidate skill claims instantly, eliminating fraudulent certificates and resume fabrication.",
-      specs: ["Cryptographic Hash Verification", "Tamper-Proof Audit Trail", "Zero Resume Fabrication", "Instant Recruiter Scan"]
+      title: "100% Genuine Verified Skills",
+      tag: "For Employers",
+      desc: "Passed test scores are permanently locked and verified, giving companies confidence that student abilities are real with zero fake resumes or false certificates.",
+      specs: ["Zero Fake Resumes", "100% Authentic Scores", "Verified Skill Badges", "Direct Talent Discovery"]
     },
     {
-      title: "Explainable Match Engine",
-      tag: "Algorithmic Placement",
-      desc: "Calculates precise student-job fit percentages based on recruiter-weighted parameters. Transparently exposes matched requirements, partial fits, and exact missing prerequisites rather than black-box AI scores.",
-      specs: ["Recruiter Weighted Criteria", "Prerequisite Gap Breakdown", "100% Transparent Overlap", "Automated Shortlisting"]
+      title: "Direct Job & Internship Match",
+      tag: "For Job Seekers",
+      desc: "Companies find the right talent immediately, while students get matched directly with relevant job and internship openings based on their real abilities.",
+      specs: ["Accurate Skill Matching", "Internships & Full-Time Jobs", "Clear Job Requirements", "Direct Applications"]
     },
     {
-      title: "NIRF 5.2.1 Intelligence",
-      tag: "Accreditation Automation",
-      desc: "Aggregates real-time median package benchmarks, offer distributions, and batch skill heatmaps. Institutional TPOs generate official compliance exports for NIRF Metric 5.2.1 and NAAC Criterion 5 with one click.",
-      specs: ["NIRF 5.2.1 Compliant", "NAAC Criterion 5 Heatmaps", "Cohort Skill Deficit Audits", "Automated TPO Reports"]
+      title: "College Placement Reports",
+      tag: "For Colleges & TPOs",
+      desc: "College placement cells can easily monitor student hiring rates, view salary package stats, and see which skills are currently most wanted by hiring companies.",
+      specs: ["Student Placement Tracking", "Company Hiring Trends", "Salary & Package Analytics", "Official College Exports"]
     },
     {
-      title: "Faculty Industry R&D",
-      tag: "Academic Immersion",
-      desc: "Bridges university professors with corporate sponsored research projects, paid consultancy contracts, and AICTE industry immersion programs with integrated milestone tracking and verified deliverables.",
-      specs: ["Sponsored Corporate Grants", "Consulting Milestone Escrow", "AICTE Immersion Alignment", "Patent & R&D Tracking"]
+      title: "Teacher & Industry Collaboration",
+      tag: "For Faculty & Professors",
+      desc: "College professors can connect with companies for sponsored research projects, corporate consulting, and industry teacher training programs.",
+      specs: ["Industry Research Projects", "Faculty Consulting Contracts", "Corporate Teacher Training", "Collaborative Grants"]
     },
     {
-      title: "Platform Governance & Audit",
-      tag: "Enterprise Administration",
-      desc: "Complete SuperAdmin control over institutional verification, corporate account approvals, dispute moderation, system audit logs, and real client IP tracking across every session.",
-      specs: ["Real Client IP Logging", "Multi-Tenant AISHE Partitioning", "Dispute Resolution Workflow", "Full Activity Auditing"]
+      title: "Safe & Trusted Community",
+      tag: "For Everyone",
+      desc: "Every student, company, college, and job listing is thoroughly checked to provide a secure, transparent, and spam-free space for everyone.",
+      specs: ["Verified Company Accounts", "Real Student Profiles", "Spam & Scam Protection", "Help & Support Desk"]
     }
   ];
 
@@ -56,13 +56,13 @@ export default function FeaturesPage({ onNavigateHome, onNavigatePage, onNavigat
         {/* Header */}
         <div className="features-header">
           <div className="features-tag">
-            Enterprise Capabilities
+            Core Platform Features
           </div>
           <h1 className="features-title">
-            Platform Feature Architecture
+            Built For Students, Colleges & Companies
           </h1>
           <p className="features-desc">
-            Comprehensive architectural breakdown of TalentOrbit's 6 core technical pillars engineered for national higher education and corporate recruitment synergy.
+            A simple, all-in-one platform connecting students with top companies, helping colleges track placements, and enabling teachers to collaborate with industry.
           </p>
         </div>
 
@@ -84,7 +84,7 @@ export default function FeaturesPage({ onNavigateHome, onNavigatePage, onNavigat
 
               <div className="features-specs-wrap">
                 <div className="features-specs-title">
-                  Technical Specifications
+                  Key Highlights
                 </div>
                 <div className="features-specs-tags">
                   {feat.specs.map((sp, i) => (
