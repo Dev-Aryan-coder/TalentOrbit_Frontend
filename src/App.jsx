@@ -5,14 +5,15 @@ import FeaturesPage from './views/public/FeaturesPage';
 import AboutUsPage from './views/public/AboutUsPage';
 import ContactUsPage from './views/public/ContactUsPage';
 import StudentAchievements from './views/student/StudentAchievements';
+import AuthPage from './views/public/AuthPage';
 
 export default function App() {
   const [currentView, setCurrentView] = useState('home');
 
   useEffect(() => {
     const path = window.location.pathname.replace('/', '');
-    if (['how-it-works', 'features', 'about-us', 'contact', 'student', 'achievements', 'badges'].includes(path)) {
-      setCurrentView(path);
+    if (['how-it-works', 'features', 'about-us', 'contact', 'student', 'achievements', 'badges', 'login', 'register', 'signup'].includes(path)) {
+      setCurrentView(path === 'signup' ? 'register' : path);
     }
   }, []);
 
@@ -35,6 +36,8 @@ export default function App() {
           onNavigateRole={(role) => setCurrentView(role)} 
           onNavigateHome={handleNavigateHome}
           onNavigatePage={handleNavigatePage}
+          onLogin={() => handleNavigatePage('login')}
+          onRegister={() => handleNavigatePage('register')}
         />
       )}
 
@@ -43,6 +46,8 @@ export default function App() {
           onNavigateHome={handleNavigateHome}
           onNavigatePage={handleNavigatePage}
           onNavigateRole={(role) => setCurrentView(role)}
+          onLogin={() => handleNavigatePage('login')}
+          onRegister={() => handleNavigatePage('register')}
         />
       )}
 
@@ -51,6 +56,8 @@ export default function App() {
           onNavigateHome={handleNavigateHome}
           onNavigatePage={handleNavigatePage}
           onNavigateRole={(role) => setCurrentView(role)}
+          onLogin={() => handleNavigatePage('login')}
+          onRegister={() => handleNavigatePage('register')}
         />
       )}
 
@@ -59,6 +66,8 @@ export default function App() {
           onNavigateHome={handleNavigateHome}
           onNavigatePage={handleNavigatePage}
           onNavigateRole={(role) => setCurrentView(role)}
+          onLogin={() => handleNavigatePage('login')}
+          onRegister={() => handleNavigatePage('register')}
         />
       )}
 
@@ -67,6 +76,8 @@ export default function App() {
           onNavigateHome={handleNavigateHome}
           onNavigatePage={handleNavigatePage}
           onNavigateRole={(role) => setCurrentView(role)}
+          onLogin={() => handleNavigatePage('login')}
+          onRegister={() => handleNavigatePage('register')}
         />
       )}
 
@@ -75,6 +86,32 @@ export default function App() {
           onNavigateHome={handleNavigateHome}
           onNavigatePage={handleNavigatePage}
           onNavigateRole={(role) => setCurrentView(role)}
+          onLogin={() => handleNavigatePage('login')}
+          onRegister={() => handleNavigatePage('register')}
+        />
+      )}
+
+      {currentView === 'login' && (
+        <AuthPage 
+          initialMode="login"
+          onNavigateHome={handleNavigateHome}
+          onNavigateRole={(role) => setCurrentView(role)}
+          onSuccessLogin={(user) => {
+            const r = (user.role || 'student').toLowerCase();
+            setCurrentView(r === 'industry' ? 'recruiter' : r === 'academician' ? 'academician' : 'student');
+          }}
+        />
+      )}
+
+      {currentView === 'register' && (
+        <AuthPage 
+          initialMode="signup"
+          onNavigateHome={handleNavigateHome}
+          onNavigateRole={(role) => setCurrentView(role)}
+          onSuccessLogin={(user) => {
+            const r = (user.role || 'student').toLowerCase();
+            setCurrentView(r === 'industry' ? 'recruiter' : r === 'academician' ? 'academician' : 'student');
+          }}
         />
       )}
     </div>
