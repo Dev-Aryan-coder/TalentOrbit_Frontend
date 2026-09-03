@@ -1,3 +1,4 @@
+import heroStudentImg from '../../assets/hero-student.jpg';
 import React from 'react';
 import './HeroBanner.css';
 import logoImg from '../../assets/logo.png';
@@ -286,7 +287,7 @@ export function HeroBanner({
         </header>
       </div>
 
-      {/* 2. Main Center Content */}
+            {/* 2. Main Center Content - 2 Columns */}
       <div 
         className="hero-main-stage"
         style={{
@@ -295,131 +296,151 @@ export function HeroBanner({
           width: '100%',
           maxWidth: '1320px',
           margin: '0 auto',
-          padding: '160px 32px 30px 32px',
+          padding: '140px 32px 30px 32px',
           textAlign: 'left',
           boxSizing: 'border-box'
         }}
       >
-        <div 
-          className="hero-top-badge"
-          style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '8px',
-            padding: '6px 18px',
-            borderRadius: '9999px',
-            border: '1px solid rgba(255, 255, 255, 0.95)',
-            backdropFilter: 'blur(20px)',
-            fontSize: '13px',
-            fontWeight: 400,
-            color: '#041638',
-            marginBottom: '20px',
-            boxShadow: '0 4px 15px rgba(0, 50, 150, 0.08)'
-          }}
-        >
-          <span 
-            className="hero-badge-marker"
-            style={{ width: '7px', height: '7px', borderRadius: '50%', backgroundColor: '#0055ff' }}
-          />
-          <span>Next-Gen Higher Education & Industry Alignment</span>
-        </div>
+        <div className="hero-content-grid">
+          {/* Left Column: Headline, Description & CTAs */}
+          <div className="hero-text-col">
+            <div 
+              className="hero-top-badge"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
+                padding: '6px 18px',
+                borderRadius: '9999px',
+                border: '1px solid #e2e8f0',
+                background: 'rgba(255, 255, 255, 0.9)',
+                backdropFilter: 'blur(20px)',
+                fontSize: '13px',
+                fontWeight: 400,
+                color: '#041638',
+                marginBottom: '20px',
+                boxShadow: '0 4px 15px rgba(0, 50, 150, 0.06)'
+              }}
+            >
+              <span 
+                className="hero-badge-marker"
+                style={{ width: '7px', height: '7px', borderRadius: '50%', backgroundColor: '#0055ff' }}
+              />
+              <span>Next-Gen Higher Education & Industry Alignment</span>
+            </div>
 
-        <h1 
-          className="hero-display-headline"
-          style={{
-            fontFamily: "'Playfair Display', 'Instrument Serif', Georgia, serif",
-            textTransform: 'uppercase',
-            letterSpacing: '0.06em',
-            fontSize: 'clamp(2.1rem, 3.4vw, 3.4rem)',
-            maxWidth: '820px',
-            lineHeight: 1.18,
-            fontWeight: 700,
-            color: '#041638',
-            margin: '0 0 22px 0',
-            textShadow: '0 2px 10px rgba(255, 255, 255, 0.6)'
-          }}
-        >
-          {title} {highlightText}
-        </h1>
+            <h1 
+              className="hero-display-headline"
+              style={{
+                fontFamily: "'Playfair Display', 'Instrument Serif', Georgia, serif",
+                textTransform: 'uppercase',
+                letterSpacing: '0.05em',
+                fontSize: 'clamp(2rem, 3.2vw, 3.2rem)',
+                lineHeight: 1.18,
+                fontWeight: 700,
+                color: '#041638',
+                margin: '0 0 20px 0'
+              }}
+            >
+              {title} {highlightText}
+            </h1>
 
-        <p 
-          className="hero-stage-desc"
-          style={{
-            maxWidth: '780px',
-            fontSize: 'clamp(1rem, 1.2vw, 1.25rem)',
-            fontWeight: 400,
-            lineHeight: 1.65,
-            color: '#092350',
-            margin: '0 0 32px 0'
-          }}
-        >
-          {description}
-        </p>
+            <p 
+              className="hero-stage-desc"
+              style={{
+                fontSize: 'clamp(0.95rem, 1.1vw, 1.15rem)',
+                fontWeight: 400,
+                lineHeight: 1.65,
+                color: '#475569',
+                margin: '0 0 32px 0'
+              }}
+            >
+              {description}
+            </p>
 
-        <div 
-          className="hero-stage-actions"
-          style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '18px' }}
-        >
-          <button 
-            type="button" 
-            onClick={onPrimaryAction} 
-            className="hero-primary-cta-btn"
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '12px',
-              padding: '16px 36px',
-              borderRadius: '9999px',
-              fontSize: '16px',
-              fontWeight: 400,
-              color: '#ffffff',
-              border: 'none',
-              cursor: 'pointer',
-              boxShadow: '0 8px 25px rgba(4, 22, 56, 0.4)'
-            }}
-          >
-            <span>{primaryActionText}</span>
-            <span style={{ fontSize: '18px', fontWeight: 'bold' }}>→</span>
-          </button>
+            <div 
+              className="hero-stage-actions"
+              style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '16px' }}
+            >
+              <button 
+                type="button" 
+                onClick={onPrimaryAction} 
+                className="hero-primary-cta-btn"
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '12px',
+                  padding: '15px 34px',
+                  borderRadius: '9999px',
+                  fontSize: '15px',
+                  fontWeight: 500,
+                  color: '#ffffff',
+                  background: '#041638',
+                  border: 'none',
+                  cursor: 'pointer',
+                  boxShadow: '0 8px 25px rgba(4, 22, 56, 0.3)'
+                }}
+              >
+                <span>{primaryActionText}</span>
+                <span className="hero-btn-arrow" style={{ fontSize: '18px', transition: 'transform 0.2s ease' }}>→</span>
+              </button>
 
-          <button 
-            type="button" 
-            onClick={onSecondaryAction} 
-            className="hero-secondary-cta-btn"
-            style={{
-              padding: '16px 32px',
-              borderRadius: '9999px',
-              fontSize: '16px',
-              fontWeight: 400,
-              color: '#041638',
-              border: '1px solid rgba(255, 255, 255, 0.95)',
-              backdropFilter: 'blur(20px)',
-              cursor: 'pointer',
-              boxShadow: '0 4px 15px rgba(0, 50, 150, 0.08)'
-            }}
-          >
-            {secondaryActionText}
-          </button>
+              <button 
+                type="button" 
+                onClick={onSecondaryAction} 
+                className="hero-secondary-cta-btn"
+                style={{
+                  padding: '15px 34px',
+                  borderRadius: '9999px',
+                  fontSize: '15px',
+                  fontWeight: 400,
+                  color: '#041638',
+                  background: '#ffffff',
+                  border: '1px solid #cbd5e1',
+                  cursor: 'pointer',
+                  boxShadow: '0 4px 16px rgba(0, 50, 150, 0.06)'
+                }}
+              >
+                <span>{secondaryActionText}</span>
+              </button>
+            </div>
+          </div>
+
+          {/* Right Column: Hero Visual with Interactive Floating Badges */}
+          <div className="hero-visual-col">
+            <div className="hero-visual-wrapper">
+              <div className="hero-visual-circle-bg" />
+              <img 
+                src={heroStudentImg} 
+                alt="TalentOrbit Verified Graduate" 
+                className="hero-visual-img" 
+              />
+
+              {/* Floating Top Right Badge */}
+              <div className="hero-floating-badge badge-top-right">
+                <div className="floating-badge-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0055ff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+                </div>
+                <div className="floating-badge-text">
+                  <span className="floating-badge-label">Verified Skill Score</span>
+                  <span className="floating-badge-val">98.4% Confidence</span>
+                </div>
+              </div>
+
+              {/* Floating Bottom Left Badge */}
+              <div className="hero-floating-badge badge-bottom-left">
+                <div className="floating-badge-icon" style={{ background: 'rgba(16, 185, 129, 0.12)' }}>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#10b981" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+                </div>
+                <div className="floating-badge-text">
+                  <span className="floating-badge-label">Direct Placement</span>
+                  <span className="floating-badge-val" style={{ color: '#10b981' }}>Top 1% Talent Pool</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-
-      
-      
-
-      {/* Seamless Soft Gradient Fade into White Section */}
-      <div 
-        className="hero-bottom-gradient-fade"
-        style={{
-          position: 'absolute',
-          bottom: 0,
-          left: 0,
-          right: 0,
-          height: '110px',
-          background: 'linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.6) 60%, #ffffff 100%)',
-          pointerEvents: 'none',
-          zIndex: 1
-        }}
-      />
 
       {/* 3. Bottom Metrics Grid */}
       <div className="hero-bottom-metrics">
