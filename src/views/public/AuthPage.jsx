@@ -3,6 +3,7 @@ import Button from '@/components/ui/button';
 import Input from '@/components/ui/input';
 import Label from '@/components/ui/label';
 import authBanner from '@/assets/auth-banner.jpg';
+import { authAPI } from '@/services/api';
 import './AuthPage.css';
 
 export function AuthPage({ 
@@ -26,20 +27,12 @@ export function AuthPage({
     setSuccessMessage('');
   };
 
-  const handleQuickFill = (presetRole, presetEmail, presetPassword) => {
-    setRole(presetRole);
-    setEmail(presetEmail);
-    setPassword(presetPassword);
-    setErrorMessage('');
-    setSuccessMessage('');
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrorMessage('');
     setSuccessMessage('');
 
-    if (!email || !password) {
+    if (!email.trim() || !password.trim()) {
       setErrorMessage('Please enter both your email address and password.');
       return;
     }
@@ -47,45 +40,25 @@ export function AuthPage({
     setIsLoading(true);
 
     try {
-      const endpoint = isLogin 
-        ? 'http://localhost:8080/api/auth/login'
-        : 'http://localhost:8080/api/auth/signup';
-
-      const payload = isLogin 
-        ? { email, password } 
-        : { email, password, role };
-
-      const response = await fetch(endpoint, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      });
-
-      if (response.ok) {
-        const userData = await response.json();
-        setSuccessMessage(isLogin ? 'Login successful! Redirecting...' : 'Account created successfully! Awaiting verification.');
-        setTimeout(() => {
-          if (onSuccessLogin) {
-            onSuccessLogin(userData);
-          } else if (onNavigateRole) {
-            const roleRoute = (userData.role || role).toLowerCase();
-            onNavigateRole(roleRoute === 'industry' ? 'recruiter' : roleRoute === 'academician' ? 'academician' : 'student');
-          }
-        }, 800);
+      let userData;
+      if (isLogin) {
+        userData = await authAPI.login(email.trim(), password);
+        setSuccessMessage('Authentication successful! Loading your verified dashboard...');
       } else {
-        const errorData = await response.json().catch(() => null);
-        const detail = errorData?.message || 'Authentication failed. Please check your credentials.';
-        setErrorMessage(detail);
+        userData = await authAPI.signup(email.trim(), password, role);
+        setSuccessMessage('Account created successfully in database! Status: PENDING_VERIFICATION.');
       }
-    } catch {
-      // Graceful local demo fallback if Spring Boot backend is offline
-      setSuccessMessage('Backend offline: Continuing in preview session...');
+
       setTimeout(() => {
-        const roleRoute = role.toLowerCase();
-        if (onNavigateRole) {
+        if (onSuccessLogin) {
+          onSuccessLogin(userData);
+        } else if (onNavigateRole) {
+          const roleRoute = (userData.role || role).toLowerCase();
           onNavigateRole(roleRoute === 'industry' ? 'recruiter' : roleRoute === 'academician' ? 'academician' : 'student');
         }
-      }, 700);
+      }, 1000);
+    } catch (err) {
+      setErrorMessage(err.message || 'Authentication request failed.');
     } finally {
       setIsLoading(false);
     }
@@ -158,32 +131,6 @@ export function AuthPage({
               className={`auth-role-tab ${role === 'INSTITUTION_ADMIN' ? 'active' : ''}`}
             >
               College TPO
-            </button>
-          </div>
-
-          {/* Quick Fill Demo Chip Strip */}
-          <div className="auth-quick-fill-bar">
-            <span className="auth-quick-fill-label">Quick Demo Fill:</span>
-            <button 
-              type="button" 
-              onClick={() => handleQuickFill('STUDENT', 'student@talentorbit.gov.in', 'Password123')}
-              className="auth-quick-chip"
-            >
-              Student
-            </button>
-            <button 
-              type="button" 
-              onClick={() => handleQuickFill('INDUSTRY', 'recruiter@infosys.com', 'Password123')}
-              className="auth-quick-chip"
-            >
-              Recruiter
-            </button>
-            <button 
-              type="button" 
-              onClick={() => handleQuickFill('ACADEMICIAN', 'prof.sharma@iitd.ac.in', 'Password123')}
-              className="auth-quick-chip"
-            >
-              Faculty
             </button>
           </div>
 

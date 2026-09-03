@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PublicNavbar from '../../components/layout/PublicNavbar';
 import PublicFooter from '../../components/layout/PublicFooter';
 import BadgeVerificationModal from '../../components/ui/BadgeVerificationModal';
+import { badgesAPI } from '@/services/api';
 import './StudentAchievements.css';
 
 const INITIAL_BADGES = [
   {
     id: 'b-py',
+    dbBadgeId: 1,
     title: 'Python Core Specialist',
     category: 'Technical Skills',
     tier: 'Gold Mastery',
@@ -21,6 +23,7 @@ const INITIAL_BADGES = [
   },
   {
     id: 'b-sql',
+    dbBadgeId: 2,
     title: 'SQL & Relational Architecture',
     category: 'Technical Skills',
     tier: 'Gold Mastery',
@@ -35,13 +38,14 @@ const INITIAL_BADGES = [
   },
   {
     id: 'b-prof',
+    dbBadgeId: 3,
     title: '100% All-Star Profile',
     category: 'Career Milestones',
     tier: 'Platform Milestone',
     status: 'Verified',
     score: '100%',
     dateEarned: '28 Aug 2026, 11:15 AM',
-    hash: 'TO-PRF-2026-A1B2C',
+    hash: 'TO-PRO-2026-A1B2C',
     sha256: 'ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb',
     desc: 'Completed university KYC, uploaded verified academic credentials, and linked GitHub repository.',
     iconColor: '#6366f1',
@@ -49,6 +53,7 @@ const INITIAL_BADGES = [
   },
   {
     id: 'b-app',
+    dbBadgeId: 4,
     title: 'First Verified Application',
     category: 'Career Milestones',
     tier: 'Platform Milestone',
@@ -63,6 +68,7 @@ const INITIAL_BADGES = [
   },
   {
     id: 'b-react',
+    dbBadgeId: 5,
     title: 'React & Frontend Engineering',
     category: 'Technical Skills',
     tier: 'Gold Mastery',
@@ -77,6 +83,7 @@ const INITIAL_BADGES = [
   },
   {
     id: 'b-java',
+    dbBadgeId: 6,
     title: 'Java Enterprise Architecture',
     category: 'Technical Skills',
     tier: 'Silver Mastery',
@@ -91,6 +98,7 @@ const INITIAL_BADGES = [
   },
   {
     id: 'b-cloud',
+    dbBadgeId: 7,
     title: 'Docker & Cloud Deployment',
     category: 'Technical Skills',
     tier: 'Silver Mastery',
@@ -105,6 +113,7 @@ const INITIAL_BADGES = [
   },
   {
     id: 'b-tpo',
+    dbBadgeId: 8,
     title: 'Batch Top 10% Placement Ready',
     category: 'Academic Honors',
     tier: 'Institutional Honor',
@@ -129,6 +138,39 @@ export default function StudentAchievements({ onNavigateHome, onNavigatePage, on
   const [selectedOption, setSelectedOption] = useState(null);
   const [isEvaluating, setIsEvaluating] = useState(false);
   const [quizSuccess, setQuizSuccess] = useState(false);
+  const [backendNotice, setBackendNotice] = useState('');
+
+  // Fetch real badges from Spring Boot REST API
+  useEffect(() => {
+    async function loadRealBadges() {
+      try {
+        const realBadges = await badgesAPI.getStudentBadges(1);
+        if (Array.isArray(realBadges) && realBadges.length > 0) {
+          setBadges(prev => prev.map(catalogBadge => {
+            const match = realBadges.find(rb => 
+              rb.name?.toLowerCase().includes(catalogBadge.title.toLowerCase().substring(0, 5)) ||
+              catalogBadge.title.toLowerCase().includes(rb.name?.toLowerCase().substring(0, 5))
+            );
+            if (match) {
+              return {
+                ...catalogBadge,
+                status: 'Verified',
+                score: match.score ? `${match.score}%` : catalogBadge.score,
+                hash: match.verificationHash || catalogBadge.hash,
+                sha256: match.sha256Digest || catalogBadge.sha256,
+                dateEarned: match.earnedAt ? new Date(match.earnedAt).toLocaleString('en-IN', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' }) : catalogBadge.dateEarned
+              };
+            }
+            return catalogBadge;
+          }));
+          setBackendNotice('Connected to live Spring Boot REST API (MySQL).');
+        }
+      } catch (err) {
+        setBackendNotice('REST API offline: Spring Boot not detected on port 8080. Start backend in STS to sync live data.');
+      }
+    }
+    loadRealBadges();
+  }, []);
 
   const earnedCount = badges.filter(b => b.status === 'Verified').length;
   const totalCount = badges.length;
@@ -147,13 +189,17 @@ export default function StudentAchievements({ onNavigateHome, onNavigatePage, on
     setQuizSuccess(false);
   };
 
-  const handleCompleteTest = () => {
+  const handleCompleteTest = async () => {
     if (selectedOption === null) return;
     setIsEvaluating(true);
 
-    setTimeout(() => {
-      const generatedCode = `TO-${testingBadge.title.substring(0, 3).toUpperCase()}-2026-${Math.random().toString(36).substring(2, 7).toUpperCase()}`;
-      const randomSha = Array.from({ length: 64 }, () => Math.floor(Math.random() * 16).toString(16)).join('');
+    try {
+      // Call real Spring Boot backend POST /api/badges/award
+      const dbBadgeId = testingBadge.dbBadgeId || 1;
+      const response = await badgesAPI.awardBadge(1, dbBadgeId, 94);
+
+      const generatedCode = response.verificationHash || `TO-${testingBadge.title.substring(0, 3).toUpperCase()}-2026-${Math.random().toString(36).substring(2, 7).toUpperCase()}`;
+      const generatedSha = response.sha256Digest || Array.from({ length: 64 }, () => Math.floor(Math.random() * 16).toString(16)).join('');
 
       setBadges(prev => prev.map(b => {
         if (b.id === testingBadge.id) {
@@ -161,9 +207,9 @@ export default function StudentAchievements({ onNavigateHome, onNavigatePage, on
             ...b,
             status: 'Verified',
             score: '94%',
-            dateEarned: 'Just now (Verified)',
+            dateEarned: 'Just now (Verified in Database)',
             hash: generatedCode,
-            sha256: randomSha
+            sha256: generatedSha
           };
         }
         return b;
@@ -174,7 +220,33 @@ export default function StudentAchievements({ onNavigateHome, onNavigatePage, on
       setTimeout(() => {
         setTestingBadge(null);
       }, 1800);
-    }, 1200);
+    } catch (err) {
+      // If server unreachable, still inform user honestly
+      setIsEvaluating(false);
+      alert(`Backend API notice: ${err.message}`);
+      setTestingBadge(null);
+    }
+  };
+
+  const handleOpenVerificationModal = async (badge) => {
+    try {
+      if (badge.hash) {
+        // Query live verification proof from Spring Boot backend
+        const verifiedProof = await badgesAPI.verifyBadge(badge.hash);
+        setSelectedBadge({
+          ...badge,
+          candidateName: verifiedProof.candidateName,
+          score: `${verifiedProof.score}%`,
+          hash: verifiedProof.verificationHash,
+          sha256: verifiedProof.sha256Digest,
+          status: verifiedProof.status
+        });
+        return;
+      }
+    } catch {
+      // Use local badge data if server offline
+    }
+    setSelectedBadge(badge);
   };
 
   return (
@@ -225,6 +297,30 @@ export default function StudentAchievements({ onNavigateHome, onNavigatePage, on
           <p className="achieve-subtitle">
             Cryptographically anchored skill credentials issued through AI proctored diagnostics. Recruiters and universities verify these badges instantly without resume exaggeration.
           </p>
+          {backendNotice && (
+            <div style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '8px',
+              padding: '6px 14px',
+              borderRadius: '8px',
+              fontSize: '12px',
+              fontWeight: 500,
+              background: backendNotice.includes('Connected') ? '#ecfdf5' : '#fffbeb',
+              color: backendNotice.includes('Connected') ? '#059669' : '#d97706',
+              border: `1px solid ${backendNotice.includes('Connected') ? '#a7f3d0' : '#fde68a'}`,
+              marginTop: '12px'
+            }}>
+              <span style={{
+                width: '7px',
+                height: '7px',
+                borderRadius: '50%',
+                background: backendNotice.includes('Connected') ? '#10b981' : '#f59e0b',
+                display: 'inline-block'
+              }} />
+              <span>{backendNotice}</span>
+            </div>
+          )}
         </div>
 
         {/* Stats Metrics Strip */}
@@ -351,7 +447,7 @@ export default function StudentAchievements({ onNavigateHome, onNavigatePage, on
                     </div>
                     <button 
                       type="button" 
-                      onClick={() => setSelectedBadge(badge)}
+                      onClick={() => handleOpenVerificationModal(badge)}
                       className="achieve-badge-btn-verify"
                     >
                       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
