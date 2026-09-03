@@ -85,7 +85,7 @@ export function HomePage({ onNavigateRole, onNavigateHome, onNavigatePage, onLog
         onSecondaryAction={() => onNavigateRole ? onNavigateRole('industry') : console.log('industry')}
       />
 
-              {/* 2. Who We Are Section */}
+                      {/* 2. Who We Are Section */}
         <section id="about" className="section-who-we-are">
           <div className="section-container">
             <div className="section-header" style={{ marginBottom: '44px' }}>
@@ -96,6 +96,7 @@ export function HomePage({ onNavigateRole, onNavigateHome, onNavigatePage, onLog
               </p>
             </div>
 
+            {/* Top Row: Authentic University Photo + Deep Narrative Story */}
             <div className="who-we-are-layout">
               {/* Left: Article Image */}
               <div className="who-we-are-image-wrapper">
@@ -116,64 +117,61 @@ export function HomePage({ onNavigateRole, onNavigateHome, onNavigatePage, onLog
                 </p>
 
                 <p className="who-we-are-body-text">
-                  Every year, millions of bright young minds graduate from technical and professional colleges across India. However, over 45% struggle to land meaningful jobs because standard paper resumes cannot prove real-world competence. At the same time, top employers receive thousands of unverified applications, and college placement offices spend hundreds of exhausting hours manually gathering placement reports for national accreditations like NIRF and NAAC. TalentOrbit replaces this outdated, confusing process with real-time clarity, verified skills, and absolute trust.
+                  Every year, millions of bright young minds graduate from technical and professional colleges across India. However, over 45% struggle to land meaningful jobs because standard paper resumes cannot prove real-world competence. At the same time, top employers receive thousands of unverified applications, and college placement offices spend hundreds of exhausting hours manually gathering placement reports for national accreditations like NIRF and NAAC.
                 </p>
 
-                <div className="who-we-are-features-list">
-                  <div className="who-we-are-feature-item">
-                    <span className="who-we-are-icon">
-                      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0055ff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
-                    </span>
-                    <div>
-                      <h4 className="who-we-are-item-title">Real Skill Diagnostics & Clear Learning Paths</h4>
-                      <p className="who-we-are-item-desc">
-                        Instead of guessing where they stand, students take practical, interactive evaluations in coding, web development, data, and core concepts. They receive clear feedback on their exact strengths, weak points, and step-by-step guidance to level up their career readiness.
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="who-we-are-feature-item">
-                    <span className="who-we-are-icon">
-                      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0055ff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-                    </span>
-                    <div>
-                      <h4 className="who-we-are-item-title">100% Genuine, Tamper-Proof Skill Badges</h4>
-                      <p className="who-we-are-item-desc">
-                        When students clear assessments, they earn authentic verified digital badges. Employers can instantly trust their abilities without second-guessing exaggerated resumes or filtering out unqualified candidates.
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="who-we-are-feature-item">
-                    <span className="who-we-are-icon">
-                      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0055ff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-                    </span>
-                    <div>
-                      <h4 className="who-we-are-item-title">Direct Job Matching For Top Companies</h4>
-                      <p className="who-we-are-item-desc">
-                        Recruiters can search directly for candidates with proven competency, review verified skill breakdowns, schedule live interviews, and extend offers faster with complete hiring confidence.
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="who-we-are-feature-item">
-                    <span className="who-we-are-icon">
-                      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0055ff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 21h18M3 10h18M5 10v11M19 10v11M9 10v11M15 10v11M12 2L2 7h20L12 2z"/></svg>
-                    </span>
-                    <div>
-                      <h4 className="who-we-are-item-title">Instant Reports for Colleges & University Rankings</h4>
-                      <p className="who-we-are-item-desc">
-                        College Placement Officers (TPOs) gain live dashboards of student placements, salary statistics, and industry demand trends. Automatic report generation simplifies accreditation documentation like NIRF Metric 5.2.1 and NAAC Criterion 5.
-                      </p>
-                    </div>
-                  </div>
-                </div>
+                <p className="who-we-are-body-text">
+                  TalentOrbit replaces this outdated, confusing process with real-time clarity, verified skills, and absolute trust. By standardizing student evaluations and aligning them directly with industry hiring criteria, we ensure that merit speaks louder than resume buzzwords.
+                </p>
 
                 <div className="who-we-are-quote-banner">
                   <div className="who-we-are-quote-text">
                     "Our mission is simple: eliminate resume noise, empower students with undeniable proof of skill, and help Indian colleges build world-class hiring ecosystems."
                   </div>
                 </div>
+              </div>
+            </div>
+
+            {/* Equal 4-Box Grid Placed Equally Below The Image & Story */}
+            <div className="who-we-are-cards-grid">
+              <div className="who-we-are-card">
+                <span className="who-we-are-card-icon">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0055ff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+                </span>
+                <h4 className="who-we-are-card-title">Real Skill Diagnostics</h4>
+                <p className="who-we-are-card-desc">
+                  Students take interactive evaluations in coding, web, and data to pinpoint exact strengths, weak points, and step-by-step guidance to level up their career readiness.
+                </p>
+              </div>
+
+              <div className="who-we-are-card">
+                <span className="who-we-are-card-icon">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0055ff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                </span>
+                <h4 className="who-we-are-card-title">100% Genuine Badges</h4>
+                <p className="who-we-are-card-desc">
+                  Students earn tamper-proof verified digital badges that employers instantly trust, removing the risk of resume exaggeration or unverified claims.
+                </p>
+              </div>
+
+              <div className="who-we-are-card">
+                <span className="who-we-are-card-icon">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0055ff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                </span>
+                <h4 className="who-we-are-card-title">Direct Job Matching</h4>
+                <p className="who-we-are-card-desc">
+                  Recruiters search directly for verified competency, review tested skill scores, schedule interviews, and extend offers faster with complete confidence.
+                </p>
+              </div>
+
+              <div className="who-we-are-card">
+                <span className="who-we-are-card-icon">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0055ff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 21h18M3 10h18M5 10v11M19 10v11M9 10v11M15 10v11M12 2L2 7h20L12 2z"/></svg>
+                </span>
+                <h4 className="who-we-are-card-title">Accreditation Reports</h4>
+                <p className="who-we-are-card-desc">
+                  College TPOs gain real-time dashboards of placements and automated reports that simplify institutional accreditations like NIRF 5.2.1 and NAAC Criterion 5.
+                </p>
               </div>
             </div>
           </div>
