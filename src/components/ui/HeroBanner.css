@@ -5,7 +5,7 @@
   position: relative;
   width: 100%;
   min-height: 100vh;
-  background-color: #0077ee;
+  background-color: #f8fafc;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -402,6 +402,7 @@
   .hero-bottom-metrics { padding: 0 16px 16px 16px; }
   .hero-metrics-grid { grid-template-columns: 1fr; }
 }
+
 
 
 
