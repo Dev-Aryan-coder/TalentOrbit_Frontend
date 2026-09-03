@@ -4,13 +4,14 @@ import HowItWorksPage from './views/public/HowItWorksPage';
 import FeaturesPage from './views/public/FeaturesPage';
 import AboutUsPage from './views/public/AboutUsPage';
 import ContactUsPage from './views/public/ContactUsPage';
+import StudentAchievements from './views/student/StudentAchievements';
 
 export default function App() {
   const [currentView, setCurrentView] = useState('home');
 
   useEffect(() => {
     const path = window.location.pathname.replace('/', '');
-    if (['how-it-works', 'features', 'about-us', 'contact'].includes(path)) {
+    if (['how-it-works', 'features', 'about-us', 'contact', 'student', 'achievements', 'badges'].includes(path)) {
       setCurrentView(path);
     }
   }, []);
@@ -63,6 +64,14 @@ export default function App() {
 
       {currentView === 'contact' && (
         <ContactUsPage 
+          onNavigateHome={handleNavigateHome}
+          onNavigatePage={handleNavigatePage}
+          onNavigateRole={(role) => setCurrentView(role)}
+        />
+      )}
+
+      {(currentView === 'student' || currentView === 'achievements' || currentView === 'badges') && (
+        <StudentAchievements 
           onNavigateHome={handleNavigateHome}
           onNavigatePage={handleNavigatePage}
           onNavigateRole={(role) => setCurrentView(role)}

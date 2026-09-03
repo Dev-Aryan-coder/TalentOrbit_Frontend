@@ -1,0 +1,276 @@
+/* BadgeVerificationModal.css */
+.badge-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(4, 22, 56, 0.7);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  box-sizing: border-box;
+  animation: fadeInModal 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes fadeInModal {
+  from { opacity: 0; transform: scale(0.97); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.badge-modal-container {
+  background: #ffffff;
+  border-radius: 24px;
+  max-width: 600px;
+  width: 100%;
+  box-shadow: 0 25px 60px rgba(0, 30, 90, 0.25), 0 4px 16px rgba(0, 0, 0, 0.08);
+  border: 1px solid #cbd5e1;
+  overflow: hidden;
+  font-family: 'Poppins', sans-serif;
+  color: #041638;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.badge-modal-header {
+  background: linear-gradient(135deg, #041638 0%, #0033aa 100%);
+  padding: 24px 28px;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}
+
+.badge-modal-header-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.badge-modal-header-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0;
+  color: #ffffff;
+  line-height: 1.2;
+}
+
+.badge-modal-header-subtitle {
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  color: #7ce8ff;
+  text-transform: uppercase;
+  margin-top: 3px;
+  font-weight: 500;
+}
+
+.badge-modal-close-btn {
+  background: rgba(255, 255, 255, 0.15);
+  border: none;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.badge-modal-close-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(1.05);
+}
+
+.badge-modal-body {
+  padding: 28px;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.badge-certificate-seal {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-radius: 16px;
+  background: rgba(0, 85, 255, 0.04);
+  border: 1px solid rgba(0, 85, 255, 0.15);
+  margin-bottom: 22px;
+}
+
+.badge-seal-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.badge-seal-icon-box {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: #0055ff;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 14px rgba(0, 85, 255, 0.3);
+}
+
+.badge-seal-badge-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: #041638;
+  margin: 0;
+}
+
+.badge-seal-badge-category {
+  font-size: 12px;
+  color: #64748b;
+  margin-top: 2px;
+}
+
+.badge-status-pill-verified {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #ecfdf5;
+  border: 1px solid #10b981;
+  color: #065f46;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 9999px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.badge-details-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 22px;
+}
+
+.badge-detail-card {
+  background: #f8fafc;
+  padding: 12px 16px;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+}
+
+.badge-detail-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #64748b;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.badge-detail-value {
+  font-size: 14px;
+  font-weight: 600;
+  color: #041638;
+}
+
+.badge-hash-box {
+  background: #020617;
+  color: #94a3b8;
+  border-radius: 14px;
+  padding: 16px 20px;
+  margin-bottom: 22px;
+  border: 1px solid #1e293b;
+}
+
+.badge-hash-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.badge-hash-title {
+  font-size: 12px;
+  font-weight: 500;
+  color: #7ce8ff;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.badge-hash-code {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 13.5px;
+  color: #ffffff;
+  word-break: break-all;
+  background: rgba(255, 255, 255, 0.06);
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  letter-spacing: 0.05em;
+}
+
+.badge-sha256-row {
+  margin-top: 10px;
+  font-size: 11px;
+  color: #64748b;
+  font-family: 'Courier New', Courier, monospace;
+  word-break: break-all;
+  line-height: 1.4;
+}
+
+.badge-modal-actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.badge-btn-copy {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: #0055ff;
+  color: #ffffff;
+  border: none;
+  padding: 12px 18px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.badge-btn-copy:hover {
+  background: #0044cc;
+}
+
+.badge-btn-close-secondary {
+  background: #f1f5f9;
+  color: #475569;
+  border: 1px solid #cbd5e1;
+  padding: 12px 20px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.badge-btn-close-secondary:hover {
+  background: #e2e8f0;
+  color: #041638;
+}
+
+@media (max-width: 600px) {
+  .badge-details-grid {
+    grid-template-columns: 1fr;
+  }
+}
