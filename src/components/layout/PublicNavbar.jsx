@@ -1,8 +1,23 @@
 import React from 'react';
 import logoImg from '../../assets/logo.png';
+import UserDropdownMenu from '../ui/UserDropdownMenu';
 import './PublicNavbar.css';
 
-export default function PublicNavbar({ activePage, onNavigateHome, onNavigatePage, onLogin, onRegister }) {
+export default function PublicNavbar({ 
+  activePage, 
+  onNavigateHome, 
+  onNavigatePage, 
+  onLogin, 
+  onRegister,
+  currentUser,
+  currentTheme,
+  onThemeChange,
+  onNavigateDashboard,
+  onOpenProfileSettings,
+  onOpenAccountSettings,
+  onOpenAppearance,
+  onLogout
+}) {
   const navItems = [
     { id: 'how-it-works', label: 'How It Works' },
     { id: 'features', label: 'Features' },
@@ -60,22 +75,37 @@ export default function PublicNavbar({ activePage, onNavigateHome, onNavigatePag
           })}
         </nav>
 
-        {/* Right: Transparent Auth Buttons */}
+        {/* Right: Transparent Auth Buttons or User Profile Avatar */}
         <div className="public-header-auth-group">
-          <button 
-            type="button" 
-            onClick={onLogin}
-            className="public-login-btn"
-          >
-            Log In
-          </button>
-          <button 
-            type="button" 
-            onClick={onRegister}
-            className="public-register-btn"
-          >
-            Sign Up / Register
-          </button>
+          {currentUser ? (
+            <UserDropdownMenu
+              user={currentUser}
+              currentTheme={currentTheme}
+              onThemeChange={onThemeChange}
+              onNavigateDashboard={onNavigateDashboard}
+              onOpenProfileSettings={onOpenProfileSettings}
+              onOpenAccountSettings={onOpenAccountSettings}
+              onOpenAppearance={onOpenAppearance}
+              onLogout={onLogout}
+            />
+          ) : (
+            <>
+              <button 
+                type="button" 
+                onClick={onLogin}
+                className="public-login-btn"
+              >
+                Log In
+              </button>
+              <button 
+                type="button" 
+                onClick={onRegister}
+                className="public-register-btn"
+              >
+                Sign Up / Register
+              </button>
+            </>
+          )}
         </div>
       </header>
     </div>

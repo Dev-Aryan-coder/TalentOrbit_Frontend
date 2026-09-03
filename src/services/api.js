@@ -102,10 +102,31 @@ export const portfolioAPI = {
   },
 };
 
+/**
+ * 6. User Profile & Account Settings (UserProfileController.java)
+ */
+export const profileAPI = {
+  getProfile: (userId) => {
+    return apiClient.get(`/user-profile/${userId}`);
+  },
+
+  updateProfile: (userId, profileData) => {
+    return apiClient.put(`/user-profile/${userId}`, profileData);
+  },
+
+  changePassword: (userId, currentPassword, newPassword) => {
+    return apiClient.put(`/user-profile/${userId}/change-password`, {
+      currentPassword,
+      newPassword,
+    });
+  },
+};
+
 export default {
   auth: authAPI,
   badges: badgesAPI,
   postings: postingsAPI,
   applications: applicationsAPI,
   portfolio: portfolioAPI,
+  profile: profileAPI,
 };

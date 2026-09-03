@@ -1,14 +1,22 @@
 import heroStudentImg from '../../assets/hero-student.jpg';
 import React from 'react';
+import UserDropdownMenu from './UserDropdownMenu';
 import './HeroBanner.css';
 import logoImg from '../../assets/logo.png';
-
 
 export function HeroBanner({
   onNavigatePage,
   onNavigateHome,
   onLogin,
   onRegister,
+  currentUser,
+  currentTheme,
+  onThemeChange,
+  onNavigateDashboard,
+  onOpenProfileSettings,
+  onOpenAccountSettings,
+  onOpenAppearance,
+  onLogout,
   title = "Transforming Academia & Industry",
   highlightText = "Collaboration",
   description = "TalentOrbit empowers Students with AI skill diagnostic assessments, Recruiters with explainable talent scouting, Academicians with research grants & FDPs, and Institutions with real-time NIRF/NAAC placement intelligence.",
@@ -240,49 +248,66 @@ export function HeroBanner({
             </a>
           </nav>
 
-          {/* Right: Full Glassmorphism Auth Buttons */}
+          {/* Right: Full Glassmorphism Auth Buttons or User Avatar */}
           <div 
             className="hero-header-auth-group"
             style={{ display: 'flex', alignItems: 'center', gap: '10px' }}
           >
-            <button 
-              type="button" 
-              onClick={onLogin} 
-              className="hero-btn-glass-login"
-              style={{
-                padding: '9px 22px',
-                borderRadius: '9999px',
-                fontSize: '14px',
-                fontWeight: 400,
-                color: '#041638',
-                border: '1px solid rgba(255, 255, 255, 0.75)',
-                backdropFilter: 'blur(16px)',
-                cursor: 'pointer',
-                boxShadow: '0 4px 14px rgba(0, 50, 150, 0.06)',
-                whiteSpace: 'nowrap'
-              }}
-            >
-              Log In
-            </button>
-            <button 
-              type="button" 
-              onClick={onRegister} 
-              className="hero-btn-glass-signup"
-              style={{
-                padding: '9px 22px',
-                borderRadius: '9999px',
-                fontSize: '14px',
-                fontWeight: 400,
-                color: '#041638',
-                border: '1.5px solid rgba(4, 22, 56, 0.75)',
-                backdropFilter: 'blur(16px)',
-                cursor: 'pointer',
-                boxShadow: '0 4px 14px rgba(0, 50, 150, 0.08)',
-                whiteSpace: 'nowrap'
-              }}
-            >
-              Sign Up / Register
-            </button>
+            {currentUser ? (
+              <UserDropdownMenu
+                user={currentUser}
+                currentTheme={currentTheme}
+                onThemeChange={onThemeChange}
+                onNavigateDashboard={onNavigateDashboard}
+                onOpenProfileSettings={onOpenProfileSettings}
+                onOpenAccountSettings={onOpenAccountSettings}
+                onOpenAppearance={onOpenAppearance}
+                onLogout={onLogout}
+              />
+            ) : (
+              <>
+                <button 
+                  type="button" 
+                  onClick={onLogin} 
+                  className="hero-btn-glass-login"
+                  style={{
+                    padding: '9px 22px',
+                    borderRadius: '9999px',
+                    fontSize: '14px',
+                    fontWeight: 400,
+                    color: '#041638',
+                    border: '1px solid rgba(255, 255, 255, 0.75)',
+                    WebkitBackdropFilter: 'blur(16px)',
+                    backdropFilter: 'blur(16px)',
+                    cursor: 'pointer',
+                    boxShadow: '0 4px 14px rgba(0, 50, 150, 0.06)',
+                    whiteSpace: 'nowrap'
+                  }}
+                >
+                  Log In
+                </button>
+                <button 
+                  type="button" 
+                  onClick={onRegister} 
+                  className="hero-btn-glass-signup"
+                  style={{
+                    padding: '9px 22px',
+                    borderRadius: '9999px',
+                    fontSize: '14px',
+                    fontWeight: 400,
+                    color: '#041638',
+                    border: '1.5px solid rgba(4, 22, 56, 0.75)',
+                    WebkitBackdropFilter: 'blur(16px)',
+                    backdropFilter: 'blur(16px)',
+                    cursor: 'pointer',
+                    boxShadow: '0 4px 14px rgba(0, 50, 150, 0.08)',
+                    whiteSpace: 'nowrap'
+                  }}
+                >
+                  Sign Up / Register
+                </button>
+              </>
+            )}
           </div>
         </header>
       </div>

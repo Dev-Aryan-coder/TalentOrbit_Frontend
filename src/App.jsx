@@ -6,9 +6,38 @@ import AboutUsPage from './views/public/AboutUsPage';
 import ContactUsPage from './views/public/ContactUsPage';
 import StudentAchievements from './views/student/StudentAchievements';
 import AuthPage from './views/public/AuthPage';
+import ProfileSettingsModal from './components/ui/ProfileSettingsModal';
+import AccountSettingsModal from './components/ui/AccountSettingsModal';
+import AppearanceModal from './components/ui/AppearanceModal';
 
 export default function App() {
   const [currentView, setCurrentView] = useState('home');
+
+  // Real logged-in user state, persisted in local storage
+  const [currentUser, setCurrentUser] = useState(() => {
+    try {
+      const saved = localStorage.getItem('talentorbit_user');
+      return saved ? JSON.parse(saved) : null;
+    } catch {
+      return null;
+    }
+  });
+
+  // Theme state ('light' | 'dark'), persisted in local storage
+  const [currentTheme, setCurrentTheme] = useState(() => {
+    return localStorage.getItem('talentorbit_theme') || 'light';
+  });
+
+  // Modal display states
+  const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
+  const [isAccountModalOpen, setIsAccountModalOpen] = useState(false);
+  const [isAppearanceModalOpen, setIsAppearanceModalOpen] = useState(false);
+
+  // Sync theme changes with document data-theme attribute
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', currentTheme);
+    localStorage.setItem('talentorbit_theme', currentTheme);
+  }, [currentTheme]);
 
   useEffect(() => {
     const path = window.location.pathname.replace('/', '');
@@ -29,6 +58,47 @@ export default function App() {
     window.history.pushState(null, '', `/${page}`);
   };
 
+  const handleAuthSuccess = (userData) => {
+    setCurrentUser(userData);
+    localStorage.setItem('talentorbit_user', JSON.stringify(userData));
+    const r = (userData.role || 'student').toLowerCase();
+    const target = r === 'industry' ? 'recruiter' : r === 'academician' ? 'academician' : r === 'institution_admin' ? 'tpo' : 'student';
+    handleNavigatePage(target);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('talentorbit_user');
+    setCurrentUser(null);
+    handleNavigateHome();
+  };
+
+  const handleProfileUpdated = (updatedData) => {
+    const merged = { ...currentUser, ...updatedData };
+    setCurrentUser(merged);
+    localStorage.setItem('talentorbit_user', JSON.stringify(merged));
+  };
+
+  const handleNavigateDashboard = () => {
+    if (!currentUser) {
+      handleNavigatePage('login');
+      return;
+    }
+    const r = (currentUser.role || 'student').toLowerCase();
+    const target = r === 'industry' ? 'recruiter' : r === 'academician' ? 'academician' : r === 'institution_admin' ? 'tpo' : 'student';
+    handleNavigatePage(target);
+  };
+
+  const sharedNavbarProps = {
+    currentUser,
+    currentTheme,
+    onThemeChange: setCurrentTheme,
+    onNavigateDashboard: handleNavigateDashboard,
+    onOpenProfileSettings: () => setIsProfileModalOpen(true),
+    onOpenAccountSettings: () => setIsAccountModalOpen(true),
+    onOpenAppearance: () => setIsAppearanceModalOpen(true),
+    onLogout: handleLogout,
+  };
+
   return (
     <div className="min-h-screen bg-white">
       {currentView === 'home' && (
@@ -38,6 +108,7 @@ export default function App() {
           onNavigatePage={handleNavigatePage}
           onLogin={() => handleNavigatePage('login')}
           onRegister={() => handleNavigatePage('register')}
+          {...sharedNavbarProps}
         />
       )}
 
@@ -88,6 +159,7 @@ export default function App() {
           onNavigateRole={(role) => setCurrentView(role)}
           onLogin={() => handleNavigatePage('login')}
           onRegister={() => handleNavigatePage('register')}
+          {...sharedNavbarProps}
         />
       )}
 
@@ -96,10 +168,7 @@ export default function App() {
           initialMode="login"
           onNavigateHome={handleNavigateHome}
           onNavigateRole={(role) => setCurrentView(role)}
-          onSuccessLogin={(user) => {
-            const r = (user.role || 'student').toLowerCase();
-            setCurrentView(r === 'industry' ? 'recruiter' : r === 'academician' ? 'academician' : 'student');
-          }}
+          onSuccessLogin={handleAuthSuccess}
         />
       )}
 
@@ -108,12 +177,30 @@ export default function App() {
           initialMode="signup"
           onNavigateHome={handleNavigateHome}
           onNavigateRole={(role) => setCurrentView(role)}
-          onSuccessLogin={(user) => {
-            const r = (user.role || 'student').toLowerCase();
-            setCurrentView(r === 'industry' ? 'recruiter' : r === 'academician' ? 'academician' : 'student');
-          }}
+          onSuccessLogin={handleAuthSuccess}
         />
       )}
+
+      {/* Global Modals for Profile, Account, and Appearance */}
+      <ProfileSettingsModal
+        isOpen={isProfileModalOpen}
+        onClose={() => setIsProfileModalOpen(false)}
+        user={currentUser}
+        onProfileUpdated={handleProfileUpdated}
+      />
+
+      <AccountSettingsModal
+        isOpen={isAccountModalOpen}
+        onClose={() => setIsAccountModalOpen(false)}
+        user={currentUser}
+      />
+
+      <AppearanceModal
+        isOpen={isAppearanceModalOpen}
+        onClose={() => setIsAppearanceModalOpen(false)}
+        currentTheme={currentTheme}
+        onThemeChange={setCurrentTheme}
+      />
     </div>
   );
 }

@@ -128,7 +128,21 @@ const INITIAL_BADGES = [
   }
 ];
 
-export default function StudentAchievements({ onNavigateHome, onNavigatePage, onNavigateRole, onLogin, onRegister }) {
+export default function StudentAchievements({ 
+  onNavigateHome, 
+  onNavigatePage, 
+  onNavigateRole, 
+  onLogin, 
+  onRegister,
+  currentUser,
+  currentTheme,
+  onThemeChange,
+  onNavigateDashboard,
+  onOpenProfileSettings,
+  onOpenAccountSettings,
+  onOpenAppearance,
+  onLogout
+}) {
   const [badges, setBadges] = useState(INITIAL_BADGES);
   const [activeTab, setActiveTab] = useState('all');
   const [selectedBadge, setSelectedBadge] = useState(null);
@@ -257,6 +271,14 @@ export default function StudentAchievements({ onNavigateHome, onNavigatePage, on
         onNavigatePage={onNavigatePage}
         onLogin={onLogin}
         onRegister={onRegister}
+        currentUser={currentUser}
+        currentTheme={currentTheme}
+        onThemeChange={onThemeChange}
+        onNavigateDashboard={onNavigateDashboard}
+        onOpenProfileSettings={onOpenProfileSettings}
+        onOpenAccountSettings={onOpenAccountSettings}
+        onOpenAppearance={onOpenAppearance}
+        onLogout={onLogout}
       />
 
       <main className="achieve-main">
