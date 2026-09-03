@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import './HeroBanner.css';
 import logoImg from '../../assets/logo.png';
 import heroBgImg from '../../assets/hero-bg.png';
@@ -447,21 +447,4 @@ export function HeroBanner({
   );
 }
 
-
 export default HeroBanner;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

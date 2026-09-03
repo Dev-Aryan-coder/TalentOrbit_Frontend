@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import HeroBanner from '../../components/ui/HeroBanner';
+import { HeroBanner } from '../../components/ui/HeroBanner';
 import './HomePage.css';
 import logoImg from '../../assets/logo.png';
 import whoWeAreImg from '../../assets/who-we-are.jpg';
