@@ -1,0 +1,96 @@
+/* PublicFooter.css */
+.public-footer {
+  background: #020617;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 64px 32px 32px 32px;
+  color: #94a3b8;
+  font-family: 'Poppins', sans-serif;
+  box-sizing: border-box;
+}
+
+.public-footer-top {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 48px;
+  max-width: 1280px;
+  margin: 0 auto 48px auto;
+}
+
+.public-footer-brand {
+  max-width: 380px;
+}
+
+.public-footer-brand-title {
+  font-weight: 500;
+  font-size: 22px;
+  color: #ffffff;
+  margin: 0;
+  line-height: 1.1;
+}
+
+.public-footer-brand-desc {
+  font-size: 14px;
+  line-height: 1.6;
+  margin: 0;
+  color: #94a3b8;
+}
+
+.public-footer-links-group {
+  display: flex;
+  gap: 64px;
+  flex-wrap: wrap;
+}
+
+.public-footer-col-title {
+  font-weight: 500;
+  font-size: 14px;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 16px;
+}
+
+.public-footer-nav {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.public-footer-link {
+  color: #94a3b8;
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.2s ease;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  text-align: left;
+  font-family: inherit;
+}
+
+.public-footer-link:hover {
+  color: #7ce8ff;
+}
+
+.public-footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 28px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  max-width: 1280px;
+  margin: 0 auto;
+  font-size: 13px;
+}
+
+@media (max-width: 900px) {
+  .public-footer-links-group {
+    gap: 32px;
+  }
+}

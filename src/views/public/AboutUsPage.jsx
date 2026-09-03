@@ -1,5 +1,6 @@
 import React from 'react';
 import PublicNavbar from '../../components/layout/PublicNavbar';
+import PublicFooter from '../../components/layout/PublicFooter';
 import whoWeAreImg from '../../assets/who-we-are.jpg';
 import './AboutUsPage.css';
 
@@ -92,6 +93,7 @@ export default function AboutUsPage({ onNavigateHome, onNavigatePage, onNavigate
           </button>
         </div>
       </main>
+      <PublicFooter onNavigateHome={onNavigateHome} onNavigatePage={onNavigatePage} onNavigateRole={onNavigateRole} />
     </div>
   );
 }

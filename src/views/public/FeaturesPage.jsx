@@ -1,5 +1,6 @@
 import React from 'react';
 import PublicNavbar from '../../components/layout/PublicNavbar';
+import PublicFooter from '../../components/layout/PublicFooter';
 import './FeaturesPage.css';
 
 export default function FeaturesPage({ onNavigateHome, onNavigatePage, onNavigateRole, onLogin, onRegister }) {
@@ -109,6 +110,7 @@ export default function FeaturesPage({ onNavigateHome, onNavigatePage, onNavigat
           </button>
         </div>
       </main>
+      <PublicFooter onNavigateHome={onNavigateHome} onNavigatePage={onNavigatePage} onNavigateRole={onNavigateRole} />
     </div>
   );
 }

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PublicNavbar from '../../components/layout/PublicNavbar';
+import PublicFooter from '../../components/layout/PublicFooter';
 import './ContactUsPage.css';
 
 export default function ContactUsPage({ onNavigateHome, onNavigatePage, onNavigateRole, onLogin, onRegister }) {
@@ -167,6 +168,7 @@ export default function ContactUsPage({ onNavigateHome, onNavigatePage, onNaviga
           </div>
         </div>
       </main>
+      <PublicFooter onNavigateHome={onNavigateHome} onNavigatePage={onNavigatePage} onNavigateRole={onNavigateRole} />
     </div>
   );
 }

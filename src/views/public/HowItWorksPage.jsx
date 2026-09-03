@@ -1,5 +1,6 @@
 import React from 'react';
 import PublicNavbar from '../../components/layout/PublicNavbar';
+import PublicFooter from '../../components/layout/PublicFooter';
 import './HowItWorksPage.css';
 
 export default function HowItWorksPage({ onNavigateHome, onNavigatePage, onNavigateRole, onLogin, onRegister }) {
@@ -113,6 +114,7 @@ export default function HowItWorksPage({ onNavigateHome, onNavigatePage, onNavig
           </div>
         </div>
       </main>
+      <PublicFooter onNavigateHome={onNavigateHome} onNavigatePage={onNavigatePage} onNavigateRole={onNavigateRole} />
     </div>
   );
 }
