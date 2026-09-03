@@ -51,14 +51,14 @@ export default function AccountSettingsModal({ isOpen, onClose, user }) {
     try {
       await profileAPI.changePassword(user.id, currentPassword, newPassword);
       setSuccessMessage(
-        `Password securely updated in database! An official security confirmation email has been dispatched to ${user.email}.`
+        `Password updated in MySQL database! An official security confirmation email with your audit details (User ID, Role, Timestamp, and Protocol) has been sent to ${user.email}.`
       );
       setCurrentPassword('');
       setNewPassword('');
       setConfirmPassword('');
       setTimeout(() => {
         onClose();
-      }, 2500);
+      }, 3500);
     } catch (err) {
       setErrorMessage(err.message || 'Failed to update password. Please check your current password.');
     } finally {
