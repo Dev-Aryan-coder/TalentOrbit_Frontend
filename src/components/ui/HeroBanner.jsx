@@ -1,7 +1,7 @@
 import React from 'react';
 import './HeroBanner.css';
 import logoImg from '../../assets/logo.png';
-import heroBgImg from '../../assets/hero-bg.png';
+
 
 export function HeroBanner({
   onNavigatePage,
@@ -56,11 +56,8 @@ export function HeroBanner({
         position: 'relative',
         width: '100%',
         minHeight: '100vh',
-        backgroundColor: '#0077ee',
-        backgroundImage: `url(${heroBgImg})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center top',
-        backgroundRepeat: 'no-repeat',
+        backgroundColor: '#f8fafc',
+        backgroundImage: 'none',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between',
