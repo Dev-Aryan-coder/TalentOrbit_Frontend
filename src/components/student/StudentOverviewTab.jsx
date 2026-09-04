@@ -24,12 +24,12 @@ import './StudentOverviewTab.css';
 export default function StudentOverviewTab({ currentUser, onSelectTab }) {
   const [loading, setLoading] = useState(true);
   const [stats, setStats] = useState({
-    readinessScore: 78,
+    readinessScore: 0,
     verifiedSkillsCount: 0,
     recommendedMatchCount: 0,
     applicationCount: 0,
     interviewCount: 0,
-    targetRole: 'Backend Developer',
+    targetRole: '',
   });
   const [skillGaps, setSkillGaps] = useState([]);
   const [matchedPostings, setMatchedPostings] = useState([]);
@@ -38,14 +38,17 @@ export default function StudentOverviewTab({ currentUser, onSelectTab }) {
   const [appliedPostingIds, setAppliedPostingIds] = useState(new Set());
   const [statusMessage, setStatusMessage] = useState(null);
 
-  const userId = currentUser?.id;
+  const userId = currentUser?.id || currentUser?.userId;
 
   const fetchDashboardData = useCallback(async () => {
-    if (!userId) return;
+    if (!userId) {
+      setLoading(false);
+      return;
+    }
     setLoading(true);
 
     try {
-      // 1. Fetch live dashboard stats and student profile
+      // 1. Fetch live dashboard stats and student profile from real database
       const [statsRes, profileRes, skillGapRes, matchedRes, roadmapRes] = await Promise.allSettled([
         dashboardAPI.getStats('STUDENT', userId),
         studentAPI.getProfile(userId),
@@ -55,8 +58,8 @@ export default function StudentOverviewTab({ currentUser, onSelectTab }) {
       ]);
 
       // Process Stats & Profile
-      let readiness = 75;
-      let targetRole = 'Software Engineer';
+      let readiness = 0;
+      let targetRole = '';
       if (profileRes.status === 'fulfilled' && profileRes.value) {
         if (profileRes.value.employabilityScore != null) {
           readiness = profileRes.value.employabilityScore;

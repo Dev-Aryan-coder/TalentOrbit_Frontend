@@ -7,38 +7,15 @@ import {
   ArrowRight,
   RefreshCw,
   Sparkles,
+  AlertTriangle,
 } from 'lucide-react';
 import './StudentCareerTab.css';
 
-const DEFAULT_SUGGESTIONS = [
-  {
-    roleName: 'Backend & Cloud Engineer',
-    description: 'Design and build highly available, scalable microservices and cloud infrastructures.',
-    fitPercent: 88,
-    matchedSkills: ['Java', 'Spring Boot', 'SQL', 'Git'],
-    missingSkills: ['Kubernetes', 'AWS', 'Redis'],
-  },
-  {
-    roleName: 'Full Stack Developer',
-    description: 'Develop end-to-end web applications combining modern frontend frameworks and robust backend APIs.',
-    fitPercent: 78,
-    matchedSkills: ['React', 'Java', 'SQL', 'Postman'],
-    missingSkills: ['TypeScript', 'Next.js', 'Docker'],
-  },
-  {
-    roleName: 'DevOps & Site Reliability Specialist',
-    description: 'Automate CI/CD deployment pipelines, container orchestration, and real-time observability.',
-    fitPercent: 62,
-    matchedSkills: ['Git', 'Linux Basics'],
-    missingSkills: ['Docker', 'Kubernetes', 'Terraform', 'Prometheus'],
-  },
-];
-
 export default function StudentCareerTab({ currentUser, onSelectTab }) {
   const [loading, setLoading] = useState(true);
-  const [suggestions, setSuggestions] = useState(DEFAULT_SUGGESTIONS);
+  const [suggestions, setSuggestions] = useState([]);
 
-  const userId = currentUser?.id;
+  const userId = currentUser?.id || currentUser?.userId;
 
   useEffect(() => {
     if (!userId) {
@@ -49,12 +26,13 @@ export default function StudentCareerTab({ currentUser, onSelectTab }) {
     setLoading(true);
     studentAPI.getCareerSuggestions(userId)
       .then((res) => {
-        if (Array.isArray(res) && res.length > 0) {
+        if (Array.isArray(res)) {
           setSuggestions(res);
         }
       })
       .catch((err) => {
-        console.warn('Could not load career suggestions from backend, using standard role profiles', err);
+        console.warn('Could not load career suggestions from database:', err.message);
+        setSuggestions([]);
       })
       .finally(() => setLoading(false));
   }, [userId]);
@@ -71,12 +49,28 @@ export default function StudentCareerTab({ currentUser, onSelectTab }) {
       {loading ? (
         <div className="flex flex-col items-center justify-center py-16 text-slate-500">
           <RefreshCw size={28} className="animate-spin text-indigo-500 mb-3" />
-          <p className="text-sm font-medium">Analyzing career role compatibility...</p>
+          <p className="text-sm font-medium">Analyzing career role compatibility from database...</p>
+        </div>
+      ) : suggestions.length === 0 ? (
+        <div className="text-center py-16 border-2 border-dashed border-slate-200 dark:border-slate-800 rounded-xl">
+          <AlertTriangle size={36} className="text-amber-500 mx-auto mb-3" />
+          <h3 className="text-base font-bold text-slate-800 dark:text-slate-100">No Career Suggestions Generated Yet</h3>
+          <p className="text-sm text-slate-500 max-w-md mx-auto mt-1 mb-5">
+            Your career compatibility profile requires verified skills in the database. Complete your 20-question skill evaluations to generate role fit recommendations.
+          </p>
+          <button
+            type="button"
+            className="quiz-primary-btn inline-flex items-center gap-2"
+            onClick={() => onSelectTab && onSelectTab('assessment')}
+          >
+            <Sparkles size={16} />
+            <span>Take Skill Diagnostic</span>
+          </button>
         </div>
       ) : (
         <div className="career-roles-grid">
           {suggestions.map((role) => {
-            const fit = role.fitPercent != null ? role.fitPercent : 75;
+            const fit = role.fitPercent != null ? role.fitPercent : 0;
             return (
               <div key={role.roleName} className="career-role-card">
                 <div>
@@ -98,37 +92,45 @@ export default function StudentCareerTab({ currentUser, onSelectTab }) {
                     <div className="career-tags-wrap">
                       {role.matchedSkills?.map((sk) => (
                         <span key={sk} className="career-skill-tag matched">
-                          {sk}
+                          <CheckCircle2 size={12} />
+                          <span>{sk}</span>
                         </span>
                       ))}
+                      {(!role.matchedSkills || role.matchedSkills.length === 0) && (
+                        <span className="text-xs text-slate-400">None yet</span>
+                      )}
                     </div>
                   </div>
 
-                  {/* Missing Skills */}
-                  {role.missingSkills && role.missingSkills.length > 0 && (
-                    <div className="career-skills-section mt-3">
-                      <div className="career-skills-lbl text-amber-600">
-                        Missing Skills to Bridge ({role.missingSkills.length})
-                      </div>
-                      <div className="career-tags-wrap">
-                        {role.missingSkills.map((sk) => (
-                          <span key={sk} className="career-skill-tag missing">
-                            + {sk}
-                          </span>
-                        ))}
-                      </div>
+                  {/* Missing Skills / Bridge */}
+                  <div className="career-skills-section mt-3">
+                    <div className="career-skills-lbl text-amber-600">
+                      Target Missing Competencies ({role.missingSkills?.length || 0})
                     </div>
-                  )}
+                    <div className="career-tags-wrap">
+                      {role.missingSkills?.map((sk) => (
+                        <span key={sk} className="career-skill-tag missing">
+                          <AlertCircle size={12} />
+                          <span>{sk}</span>
+                        </span>
+                      ))}
+                      {(!role.missingSkills || role.missingSkills.length === 0) && (
+                        <span className="text-xs text-emerald-500 font-medium">Fully aligned!</span>
+                      )}
+                    </div>
+                  </div>
                 </div>
 
-                <button
-                  type="button"
-                  className="career-card-action-btn"
-                  onClick={() => onSelectTab('roadmap')}
-                >
-                  <span>Close Gap in Learning Roadmap</span>
-                  <ArrowRight size={14} />
-                </button>
+                <div className="career-card-footer mt-5">
+                  <button
+                    type="button"
+                    className="career-bridge-btn"
+                    onClick={() => onSelectTab && onSelectTab('roadmap')}
+                  >
+                    <span>Bridge Gap in Roadmap</span>
+                    <ArrowRight size={14} />
+                  </button>
+                </div>
               </div>
             );
           })}

@@ -14,9 +14,9 @@ export default function StudentSettingsTab({ currentUser }) {
     name: currentUser?.fullName || '',
     institutionName: '',
     branch: '',
-    gradYear: 2026,
-    cgpa: 8.5,
-    targetRole: 'Backend Developer',
+    gradYear: '',
+    cgpa: '',
+    targetRole: '',
   });
 
   const [passwordData, setPasswordData] = useState({
@@ -29,7 +29,7 @@ export default function StudentSettingsTab({ currentUser }) {
   const [isSavingPassword, setIsSavingPassword] = useState(false);
   const [message, setMessage] = useState(null);
 
-  const userId = currentUser?.id;
+  const userId = currentUser?.id || currentUser?.userId;
 
   useEffect(() => {
     if (!userId) return;
@@ -39,14 +39,14 @@ export default function StudentSettingsTab({ currentUser }) {
           setProfileData({
             name: res.name || currentUser?.fullName || '',
             institutionName: res.institutionName || '',
-            branch: res.branch || 'Computer Science and Engineering',
-            gradYear: res.gradYear || 2026,
-            cgpa: res.cgpa || 8.8,
-            targetRole: res.targetRole || 'Backend & Cloud Engineer',
+            branch: res.branch || '',
+            gradYear: res.gradYear || '',
+            cgpa: res.cgpa || '',
+            targetRole: res.targetRole || '',
           });
         }
       })
-      .catch((err) => console.warn('Could not load profile settings', err));
+      .catch((err) => console.warn('Could not load profile settings from database:', err.message));
   }, [userId, currentUser]);
 
   const handleSaveProfile = async (e) => {

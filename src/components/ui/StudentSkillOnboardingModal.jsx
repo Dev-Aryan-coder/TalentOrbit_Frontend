@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Dialog,
   DialogContent,
@@ -8,7 +8,7 @@ import {
   DialogFooter,
 } from '@/components/ui/dialog';
 import { RadioGroupItem } from '@/components/ui/radio-group';
-import { studentAPI } from '@/services/api';
+import { studentAPI, profileAPI } from '@/services/api';
 import './StudentSkillOnboardingModal.css';
 
 export const PRESET_LANGUAGES = [
@@ -94,10 +94,37 @@ export default function StudentSkillOnboardingModal({
   onComplete,
 }) {
   const [currentStep, setCurrentStep] = useState(1); // 1: Languages, 2: Libraries, 3: Frameworks, 4: Tools
-  const [selectedLanguages, setSelectedLanguages] = useState(['Python', 'Java', 'JavaScript', 'SQL']);
-  const [selectedLibraries, setSelectedLibraries] = useState(['React', 'Recharts', 'Axios', 'Tailwind CSS']);
-  const [selectedFrameworks, setSelectedFrameworks] = useState(['Spring Boot', 'Next.js']);
-  const [selectedTools, setSelectedTools] = useState(['Git & GitHub', 'Docker', 'Postman', 'VS Code']);
+  const [selectedLanguages, setSelectedLanguages] = useState([]);
+  const [selectedLibraries, setSelectedLibraries] = useState([]);
+  const [selectedFrameworks, setSelectedFrameworks] = useState([]);
+  const [selectedTools, setSelectedTools] = useState([]);
+
+  const userId = currentUser?.id || currentUser?.userId;
+
+  // Load existing saved skills from database if user already onboarded
+  useEffect(() => {
+    if (!userId) return;
+    profileAPI.getProfile(userId)
+      .then((prof) => {
+        if (prof) {
+          if (Array.isArray(prof.languages) && prof.languages.length > 0) {
+            setSelectedLanguages(prof.languages);
+          }
+          if (Array.isArray(prof.libraries) && prof.libraries.length > 0) {
+            setSelectedLibraries(prof.libraries);
+          }
+          if (Array.isArray(prof.frameworks) && prof.frameworks.length > 0) {
+            setSelectedFrameworks(prof.frameworks);
+          }
+          if (Array.isArray(prof.tools) && prof.tools.length > 0) {
+            setSelectedTools(prof.tools);
+          }
+        }
+      })
+      .catch((err) => {
+        console.warn('Could not pre-load user skills from database:', err.message);
+      });
+  }, [userId]);
 
   const [searchQuery, setSearchQuery] = useState('');
   const [customInput, setCustomInput] = useState('');

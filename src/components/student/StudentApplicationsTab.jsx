@@ -8,41 +8,16 @@ import {
   XCircle,
   RefreshCw,
   Building,
+  AlertTriangle,
+  Briefcase,
 } from 'lucide-react';
 import './StudentApplicationsTab.css';
 
-const DEFAULT_APPLICATIONS = [
-  {
-    id: 101,
-    title: 'Cloud Infrastructure & Backend Intern',
-    companyName: 'CloudCorp Technologies',
-    appliedDate: '2026-08-28',
-    status: 'INTERVIEW_SCHEDULED',
-    interviewDate: '2026-09-08 14:00',
-  },
-  {
-    id: 102,
-    title: 'Full Stack Java Associate',
-    companyName: 'DataSystems Global',
-    appliedDate: '2026-08-30',
-    status: 'SHORTLISTED',
-    interviewDate: null,
-  },
-  {
-    id: 103,
-    title: 'Site Reliability & Cloud Operations',
-    companyName: 'DevOps Scale Labs',
-    appliedDate: '2026-09-02',
-    status: 'APPLIED',
-    interviewDate: null,
-  },
-];
-
-export default function StudentApplicationsTab({ currentUser }) {
+export default function StudentApplicationsTab({ currentUser, onSelectTab }) {
   const [loading, setLoading] = useState(true);
-  const [applications, setApplications] = useState(DEFAULT_APPLICATIONS);
+  const [applications, setApplications] = useState([]);
 
-  const userId = currentUser?.id;
+  const userId = currentUser?.id || currentUser?.userId;
 
   useEffect(() => {
     if (!userId) {
@@ -53,12 +28,12 @@ export default function StudentApplicationsTab({ currentUser }) {
     setLoading(true);
     applicationsAPI.getByUser(userId)
       .then((res) => {
-        if (Array.isArray(res) && res.length > 0) {
+        if (Array.isArray(res)) {
           const mapped = res.map((item) => ({
             id: item.id,
             title: item.postingTitle || item.posting?.title || 'Engineering Role',
-            companyName: item.companyName || item.posting?.postedByName || 'Enterprise Partner',
-            appliedDate: item.appliedAt ? String(item.appliedAt).split('T')[0] : '2026-09-01',
+            companyName: item.companyName || item.posting?.postedByName || 'Corporate Partner',
+            appliedDate: item.appliedAt ? String(item.appliedAt).split('T')[0] : 'Recent',
             status: item.status || 'APPLIED',
             interviewDate: item.interviewScheduledAt || null,
           }));
@@ -66,7 +41,8 @@ export default function StudentApplicationsTab({ currentUser }) {
         }
       })
       .catch((err) => {
-        console.warn('Could not load user applications from backend, showing pipeline records', err);
+        console.warn('Could not load user applications from database:', err.message);
+        setApplications([]);
       })
       .finally(() => setLoading(false));
   }, [userId]);
@@ -78,115 +54,140 @@ export default function StudentApplicationsTab({ currentUser }) {
 
   const renderStatusPill = (status) => {
     switch (status) {
-      case 'SELECTED':
-      case 'COMPLETED':
-        return (
-          <span className="apps-status-pill selected">
-            <CheckCircle2 size={12} />
-            <span>Selected</span>
-          </span>
-        );
       case 'INTERVIEW_SCHEDULED':
         return (
-          <span className="apps-status-pill interview">
+          <span className="app-status-badge interview">
             <Calendar size={12} />
             <span>Interview Scheduled</span>
           </span>
         );
       case 'SHORTLISTED':
         return (
-          <span className="apps-status-pill shortlisted">
-            <Clock size={12} />
+          <span className="app-status-badge shortlisted">
+            <CheckCircle2 size={12} />
             <span>Shortlisted</span>
+          </span>
+        );
+      case 'SELECTED':
+        return (
+          <span className="app-status-badge selected">
+            <CheckCircle2 size={12} />
+            <span>Selected / Offered</span>
           </span>
         );
       case 'REJECTED':
         return (
-          <span className="apps-status-pill rejected">
+          <span className="app-status-badge rejected">
             <XCircle size={12} />
-            <span>Not Selected</span>
+            <span>Archived</span>
           </span>
         );
-      case 'APPLIED':
       default:
         return (
-          <span className="apps-status-pill applied">
+          <span className="app-status-badge applied">
             <Clock size={12} />
-            <span>Applied</span>
+            <span>Under Review</span>
           </span>
         );
     }
   };
 
   return (
-    <div className="student-apps-container">
-      <div className="apps-header-area">
-        <div>
-          <h2>Placement Applications Pipeline</h2>
-          <p>Real-time lifecycle tracking of all corporate drives, internship interviews, and hiring outcomes.</p>
-        </div>
+    <div className="student-applications-container">
+      <div className="applications-header-area">
+        <h2 className="applications-header-title">Application Pipeline & Tracking</h2>
+        <p className="applications-header-desc">
+          Monitor your active candidacy status, recruiter reviews, and upcoming interview schedules in real time.
+        </p>
       </div>
 
-      {/* Funnel Bar */}
-      <div className="apps-funnel-bar">
-        <div className="apps-funnel-tile">
-          <div className="apps-funnel-lbl">Total Submitted</div>
-          <div className="apps-funnel-val text-blue-600">{applications.length}</div>
-        </div>
-        <div className="apps-funnel-tile">
-          <div className="apps-funnel-lbl">Under Review / Shortlisted</div>
-          <div className="apps-funnel-val text-purple-600">{shortlistedCount}</div>
-        </div>
-        <div className="apps-funnel-tile">
-          <div className="apps-funnel-lbl">Interviews Booked</div>
-          <div className="apps-funnel-val text-amber-600">{interviewCount}</div>
-        </div>
-        <div className="apps-funnel-tile">
-          <div className="apps-funnel-lbl">Offers / Placed</div>
-          <div className="apps-funnel-val text-emerald-600">{selectedCount}</div>
-        </div>
-      </div>
-
-      {/* Table */}
       {loading ? (
         <div className="flex flex-col items-center justify-center py-16 text-slate-500">
           <RefreshCw size={28} className="animate-spin text-indigo-500 mb-3" />
-          <p className="text-sm font-medium">Loading application status updates...</p>
+          <p className="text-sm font-medium">Fetching application history from database...</p>
         </div>
-      ) : applications.length > 0 ? (
-        <div className="apps-table-card">
-          <div className="overflow-x-auto">
-            <table className="apps-table">
+      ) : applications.length === 0 ? (
+        <div className="text-center py-16 border-2 border-dashed border-slate-200 dark:border-slate-800 rounded-xl">
+          <AlertTriangle size={36} className="text-amber-500 mx-auto mb-3" />
+          <h3 className="text-base font-bold text-slate-800 dark:text-slate-100">No Job Applications Found</h3>
+          <p className="text-sm text-slate-500 max-w-md mx-auto mt-1 mb-5">
+            You haven't submitted applications to any corporate openings yet. Browse matched opportunities to apply with one click.
+          </p>
+          <button
+            type="button"
+            className="quiz-primary-btn inline-flex items-center gap-2"
+            onClick={() => onSelectTab && onSelectTab('opportunities')}
+          >
+            <Briefcase size={16} />
+            <span>Explore Matched Opportunities</span>
+          </button>
+        </div>
+      ) : (
+        <>
+          {/* Pipeline Funnel Stats */}
+          <div className="app-pipeline-stats-grid">
+            <div className="app-pipeline-stat-card">
+              <div className="app-pipeline-lbl">Under Review</div>
+              <div className="app-pipeline-val">{appliedCount}</div>
+            </div>
+
+            <div className="app-pipeline-stat-card">
+              <div className="app-pipeline-lbl">Shortlisted</div>
+              <div className="app-pipeline-val text-indigo-600">{shortlistedCount}</div>
+            </div>
+
+            <div className="app-pipeline-stat-card">
+              <div className="app-pipeline-lbl">Interviews Scheduled</div>
+              <div className="app-pipeline-val text-amber-600">{interviewCount}</div>
+            </div>
+
+            <div className="app-pipeline-stat-card">
+              <div className="app-pipeline-lbl">Selected & Placed</div>
+              <div className="app-pipeline-val text-emerald-600">{selectedCount}</div>
+            </div>
+          </div>
+
+          {/* Applications List */}
+          <div className="applications-table-wrapper">
+            <table className="applications-table">
               <thead>
                 <tr>
-                  <th>Target Role</th>
-                  <th>Hiring Company</th>
-                  <th>Applied On</th>
-                  <th>Recruitment Stage</th>
-                  <th>Next Action</th>
+                  <th>Role & Position</th>
+                  <th>Company</th>
+                  <th>Date Applied</th>
+                  <th>Candidacy Status</th>
+                  <th>Interview Details</th>
                 </tr>
               </thead>
               <tbody>
                 {applications.map((app) => (
                   <tr key={app.id}>
-                    <td className="font-semibold text-slate-800 dark:text-slate-100">{app.title}</td>
                     <td>
-                      <div className="flex items-center gap-1.5 text-slate-600 dark:text-slate-300">
+                      <div className="app-role-cell">
+                        <FileText size={16} className="text-indigo-500 shrink-0" />
+                        <span className="font-semibold text-slate-800 dark:text-slate-200">
+                          {app.title}
+                        </span>
+                      </div>
+                    </td>
+                    <td>
+                      <div className="app-company-cell">
                         <Building size={14} className="text-slate-400" />
                         <span>{app.companyName}</span>
                       </div>
                     </td>
-                    <td className="text-slate-500">{app.appliedDate}</td>
+                    <td>
+                      <span className="text-xs text-slate-500">{app.appliedDate}</span>
+                    </td>
                     <td>{renderStatusPill(app.status)}</td>
                     <td>
-                      {app.status === 'INTERVIEW_SCHEDULED' ? (
-                        <span className="text-xs font-semibold text-indigo-600">
-                          Prep for Technical Interview {app.interviewDate ? `(${app.interviewDate})` : ''}
-                        </span>
-                      ) : app.status === 'SHORTLISTED' ? (
-                        <span className="text-xs text-slate-500">Recruiter reviewing code samples</span>
+                      {app.interviewDate ? (
+                        <div className="text-xs text-amber-600 font-semibold flex items-center gap-1">
+                          <Calendar size={12} />
+                          <span>{String(app.interviewDate).replace('T', ' ')}</span>
+                        </div>
                       ) : (
-                        <span className="text-xs text-slate-400">Application under initial screening</span>
+                        <span className="text-xs text-slate-400">Pending Review</span>
                       )}
                     </td>
                   </tr>
@@ -194,13 +195,7 @@ export default function StudentApplicationsTab({ currentUser }) {
               </tbody>
             </table>
           </div>
-        </div>
-      ) : (
-        <div className="text-center py-16 text-slate-500">
-          <FileText size={36} className="mx-auto mb-2 text-slate-400" />
-          <p className="font-semibold text-slate-700 dark:text-slate-300">No applications submitted yet</p>
-          <p className="text-xs mt-1">Explore recommended opportunities and submit with 1-Click apply.</p>
-        </div>
+        </>
       )}
     </div>
   );
