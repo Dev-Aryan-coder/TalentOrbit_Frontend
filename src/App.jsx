@@ -62,6 +62,10 @@ export default function App() {
     setCurrentUser(userData);
     localStorage.setItem('talentorbit_user', JSON.stringify(userData));
     const r = (userData.role || 'student').toLowerCase();
+    if (r === 'student') {
+      handleNavigateHome();
+      return;
+    }
     const target = r === 'industry' ? 'recruiter' : r === 'academician' ? 'academician' : r === 'institution_admin' ? 'tpo' : 'student';
     handleNavigatePage(target);
   };

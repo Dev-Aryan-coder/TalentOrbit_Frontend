@@ -55,7 +55,10 @@ export function AuthPage({
       let userData;
       if (isLogin) {
         userData = await authAPI.login(email.trim(), password);
-        setSuccessMessage(`Welcome back${userData.fullName ? ', ' + userData.fullName : ''}! Loading dashboard...`);
+        const userRole = (userData.role || role).toLowerCase();
+        setSuccessMessage(
+          `Welcome back${userData.fullName ? ', ' + userData.fullName : ''}! ${userRole === 'student' ? 'Redirecting to homepage...' : 'Loading dashboard...'}`
+        );
       } else {
         userData = await authAPI.signup(email.trim(), password, role, fullName.trim());
         setSuccessMessage(`Account created for ${userData.fullName || fullName}! Status: PENDING_VERIFICATION.`);
@@ -66,7 +69,12 @@ export function AuthPage({
           onSuccessLogin(userData);
         } else if (onNavigateRole) {
           const roleRoute = (userData.role || role).toLowerCase();
-          onNavigateRole(roleRoute === 'industry' ? 'recruiter' : roleRoute === 'academician' ? 'academician' : 'student');
+          if (roleRoute === 'student') {
+            if (onNavigateHome) onNavigateHome();
+            else onNavigateRole('home');
+          } else {
+            onNavigateRole(roleRoute === 'industry' ? 'recruiter' : roleRoute === 'academician' ? 'academician' : 'student');
+          }
         }
       }, 1000);
     } catch (err) {
