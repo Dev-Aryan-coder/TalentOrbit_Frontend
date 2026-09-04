@@ -10,6 +10,8 @@ import {
   SidebarMenuItem,
   SidebarMenuButton,
   SidebarFooter,
+  SidebarTrigger,
+  useSidebar,
 } from '@/components/ui/sidebar';
 import './StudentSidebar.css';
 
@@ -178,6 +180,9 @@ export default function StudentSidebar({
     .substring(0, 2)
     .toUpperCase() || 'ST';
 
+  const { state } = useSidebar();
+  const isCollapsed = state === 'collapsed';
+
   const toggleTheme = () => {
     if (onThemeChange) {
       onThemeChange(currentTheme === 'dark' ? 'light' : 'dark');
@@ -186,7 +191,7 @@ export default function StudentSidebar({
 
   return (
     <Sidebar className="student-sidebar" aria-label="Student Navigation">
-      {/* 1. Official Shadcn SidebarHeader */}
+      {/* 1. Official Shadcn SidebarHeader with Shrink / Expand Trigger */}
       <SidebarHeader className="student-sidebar-header">
         <button
           type="button"
@@ -201,11 +206,16 @@ export default function StudentSidebar({
               <path d="M2 12h20" />
             </svg>
           </div>
-          <div className="student-sidebar-brand-meta">
-            <span className="student-sidebar-title">TalentOrbit</span>
-            <span className="student-sidebar-persona-badge">Student Portal</span>
-          </div>
+          {!isCollapsed && (
+            <div className="student-sidebar-brand-meta">
+              <span className="student-sidebar-title">TalentOrbit</span>
+              <span className="student-sidebar-persona-badge">Student Portal</span>
+            </div>
+          )}
         </button>
+
+        {/* Shrink from text to logo button */}
+        <SidebarTrigger />
       </SidebarHeader>
 
       {/* 2. Official Shadcn SidebarContent */}
@@ -225,10 +235,11 @@ export default function StudentSidebar({
                         isActive={isActive}
                         onClick={() => onSelectTab(item.id)}
                         className={`student-sidebar-item ${isActive ? 'active' : ''}`}
+                        title={item.label}
                       >
                         <div className="student-sidebar-item-left">
                           <span className="student-sidebar-item-icon">{item.icon}</span>
-                          <span>{item.label}</span>
+                          <span className="student-sidebar-item-label">{item.label}</span>
                         </div>
                       </SidebarMenuButton>
                     </SidebarMenuItem>

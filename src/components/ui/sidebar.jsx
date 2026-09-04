@@ -305,4 +305,48 @@ export const SidebarInset = React.forwardRef(({ className, ...props }, ref) => {
 })
 SidebarInset.displayName = "SidebarInset"
 
+export const SidebarTrigger = React.forwardRef(({ className, onClick, ...props }, ref) => {
+  const { toggleSidebar, state } = useSidebar()
+
+  return (
+    <button
+      ref={ref}
+      data-sidebar="trigger"
+      type="button"
+      className={cn(
+        "inline-flex h-8 w-8 items-center justify-center rounded-lg border border-slate-200 bg-white text-slate-600 transition-colors hover:bg-slate-100 hover:text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-slate-50",
+        className
+      )}
+      onClick={(e) => {
+        onClick?.(e)
+        toggleSidebar()
+      }}
+      title={state === "collapsed" ? "Expand sidebar" : "Collapse sidebar"}
+      aria-label={state === "collapsed" ? "Expand sidebar" : "Collapse sidebar"}
+      {...props}
+    >
+      <svg
+        width="16"
+        height="16"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        aria-hidden="true"
+        className={cn(
+          "transition-transform duration-200",
+          state === "collapsed" ? "rotate-180" : ""
+        )}
+      >
+        <rect width="18" height="18" x="3" y="3" rx="2" ry="2" />
+        <line x1="9" y1="3" x2="9" y2="21" />
+        <path d="m14 15-3-3 3-3" />
+      </svg>
+    </button>
+  )
+})
+SidebarTrigger.displayName = "SidebarTrigger"
+
 export default Sidebar
