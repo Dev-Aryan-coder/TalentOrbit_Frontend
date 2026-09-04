@@ -180,6 +180,29 @@ export function HomePage({
         }
       );
 
+      // Cards of "What We Are Thinking To Add" (Subtle Pop Animation)
+      gsap.fromTo(
+        '.section-roadmap .roadmap-card',
+        {
+          opacity: 0,
+          scale: 0.9,
+          y: 30,
+        },
+        {
+          opacity: 1,
+          scale: 1,
+          y: 0,
+          duration: 0.75,
+          ease: 'back.out(1.4)',
+          stagger: 0.1,
+          scrollTrigger: {
+            trigger: '.section-roadmap',
+            start: 'top 80%',
+            toggleActions: 'play none none none',
+          },
+        }
+      );
+
       ScrollTrigger.refresh();
     }, landingRootRef);
 
@@ -468,18 +491,18 @@ export function HomePage({
             </div>
           </div>
 
-          {/* Block 2: How We Have Solved This Problem */}
+          {/* Block 2: How We Have Solved This Problem (Production Implemented) */}
           <div className="why-section-block">
             <div className="why-sub-header">
               <div className="why-badge solution">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                   <polyline points="20 6 9 17 4 12" />
                 </svg>
-                Our Engineered Solution
+                Active Production Core
               </div>
               <h3 className="why-sub-title">How We Have Solved This Problem</h3>
               <p className="why-sub-desc">
-                An integrated platform powered by live skill diagnostics, deterministic matching algorithms, and automated accreditation intelligence.
+                Production-ready features implemented across our Spring Boot REST API, MySQL relational architecture, and frontend dashboards.
               </p>
             </div>
 
@@ -487,59 +510,149 @@ export function HomePage({
               <div className="why-card solution-card">
                 <div className="why-card-icon-box solution">
                   <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                    <circle cx="12" cy="12" r="10" />
-                    <circle cx="12" cy="12" r="6" />
-                    <circle cx="12" cy="12" r="2" />
-                  </svg>
-                </div>
-                <h4 className="why-card-title">Live AI Diagnostics &amp; Remedial Paths</h4>
-                <p className="why-card-desc">
-                  On-demand technical evaluations benchmark students against corporate profiles in real time. Identified gaps trigger personalized milestones and curated courses to systematically close deficiencies.
-                </p>
-                <div className="why-card-tag solution">Competence Verified</div>
-              </div>
-
-              <div className="why-card solution-card">
-                <div className="why-card-icon-box solution">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
-                  </svg>
-                </div>
-                <h4 className="why-card-title">Deterministic 2ms ATS Weighted Matching</h4>
-                <p className="why-card-desc">
-                  Recruiters post roles with strict skill weightings (e.g., Java 40%, Spring 30%). Our explainable scoring engine ranks thousands of applicants in milliseconds, eliminating bias and resume inflation.
-                </p>
-                <div className="why-card-tag solution">Instant Shortlisting</div>
-              </div>
-
-              <div className="why-card solution-card">
-                <div className="why-card-icon-box solution">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                    <line x1="18" y1="20" x2="18" y2="10" />
-                    <line x1="12" y1="20" x2="12" y2="4" />
-                    <line x1="6" y1="20" x2="6" y2="14" />
-                  </svg>
-                </div>
-                <h4 className="why-card-title">Automated NIRF 5.2.1 &amp; NAAC Analytics</h4>
-                <p className="why-card-desc">
-                  Real-time placement dashboards aggregate placement rates, median salary packages, and company MoUs. One-click audit-compliant PDF generation replaces weeks of manual administrative labor.
-                </p>
-                <div className="why-card-tag solution">Accreditation Ready</div>
-              </div>
-
-              <div className="why-card solution-card">
-                <div className="why-card-icon-box solution">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                     <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
                     <polyline points="9 12 11 14 15 10" />
                   </svg>
                 </div>
-                <h4 className="why-card-title">SHA-256 Proofs &amp; Faculty R&amp;D Exchange</h4>
+                <h4 className="why-card-title">Cryptographic SHA-256 Skill Badges</h4>
                 <p className="why-card-desc">
-                  All achievements and verified skill badges are cryptographically hashed for tamper-proof trust. Simultaneously, a dedicated exchange connects faculty with funded corporate R&amp;D projects and FDPs.
+                  Tamper-proof digital credentials verified with cryptographic SHA-256 hashes on MySQL. Anyone can instantly validate student badges through our public verification modal and backend lookup API.
                 </p>
-                <div className="why-card-tag solution">Tamper-Proof Ecosystem</div>
+                <div className="why-card-tag solution">Verified in Backend &amp; UI</div>
               </div>
+
+              <div className="why-card solution-card">
+                <div className="why-card-icon-box solution">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                  </svg>
+                </div>
+                <h4 className="why-card-title">Role-Based Auth &amp; Email Security Alerts</h4>
+                <p className="why-card-desc">
+                  Dedicated Spring Boot authentication service for Students, Recruiters, and Faculty. Features secure 3-phase OTP password resets and automated JavaMailSender security notification emails.
+                </p>
+                <div className="why-card-tag solution">Active Spring Boot Security</div>
+              </div>
+
+              <div className="why-card solution-card">
+                <div className="why-card-icon-box solution">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <circle cx="12" cy="12" r="10" />
+                    <line x1="14.31" y1="8" x2="20.05" y2="17.94" />
+                    <line x1="9.69" y1="8" x2="21.17" y2="8" />
+                    <line x1="7.38" y1="12" x2="13.12" y2="2.06" />
+                    <line x1="9.69" y1="16" x2="3.95" y2="6.06" />
+                    <line x1="14.31" y1="16" x2="2.83" y2="16" />
+                    <line x1="16.62" y1="12" x2="10.88" y2="21.94" />
+                  </svg>
+                </div>
+                <h4 className="why-card-title">Explainable Skill-Overlap Scoring</h4>
+                <p className="why-card-desc">
+                  Our backend MatchingService evaluates student verified competencies directly against employer posting requirements, calculating exact percentage compatibility without black-box confusion.
+                </p>
+                <div className="why-card-tag solution">Deterministic Matching API</div>
+              </div>
+
+              <div className="why-card solution-card">
+                <div className="why-card-icon-box solution">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                  </svg>
+                </div>
+                <h4 className="why-card-title">Structured Assessments &amp; Portfolio Hub</h4>
+                <p className="why-card-desc">
+                  Full student achievement portal recording technical MCQ assessment scores, verified GitHub project links, academic certifications, and personal career milestones in a unified profile.
+                </p>
+                <div className="why-card-tag solution">Live Student Portfolio</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 3.1 Section Divider */}
+      <div className="section-divider-wrapper">
+        <hr className="section-divider" />
+      </div>
+
+      {/* 3.2 What We Are Thinking To Add (Upcoming Features / Roadmap) */}
+      <section id="roadmap" className="section-roadmap">
+        <div className="section-container">
+          <div className="section-header">
+            <div className="roadmap-badge">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+              </svg>
+              Platform Evolution
+            </div>
+            <h2 className="section-title">What We Are Thinking To Add</h2>
+            <p className="section-subtitle">
+              Our upcoming engineering roadmap designed to push higher education intelligence, AI-driven evaluation, and national accreditation to the next frontier.
+            </p>
+          </div>
+
+          <div className="roadmap-cards-grid">
+            <div className="roadmap-card">
+              <div className="roadmap-card-icon-box">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <path d="M12 2a4 4 0 0 1 4 4c0 1.1-.5 2.1-1.3 2.8L16 11l-2 1-2-1 1.3-2.2C12.5 8.1 12 7.1 12 6a4 4 0 0 1 4-4z" />
+                  <path d="M18 10a6 6 0 0 1-6 6v4h-4v-4a6 6 0 0 1-6-6" />
+                </svg>
+              </div>
+              <div className="roadmap-card-phase-tag">Phase 2 AI Engine</div>
+              <h4 className="roadmap-card-title">Dynamic LLM-Powered Technical Exams</h4>
+              <p className="roadmap-card-desc">
+                Integrating Gemini &amp; OpenAI API webhooks to synthesize real-time, adaptive technical MCQs and sandbox coding challenges tailored dynamically to emerging technology stacks.
+              </p>
+              <div className="roadmap-card-target">In Research &amp; Prototyping</div>
+            </div>
+
+            <div className="roadmap-card">
+              <div className="roadmap-card-icon-box">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                  <polyline points="14 2 14 8 20 8" />
+                  <line x1="16" y1="13" x2="8" y2="13" />
+                  <line x1="16" y1="17" x2="8" y2="17" />
+                  <polyline points="10 9 9 9 8 9" />
+                </svg>
+              </div>
+              <div className="roadmap-card-phase-tag">Accreditation Automation</div>
+              <h4 className="roadmap-card-title">1-Click NIRF 5.2.1 &amp; NAAC PDF Reports</h4>
+              <p className="roadmap-card-desc">
+                A dedicated Spring Boot PDF compilation pipeline using iText to aggregate placement percentages, median salary distributions, and MoUs directly into official accreditation audit tables.
+              </p>
+              <div className="roadmap-card-target">Institutional Module</div>
+            </div>
+
+            <div className="roadmap-card">
+              <div className="roadmap-card-icon-box">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+                </svg>
+              </div>
+              <div className="roadmap-card-phase-tag">High-Performance Scale</div>
+              <h4 className="roadmap-card-title">Sub-2ms Deterministic Vector ATS</h4>
+              <p className="roadmap-card-desc">
+                Upgrading our matching layer with in-memory vector embeddings to rank hundreds of thousands of candidate profiles against multi-skill job descriptions in under 2 milliseconds with zero bias.
+              </p>
+              <div className="roadmap-card-target">Enterprise Recruiter ATS</div>
+            </div>
+
+            <div className="roadmap-card">
+              <div className="roadmap-card-icon-box">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
+                  <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+                </svg>
+              </div>
+              <div className="roadmap-card-phase-tag">Academia-Industry Portal</div>
+              <h4 className="roadmap-card-title">Corporate R&amp;D Grants &amp; Consulting Escrow</h4>
+              <p className="roadmap-card-desc">
+                A formal financial exchange enabling companies to contract college professors for paid technical consulting, fund specialized university lab research, and sponsor AICTE-aligned FDPs.
+              </p>
+              <div className="roadmap-card-target">Faculty Marketplace</div>
             </div>
           </div>
         </div>
