@@ -14,12 +14,23 @@ import {
   ChevronRight,
   PlusCircle,
   ShieldCheck,
+  Code2,
+  Layers,
+  BookOpen,
+  Wrench,
 } from 'lucide-react';
 import './StudentAssessmentTab.css';
 
 export default function StudentAssessmentTab({ currentUser, onSelectTab }) {
   const [stage, setStage] = useState('IDLE'); // 'IDLE' | 'LOADING' | 'IN_TEST' | 'RESULTS'
   const [loadingSkills, setLoadingSkills] = useState(true);
+  const [activeSection, setActiveSection] = useState('languages'); // 'languages' | 'frameworks' | 'libraries' | 'tools'
+  const [categorizedSkills, setCategorizedSkills] = useState({
+    languages: [],
+    frameworks: [],
+    libraries: [],
+    tools: [],
+  });
   const [availableSkills, setAvailableSkills] = useState([]);
   const [selectedSkill, setSelectedSkill] = useState(null);
   const [selfRating, setSelfRating] = useState(7); // 1-10 rating for the selected language/framework
@@ -50,27 +61,63 @@ export default function StudentAssessmentTab({ currentUser, onSelectTab }) {
       studentAPI.getProfile(userId),
     ])
       .then(([userProfRes, studentRes]) => {
-        const skillList = [];
+        const catMap = {
+          languages: [],
+          frameworks: [],
+          libraries: [],
+          tools: [],
+        };
+        const allList = [];
         const seenNames = new Set();
 
         // Check user-profile (which stores languages, frameworks, libraries, tools from database)
         if (userProfRes.status === 'fulfilled' && userProfRes.value) {
           const prof = userProfRes.value;
+
           if (Array.isArray(prof.languages)) {
             prof.languages.forEach((lang) => {
               const name = typeof lang === 'string' ? lang.trim() : lang.name;
               if (name && !seenNames.has(name.toLowerCase())) {
                 seenNames.add(name.toLowerCase());
-                skillList.push({ id: `lang_${name}`, name, type: 'LANGUAGE' });
+                const item = { id: `lang_${name}`, name, type: 'LANGUAGE', category: 'languages' };
+                catMap.languages.push(item);
+                allList.push(item);
               }
             });
           }
+
           if (Array.isArray(prof.frameworks)) {
             prof.frameworks.forEach((fw) => {
               const name = typeof fw === 'string' ? fw.trim() : fw.name;
               if (name && !seenNames.has(name.toLowerCase())) {
                 seenNames.add(name.toLowerCase());
-                skillList.push({ id: `fw_${name}`, name, type: 'FRAMEWORK' });
+                const item = { id: `fw_${name}`, name, type: 'FRAMEWORK', category: 'frameworks' };
+                catMap.frameworks.push(item);
+                allList.push(item);
+              }
+            });
+          }
+
+          if (Array.isArray(prof.libraries)) {
+            prof.libraries.forEach((lib) => {
+              const name = typeof lib === 'string' ? lib.trim() : lib.name;
+              if (name && !seenNames.has(name.toLowerCase())) {
+                seenNames.add(name.toLowerCase());
+                const item = { id: `lib_${name}`, name, type: 'LIBRARY', category: 'libraries' };
+                catMap.libraries.push(item);
+                allList.push(item);
+              }
+            });
+          }
+
+          if (Array.isArray(prof.tools)) {
+            prof.tools.forEach((tool) => {
+              const name = typeof tool === 'string' ? tool.trim() : tool.name;
+              if (name && !seenNames.has(name.toLowerCase())) {
+                seenNames.add(name.toLowerCase());
+                const item = { id: `tool_${name}`, name, type: 'TOOL', category: 'tools' };
+                catMap.tools.push(item);
+                allList.push(item);
               }
             });
           }
@@ -84,15 +131,31 @@ export default function StudentAssessmentTab({ currentUser, onSelectTab }) {
               const raw = typeof s === 'string' ? s.split('(')[0].trim() : s.name;
               if (raw && !seenNames.has(raw.toLowerCase())) {
                 seenNames.add(raw.toLowerCase());
-                skillList.push({ id: `skill_${raw}`, name: raw, type: 'LANGUAGE' });
+                const item = { id: `skill_${raw}`, name: raw, type: 'LANGUAGE', category: 'languages' };
+                catMap.languages.push(item);
+                allList.push(item);
               }
             });
           }
         }
 
-        setAvailableSkills(skillList);
-        if (skillList.length > 0) {
-          setSelectedSkill(skillList[0]);
+        setCategorizedSkills(catMap);
+        setAvailableSkills(allList);
+
+        if (catMap.languages.length > 0) {
+          setSelectedSkill(catMap.languages[0]);
+          setActiveSection('languages');
+        } else if (catMap.frameworks.length > 0) {
+          setSelectedSkill(catMap.frameworks[0]);
+          setActiveSection('frameworks');
+        } else if (catMap.libraries.length > 0) {
+          setSelectedSkill(catMap.libraries[0]);
+          setActiveSection('libraries');
+        } else if (catMap.tools.length > 0) {
+          setSelectedSkill(catMap.tools[0]);
+          setActiveSection('tools');
+        } else if (allList.length > 0) {
+          setSelectedSkill(allList[0]);
         }
       })
       .catch((err) => {
@@ -136,13 +199,25 @@ export default function StudentAssessmentTab({ currentUser, onSelectTab }) {
       // Query Spring Boot backend REST API for real database questions
       if (selectedSkill.type === 'FRAMEWORK') {
         qList = await assessmentAPI.getQuestionsByFramework(selectedSkill.name);
+      } else if (selectedSkill.type === 'LIBRARY') {
+        try {
+          qList = await assessmentAPI.getQuestionsByFramework(selectedSkill.name);
+        } catch {
+          qList = await assessmentAPI.getQuestionsByLanguage(selectedSkill.name);
+        }
+      } else if (selectedSkill.type === 'TOOL') {
+        try {
+          qList = await assessmentAPI.getQuestionsByTechType('TOOL');
+        } catch {
+          qList = await assessmentAPI.getQuestionsByLanguage(selectedSkill.name);
+        }
       } else {
         qList = await assessmentAPI.getQuestionsByLanguage(selectedSkill.name);
       }
 
       if (!Array.isArray(qList) || qList.length === 0) {
         throw new Error(
-          `No assessment questions found in the backend database for "${selectedSkill.name}". Please seed questions in the database.`
+          `No assessment questions found in the backend database for "${selectedSkill.name}". The backend AI question generator will generate and store questions in MySQL on next sync.`
         );
       }
 
@@ -236,9 +311,9 @@ export default function StudentAssessmentTab({ currentUser, onSelectTab }) {
           ) : availableSkills.length === 0 ? (
             <div className="text-center py-12 border-2 border-dashed border-slate-200 dark:border-slate-800 rounded-xl">
               <AlertTriangle size={36} className="text-amber-500 mx-auto mb-3" />
-              <h3 className="text-base font-bold text-slate-800 dark:text-slate-100">No Languages or Frameworks Found</h3>
+              <h3 className="text-base font-bold text-slate-800 dark:text-slate-100">No Skills Found in Profile</h3>
               <p className="text-sm text-slate-500 max-w-md mx-auto mt-1 mb-5">
-                You haven't added any languages or frameworks to your skill profile in the database yet. Please complete onboarding or add skills to take an assessment.
+                You haven't configured any languages, frameworks, libraries, or tools in your profile yet. Please complete onboarding to take an assessment.
               </p>
               <button
                 type="button"
@@ -246,80 +321,167 @@ export default function StudentAssessmentTab({ currentUser, onSelectTab }) {
                 onClick={() => onSelectTab && onSelectTab('skills')}
               >
                 <PlusCircle size={16} />
-                <span>Add Skills in My Skills Tab</span>
+                <span>Configure Skills</span>
               </button>
             </div>
           ) : (
             <>
-              <div className="assessment-controls-grid">
-                {/* 1. Skill Selector */}
-                <div className="assessment-control-group">
-                  <label className="assessment-control-label">
-                    Select Language or Framework for Assessment
-                  </label>
-                  <select
-                    className="assessment-select-input"
-                    value={selectedSkill?.id}
-                    onChange={(e) => {
-                      const found = availableSkills.find((item) => item.id === e.target.value);
-                      if (found) setSelectedSkill(found);
+              {/* 4 Category Section Switcher */}
+              <div className="mb-2">
+                <label className="assessment-control-label mb-2 block">
+                  Select Skill Category
+                </label>
+                <div className="category-tabs-container">
+                  <button
+                    type="button"
+                    className={`category-tab-btn ${activeSection === 'languages' ? 'active' : ''}`}
+                    onClick={() => {
+                      setActiveSection('languages');
+                      if (categorizedSkills.languages.length > 0) setSelectedSkill(categorizedSkills.languages[0]);
                     }}
                   >
-                    {availableSkills.map((sk) => (
-                      <option key={sk.id} value={sk.id}>
-                        {sk.name} ({sk.type})
-                      </option>
-                    ))}
-                  </select>
+                    <Code2 size={16} />
+                    <span>Languages</span>
+                    <span className="category-count-badge">{categorizedSkills.languages.length}</span>
+                  </button>
+
+                  <button
+                    type="button"
+                    className={`category-tab-btn ${activeSection === 'frameworks' ? 'active' : ''}`}
+                    onClick={() => {
+                      setActiveSection('frameworks');
+                      if (categorizedSkills.frameworks.length > 0) setSelectedSkill(categorizedSkills.frameworks[0]);
+                    }}
+                  >
+                    <Layers size={16} />
+                    <span>Frameworks</span>
+                    <span className="category-count-badge">{categorizedSkills.frameworks.length}</span>
+                  </button>
+
+                  <button
+                    type="button"
+                    className={`category-tab-btn ${activeSection === 'libraries' ? 'active' : ''}`}
+                    onClick={() => {
+                      setActiveSection('libraries');
+                      if (categorizedSkills.libraries.length > 0) setSelectedSkill(categorizedSkills.libraries[0]);
+                    }}
+                  >
+                    <BookOpen size={16} />
+                    <span>Libraries</span>
+                    <span className="category-count-badge">{categorizedSkills.libraries.length}</span>
+                  </button>
+
+                  <button
+                    type="button"
+                    className={`category-tab-btn ${activeSection === 'tools' ? 'active' : ''}`}
+                    onClick={() => {
+                      setActiveSection('tools');
+                      if (categorizedSkills.tools.length > 0) setSelectedSkill(categorizedSkills.tools[0]);
+                    }}
+                  >
+                    <Wrench size={16} />
+                    <span>Tools</span>
+                    <span className="category-count-badge">{categorizedSkills.tools.length}</span>
+                  </button>
+                </div>
+              </div>
+
+              {/* Skills Selection Cards for Active Category */}
+              <div className="mb-5">
+                <div className="flex items-center justify-between mb-2">
+                  <label className="assessment-control-label">
+                    Select {activeSection.slice(0, -1).toUpperCase()} to Test
+                  </label>
+                  {selectedSkill && (
+                    <span className="text-xs font-semibold text-indigo-600 dark:text-indigo-400">
+                      Selected: {selectedSkill.name} ({selectedSkill.type})
+                    </span>
+                  )}
                 </div>
 
-                {/* 2. Rating 1 to 10 Input */}
-                <div className="assessment-control-group">
-                  <div className="flex items-center justify-between">
-                    <label className="assessment-control-label">
-                      Self-Rating for {selectedSkill?.name} (1 to 10 Scale)
-                    </label>
-                    <span className="font-bold text-indigo-600 dark:text-indigo-400 text-sm">
-                      {selfRating} / 10 ({selfRating * 10}%)
-                    </span>
+                {categorizedSkills[activeSection]?.length === 0 ? (
+                  <div className="p-6 text-center border-2 border-dashed border-slate-200 dark:border-slate-800 rounded-xl mb-4">
+                    <p className="text-xs text-slate-500 mb-2">
+                      No {activeSection} selected in your starting onboarding profile.
+                    </p>
+                    <button
+                      type="button"
+                      className="text-xs text-indigo-600 font-semibold underline"
+                      onClick={() => onSelectTab && onSelectTab('skills')}
+                    >
+                      Configure in My Skills
+                    </button>
                   </div>
+                ) : (
+                  <div className="skills-selector-grid">
+                    {categorizedSkills[activeSection]?.map((sk) => {
+                      const isSelected = selectedSkill?.name === sk.name;
+                      return (
+                        <div
+                          key={sk.id || sk.name}
+                          className={`skill-select-card ${isSelected ? 'active' : ''}`}
+                          onClick={() => setSelectedSkill(sk)}
+                        >
+                          <div className="skill-card-top">
+                            <span className="skill-card-type-tag">{sk.type}</span>
+                            <div className="skill-card-indicator">
+                              {isSelected && <CheckCircle size={12} />}
+                            </div>
+                          </div>
+                          <div className="skill-card-name">{sk.name}</div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
 
-                  {/* 10-Button Rating Selector */}
-                  <div className="rating-buttons-bar">
-                    {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((num) => (
-                      <button
-                        key={num}
-                        type="button"
-                        className={`rating-num-btn ${selfRating === num ? 'selected' : ''}`}
-                        onClick={() => setSelfRating(num)}
-                      >
-                        {num}
-                      </button>
-                    ))}
-                  </div>
+              {/* Pre-Assessment 1 to 10 Self Rating */}
+              <div className="assessment-control-group mb-6 p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-white/60 dark:bg-slate-900/60">
+                <div className="flex items-center justify-between mb-2">
+                  <label className="assessment-control-label">
+                    Rate Your Proficiency in {selectedSkill?.name || 'Selected Skill'} (1 to 10 Scale)
+                  </label>
+                  <span className="font-bold text-indigo-600 dark:text-indigo-400 text-sm">
+                    {selfRating} / 10 ({selfRating * 10}% Confidence)
+                  </span>
+                </div>
 
-                  <div className="assessment-slider-wrapper">
-                    <input
-                      type="range"
-                      min="1"
-                      max="10"
-                      value={selfRating}
-                      onChange={(e) => setSelfRating(Number(e.target.value))}
-                      className="assessment-slider"
-                    />
-                  </div>
+                {/* 10-Button Rating Selector */}
+                <div className="rating-buttons-bar mb-3">
+                  {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((num) => (
+                    <button
+                      key={num}
+                      type="button"
+                      className={`rating-num-btn ${selfRating === num ? 'selected' : ''}`}
+                      onClick={() => setSelfRating(num)}
+                    >
+                      {num}
+                    </button>
+                  ))}
+                </div>
 
-                  <div className="text-xs text-slate-500">
-                    {selfRating <= 2
-                      ? 'Novice (10-20% expected mastery)'
-                      : selfRating <= 4
-                      ? 'Beginner (30-40% expected mastery)'
-                      : selfRating <= 6
-                      ? 'Intermediate (50-60% expected mastery)'
-                      : selfRating <= 8
-                      ? 'Advanced (70-80% expected mastery)'
-                      : 'Expert (90-100% expected mastery)'}
-                  </div>
+                <div className="assessment-slider-wrapper">
+                  <input
+                    type="range"
+                    min="1"
+                    max="10"
+                    value={selfRating}
+                    onChange={(e) => setSelfRating(Number(e.target.value))}
+                    className="assessment-slider"
+                  />
+                </div>
+
+                <div className="text-xs text-slate-500 mt-1">
+                  {selfRating <= 2
+                    ? 'Novice (10-20% expected mastery)'
+                    : selfRating <= 4
+                    ? 'Beginner (30-40% expected mastery)'
+                    : selfRating <= 6
+                    ? 'Intermediate (50-60% expected mastery)'
+                    : selfRating <= 8
+                    ? 'Proficient (70-80% expected mastery)'
+                    : 'Expert / Mastery (90-100% expected mastery)'}
                 </div>
               </div>
 
