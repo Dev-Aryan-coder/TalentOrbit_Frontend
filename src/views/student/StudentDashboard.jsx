@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { SidebarProvider, SidebarInset } from '@/components/ui/sidebar';
 import StudentSidebar from '../../components/ui/StudentSidebar';
+import StudentSkillOnboardingModal from '../../components/ui/StudentSkillOnboardingModal';
 import './StudentDashboard.css';
 
 export default function StudentDashboard({
@@ -12,8 +13,37 @@ export default function StudentDashboard({
   onLogout
 }) {
   const [activeTab, setActiveTab] = useState('dashboard');
+  const [showSkillOnboardingModal, setShowSkillOnboardingModal] = useState(false);
+  const [userSkillsData, setUserSkillsData] = useState(null);
 
   const userName = currentUser?.fullName || 'Student';
+  const userKey = currentUser?.id || currentUser?.email || 'guest';
+
+  // Check if current user has already completed the 4-step skill onboarding
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem(`talentorbit_skills_onboarded_${userKey}`);
+      if (saved) {
+        setUserSkillsData(JSON.parse(saved));
+      } else {
+        // Automatically pop up modal for new students who have not completed onboarding
+        setShowSkillOnboardingModal(true);
+      }
+    } catch (err) {
+      console.warn('Could not read onboarding state from storage', err);
+      setShowSkillOnboardingModal(true);
+    }
+  }, [userKey]);
+
+  const handleSkillsOnboardingComplete = (compiledData) => {
+    setUserSkillsData(compiledData);
+    try {
+      localStorage.setItem(`talentorbit_skills_onboarded_${userKey}`, JSON.stringify(compiledData));
+    } catch (err) {
+      console.error('Could not persist onboarding state to storage', err);
+    }
+    setShowSkillOnboardingModal(false);
+  };
 
   // Functional component switch case rendering the active student feature
   const renderActiveFeature = () => {
@@ -240,6 +270,17 @@ export default function StudentDashboard({
                 <div className="student-dash-stat-val">Active</div>
                 <div className="student-dash-stat-lbl">Placement Cycle</div>
               </div>
+              <button
+                type="button"
+                className="student-dash-skills-btn"
+                onClick={() => setShowSkillOnboardingModal(true)}
+                title="Review or adjust your 4-step skill diagnostic preferences"
+              >
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                </svg>
+                <span>{userSkillsData ? 'Edit Skills Profile' : 'Configure Skills'}</span>
+              </button>
             </div>
           </div>
 
@@ -247,6 +288,14 @@ export default function StudentDashboard({
           {renderActiveFeature()}
         </div>
       </SidebarInset>
+
+      {/* 3. Official 4-Step Student Skill Diagnostic Onboarding Modal */}
+      <StudentSkillOnboardingModal
+        isOpen={showSkillOnboardingModal}
+        onClose={() => setShowSkillOnboardingModal(false)}
+        currentUser={currentUser}
+        onComplete={handleSkillsOnboardingComplete}
+      />
     </SidebarProvider>
   );
 }
