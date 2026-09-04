@@ -88,10 +88,11 @@ export function HomePage({
     }
   };
 
-  const whoWeAreRef = useRef(null);
+  const landingRootRef = useRef(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
+      // ===== 1. "Who We Are ?" Section Animations =====
       // 0. Header title and badge animation
       gsap.fromTo(
         '.section-who-we-are .section-header',
@@ -175,8 +176,52 @@ export function HomePage({
         }
       );
 
+      // ===== 2. "Built For Students, Colleges & Companies" Section Animations =====
+      // Section Header (Fade In Up)
+      gsap.fromTo(
+        '.section-features .section-header',
+        {
+          opacity: 0,
+          y: 35,
+        },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.9,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: '.section-features',
+            start: 'top 85%',
+            toggleActions: 'play none none none',
+          },
+        }
+      );
+
+      // Cards of "Built For Students, Colleges & Companies" (Subtle Pop Animation)
+      gsap.fromTo(
+        '.section-features .feature-card',
+        {
+          opacity: 0,
+          scale: 0.88,
+          y: 35,
+        },
+        {
+          opacity: 1,
+          scale: 1,
+          y: 0,
+          duration: 0.8,
+          ease: 'back.out(1.5)', // Subtle springy pop
+          stagger: 0.12,         // Smooth sequential pop across cards
+          scrollTrigger: {
+            trigger: '.section-features .features-grid',
+            start: 'top 85%',
+            toggleActions: 'play none none none',
+          },
+        }
+      );
+
       ScrollTrigger.refresh();
-    }, whoWeAreRef);
+    }, landingRootRef);
 
     return () => ctx.revert();
   }, []);
@@ -184,7 +229,7 @@ export function HomePage({
   const currentShowcase = roleShowcases[activeRoleTab];
 
   return (
-    <div className="landing-page">
+    <div className="landing-page" ref={landingRootRef}>
       {/* 1. Hero Banner with Fluid Silk Cyan Background & Floating Pill Navbar */}
       <HeroBanner 
         onLogin={onLogin} 

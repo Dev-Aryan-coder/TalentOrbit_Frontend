@@ -1,9 +1,51 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
+import gsap from 'gsap';
 import PublicNavbar from '../../components/layout/PublicNavbar';
 import PublicFooter from '../../components/layout/PublicFooter';
 import './FeaturesPage.css';
 
-export default function FeaturesPage({ onNavigateHome, onNavigatePage, onNavigateRole, onLogin, onRegister }) {
+export default function FeaturesPage({ 
+  onNavigateHome, 
+  onNavigatePage, 
+  onNavigateRole, 
+  onLogin, 
+  onRegister,
+  currentUser,
+  currentTheme,
+  onThemeChange,
+  onNavigateDashboard,
+  onOpenProfileSettings,
+  onOpenAccountSettings,
+  onOpenAppearance,
+  onLogout
+}) {
+  const rootRef = useRef(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        '.features-header',
+        { opacity: 0, y: 30 },
+        { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' }
+      );
+
+      gsap.fromTo(
+        '.features-card',
+        { opacity: 0, scale: 0.88, y: 35 },
+        {
+          opacity: 1,
+          scale: 1,
+          y: 0,
+          duration: 0.8,
+          ease: 'back.out(1.5)',
+          stagger: 0.12,
+        }
+      );
+    }, rootRef);
+
+    return () => ctx.revert();
+  }, []);
+
   const features = [
     {
       title: "Smart Skill Assessments",
@@ -44,13 +86,21 @@ export default function FeaturesPage({ onNavigateHome, onNavigatePage, onNavigat
   ];
 
   return (
-    <div className="features-page">
+    <div className="features-page" ref={rootRef}>
       <PublicNavbar 
         activePage="features" 
         onNavigateHome={onNavigateHome} 
         onNavigatePage={onNavigatePage}
         onLogin={onLogin} 
-        onRegister={onRegister} 
+        onRegister={onRegister}
+        currentUser={currentUser}
+        currentTheme={currentTheme}
+        onThemeChange={onThemeChange}
+        onNavigateDashboard={onNavigateDashboard}
+        onOpenProfileSettings={onOpenProfileSettings}
+        onOpenAccountSettings={onOpenAccountSettings}
+        onOpenAppearance={onOpenAppearance}
+        onLogout={onLogout}
       />
 
       <main className="features-main">
