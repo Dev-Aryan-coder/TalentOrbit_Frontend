@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { HeroBanner } from '../../components/ui/HeroBanner';
+import PreFooterCtaBanner from '../../components/ui/PreFooterCtaBanner';
 import './HomePage.css';
 import logoImg from '../../assets/logo.png';
 import whoWeAreImg from '../../assets/who-we-are.jpg';
@@ -508,6 +509,14 @@ export function HomePage({
           </div>
         </div>
       </section>
+
+      {/* 3.5 Pre-Footer Call to Action Banner */}
+      <PreFooterCtaBanner 
+        title="Hundreds Of Companies Use Us To Hire"
+        description="Gain instant access to a curated pool of responsive, top-tech talent actively seeking their next role with cryptographically verified skills."
+        buttonText="Get Started"
+        onAction={() => onRegister ? onRegister() : (onNavigateRole && onNavigateRole('industry'))}
+      />
 
       {/* 4. Senior Global Footer */}
       <footer id="contact" className="landing-footer">
