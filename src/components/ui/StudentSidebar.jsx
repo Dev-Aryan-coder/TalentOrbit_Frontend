@@ -11,6 +11,7 @@ import {
   SidebarMenuButton,
   SidebarFooter,
   SidebarTrigger,
+  SidebarRail,
   useSidebar,
 } from '@/components/ui/sidebar';
 import './StudentSidebar.css';
@@ -323,6 +324,9 @@ export default function StudentSidebar({
           )}
         </div>
       </SidebarFooter>
+
+      {/* Official Shadcn SidebarRail on border edge */}
+      <SidebarRail />
     </Sidebar>
   );
 }

@@ -335,18 +335,35 @@ export const SidebarTrigger = React.forwardRef(({ className, onClick, ...props }
         strokeLinecap="round"
         strokeLinejoin="round"
         aria-hidden="true"
-        className={cn(
-          "transition-transform duration-200",
-          state === "collapsed" ? "rotate-180" : ""
-        )}
       >
         <rect width="18" height="18" x="3" y="3" rx="2" ry="2" />
         <line x1="9" y1="3" x2="9" y2="21" />
-        <path d="m14 15-3-3 3-3" />
       </svg>
     </button>
   )
 })
 SidebarTrigger.displayName = "SidebarTrigger"
 
+export const SidebarRail = React.forwardRef(({ className, ...props }, ref) => {
+  const { toggleSidebar } = useSidebar()
+
+  return (
+    <button
+      ref={ref}
+      data-sidebar="rail"
+      aria-label="Toggle Sidebar"
+      tabIndex={-1}
+      onClick={toggleSidebar}
+      title="Toggle Sidebar"
+      className={cn(
+        "absolute inset-y-0 right-0 z-20 hidden w-2 -mr-1 transition-all ease-linear hover:bg-blue-500/40 cursor-col-resize sm:flex",
+        className
+      )}
+      {...props}
+    />
+  )
+})
+SidebarRail.displayName = "SidebarRail"
+
 export default Sidebar
+
