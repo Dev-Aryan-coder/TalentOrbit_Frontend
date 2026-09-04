@@ -1,9 +1,12 @@
 /* StudentDashboard.css - Dedicated Dashboard Styles */
 .student-dashboard-root {
   min-height: 100vh;
+  width: 100% !important;
+  max-width: 100% !important;
   background-color: #f8fafc;
   color: #0f172a;
-  display: flex;
+  display: flex !important;
+  flex-direction: row !important;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   transition: background-color 0.25s ease, color 0.25s ease;
   overflow-x: hidden;
@@ -15,12 +18,18 @@
 }
 
 .student-dashboard-main {
-  flex: 1;
-  min-width: 0;
-  display: flex;
+  flex: 1 1 0% !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  display: flex !important;
   flex-direction: column;
   min-height: 100vh;
   overflow-y: auto;
+  background-color: #f8fafc;
+}
+
+[data-theme="dark"] .student-dashboard-main {
+  background-color: #030712;
 }
 
 /* Dashboard Navigation Bar (Internal, not PublicNavbar) */

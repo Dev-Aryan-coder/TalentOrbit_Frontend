@@ -208,47 +208,45 @@ export default function StudentDashboard({
   };
 
   return (
-    <SidebarProvider defaultOpen={true}>
-      <div className="student-dashboard-root">
-        {/* 1. Official Shadcn UI Sidebar (Left side) */}
-        <StudentSidebar
-          activeTab={activeTab}
-          onSelectTab={setActiveTab}
-          currentUser={currentUser}
-          currentTheme={currentTheme}
-          onThemeChange={onThemeChange}
-          onNavigateHome={onNavigateHome}
-          onLogout={onLogout}
-        />
+    <SidebarProvider defaultOpen={true} className="student-dashboard-root w-full min-h-screen">
+      {/* 1. Official Shadcn UI Sidebar (Left side) */}
+      <StudentSidebar
+        activeTab={activeTab}
+        onSelectTab={setActiveTab}
+        currentUser={currentUser}
+        currentTheme={currentTheme}
+        onThemeChange={onThemeChange}
+        onNavigateHome={onNavigateHome}
+        onLogout={onLogout}
+      />
 
-        {/* 2. Official Shadcn SidebarInset Main Workspace (Right side) */}
-        <SidebarInset className="student-dashboard-main">
-          <main className="student-dash-content">
-            {/* Welcome Banner */}
-            <div className="student-dash-hero">
-              <div className="student-dash-hero-text">
-                <h1>Welcome back, {userName}</h1>
-                <p>
-                  Your personal career, skills diagnostic, and verified credential workspace. All verified competency badges and institutional placements are tracked here.
-                </p>
+      {/* 2. Official Shadcn SidebarInset Main Workspace (Right side) */}
+      <SidebarInset className="student-dashboard-main">
+        <div className="student-dash-content">
+          {/* Welcome Banner */}
+          <div className="student-dash-hero">
+            <div className="student-dash-hero-text">
+              <h1>Welcome back, {userName}</h1>
+              <p>
+                Your personal career, skills diagnostic, and verified credential workspace. All verified competency badges and institutional placements are tracked here.
+              </p>
+            </div>
+            <div className="student-dash-hero-badges">
+              <div className="student-dash-stat-chip">
+                <div className="student-dash-stat-val">Verified</div>
+                <div className="student-dash-stat-lbl">Account Status</div>
               </div>
-              <div className="student-dash-hero-badges">
-                <div className="student-dash-stat-chip">
-                  <div className="student-dash-stat-val">Verified</div>
-                  <div className="student-dash-stat-lbl">Account Status</div>
-                </div>
-                <div className="student-dash-stat-chip">
-                  <div className="student-dash-stat-val">Active</div>
-                  <div className="student-dash-stat-lbl">Placement Cycle</div>
-                </div>
+              <div className="student-dash-stat-chip">
+                <div className="student-dash-stat-val">Active</div>
+                <div className="student-dash-stat-lbl">Placement Cycle</div>
               </div>
             </div>
+          </div>
 
-            {/* Active Feature Rendered via switch-case */}
-            {renderActiveFeature()}
-          </main>
-        </SidebarInset>
-      </div>
+          {/* Active Feature Rendered via switch-case */}
+          {renderActiveFeature()}
+        </div>
+      </SidebarInset>
     </SidebarProvider>
   );
 }

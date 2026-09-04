@@ -109,7 +109,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen w-full bg-white">
       {currentView === 'home' && (
         <HomePage 
           onNavigateRole={(role) => setCurrentView(role)} 
