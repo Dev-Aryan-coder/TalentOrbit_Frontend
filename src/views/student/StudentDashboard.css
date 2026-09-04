@@ -209,13 +209,12 @@
   color: #f8fafc;
 }
 
-/* Main Dashboard Body */
+/* Main Dashboard Body - Full Fluid Width */
 .student-dash-content {
   flex: 1;
-  max-width: 1280px;
   width: 100%;
-  margin: 0 auto;
-  padding: 32px 28px 60px 28px;
+  max-width: 100%;
+  padding: 32px 36px 60px 36px;
   box-sizing: border-box;
 }
 

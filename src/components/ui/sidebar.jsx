@@ -126,7 +126,7 @@ export const SidebarHeader = React.forwardRef(({ className, ...props }, ref) => 
     <div
       ref={ref}
       data-sidebar="header"
-      className={cn("flex flex-col gap-2 p-4 border-b border-slate-100 dark:border-slate-800/80", className)}
+      className={cn("flex flex-row items-center justify-between gap-2 p-4 border-b border-slate-100 dark:border-slate-800/80", className)}
       {...props}
     />
   )
