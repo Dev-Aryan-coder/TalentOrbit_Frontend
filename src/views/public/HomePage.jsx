@@ -92,6 +92,26 @@ export function HomePage({
 
   useEffect(() => {
     const ctx = gsap.context(() => {
+      // 0. Header title and badge animation
+      gsap.fromTo(
+        '.section-who-we-are .section-header',
+        {
+          opacity: 0,
+          y: 35,
+        },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.9,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: '.section-who-we-are',
+            start: 'top 85%',
+            toggleActions: 'play none none none',
+          },
+        }
+      );
+
       // 1. Fade In Up animation for the image
       gsap.fromTo(
         '.who-we-are-image-wrapper',
@@ -154,6 +174,8 @@ export function HomePage({
           },
         }
       );
+
+      ScrollTrigger.refresh();
     }, whoWeAreRef);
 
     return () => ctx.revert();
