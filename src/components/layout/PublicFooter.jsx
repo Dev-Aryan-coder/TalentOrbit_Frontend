@@ -1,8 +1,9 @@
 import React from 'react';
 import logoImg from '../../assets/logo.png';
+import PreFooterCtaBanner from '../ui/PreFooterCtaBanner';
 import './PublicFooter.css';
 
-export function PublicFooter({ onNavigateHome, onNavigatePage, onNavigateRole }) {
+export function PublicFooter({ onNavigateHome, onNavigatePage, onNavigateRole, showPreFooterCta = true }) {
   const handlePageClick = (page) => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
     if (onNavigatePage) {
@@ -26,7 +27,16 @@ export function PublicFooter({ onNavigateHome, onNavigatePage, onNavigateRole })
   };
 
   return (
-    <footer className="public-footer">
+    <>
+      {showPreFooterCta && (
+        <PreFooterCtaBanner 
+          title="Hundreds Of Companies Use Us To Hire"
+          description="Gain instant access to a curated pool of responsive, top-tech talent actively seeking verified career opportunities."
+          buttonText="Get Started"
+          onAction={() => onNavigatePage ? onNavigatePage('register') : handleRoleClick('industry')}
+        />
+      )}
+      <footer className="public-footer">
       <div className="public-footer-top">
         <div className="public-footer-brand">
           <a 
@@ -121,6 +131,7 @@ export function PublicFooter({ onNavigateHome, onNavigatePage, onNavigateRole })
         <span style={{ color: '#7ce8ff' }}>Production Architecture Verified</span>
       </div>
     </footer>
+    </>
   );
 }
 
