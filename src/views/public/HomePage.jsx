@@ -89,6 +89,7 @@ export function HomePage({
   };
 
   const landingRootRef = useRef(null);
+  const whoWeAreRef = useRef(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
