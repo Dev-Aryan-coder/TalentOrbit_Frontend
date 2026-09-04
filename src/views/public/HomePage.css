@@ -363,6 +363,7 @@
     0 4px 12px rgba(0, 0, 0, 0.05);
   border: 1px solid rgba(0, 85, 255, 0.14);
   background: #f8fafc;
+  will-change: transform, opacity;
 }
 
 .who-we-are-img {
@@ -393,6 +394,7 @@
   flex-direction: column;
   gap: 16px;
   text-align: left;
+  will-change: transform, opacity;
 }
 
 .who-we-are-lead {
@@ -448,9 +450,10 @@
   background: rgba(248, 250, 252, 0.9);
   border: 1px solid rgba(226, 232, 240, 0.9);
   box-shadow: 0 4px 16px rgba(0, 50, 150, 0.04);
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, background 0.3s ease;
   box-sizing: border-box;
   text-align: left;
+  will-change: transform, opacity;
 }
 
 .who-we-are-card:hover {

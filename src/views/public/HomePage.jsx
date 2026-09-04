@@ -1,10 +1,28 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { HeroBanner } from '../../components/ui/HeroBanner';
 import './HomePage.css';
 import logoImg from '../../assets/logo.png';
 import whoWeAreImg from '../../assets/who-we-are.jpg';
 
-export function HomePage({ onNavigateRole, onNavigateHome, onNavigatePage, onLogin, onRegister }) {
+gsap.registerPlugin(ScrollTrigger);
+
+export function HomePage({ 
+  onNavigateRole, 
+  onNavigateHome, 
+  onNavigatePage, 
+  onLogin, 
+  onRegister,
+  currentUser,
+  currentTheme,
+  onThemeChange,
+  onNavigateDashboard,
+  onOpenProfileSettings,
+  onOpenAccountSettings,
+  onOpenAppearance,
+  onLogout
+}) {
   const [activeRoleTab, setActiveRoleTab] = useState('student');
 
   const roleShowcases = {
@@ -70,12 +88,95 @@ export function HomePage({ onNavigateRole, onNavigateHome, onNavigatePage, onLog
     }
   };
 
+  const whoWeAreRef = useRef(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // 1. Fade In Up animation for the image
+      gsap.fromTo(
+        '.who-we-are-image-wrapper',
+        {
+          opacity: 0,
+          y: 60,
+        },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 1.1,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: '.who-we-are-layout',
+            start: 'top 82%',
+            toggleActions: 'play none none none',
+          },
+        }
+      );
+
+      // 2. Slide In Right animation for the content
+      gsap.fromTo(
+        '.who-we-are-content',
+        {
+          opacity: 0,
+          x: 60,
+        },
+        {
+          opacity: 1,
+          x: 0,
+          duration: 1.1,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: '.who-we-are-layout',
+            start: 'top 82%',
+            toggleActions: 'play none none none',
+          },
+        }
+      );
+
+      // 3. Subtle Pop animation for the four cards
+      gsap.fromTo(
+        '.who-we-are-card',
+        {
+          opacity: 0,
+          scale: 0.88,
+          y: 30,
+        },
+        {
+          opacity: 1,
+          scale: 1,
+          y: 0,
+          duration: 0.85,
+          ease: 'back.out(1.5)',
+          stagger: 0.14,
+          scrollTrigger: {
+            trigger: '.who-we-are-cards-grid',
+            start: 'top 85%',
+            toggleActions: 'play none none none',
+          },
+        }
+      );
+    }, whoWeAreRef);
+
+    return () => ctx.revert();
+  }, []);
+
   const currentShowcase = roleShowcases[activeRoleTab];
 
   return (
     <div className="landing-page">
       {/* 1. Hero Banner with Fluid Silk Cyan Background & Floating Pill Navbar */}
-      <HeroBanner onLogin={onLogin} onRegister={onRegister} onNavigatePage={onNavigatePage} onNavigateHome={onNavigateHome || (() => { window.scrollTo({ top: 0, behavior: 'smooth' }); window.history.pushState(null, '', '/'); })}
+      <HeroBanner 
+        onLogin={onLogin} 
+        onRegister={onRegister} 
+        onNavigatePage={onNavigatePage} 
+        onNavigateHome={onNavigateHome || (() => { window.scrollTo({ top: 0, behavior: 'smooth' }); window.history.pushState(null, '', '/'); })}
+        currentUser={currentUser}
+        currentTheme={currentTheme}
+        onThemeChange={onThemeChange}
+        onNavigateDashboard={onNavigateDashboard}
+        onOpenProfileSettings={onOpenProfileSettings}
+        onOpenAccountSettings={onOpenAccountSettings}
+        onOpenAppearance={onOpenAppearance}
+        onLogout={onLogout}
         title="Transforming Academia & Industry"
         highlightText="Collaboration"
         description="TalentOrbit is the National Career & Higher Education Intelligence Platform bridging Students, Recruiters, Academicians, and Institutions with explainable AI benchmarking and verified placement analytics."
@@ -85,8 +186,8 @@ export function HomePage({ onNavigateRole, onNavigateHome, onNavigatePage, onLog
         onSecondaryAction={() => onNavigateRole ? onNavigateRole('industry') : console.log('industry')}
       />
 
-                      {/* 2. Who We Are Section */}
-        <section id="about" className="section-who-we-are">
+      {/* 2. Who We Are Section */}
+      <section id="about" className="section-who-we-are" ref={whoWeAreRef}>
           <div className="section-container">
             <div className="section-header" style={{ marginBottom: '44px' }}>
               <div className="section-pill-tag">About TalentOrbit</div>
