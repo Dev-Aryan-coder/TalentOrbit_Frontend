@@ -31,9 +31,9 @@ export default function StudentApplicationsTab({ currentUser, onSelectTab }) {
         if (Array.isArray(res)) {
           const mapped = res.map((item) => ({
             id: item.id,
-            title: item.postingTitle || item.posting?.title || 'Engineering Role',
-            companyName: item.companyName || item.posting?.postedByName || 'Corporate Partner',
-            appliedDate: item.appliedAt ? String(item.appliedAt).split('T')[0] : 'Recent',
+            title: item.postingTitle || item.posting?.title || 'Untitled Application',
+            companyName: item.companyName || item.posting?.postedByName || 'N/A',
+            appliedDate: item.appliedAt ? String(item.appliedAt).split('T')[0] : 'N/A',
             status: item.status || 'APPLIED',
             interviewDate: item.interviewScheduledAt || null,
           }));

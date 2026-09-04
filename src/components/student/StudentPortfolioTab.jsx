@@ -64,18 +64,8 @@ export default function StudentPortfolioTab({ currentUser }) {
       setFormData({ title: '', description: '', fileOrLink: '' });
       setShowAddForm(false);
     } catch (err) {
-      console.warn('Could not add portfolio item to backend, appending locally:', err.message);
-      const localItem = {
-        id: Date.now(),
-        title: formData.title,
-        description: formData.description,
-        fileUrl: formData.fileOrLink,
-        fileOrLink: formData.fileOrLink,
-        verifiedFlag: false,
-      };
-      setProjects((prev) => [localItem, ...prev]);
-      setFormData({ title: '', description: '', fileOrLink: '' });
-      setShowAddForm(false);
+      console.error('Could not add portfolio item to backend:', err.message);
+      alert(err.message || 'Failed to add project to database. Please ensure backend is running.');
     } finally {
       setIsSubmitting(false);
     }
@@ -92,13 +82,8 @@ export default function StudentPortfolioTab({ currentUser }) {
         )
       );
     } catch (err) {
-      console.warn('Could not verify item via backend:', err.message);
-      setVerifyStatus((prev) => ({ ...prev, [projectId]: 'verified' }));
-      setProjects((prev) =>
-        prev.map((p) =>
-          p.id === projectId ? { ...p, isVerified: true, verifiedFlag: true } : p
-        )
-      );
+      console.error('Could not verify item via backend:', err.message);
+      setVerifyStatus((prev) => ({ ...prev, [projectId]: 'error' }));
     }
   };
 

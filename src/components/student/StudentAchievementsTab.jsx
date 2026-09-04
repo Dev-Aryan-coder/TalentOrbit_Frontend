@@ -51,11 +51,10 @@ export default function StudentAchievementsTab({ currentUser, onSelectTab }) {
         [hash]: { valid: true, data: res },
       }));
     } catch (err) {
-      console.warn('Backend verification note:', err.message);
-      // Cryptographic verification format check
+      console.error('Backend badge verification error:', err.message);
       setVerificationResult((prev) => ({
         ...prev,
-        [hash]: { valid: true, data: { status: 'CRYPTOGRAPHICALLY_VERIFIED', hash } },
+        [hash]: { valid: false, error: err.message || 'Signature not found in database ledger' },
       }));
     } finally {
       setVerifyingHash(null);

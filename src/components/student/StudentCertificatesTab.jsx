@@ -40,11 +40,11 @@ export default function StudentCertificatesTab({ currentUser, onSelectTab }) {
             certList.push({
               id: item.id,
               title: item.title,
-              issuer: item.institutionName || 'Accredited Partner',
-              issueDate: item.createdAt ? String(item.createdAt).split('T')[0] : 'Verified',
+              issuer: item.institutionName || 'Institution / Issuer',
+              issueDate: item.createdAt ? String(item.createdAt).split('T')[0] : 'N/A',
               status: item.verifiedFlag ? 'AUTHENTIC & VERIFIED' : 'PENDING REVIEW',
               certificateId: `TO-CERT-${item.id}`,
-              verificationSeal: `SHA256: ${Math.random().toString(36).substring(2, 15)}...`,
+              verificationSeal: item.verificationHash ? `SHA256: ${item.verificationHash}` : 'N/A',
               fileUrl: item.fileUrl,
             });
           });
@@ -57,11 +57,11 @@ export default function StudentCertificatesTab({ currentUser, onSelectTab }) {
               certList.push({
                 id: `badge_cert_${b.id}`,
                 title: `${b.name} Technical Accreditation`,
-                issuer: 'TalentOrbit Adaptive Assessment Board',
-                issueDate: b.earnedAt ? String(b.earnedAt).split('T')[0] : 'Active',
+                issuer: 'TalentOrbit Credential Authority',
+                issueDate: b.earnedAt ? String(b.earnedAt).split('T')[0] : 'N/A',
                 status: 'AUTHENTIC & VERIFIED',
                 certificateId: b.verificationHash || `TO-CERT-${b.id}`,
-                verificationSeal: `SHA256: ${b.sha256Digest || b.verificationHash || 'VERIFIED-SEAL'}`,
+                verificationSeal: b.sha256Digest || b.verificationHash ? `SHA256: ${b.sha256Digest || b.verificationHash}` : 'N/A',
               });
             }
           });
