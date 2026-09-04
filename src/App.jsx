@@ -5,6 +5,7 @@ import FeaturesPage from './views/public/FeaturesPage';
 import AboutUsPage from './views/public/AboutUsPage';
 import ContactUsPage from './views/public/ContactUsPage';
 import StudentAchievements from './views/student/StudentAchievements';
+import StudentDashboard from './views/student/StudentDashboard';
 import AuthPage from './views/public/AuthPage';
 import ProfileSettingsModal from './components/ui/ProfileSettingsModal';
 import AccountSettingsModal from './components/ui/AccountSettingsModal';
@@ -41,8 +42,12 @@ export default function App() {
 
   useEffect(() => {
     const path = window.location.pathname.replace('/', '');
-    if (['how-it-works', 'features', 'about-us', 'contact', 'student', 'achievements', 'badges', 'login', 'register', 'signup'].includes(path)) {
-      setCurrentView(path === 'signup' ? 'register' : path);
+    if (['how-it-works', 'features', 'about-us', 'contact', 'student', 'dashboard', 'achievements', 'badges', 'login', 'register', 'signup'].includes(path)) {
+      if (path === 'dashboard') {
+        setCurrentView('student');
+      } else {
+        setCurrentView(path === 'signup' ? 'register' : path);
+      }
     }
   }, []);
 
@@ -156,7 +161,7 @@ export default function App() {
         />
       )}
 
-      {(currentView === 'student' || currentView === 'achievements' || currentView === 'badges') && (
+      {(currentView === 'achievements' || currentView === 'badges') && (
         <StudentAchievements 
           onNavigateHome={handleNavigateHome}
           onNavigatePage={handleNavigatePage}
@@ -164,6 +169,17 @@ export default function App() {
           onLogin={() => handleNavigatePage('login')}
           onRegister={() => handleNavigatePage('register')}
           {...sharedNavbarProps}
+        />
+      )}
+
+      {(currentView === 'student' || currentView === 'dashboard') && (
+        <StudentDashboard
+          currentUser={currentUser}
+          currentTheme={currentTheme}
+          onThemeChange={setCurrentTheme}
+          onNavigateHome={handleNavigateHome}
+          onNavigatePage={handleNavigatePage}
+          onLogout={handleLogout}
         />
       )}
 
