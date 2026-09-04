@@ -1,4 +1,16 @@
 import React from 'react';
+import {
+  Sidebar,
+  SidebarHeader,
+  SidebarContent,
+  SidebarGroup,
+  SidebarGroupLabel,
+  SidebarGroupContent,
+  SidebarMenu,
+  SidebarMenuItem,
+  SidebarMenuButton,
+  SidebarFooter,
+} from '@/components/ui/sidebar';
 import './StudentSidebar.css';
 
 export const STUDENT_NAV_ITEMS = [
@@ -173,9 +185,9 @@ export default function StudentSidebar({
   };
 
   return (
-    <aside className="student-sidebar" aria-label="Student Navigation">
-      {/* 1. Header with Logo & Brand */}
-      <div className="student-sidebar-header">
+    <Sidebar className="student-sidebar" aria-label="Student Navigation">
+      {/* 1. Official Shadcn SidebarHeader */}
+      <SidebarHeader className="student-sidebar-header">
         <button
           type="button"
           className="student-sidebar-brand"
@@ -194,36 +206,42 @@ export default function StudentSidebar({
             <span className="student-sidebar-persona-badge">Student Portal</span>
           </div>
         </button>
-      </div>
+      </SidebarHeader>
 
-      {/* 2. Scrollable Navigation Menu */}
-      <nav className="student-sidebar-content">
+      {/* 2. Official Shadcn SidebarContent */}
+      <SidebarContent className="student-sidebar-content">
         {STUDENT_NAV_ITEMS.map((section) => (
-          <div key={section.group} className="student-sidebar-group">
-            <div className="student-sidebar-group-label">{section.group}</div>
-            {section.items.map((item) => {
-              const isActive = activeTab === item.id;
-              return (
-                <button
-                  key={item.id}
-                  type="button"
-                  onClick={() => onSelectTab(item.id)}
-                  className={`student-sidebar-item ${isActive ? 'active' : ''}`}
-                  aria-current={isActive ? 'page' : undefined}
-                >
-                  <div className="student-sidebar-item-left">
-                    <span className="student-sidebar-item-icon">{item.icon}</span>
-                    <span>{item.label}</span>
-                  </div>
-                </button>
-              );
-            })}
-          </div>
+          <SidebarGroup key={section.group} className="student-sidebar-group">
+            <SidebarGroupLabel className="student-sidebar-group-label">
+              {section.group}
+            </SidebarGroupLabel>
+            <SidebarGroupContent>
+              <SidebarMenu>
+                {section.items.map((item) => {
+                  const isActive = activeTab === item.id;
+                  return (
+                    <SidebarMenuItem key={item.id}>
+                      <SidebarMenuButton
+                        isActive={isActive}
+                        onClick={() => onSelectTab(item.id)}
+                        className={`student-sidebar-item ${isActive ? 'active' : ''}`}
+                      >
+                        <div className="student-sidebar-item-left">
+                          <span className="student-sidebar-item-icon">{item.icon}</span>
+                          <span>{item.label}</span>
+                        </div>
+                      </SidebarMenuButton>
+                    </SidebarMenuItem>
+                  );
+                })}
+              </SidebarMenu>
+            </SidebarGroupContent>
+          </SidebarGroup>
         ))}
-      </nav>
+      </SidebarContent>
 
-      {/* 3. Footer with Profile, Theme & Actions */}
-      <div className="student-sidebar-footer">
+      {/* 3. Official Shadcn SidebarFooter */}
+      <SidebarFooter className="student-sidebar-footer">
         <div className="student-sidebar-user-card">
           <div className="student-sidebar-avatar">{userInitials}</div>
           <div className="student-sidebar-user-info">
@@ -293,7 +311,7 @@ export default function StudentSidebar({
             </button>
           )}
         </div>
-      </div>
-    </aside>
+      </SidebarFooter>
+    </Sidebar>
   );
 }
