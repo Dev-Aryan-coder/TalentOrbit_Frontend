@@ -1,0 +1,147 @@
+/* Student Achievements Tab - Stitch UI Inspired */
+.student-achievements-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 100%;
+}
+
+.achieve-header-bar {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.achieve-header-bar h2 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary, #0f172a);
+}
+
+.achieve-header-bar p {
+  font-size: 0.85rem;
+  color: var(--text-muted, #64748b);
+  max-width: 650px;
+}
+
+.badges-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.25rem;
+}
+
+@media (max-width: 640px) {
+  .badges-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.badge-card {
+  background: var(--bg-card, #ffffff);
+  border: 1px solid var(--border-subtle, rgba(226, 232, 240, 0.8));
+  border-radius: 16px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+  transition: all 0.25s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.badge-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(99, 102, 241, 0.35);
+  box-shadow: 0 8px 20px rgba(99, 102, 241, 0.08);
+}
+
+.badge-top-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.badge-medal-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.12) 0%, rgba(168, 85, 247, 0.12) 100%);
+  color: #6366f1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.badge-name {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-primary, #0f172a);
+  margin-bottom: 0.2rem;
+}
+
+.badge-desc {
+  font-size: 0.82rem;
+  color: var(--text-muted, #64748b);
+  line-height: 1.45;
+}
+
+.badge-crypto-box {
+  background: var(--bg-surface-soft, #f8fafc);
+  border: 1px dashed var(--border-subtle, rgba(226, 232, 240, 0.8));
+  border-radius: 8px;
+  padding: 0.6rem 0.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.badge-crypto-lbl {
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text-muted, #64748b);
+  letter-spacing: 0.05em;
+}
+
+.badge-crypto-code {
+  font-family: monospace;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #6366f1;
+}
+
+.badge-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--border-subtle, rgba(226, 232, 240, 0.8));
+}
+
+.badge-score-pill {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #10b981;
+  background: rgba(16, 185, 129, 0.1);
+  padding: 0.2rem 0.55rem;
+  border-radius: 20px;
+}
+
+/* Dark Mode Overrides */
+[data-theme="dark"] .badge-card {
+  background: #1e1e2e;
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="dark"] .achieve-header-bar h2,
+[data-theme="dark"] .badge-name {
+  color: #f1f5f9;
+}
+
+[data-theme="dark"] .badge-crypto-box {
+  background: #262638;
+  border-color: rgba(255, 255, 255, 0.1);
+}

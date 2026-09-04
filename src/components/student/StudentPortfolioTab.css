@@ -1,0 +1,184 @@
+/* Student Portfolio Tab - Stitch UI Inspired */
+.student-portfolio-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 100%;
+}
+
+.portfolio-header-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.portfolio-header-bar h2 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary, #0f172a);
+}
+
+.portfolio-header-bar p {
+  font-size: 0.85rem;
+  color: var(--text-muted, #64748b);
+  margin-top: 0.2rem;
+}
+
+.portfolio-add-toggle-btn {
+  background: #6366f1;
+  color: #ffffff;
+  padding: 0.6rem 1.25rem;
+  border-radius: 10px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: all 0.2s ease;
+}
+
+.portfolio-add-toggle-btn:hover {
+  background: #4f46e5;
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+}
+
+/* Add Item Form */
+.portfolio-form-panel {
+  background: var(--bg-card, #ffffff);
+  border: 1px solid var(--border-subtle, rgba(226, 232, 240, 0.8));
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+}
+
+.portfolio-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 640px) {
+  .portfolio-form-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.portfolio-input-field {
+  width: 100%;
+  padding: 0.65rem 0.9rem;
+  border-radius: 8px;
+  border: 1px solid var(--border-subtle, rgba(226, 232, 240, 0.8));
+  background: var(--bg-surface-soft, #f8fafc);
+  font-size: 0.85rem;
+  color: var(--text-primary, #0f172a);
+  outline: none;
+}
+
+.portfolio-input-field:focus {
+  border-color: #6366f1;
+  background: #ffffff;
+}
+
+/* Projects Grid */
+.portfolio-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 1.25rem;
+}
+
+@media (max-width: 640px) {
+  .portfolio-cards-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.portfolio-card {
+  background: var(--bg-card, #ffffff);
+  border: 1px solid var(--border-subtle, rgba(226, 232, 240, 0.8));
+  border-radius: 16px;
+  padding: 1.4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+  transition: all 0.2s ease;
+}
+
+.portfolio-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(99, 102, 241, 0.35);
+  box-shadow: 0 8px 18px rgba(99, 102, 241, 0.08);
+}
+
+.portfolio-card-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-primary, #0f172a);
+  margin-bottom: 0.3rem;
+}
+
+.portfolio-card-desc {
+  font-size: 0.82rem;
+  color: var(--text-muted, #64748b);
+  line-height: 1.45;
+}
+
+.portfolio-seal-box {
+  background: var(--bg-surface-soft, #f8fafc);
+  border: 1px dashed var(--border-subtle, rgba(226, 232, 240, 0.8));
+  border-radius: 8px;
+  padding: 0.5rem 0.75rem;
+  font-family: monospace;
+  font-size: 0.72rem;
+  color: var(--text-muted, #64748b);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.portfolio-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--border-subtle, rgba(226, 232, 240, 0.8));
+}
+
+.portfolio-link-btn {
+  font-size: 0.82rem;
+  color: #6366f1;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  text-decoration: none;
+}
+
+.portfolio-link-btn:hover {
+  text-decoration: underline;
+}
+
+/* Dark Mode Overrides */
+[data-theme="dark"] .portfolio-form-panel,
+[data-theme="dark"] .portfolio-card {
+  background: #1e1e2e;
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="dark"] .portfolio-header-bar h2,
+[data-theme="dark"] .portfolio-card-title {
+  color: #f1f5f9;
+}
+
+[data-theme="dark"] .portfolio-input-field,
+[data-theme="dark"] .portfolio-seal-box {
+  background: #262638;
+  border-color: rgba(255, 255, 255, 0.1);
+  color: #cbd5e1;
+}

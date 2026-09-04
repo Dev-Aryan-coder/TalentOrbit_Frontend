@@ -72,7 +72,11 @@ export const badgesAPI = {
  */
 export const postingsAPI = {
   getAll: () => {
-    return apiClient.get('/postings');
+    return apiClient.get('/postings/active');
+  },
+
+  getActive: () => {
+    return apiClient.get('/postings/active');
   },
 
   getById: (id) => {
@@ -89,7 +93,7 @@ export const applicationsAPI = {
   },
 
   apply: (userId, postingId) => {
-    return apiClient.post(`/applications/apply?userId=${userId}&postingId=${postingId}`);
+    return apiClient.post('/applications/apply', { userId, postingId });
   },
 };
 
@@ -97,8 +101,17 @@ export const applicationsAPI = {
  * 5. Student Digital Portfolio (PortfolioController.java)
  */
 export const portfolioAPI = {
-  getByUser: (userId) => {
-    return apiClient.get(`/portfolio/user/${userId}`);
+  getByUser: (userId, type = null) => {
+    const url = type ? `/portfolio/user/${userId}?type=${type}` : `/portfolio/user/${userId}`;
+    return apiClient.get(url);
+  },
+
+  addItem: (payload) => {
+    return apiClient.post('/portfolio/add', payload);
+  },
+
+  verifyItem: (id) => {
+    return apiClient.get(`/portfolio/${id}/verify`);
   },
 };
 
@@ -123,9 +136,40 @@ export const profileAPI = {
 };
 
 /**
- * 7. Student Diagnostics & Skills Onboarding (UserProfileController.java / StudentDetails)
+ * 7. Dashboard Metrics & Analytics (DashboardController.java)
+ */
+export const dashboardAPI = {
+  getStats: (role = 'STUDENT', userId = null) => {
+    const url = userId ? `/dashboard/stats?role=${role}&userId=${userId}` : `/dashboard/stats?role=${role}`;
+    return apiClient.get(url);
+  },
+
+  getSkillGaps: (institutionId = null) => {
+    const url = institutionId ? `/admin/skill-gaps?institutionId=${institutionId}` : '/admin/skill-gaps';
+    return apiClient.get(url);
+  },
+};
+
+/**
+ * 8. Student Profile & Role Matching (StudentController.java)
  */
 export const studentAPI = {
+  getProfile: (userId) => {
+    return apiClient.get(`/students/${userId}`);
+  },
+
+  updateProfile: (userId, profileData) => {
+    return apiClient.put(`/students/${userId}`, profileData);
+  },
+
+  getCareerSuggestions: (userId) => {
+    return apiClient.get(`/students/${userId}/career-suggestions`);
+  },
+
+  getMatchedPostings: (userId) => {
+    return apiClient.get(`/students/${userId}/matched-postings`);
+  },
+
   saveOnboardingSkills: async (userId, payload) => {
     const allSkills = [
       ...(payload.languages || []),
@@ -144,12 +188,49 @@ export const studentAPI = {
       onboardedAt: payload.onboardedAt || new Date().toISOString(),
     };
 
-    // Primary REST API: Persist directly into MySQL database via PUT /api/user-profile/{userId}
     return apiClient.put(`/user-profile/${userId}`, profilePayload);
   },
 
   getStudentSkills: (userId) => {
     return apiClient.get(`/user-profile/${userId}`);
+  },
+};
+
+/**
+ * 9. AI Skill Assessment Engine (AiAssessmentController.java)
+ */
+export const assessmentAPI = {
+  getQuestionsForSkill: (skillId) => {
+    return apiClient.get(`/assessment/questions/${skillId}`);
+  },
+
+  getQuestionsByTechType: (techType) => {
+    return apiClient.get(`/assessment/filter/tech-type/${techType}`);
+  },
+
+  getQuestionsByLanguage: (language) => {
+    return apiClient.get(`/assessment/filter/language/${encodeURIComponent(language)}`);
+  },
+
+  getQuestionsByFramework: (framework) => {
+    return apiClient.get(`/assessment/filter/framework/${encodeURIComponent(framework)}`);
+  },
+
+  evaluateWithAi: (payload) => {
+    return apiClient.post('/assessment/evaluate-with-ai', payload);
+  },
+};
+
+/**
+ * 10. Milestone Learning Roadmap (RoadmapController.java)
+ */
+export const roadmapAPI = {
+  getSteps: (userId) => {
+    return apiClient.get(`/roadmap/user/${userId}`);
+  },
+
+  updateStepStatus: (stepId, status) => {
+    return apiClient.patch(`/roadmap/step/${stepId}`, { status });
   },
 };
 
@@ -160,5 +241,8 @@ export default {
   applications: applicationsAPI,
   portfolio: portfolioAPI,
   profile: profileAPI,
+  dashboard: dashboardAPI,
   student: studentAPI,
+  assessment: assessmentAPI,
+  roadmap: roadmapAPI,
 };

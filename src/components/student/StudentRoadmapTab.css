@@ -1,0 +1,226 @@
+/* Student Roadmap Tab - Stitch UI Inspired */
+.student-roadmap-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 100%;
+}
+
+.roadmap-progress-header {
+  background: var(--bg-card, #ffffff);
+  border: 1px solid var(--border-subtle, rgba(226, 232, 240, 0.8));
+  border-radius: 16px;
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+}
+
+.roadmap-header-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary, #0f172a);
+}
+
+.roadmap-header-desc {
+  font-size: 0.82rem;
+  color: var(--text-muted, #64748b);
+  margin-top: 0.2rem;
+}
+
+.roadmap-progress-box {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  min-width: 220px;
+}
+
+.roadmap-progress-bar-wrap {
+  flex: 1;
+  height: 8px;
+  background: var(--bg-surface-soft, #f1f5f9);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.roadmap-progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #6366f1, #8b5cf6);
+  border-radius: 10px;
+  transition: width 0.6s ease;
+}
+
+.roadmap-progress-pct {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #6366f1;
+}
+
+/* Vertical Timeline */
+.roadmap-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  position: relative;
+}
+
+.roadmap-step-card {
+  background: var(--bg-card, #ffffff);
+  border: 1px solid var(--border-subtle, rgba(226, 232, 240, 0.8));
+  border-radius: 16px;
+  padding: 1.5rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 1.25rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+  transition: all 0.2s ease;
+}
+
+.roadmap-step-card.in-progress {
+  border-color: #6366f1;
+  box-shadow: 0 4px 16px rgba(99, 102, 241, 0.1);
+}
+
+.roadmap-step-indicator {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.roadmap-step-indicator.done {
+  background: rgba(16, 185, 129, 0.12);
+  color: #10b981;
+}
+
+.roadmap-step-indicator.in-progress {
+  background: rgba(99, 102, 241, 0.12);
+  color: #6366f1;
+  border: 2px solid #6366f1;
+}
+
+.roadmap-step-indicator.locked {
+  background: var(--bg-surface-soft, #f1f5f9);
+  color: #94a3b8;
+}
+
+.roadmap-step-content {
+  flex: 1;
+}
+
+.roadmap-step-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.35rem;
+}
+
+.roadmap-step-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-primary, #0f172a);
+}
+
+.roadmap-status-badge {
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.2rem 0.6rem;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.roadmap-status-badge.done {
+  background: rgba(16, 185, 129, 0.12);
+  color: #10b981;
+}
+
+.roadmap-status-badge.in-progress {
+  background: rgba(99, 102, 241, 0.12);
+  color: #6366f1;
+}
+
+.roadmap-status-badge.locked {
+  background: var(--bg-surface-soft, #f1f5f9);
+  color: #94a3b8;
+}
+
+.roadmap-step-desc {
+  font-size: 0.85rem;
+  color: var(--text-muted, #64748b);
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+
+.roadmap-action-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.roadmap-btn-primary {
+  background: #6366f1;
+  color: #ffffff;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  transition: all 0.15s ease;
+}
+
+.roadmap-btn-primary:hover {
+  background: #4f46e5;
+}
+
+.roadmap-btn-outline {
+  background: transparent;
+  color: #10b981;
+  border: 1px solid #10b981;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  transition: all 0.15s ease;
+}
+
+.roadmap-btn-outline:hover {
+  background: rgba(16, 185, 129, 0.08);
+}
+
+/* Dark Mode Overrides */
+[data-theme="dark"] .roadmap-progress-header,
+[data-theme="dark"] .roadmap-step-card {
+  background: #1e1e2e;
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="dark"] .roadmap-header-title,
+[data-theme="dark"] .roadmap-step-title {
+  color: #f1f5f9;
+}
+
+[data-theme="dark"] .roadmap-step-indicator.locked {
+  background: #262638;
+  color: #64748b;
+}
+
+[data-theme="dark"] .roadmap-progress-bar-wrap {
+  background: #2a2a3c;
+}

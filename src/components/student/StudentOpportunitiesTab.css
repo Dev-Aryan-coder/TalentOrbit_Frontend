@@ -1,0 +1,204 @@
+/* Student Opportunities Tab - Stitch UI Inspired */
+.student-opportunities-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 100%;
+}
+
+.opps-header-area {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.opps-title-group h2 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary, #0f172a);
+}
+
+.opps-title-group p {
+  font-size: 0.85rem;
+  color: var(--text-muted, #64748b);
+  margin-top: 0.2rem;
+}
+
+.opps-search-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--bg-card, #ffffff);
+  border: 1px solid var(--border-subtle, rgba(226, 232, 240, 0.8));
+  border-radius: 10px;
+  padding: 0.5rem 0.85rem;
+  min-width: 280px;
+}
+
+.opps-search-input {
+  border: none;
+  background: transparent;
+  outline: none;
+  font-size: 0.85rem;
+  color: var(--text-primary, #0f172a);
+  width: 100%;
+}
+
+.opps-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  gap: 1.25rem;
+}
+
+@media (max-width: 640px) {
+  .opps-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.opp-card-extended {
+  background: var(--bg-card, #ffffff);
+  border: 1px solid var(--border-subtle, rgba(226, 232, 240, 0.8));
+  border-radius: 16px;
+  padding: 1.4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1.25rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+  transition: all 0.2s ease;
+}
+
+.opp-card-extended:hover {
+  transform: translateY(-2px);
+  border-color: rgba(99, 102, 241, 0.35);
+  box-shadow: 0 8px 20px rgba(99, 102, 241, 0.08);
+}
+
+.opp-card-top-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.opp-role-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-primary, #0f172a);
+  margin-bottom: 0.25rem;
+}
+
+.opp-company-subtitle {
+  font-size: 0.82rem;
+  color: var(--text-muted, #64748b);
+}
+
+.opp-score-badge {
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 0.25rem 0.65rem;
+  border-radius: 20px;
+  background: rgba(99, 102, 241, 0.1);
+  color: #6366f1;
+  white-space: nowrap;
+}
+
+.opp-score-badge.high {
+  background: rgba(16, 185, 129, 0.12);
+  color: #10b981;
+}
+
+.opp-meta-pills-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.opp-meta-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.75rem;
+  color: var(--text-muted, #64748b);
+  background: var(--bg-surface-soft, #f1f5f9);
+  padding: 0.25rem 0.6rem;
+  border-radius: 6px;
+}
+
+.opp-skills-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.opp-skill-chip {
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 0.2rem 0.5rem;
+  border-radius: 6px;
+  background: var(--bg-surface-soft, #f8fafc);
+  border: 1px solid var(--border-subtle, rgba(226, 232, 240, 0.8));
+  color: var(--text-primary, #334155);
+}
+
+.opp-card-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-subtle, rgba(226, 232, 240, 0.8));
+}
+
+.opp-apply-btn {
+  background: #6366f1;
+  color: #ffffff;
+  padding: 0.55rem 1.25rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: all 0.15s ease;
+}
+
+.opp-apply-btn:hover:not(:disabled) {
+  background: #4f46e5;
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.3);
+}
+
+.opp-apply-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.opp-apply-btn.applied {
+  background: rgba(16, 185, 129, 0.15);
+  color: #10b981;
+  cursor: default;
+}
+
+/* Dark Mode Overrides */
+[data-theme="dark"] .opps-search-bar,
+[data-theme="dark"] .opp-card-extended {
+  background: #1e1e2e;
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="dark"] .opps-title-group h2,
+[data-theme="dark"] .opp-role-title,
+[data-theme="dark"] .opp-skill-chip {
+  color: #f1f5f9;
+}
+
+[data-theme="dark"] .opp-meta-pill,
+[data-theme="dark"] .opp-skill-chip {
+  background: #262638;
+  border-color: rgba(255, 255, 255, 0.1);
+}

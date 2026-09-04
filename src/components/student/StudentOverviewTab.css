@@ -1,0 +1,519 @@
+/* Student Overview Tab - Stitch UI Inspired */
+.student-overview-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 100%;
+}
+
+/* Stat Cards Row */
+.student-stat-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+@media (max-width: 1024px) {
+  .student-stat-cards-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .student-stat-cards-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.student-stat-card {
+  background: var(--bg-card, #ffffff);
+  border: 1px solid var(--border-subtle, rgba(226, 232, 240, 0.8));
+  border-radius: 14px;
+  padding: 1.15rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 124px;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+}
+
+.student-stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(99, 102, 241, 0.08);
+  border-color: rgba(99, 102, 241, 0.3);
+}
+
+.student-stat-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+
+.student-stat-icon-wrapper {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.student-stat-icon-wrapper.primary {
+  background: rgba(99, 102, 241, 0.1);
+  color: #6366f1;
+}
+
+.student-stat-icon-wrapper.emerald {
+  background: rgba(16, 185, 129, 0.1);
+  color: #10b981;
+}
+
+.student-stat-icon-wrapper.purple {
+  background: rgba(168, 85, 247, 0.1);
+  color: #a855f7;
+}
+
+.student-stat-icon-wrapper.blue {
+  background: rgba(59, 130, 246, 0.1);
+  color: #3b82f6;
+}
+
+.student-stat-icon-wrapper.amber {
+  background: rgba(245, 158, 11, 0.1);
+  color: #f59e0b;
+}
+
+.student-stat-badge {
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 0.15rem 0.5rem;
+  border-radius: 20px;
+  background: rgba(16, 185, 129, 0.12);
+  color: #10b981;
+}
+
+.student-stat-label {
+  font-size: 0.8rem;
+  color: var(--text-muted, #64748b);
+  margin-bottom: 0.2rem;
+  font-weight: 500;
+}
+
+.student-stat-val {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--text-primary, #0f172a);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+/* Two-column Main Grid */
+.student-dash-grid-split {
+  display: grid;
+  grid-template-columns: 1.15fr 1.85fr;
+  gap: 1.5rem;
+}
+
+@media (max-width: 1024px) {
+  .student-dash-grid-split {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Base Card Container */
+.student-card-panel {
+  background: var(--bg-card, #ffffff);
+  border: 1px solid var(--border-subtle, rgba(226, 232, 240, 0.8));
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+  display: flex;
+  flex-direction: column;
+}
+
+.student-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+}
+
+.student-panel-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-primary, #0f172a);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.student-panel-subtitle {
+  font-size: 0.8rem;
+  color: var(--text-muted, #64748b);
+  margin-top: 0.15rem;
+}
+
+.student-panel-badge {
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 0.2rem 0.6rem;
+  border-radius: 20px;
+  background: rgba(99, 102, 241, 0.1);
+  color: #6366f1;
+}
+
+/* Skill Gaps List */
+.student-skill-gaps-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  flex: 1;
+}
+
+.student-skill-gap-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.student-skill-gap-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.student-skill-name {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-primary, #0f172a);
+}
+
+.student-skill-gap-tag {
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.student-skill-gap-tag.deficit-high {
+  color: #ef4444;
+}
+
+.student-skill-gap-tag.deficit-mid {
+  color: #f59e0b;
+}
+
+.student-skill-gap-tag.deficit-low {
+  color: #10b981;
+}
+
+.student-progress-track {
+  width: 100%;
+  height: 8px;
+  background: var(--bg-surface-soft, #f1f5f9);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.student-progress-fill {
+  height: 100%;
+  border-radius: 10px;
+  transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.student-progress-fill.red {
+  background: linear-gradient(90deg, #ef4444, #f87171);
+}
+
+.student-progress-fill.amber {
+  background: linear-gradient(90deg, #f59e0b, #fbbf24);
+}
+
+.student-progress-fill.emerald {
+  background: linear-gradient(90deg, #10b981, #34d399);
+}
+
+.student-gap-tip-box {
+  margin-top: 1.25rem;
+  padding: 0.9rem 1rem;
+  background: rgba(99, 102, 241, 0.05);
+  border: 1px dashed rgba(99, 102, 241, 0.25);
+  border-radius: 10px;
+  display: flex;
+  gap: 0.65rem;
+  align-items: flex-start;
+}
+
+.student-gap-tip-text {
+  font-size: 0.78rem;
+  line-height: 1.45;
+  color: var(--text-muted, #475569);
+}
+
+/* Recommended Opportunities */
+.student-opportunities-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.student-opportunity-card {
+  border: 1px solid var(--border-subtle, rgba(226, 232, 240, 0.8));
+  border-radius: 12px;
+  padding: 1rem 1.15rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  background: var(--bg-card, #ffffff);
+  transition: all 0.2s ease;
+}
+
+.student-opportunity-card:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+  border-color: rgba(99, 102, 241, 0.25);
+}
+
+.student-opp-left {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+}
+
+.student-opp-logo {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: var(--bg-surface-soft, #f8fafc);
+  border: 1px solid var(--border-subtle, rgba(226, 232, 240, 0.8));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #6366f1;
+  flex-shrink: 0;
+}
+
+.student-opp-title {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--text-primary, #0f172a);
+  margin-bottom: 0.25rem;
+}
+
+.student-opp-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.78rem;
+  color: var(--text-muted, #64748b);
+}
+
+.student-opp-meta-item {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.student-opp-right {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-shrink: 0;
+}
+
+.student-match-pill {
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 0.25rem 0.65rem;
+  border-radius: 20px;
+  background: rgba(99, 102, 241, 0.1);
+  color: #6366f1;
+  white-space: nowrap;
+}
+
+.student-match-pill.high {
+  background: rgba(16, 185, 129, 0.12);
+  color: #10b981;
+}
+
+.student-apply-btn {
+  background: #6366f1;
+  color: #ffffff;
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.student-apply-btn:hover:not(:disabled) {
+  background: #4f46e5;
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.35);
+}
+
+.student-apply-btn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.student-apply-btn.applied {
+  background: rgba(16, 185, 129, 0.15);
+  color: #10b981;
+  cursor: default;
+}
+
+/* Roadmap Milestone Banner */
+.student-milestone-banner {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.08) 0%, rgba(168, 85, 247, 0.08) 100%);
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  border-radius: 16px;
+  padding: 1.4rem 1.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .student-milestone-banner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+.student-milestone-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.student-milestone-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: #6366f1;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.student-milestone-tag {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #6366f1;
+  margin-bottom: 0.25rem;
+}
+
+.student-milestone-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-primary, #0f172a);
+  margin-bottom: 0.2rem;
+}
+
+.student-milestone-desc {
+  font-size: 0.82rem;
+  color: var(--text-muted, #64748b);
+  max-width: 600px;
+}
+
+.student-milestone-action-btn {
+  background: #6366f1;
+  color: #ffffff;
+  border: none;
+  padding: 0.65rem 1.25rem;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  white-space: nowrap;
+}
+
+.student-milestone-action-btn:hover {
+  background: #4f46e5;
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+}
+
+/* Empty State / Loading State */
+.student-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2.5rem 1rem;
+  text-align: center;
+  color: var(--text-muted, #64748b);
+}
+
+.student-empty-icon {
+  width: 48px;
+  height: 48px;
+  color: #94a3b8;
+  margin-bottom: 0.75rem;
+}
+
+.student-empty-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-primary, #0f172a);
+  margin-bottom: 0.25rem;
+}
+
+.student-empty-desc {
+  font-size: 0.82rem;
+  max-width: 320px;
+}
+
+/* Dark Mode Overrides */
+[data-theme="dark"] .student-stat-card,
+[data-theme="dark"] .student-card-panel,
+[data-theme="dark"] .student-opportunity-card {
+  background: #1e1e2e;
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="dark"] .student-stat-val,
+[data-theme="dark"] .student-panel-title,
+[data-theme="dark"] .student-skill-name,
+[data-theme="dark"] .student-opp-title,
+[data-theme="dark"] .student-milestone-title,
+[data-theme="dark"] .student-empty-title {
+  color: #f1f5f9;
+}
+
+[data-theme="dark"] .student-progress-track {
+  background: #2a2a3c;
+}
+
+[data-theme="dark"] .student-opp-logo {
+  background: #262638;
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] .student-gap-tip-box {
+  background: rgba(99, 102, 241, 0.1);
+  border-color: rgba(99, 102, 241, 0.3);
+}
+
+[data-theme="dark"] .student-gap-tip-text {
+  color: #cbd5e1;
+}
+
+[data-theme="dark"] .student-milestone-banner {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.15) 0%, rgba(168, 85, 247, 0.15) 100%);
+  border-color: rgba(99, 102, 241, 0.3);
+}
