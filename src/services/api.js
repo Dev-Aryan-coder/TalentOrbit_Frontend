@@ -122,6 +122,37 @@ export const profileAPI = {
   },
 };
 
+/**
+ * 7. Student Diagnostics & Skills Onboarding (UserProfileController.java / StudentDetails)
+ */
+export const studentAPI = {
+  saveOnboardingSkills: async (userId, payload) => {
+    const allSkills = [
+      ...(payload.languages || []),
+      ...(payload.libraries || []),
+      ...(payload.frameworks || []),
+      ...(payload.tools || []),
+    ];
+
+    const profilePayload = {
+      skills: allSkills,
+      languages: payload.languages || [],
+      libraries: payload.libraries || [],
+      frameworks: payload.frameworks || [],
+      tools: payload.tools || [],
+      onboardingCompleted: true,
+      onboardedAt: payload.onboardedAt || new Date().toISOString(),
+    };
+
+    // Primary REST API: Persist directly into MySQL database via PUT /api/user-profile/{userId}
+    return apiClient.put(`/user-profile/${userId}`, profilePayload);
+  },
+
+  getStudentSkills: (userId) => {
+    return apiClient.get(`/user-profile/${userId}`);
+  },
+};
+
 export default {
   auth: authAPI,
   badges: badgesAPI,
@@ -129,4 +160,5 @@ export default {
   applications: applicationsAPI,
   portfolio: portfolioAPI,
   profile: profileAPI,
+  student: studentAPI,
 };
