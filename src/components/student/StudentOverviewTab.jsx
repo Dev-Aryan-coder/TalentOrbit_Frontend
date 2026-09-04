@@ -18,7 +18,18 @@ import {
   Clock,
   ChevronRight,
   RefreshCw,
+  Rocket,
+  ShieldCheck,
 } from 'lucide-react';
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+} from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Progress } from '@/components/ui/progress';
 import './StudentOverviewTab.css';
 
 export default function StudentOverviewTab({ currentUser, onSelectTab }) {
@@ -230,6 +241,89 @@ export default function StudentOverviewTab({ currentUser, onSelectTab }) {
           </div>
         </div>
       </div>
+
+      {/* New Student Activation Journey (Rendered when student is new with 0 verified skills) */}
+      {stats.verifiedSkillsCount === 0 && (
+        <Card className="mb-6 border-indigo-200 bg-gradient-to-r from-indigo-50/70 via-white to-blue-50/60 dark:from-indigo-950/20 dark:via-slate-900 dark:to-blue-950/20 shadow-sm">
+          <CardHeader className="pb-3">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <Rocket className="text-indigo-600" size={20} />
+                <CardTitle className="text-base font-bold text-slate-900 dark:text-slate-100">
+                  New Student Activation Journey
+                </CardTitle>
+              </div>
+              <Badge variant="indigo">Step 2 of 4 Ready</Badge>
+            </div>
+            <CardDescription className="text-xs text-slate-500 mt-1">
+              Your profile is initialized from your onboarding preferences. As you complete diagnostics and verify skills, your readiness score, skill radar charts, and recruiter interview matches will dynamically populate.
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="pt-0">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-3 pt-2">
+              <div className="p-3.5 rounded-lg border bg-white/80 dark:bg-slate-900/80 flex flex-col justify-between">
+                <div>
+                  <div className="flex items-center justify-between mb-1.5">
+                    <span className="text-xs font-bold text-slate-800 dark:text-slate-200">1. Onboarded Skills</span>
+                    <Badge variant="emerald" className="text-[10px] py-0">Completed</Badge>
+                  </div>
+                  <p className="text-xs text-slate-500">
+                    Languages, frameworks & tools saved from your 4-step onboarding modal.
+                  </p>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => onSelectTab('skills')}
+                  className="mt-3 text-xs font-semibold text-indigo-600 flex items-center gap-1 hover:underline"
+                >
+                  <span>View Technical Matrix</span>
+                  <ArrowRight size={13} />
+                </button>
+              </div>
+
+              <div className="p-3.5 rounded-lg border border-indigo-200 dark:border-indigo-800 bg-indigo-50/50 dark:bg-indigo-950/30 flex flex-col justify-between">
+                <div>
+                  <div className="flex items-center justify-between mb-1.5">
+                    <span className="text-xs font-bold text-indigo-900 dark:text-indigo-200">2. Skill Diagnostic</span>
+                    <Badge variant="indigo" className="text-[10px] py-0">Action Needed</Badge>
+                  </div>
+                  <p className="text-xs text-slate-600 dark:text-slate-300">
+                    Take a 20-question test on any chosen skill to unlock tamper-verified credentials (score &ge; 70%).
+                  </p>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => onSelectTab('assessment')}
+                  className="mt-3 text-xs font-semibold text-white bg-indigo-600 hover:bg-indigo-700 py-1.5 px-3 rounded flex items-center justify-center gap-1.5 transition-colors"
+                >
+                  <Sparkles size={13} />
+                  <span>Start 20-Question Assessment</span>
+                </button>
+              </div>
+
+              <div className="p-3.5 rounded-lg border bg-white/80 dark:bg-slate-900/80 flex flex-col justify-between">
+                <div>
+                  <div className="flex items-center justify-between mb-1.5">
+                    <span className="text-xs font-bold text-slate-800 dark:text-slate-200">3. Corporate Match</span>
+                    <Badge variant="outline" className="text-[10px] py-0">Pending Assessment</Badge>
+                  </div>
+                  <p className="text-xs text-slate-500">
+                    Verified competencies rank your profile higher for corporate internship shortlists.
+                  </p>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => onSelectTab('opportunities')}
+                  className="mt-3 text-xs font-semibold text-slate-600 hover:text-indigo-600 flex items-center gap-1 hover:underline"
+                >
+                  <span>Browse Postings</span>
+                  <ArrowRight size={13} />
+                </button>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      )}
 
       {/* Milestone Roadmap Banner */}
       {nextMilestone && (
