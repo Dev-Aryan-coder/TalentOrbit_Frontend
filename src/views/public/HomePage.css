@@ -129,115 +129,206 @@
   line-height: 1.65;
 }
 
-/* Interactive Role Showcase Section */
-.section-showcase {
-  background: #041638;
-  color: #ffffff;
-  padding: 100px 32px;
+/* Why Use TalentOrbit Section */
+.section-why-talentorbit {
   position: relative;
+  background: #f8fafc;
+  padding: 90px 32px;
+  z-index: 5;
 }
 
-.role-tab-buttons {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-bottom: 48px;
+.why-section-block {
+  margin-bottom: 72px;
 }
 
-.role-tab-btn {
-  padding: 12px 28px;
-  border-radius: 9999px;
-  font-size: 15px;
-  font-weight: 400;
-  color: #94a3b8;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  cursor: pointer;
-  transition: all 0.25s ease;
+.why-section-block:last-child {
+  margin-bottom: 0;
 }
 
-.role-tab-btn.active, .role-tab-btn:hover {
-  color: #041638;
-  background: #ffffff;
-  border-color: #ffffff;
-  box-shadow: 0 0 25px rgba(124, 232, 255, 0.5);
+.why-sub-header {
+  margin-bottom: 36px;
+  text-align: left;
 }
 
-.showcase-display-box {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 28px;
-  padding: 48px;
-  backdrop-filter: blur(32px);
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 48px;
+.why-badge {
+  display: inline-flex;
   align-items: center;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
-}
-
-.showcase-badge {
-  color: #7ce8ff;
-  font-size: 12px;
-  font-weight: 500;
+  gap: 6px;
+  padding: 5px 14px;
+  border-radius: 9999px;
+  font-size: 11.5px;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.08em;
   margin-bottom: 12px;
 }
 
-.showcase-heading {
-  font-family: var(--font-serif);
-  font-size: clamp(1.8rem, 3vw, 2.6rem);
-  font-weight: 500;
-  color: #ffffff;
-  margin-bottom: 16px;
-  line-height: 1.2;
+.why-badge.problem {
+  background: #fef2f2;
+  color: #dc2626;
+  border: 1px solid #fecaca;
 }
 
-.showcase-text {
-  font-size: 16px;
-  color: #cbd5e1;
-  line-height: 1.7;
-  margin-bottom: 28px;
+.why-badge.solution {
+  background: #ecfdf5;
+  color: #059669;
+  border: 1px solid #a7f3d0;
 }
 
-.showcase-list {
-  list-style: none;
-  padding: 0;
-  margin: 0 0 32px 0;
+.why-sub-title {
+  font-size: clamp(1.8rem, 2.8vw, 2.35rem);
+  font-weight: 700;
+  color: #041638;
+  margin: 0 0 10px 0;
+  line-height: 1.25;
+}
+
+.why-sub-desc {
+  font-size: 15.5px;
+  color: #64748b;
+  margin: 0;
+  max-width: 680px;
+  line-height: 1.6;
+}
+
+.why-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  width: 100%;
+}
+
+.why-card {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 32px 26px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  justify-content: flex-start;
+  align-items: flex-start;
+  text-align: left;
+  box-sizing: border-box;
+  box-shadow: 0 4px 20px rgba(0, 50, 150, 0.04);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
+  will-change: transform, opacity;
 }
 
-.showcase-list-item {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 15px;
-  color: #e2e8f0;
+.why-card:hover {
+  transform: translateY(-4px);
 }
 
-.showcase-list-check {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background: rgba(124, 232, 255, 0.2);
-  color: #7ce8ff;
+/* Problem Card Variant */
+.why-card.problem-card {
+  border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+.why-card.problem-card:hover {
+  border-color: rgba(220, 38, 38, 0.4);
+  box-shadow: 0 16px 36px rgba(220, 38, 38, 0.08);
+}
+
+.why-card-icon-box.problem {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: rgba(239, 68, 68, 0.08);
+  color: #dc2626;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 12px;
-  font-weight: bold;
+  margin-bottom: 20px;
 }
 
-.showcase-preview-card {
-  background: rgba(3, 7, 18, 0.85);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 20px;
-  padding: 32px;
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+/* Solution Card Variant */
+.why-card.solution-card {
+  border: 1px solid rgba(0, 85, 255, 0.18);
+}
+
+.why-card.solution-card:hover {
+  border-color: rgba(0, 85, 255, 0.4);
+  box-shadow: 0 16px 36px rgba(0, 85, 255, 0.1);
+}
+
+.why-card-icon-box.solution {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: rgba(0, 85, 255, 0.08);
+  color: #0055ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.why-card-title {
+  font-size: 17px;
+  font-weight: 600;
+  color: #041638;
+  margin: 0 0 10px 0;
+  line-height: 1.35;
+}
+
+.why-card-desc {
+  font-size: 14px;
+  color: #64748b;
+  line-height: 1.65;
+  margin: 0 0 18px 0;
+  flex: 1;
+}
+
+.why-card-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 11.5px;
+  font-weight: 600;
+}
+
+.why-card-tag.problem {
+  background: #fef2f2;
+  color: #b91c1c;
+}
+
+.why-card-tag.solution {
+  background: #eff6ff;
+  color: #0055ff;
+}
+
+/* Dark Theme Overrides for Why Use TalentOrbit */
+[data-theme="dark"] .section-why-talentorbit {
+  background: #0b1120;
+}
+
+[data-theme="dark"] .why-sub-title {
+  color: #f8fafc;
+}
+
+[data-theme="dark"] .why-sub-desc {
+  color: #94a3b8;
+}
+
+[data-theme="dark"] .why-card {
+  background: #0f172a;
+}
+
+[data-theme="dark"] .why-card.problem-card {
+  border-color: rgba(239, 68, 68, 0.3);
+}
+
+[data-theme="dark"] .why-card.solution-card {
+  border-color: rgba(59, 130, 246, 0.3);
+}
+
+[data-theme="dark"] .why-card-title {
+  color: #f1f5f9;
+}
+
+[data-theme="dark"] .why-card-desc {
+  color: #94a3b8;
+}
 }
 
 /* Footer Section */

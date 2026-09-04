@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { HeroBanner } from '../../components/ui/HeroBanner';
@@ -24,71 +24,6 @@ export function HomePage({
   onOpenAppearance,
   onLogout
 }) {
-  const [activeRoleTab, setActiveRoleTab] = useState('student');
-
-  const roleShowcases = {
-    student: {
-      tag: "For Engineering & Degree Students",
-      title: "Verify Your Real-World Technical Competence",
-      desc: "Stop relying on static resumes. Take diagnostic AI evaluations that map your exact topic mastery, compute your confidence gap, and cryptographically verify your skill genome on MySQL.",
-      points: [
-        "Dynamic On-Demand Technical MCQs for any IT topic",
-        "Cryptographic SHA-256 Tamper-Proof Skill Verification",
-        "Deterministic Weighted Opportunity Matching",
-        "Personalized Remedial Learning Milestones"
-      ],
-      cta: "Launch Student Diagnostic",
-      action: () => onNavigateRole && onNavigateRole('student'),
-      previewStat: "94% Skill Overlap Fit",
-      previewLabel: "Target Role: Full-Stack Cloud Engineer"
-    },
-    industry: {
-      tag: "For Corporate Recruiters & Startups",
-      title: "Explainable Talent Acquisition & ATS Funnels",
-      desc: "Zero guessing. Specify required skills with explicit weighted importance (e.g. Java 40%, Spring Boot 30%, Docker 20%) and let our deterministic engine score the entire talent pool in 2 milliseconds.",
-      points: [
-        "Weighted Skill Postings (Jobs & Internships)",
-        "Instant Candidate Scoring & Explainable Match Breakdowns",
-        "Structured Interview Scheduling & Automated Offer Tracking",
-        "Industry-Academia R&D Grant Proposals"
-      ],
-      cta: "Explore Recruiter ATS",
-      action: () => onNavigateRole && onNavigateRole('industry'),
-      previewStat: "24 Shortlisted Candidates",
-      previewLabel: "Average Match: 88.4% Proficiency"
-    },
-    academician: {
-      tag: "For Professors & Faculty Researchers",
-      title: "Bridge Faculty Expertise with Corporate Grants",
-      desc: "Collaborate directly with top tech firms. Publish consulting capabilities, apply for funded R&D projects, and attend AICTE-aligned Faculty Development Programs (FDPs) and sabbaticals.",
-      points: [
-        "Industry Consultancy & Sponsored Research Listings",
-        "FDP & National Workshop Immersion Programs",
-        "Joint Patent & Publication Synergy Tracking",
-        "Direct Research Grant Disbursement Tracking"
-      ],
-      cta: "Access Faculty Portal",
-      action: () => onNavigateRole && onNavigateRole('academician'),
-      previewStat: "₹18.5 Lakhs",
-      previewLabel: "Active Sponsored Research Grants"
-    },
-    institution: {
-      tag: "For University Leaders & TPOs",
-      title: "Real-Time NIRF & NAAC Placement Intelligence",
-      desc: "Transform your accreditation posture with verifiable placement analytics, curriculum deficit heatmaps, and automated metrics computation for NIRF 5.2.1 and NAAC Criterion 5.",
-      points: [
-        "Live NIRF Metric 5.2.1 Placement Rate & Highest CTC Analytics",
-        "Batch-wide Skill Deficit Heatmaps & Curriculum Recommendations",
-        "MoU & Enterprise Industry Partnership Dashboard",
-        "One-Click Automated Accreditation PDF Reports"
-      ],
-      cta: "Open TPO Intelligence",
-      action: () => onNavigateRole && onNavigateRole('institution'),
-      previewStat: "91.8% Placement Rate",
-      previewLabel: "Average CTC: ₹9.4 LPA (Verified)"
-    }
-  };
-
   const landingRootRef = useRef(null);
   const whoWeAreRef = useRef(null);
 
@@ -222,13 +157,34 @@ export function HomePage({
         }
       );
 
+      // Cards of "Why Use TalentOrbit ?" (Subtle Pop Animation)
+      gsap.fromTo(
+        '.section-why-talentorbit .why-card',
+        {
+          opacity: 0,
+          scale: 0.9,
+          y: 30,
+        },
+        {
+          opacity: 1,
+          scale: 1,
+          y: 0,
+          duration: 0.75,
+          ease: 'back.out(1.4)',
+          stagger: 0.1,
+          scrollTrigger: {
+            trigger: '.section-why-talentorbit',
+            start: 'top 80%',
+            toggleActions: 'play none none none',
+          },
+        }
+      );
+
       ScrollTrigger.refresh();
     }, landingRootRef);
 
     return () => ctx.revert();
   }, []);
-
-  const currentShowcase = roleShowcases[activeRoleTab];
 
   return (
     <div className="landing-page" ref={landingRootRef}>
@@ -416,94 +372,173 @@ export function HomePage({
         </div>
       </section>
 
-      {/* 3. Interactive 4-Role Portal Showcase */}
-      <section id="how-it-works" className="section-showcase">
+      {/* 3. Why Use TalentOrbit Section */}
+      <section id="how-it-works" className="section-why-talentorbit">
         <div className="section-container">
           <div className="section-header">
-            <div className="section-pill-tag" style={{ background: 'rgba(124, 232, 255, 0.1)', color: '#7ce8ff', borderColor: 'rgba(124, 232, 255, 0.25)' }}>
-              Interactive Role Ecosystem
+            <div className="section-pill-tag">
+              The TalentOrbit Advantage
             </div>
-            <h2 className="section-title" style={{ color: '#ffffff' }}>One Platform. Four Unified Portals.</h2>
-            <p className="section-subtitle" style={{ color: '#94a3b8' }}>
-              Select a portal below to experience how TalentOrbit powers every stakeholder in higher education.
+            <h2 className="section-title">Why Use TalentOrbit ?</h2>
+            <p className="section-subtitle">
+              Higher education and technical hiring are fraught with resume inflation, unverified credentials, and manual administrative drag. Here is how our unified intelligence ecosystem transforms the landscape.
             </p>
           </div>
 
-          {/* Role Switcher Pills */}
-          <div className="role-tab-buttons">
-            <button
-              type="button"
-              className={`role-tab-btn ${activeRoleTab === 'student' ? 'active' : ''}`}
-              onClick={() => setActiveRoleTab('student')}
-            >
-              Student Portal
-            </button>
-            <button
-              type="button"
-              className={`role-tab-btn ${activeRoleTab === 'industry' ? 'active' : ''}`}
-              onClick={() => setActiveRoleTab('industry')}
-            >
-              Industry Recruiter
-            </button>
-            <button
-              type="button"
-              className={`role-tab-btn ${activeRoleTab === 'academician' ? 'active' : ''}`}
-              onClick={() => setActiveRoleTab('academician')}
-            >
-              Faculty & Research
-            </button>
-            <button
-              type="button"
-              className={`role-tab-btn ${activeRoleTab === 'institution' ? 'active' : ''}`}
-              onClick={() => setActiveRoleTab('institution')}
-            >
-              Institution TPO
-            </button>
-          </div>
-
-          {/* Active Role Showcase Card */}
-          <div className="showcase-display-box">
-            <div>
-              <div className="showcase-badge">{currentShowcase.tag}</div>
-              <h3 className="showcase-heading">{currentShowcase.title}</h3>
-              <p className="showcase-text">{currentShowcase.desc}</p>
-
-              <ul className="showcase-list">
-                {currentShowcase.points.map((pt, i) => (
-                  <li key={i} className="showcase-list-item">
-                    <span className="showcase-list-check">✓</span>
-                    <span>{pt}</span>
-                  </li>
-                ))}
-              </ul>
-
-              <button
-                type="button"
-                onClick={currentShowcase.action}
-                className="hero-btn-primary"
-                style={{ padding: '14px 32px', fontSize: '15px' }}
-              >
-                <span>{currentShowcase.cta}</span>
-                <span style={{ fontWeight: 'bold' }}>→</span>
-              </button>
+          {/* Block 1: What Problem We Have Solved */}
+          <div className="why-section-block">
+            <div className="why-sub-header">
+              <div className="why-badge problem">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <circle cx="12" cy="12" r="10" />
+                  <line x1="12" y1="8" x2="12" y2="12" />
+                  <line x1="12" y1="16" x2="12.01" y2="16" />
+                </svg>
+                Current System Breakdown
+              </div>
+              <h3 className="why-sub-title">What Problem We Have Solved</h3>
+              <p className="why-sub-desc">
+                The core structural bottlenecks holding back students, recruiters, and university leadership across the national education ecosystem.
+              </p>
             </div>
 
-            <div className="showcase-preview-card">
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '24px' }}>
-                <span style={{ fontSize: '13px', color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Live Intelligence Telemetry</span>
-                <span style={{ fontSize: '12px', padding: '4px 10px', borderRadius: '9999px', background: 'rgba(16, 185, 129, 0.2)', color: '#34d399', fontWeight: 'bold' }}>Active Session</span>
+            <div className="why-cards-grid">
+              <div className="why-card problem-card">
+                <div className="why-card-icon-box problem">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
+                    <line x1="12" y1="9" x2="12" y2="13" />
+                    <line x1="12" y1="17" x2="12.01" y2="17" />
+                  </svg>
+                </div>
+                <h4 className="why-card-title">45%+ Graduate Employability Deficit</h4>
+                <p className="why-card-desc">
+                  Traditional curriculum measures rote memorization rather than live technical capability. Students graduate without knowing their actual industry skill gaps or benchmarked standing against corporate standards.
+                </p>
+                <div className="why-card-tag problem">Student &amp; Curriculum Deficit</div>
               </div>
 
-              <div style={{ fontSize: '42px', fontWeight: '900', color: '#7ce8ff', lineHeight: '1', marginBottom: '8px' }}>
-                {currentShowcase.previewStat}
+              <div className="why-card problem-card">
+                <div className="why-card-icon-box problem">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                    <polyline points="14 2 14 8 20 8" />
+                    <line x1="16" y1="13" x2="8" y2="13" />
+                    <line x1="16" y1="17" x2="8" y2="17" />
+                    <polyline points="10 9 9 9 8 9" />
+                  </svg>
+                </div>
+                <h4 className="why-card-title">Recruiter Overwhelm &amp; Resume Noise</h4>
+                <p className="why-card-desc">
+                  Recruiters sift through thousands of identical, AI-generated resumes with unverified claims. Inability to validate actual coding ability upfront inflates hiring cycle times and recruitment costs.
+                </p>
+                <div className="why-card-tag problem">Hiring Inefficiency</div>
               </div>
-              <p style={{ fontSize: '14px', color: '#cbd5e1', marginBottom: '28px' }}>
-                {currentShowcase.previewLabel}
+
+              <div className="why-card problem-card">
+                <div className="why-card-icon-box problem">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                    <line x1="16" y1="2" x2="16" y2="6" />
+                    <line x1="8" y1="2" x2="8" y2="6" />
+                    <line x1="3" y1="10" x2="21" y2="10" />
+                  </svg>
+                </div>
+                <h4 className="why-card-title">Manual &amp; Chaotic TPO Accreditation</h4>
+                <p className="why-card-desc">
+                  Training &amp; Placement Officers juggle unorganized spreadsheets and physical paperwork for NIRF Metric 5.2.1 and NAAC Criterion 5 audits, leading to audit stress and inaccurate compliance tracking.
+                </p>
+                <div className="why-card-tag problem">Administrative Burden</div>
+              </div>
+
+              <div className="why-card problem-card">
+                <div className="why-card-icon-box problem">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <path d="M18.84 12.25l1.72-1.71a4.5 4.5 0 0 0-6.36-6.36l-1.72 1.71" />
+                    <path d="M5.16 11.75l-1.72 1.71a4.5 4.5 0 0 0 6.36 6.36l1.72-1.71" />
+                    <line x1="2" y1="2" x2="22" y2="22" />
+                  </svg>
+                </div>
+                <h4 className="why-card-title">Siloed Faculty &amp; Idle R&amp;D Potential</h4>
+                <p className="why-card-desc">
+                  Academia and tech enterprises remain isolated. High-level professors lack formal avenues for paid corporate consultancy, while companies miss out on deep academic research talent and sponsored grants.
+                </p>
+                <div className="why-card-tag problem">Academia Disconnect</div>
+              </div>
+            </div>
+          </div>
+
+          {/* Block 2: How We Have Solved This Problem */}
+          <div className="why-section-block">
+            <div className="why-sub-header">
+              <div className="why-badge solution">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+                Our Engineered Solution
+              </div>
+              <h3 className="why-sub-title">How We Have Solved This Problem</h3>
+              <p className="why-sub-desc">
+                An integrated platform powered by live skill diagnostics, deterministic matching algorithms, and automated accreditation intelligence.
               </p>
+            </div>
 
-              <div style={{ borderTop: '1px solid rgba(255, 255, 255, 0.1)', paddingTop: '20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <span style={{ fontSize: '13px', color: '#64748b' }}>Connected to Spring Boot API</span>
-                <span style={{ fontSize: '12px', color: '#7ce8ff', fontFamily: 'monospace' }}>Port 8080 (MySQL Active)</span>
+            <div className="why-cards-grid">
+              <div className="why-card solution-card">
+                <div className="why-card-icon-box solution">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <circle cx="12" cy="12" r="10" />
+                    <circle cx="12" cy="12" r="6" />
+                    <circle cx="12" cy="12" r="2" />
+                  </svg>
+                </div>
+                <h4 className="why-card-title">Live AI Diagnostics &amp; Remedial Paths</h4>
+                <p className="why-card-desc">
+                  On-demand technical evaluations benchmark students against corporate profiles in real time. Identified gaps trigger personalized milestones and curated courses to systematically close deficiencies.
+                </p>
+                <div className="why-card-tag solution">Competence Verified</div>
+              </div>
+
+              <div className="why-card solution-card">
+                <div className="why-card-icon-box solution">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+                  </svg>
+                </div>
+                <h4 className="why-card-title">Deterministic 2ms ATS Weighted Matching</h4>
+                <p className="why-card-desc">
+                  Recruiters post roles with strict skill weightings (e.g., Java 40%, Spring 30%). Our explainable scoring engine ranks thousands of applicants in milliseconds, eliminating bias and resume inflation.
+                </p>
+                <div className="why-card-tag solution">Instant Shortlisting</div>
+              </div>
+
+              <div className="why-card solution-card">
+                <div className="why-card-icon-box solution">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <line x1="18" y1="20" x2="18" y2="10" />
+                    <line x1="12" y1="20" x2="12" y2="4" />
+                    <line x1="6" y1="20" x2="6" y2="14" />
+                  </svg>
+                </div>
+                <h4 className="why-card-title">Automated NIRF 5.2.1 &amp; NAAC Analytics</h4>
+                <p className="why-card-desc">
+                  Real-time placement dashboards aggregate placement rates, median salary packages, and company MoUs. One-click audit-compliant PDF generation replaces weeks of manual administrative labor.
+                </p>
+                <div className="why-card-tag solution">Accreditation Ready</div>
+              </div>
+
+              <div className="why-card solution-card">
+                <div className="why-card-icon-box solution">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                    <polyline points="9 12 11 14 15 10" />
+                  </svg>
+                </div>
+                <h4 className="why-card-title">SHA-256 Proofs &amp; Faculty R&amp;D Exchange</h4>
+                <p className="why-card-desc">
+                  All achievements and verified skill badges are cryptographically hashed for tamper-proof trust. Simultaneously, a dedicated exchange connects faculty with funded corporate R&amp;D projects and FDPs.
+                </p>
+                <div className="why-card-tag solution">Tamper-Proof Ecosystem</div>
               </div>
             </div>
           </div>
