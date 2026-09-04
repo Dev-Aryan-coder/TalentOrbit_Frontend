@@ -4,14 +4,23 @@
   background-color: #f8fafc;
   color: #0f172a;
   display: flex;
-  flex-direction: column;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   transition: background-color 0.25s ease, color 0.25s ease;
+  overflow-x: hidden;
 }
 
 [data-theme="dark"] .student-dashboard-root {
   background-color: #030712;
   color: #f8fafc;
+}
+
+.student-dashboard-main {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  overflow-y: auto;
 }
 
 /* Dashboard Navigation Bar (Internal, not PublicNavbar) */
