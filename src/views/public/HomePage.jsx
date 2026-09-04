@@ -1,13 +1,183 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { HeroBanner } from '../../components/ui/HeroBanner';
 import PreFooterCtaBanner from '../../components/ui/PreFooterCtaBanner';
+import CardDetailModal from '../../components/ui/CardDetailModal';
 import './HomePage.css';
 import logoImg from '../../assets/logo.png';
 import whoWeAreImg from '../../assets/who-we-are.jpg';
 
 gsap.registerPlugin(ScrollTrigger);
+
+const PROBLEM_CARDS_DATA = [
+  {
+    id: 'p1',
+    type: 'problem',
+    badge: 'Challenge 01: Skill Deficit',
+    title: "College Marks Don't Match Job Skills",
+    simpleSubtitle: 'Why high GPAs often struggle in real technical job interviews',
+    desc: 'Colleges test memorization from textbooks, but tech companies hire for practical coding and real problem-solving ability.',
+    tag: 'Curriculum Deficit',
+    whatItMeans: 'In college, students can score 90% by memorizing definitions the night before an exam. But when they apply for a job, companies do not ask for definitions—they ask candidates to build a feature, fix a bug, or write running code. Because traditional college exams test theory rather than practical work, students graduate without knowing what tech skills they are missing.',
+    realLifeExample: 'Rahul scored an 8.8 CGPA in Computer Science. In his first job interview, the recruiter asked him to create a basic REST API connected to a database. Because his college courses only taught paper diagrams, Rahul struggled to write running code.',
+    howItWorks: 'TalentOrbit provides dynamic diagnostic skill evaluations. Students take practical tests, discover their exact blindspots, and receive clear milestones to build the exact skills companies want.',
+    statusTag: 'Systemic Problem Solved'
+  },
+  {
+    id: 'p2',
+    type: 'problem',
+    badge: 'Challenge 02: Resume Noise',
+    title: 'Companies Drown in Fake & AI Resumes',
+    simpleSubtitle: 'The flood of copy-pasted resumes with exaggerated skills',
+    desc: 'Recruiters get thousands of copy-pasted resumes with buzzwords and cannot tell who can actually code before interviewing.',
+    tag: 'Hiring Bottleneck',
+    whatItMeans: 'With generative AI tools, anyone can generate a perfect-looking resume in 30 seconds filled with impressive keywords. Recruiters now receive 2,000+ applications for a single job opening, but 90% of applicants cannot perform the required tasks, wasting weeks of interviewing time.',
+    realLifeExample: 'A startup recruiter posts an opening for a junior backend developer. They receive 1,400 resumes in 48 hours. After spending three weeks screening candidates, they discover that most applicants copied their listed projects straight from YouTube tutorials.',
+    howItWorks: 'TalentOrbit replaces unverified bullet points with cryptographic skill badges. Recruiters see verified proof of code competence before scheduling an interview.',
+    statusTag: 'Recruitment Overhead Solved'
+  },
+  {
+    id: 'p3',
+    type: 'problem',
+    badge: 'Challenge 03: College Admin',
+    title: 'College Placement Records Are a Mess',
+    simpleSubtitle: 'The manual chaos of gathering proof for NIRF and NAAC audits',
+    desc: 'Placement officers scramble through messy spreadsheets and paper letters when preparing government NIRF and NAAC reports.',
+    tag: 'Administrative Burden',
+    whatItMeans: 'Every year, colleges must prove to government inspection committees (such as NIRF Metric 5.2.1 and NAAC Criterion 5) that their students are getting placed. Currently, Training and Placement Officers (TPOs) have to manually collect offer letters from hundreds of alumni over WhatsApp and email.',
+    realLifeExample: 'With a NAAC audit just two weeks away, the college placement cell has to stay late every night manually calling alumni, organizing lost PDFs, and calculating median salary packages by hand on spreadsheets.',
+    howItWorks: 'TalentOrbit automatically logs student offers, verified salaries, and employer MoUs into a live college dashboard. College administrators can view their verified placement statistics anytime.',
+    statusTag: 'Accreditation Friction Solved'
+  },
+  {
+    id: 'p4',
+    type: 'problem',
+    badge: 'Challenge 04: Academia Silos',
+    title: 'Professors Are Cut Off from Industry',
+    simpleSubtitle: 'Why deep academic faculty knowledge stays locked inside classrooms',
+    desc: 'Experienced engineering professors lack an easy way to work with top tech firms on paid consulting or funded research.',
+    tag: 'Academia Disconnect',
+    whatItMeans: 'College professors often have deep PhD knowledge in specialized domains like cryptography, algorithms, and distributed systems. However, tech companies rarely know how to reach them for paid advisory or corporate-sponsored research projects.',
+    realLifeExample: 'A computer science professor with 15 years of database research wants to advise tech startups on database performance during summer break, but has no institutional platform to connect with industry projects.',
+    howItWorks: 'TalentOrbit includes an Academician Portal where professors publish their research capabilities, receive corporate consulting opportunities, and participate in industry Faculty Development Programs (FDPs).',
+    statusTag: 'Faculty Collaboration Solved'
+  }
+];
+
+const SOLUTION_CARDS_DATA = [
+  {
+    id: 's1',
+    type: 'solution',
+    badge: 'Implemented Feature',
+    title: 'Tamper-Proof Digital Skill Badges',
+    simpleSubtitle: 'Real certificates that cannot be forged or faked',
+    desc: 'Digital certificates secured with SHA-256 codes that prove a student genuinely passed a real technical evaluation.',
+    tag: 'Verified in Backend & UI',
+    whatItMeans: 'Instead of an easily edited PDF certificate, TalentOrbit awards students cryptographic digital badges. Each badge has a unique digital fingerprint (SHA-256 hash) stored securely in our MySQL database.',
+    realLifeExample: 'When an employer views a student’s Python Mastery badge, they can click our official verification button. Our system confirms the exact score, date, and authenticity directly from our database.',
+    howItWorks: 'Implemented in our Spring Boot backend (BadgeController.java) and MySQL database. Every badge generates a SHA-256 hash that can be publicly validated by any company.',
+    statusTag: 'Active in Production'
+  },
+  {
+    id: 's2',
+    type: 'solution',
+    badge: 'Implemented Feature',
+    title: 'Safe Accounts & Security Email Alerts',
+    simpleSubtitle: 'Protecting student and recruiter accounts with instant alerts',
+    desc: 'Secure logins for students, recruiters, and colleges with OTP verification and instant security notification emails.',
+    tag: 'Active Spring Boot Security',
+    whatItMeans: 'Every user on TalentOrbit is protected by enterprise authentication. When anyone requests a password reset or updates account credentials, our backend immediately dispatches an automated security alert email.',
+    realLifeExample: 'If someone updates their password, TalentOrbit sends an immediate security notification to their inbox: "Your password was changed on September 4. If this was not you, secure your account immediately."',
+    howItWorks: 'Powered by Spring Boot and JavaMailSender (SMTP). Includes a 3-phase OTP password reset workflow and transactional security alert notifications.',
+    statusTag: 'Active in Production'
+  },
+  {
+    id: 's3',
+    type: 'solution',
+    badge: 'Implemented Feature',
+    title: 'Clear & Fair Skill Matching',
+    simpleSubtitle: 'Transparent compatibility math with zero hidden bias',
+    desc: 'Our system directly matches what a company needs with what a student can do, giving an honest, transparent score.',
+    tag: 'Deterministic Matching API',
+    whatItMeans: 'Most hiring platforms use opaque algorithms that leave applicants confused. TalentOrbit uses transparent, explainable matching: if an employer requires 40% Java and 30% Spring Boot, the system shows both parties the exact percentage match.',
+    realLifeExample: 'A student sees: "You have an 85% match for this Cloud Engineer internship because your Java and SQL are verified, but you still need to verify Docker to reach 100%."',
+    howItWorks: 'Executed by MatchingService.java in the Spring Boot backend, evaluating student competencies in StudentSkill against role criteria in PostingSkill.',
+    statusTag: 'Active in Production'
+  },
+  {
+    id: 's4',
+    type: 'solution',
+    badge: 'Implemented Feature',
+    title: 'Complete Student Profile & Test Hub',
+    simpleSubtitle: 'All test scores, GitHub code, and certificates in one place',
+    desc: 'A single home for all test scores, verified GitHub code projects, certificates, and college achievements.',
+    tag: 'Live Student Portfolio',
+    whatItMeans: 'Instead of emailing separate resumes, certificates, and links, students get an integrated digital portfolio. It gathers their technical test scores, college marks, GitHub repositories, and verified milestones in one place.',
+    realLifeExample: 'A recruiter opens a student’s TalentOrbit profile and immediately reviews their verified test scores, live GitHub projects, semester marks, and verified badges in one clean screen.',
+    howItWorks: 'Built into our Spring Boot REST API (PortfolioController.java & AssessmentController.java), serving structured data directly to the student dashboard.',
+    statusTag: 'Active in Production'
+  }
+];
+
+const ROADMAP_CARDS_DATA = [
+  {
+    id: 'r1',
+    type: 'roadmap',
+    badge: 'Upcoming AI Feature',
+    phaseTag: 'Phase 2 AI Engine',
+    title: 'Smart AI-Generated Practice Tests',
+    simpleSubtitle: 'Dynamic questions tailored to real-world coding problems',
+    desc: 'Smart quizzes that generate fresh, customized coding questions to test applied skills rather than memorized theory.',
+    tag: 'In Research & Prototyping',
+    whatItMeans: 'Static question banks are quickly memorized or leaked online. Our planned AI test engine will generate fresh, unique technical questions on-the-fly for any programming language or framework.',
+    realLifeExample: 'Two students taking a React test at the same time will get two completely different, customized coding scenarios designed to test their applied problem-solving rather than rote memorization.',
+    howItWorks: 'Will integrate Google Gemini and OpenAI API webhooks with our Spring Boot assessment service to synthesize real-time question sets and evaluate coding logic.',
+    statusTag: 'Roadmap Milestone 1'
+  },
+  {
+    id: 'r2',
+    type: 'roadmap',
+    badge: 'Upcoming Feature',
+    phaseTag: 'Accreditation Automation',
+    title: '1-Click Government Audit Reports',
+    simpleSubtitle: 'Instant PDF generation for NIRF and NAAC inspections',
+    desc: 'Auto-generated official PDF reports for government NIRF and NAAC reviews generated in seconds.',
+    tag: 'Institutional Module',
+    whatItMeans: 'Instead of spending months preparing for college accreditation inspections, placement directors will be able to click one button to generate official, audit-ready PDF reports with verified numbers.',
+    realLifeExample: 'When the government NAAC inspection committee asks for verified placement records, the college principal downloads a formatted, compliant PDF report in five seconds.',
+    howItWorks: 'A dedicated Spring Boot PDF generation pipeline using iText to aggregate placement percentages, median salary distributions, and MoUs directly into official accreditation audit tables.',
+    statusTag: 'Roadmap Milestone 2'
+  },
+  {
+    id: 'r3',
+    type: 'roadmap',
+    badge: 'Upcoming Feature',
+    phaseTag: 'High-Performance Scale',
+    title: 'Super-Fast Candidate Search',
+    simpleSubtitle: 'Searching across thousands of students in milliseconds',
+    desc: 'Lightning-fast candidate matching that lets companies filter thousands of verified students in milliseconds.',
+    tag: 'Enterprise Recruiter ATS',
+    whatItMeans: 'When a large tech firm needs 50 qualified junior developers across 100 colleges, they shouldn’t have to wait minutes for slow searches. Our upgraded search engine will filter the national talent pool in milliseconds.',
+    realLifeExample: 'A recruiter sets filters: "Need 80%+ Python, 70%+ Docker, and 8.0 CGPA." The search results update instantly with zero lag as they adjust the criteria.',
+    howItWorks: 'Engineered using in-memory vector indexing and cached relational projections to execute complex multi-skill score calculations in under 2 milliseconds.',
+    statusTag: 'Roadmap Milestone 3'
+  },
+  {
+    id: 'r4',
+    type: 'roadmap',
+    badge: 'Upcoming Feature',
+    phaseTag: 'Academia-Industry Portal',
+    title: 'Company Grants for College Research',
+    simpleSubtitle: 'Direct corporate funding for college professors and labs',
+    desc: 'A secure portal where tech companies can directly fund college research projects and teacher training.',
+    tag: 'Faculty Marketplace',
+    whatItMeans: 'Tech companies often want cutting-edge research in areas like AI, renewable energy, and cybersecurity. We are building a secure marketplace where companies can fund college labs and hire professors for specialized consulting.',
+    realLifeExample: 'An electric vehicle company funds a ₹15 Lakh research project with an engineering college lab to design better battery management algorithms.',
+    howItWorks: 'A specialized escrow marketplace with milestone tracking, contract signoffs, and direct grant disbursement tracking connecting industry R&D teams with university faculty.',
+    statusTag: 'Roadmap Milestone 4'
+  }
+];
 
 export function HomePage({ 
   onNavigateRole, 
@@ -24,6 +194,7 @@ export function HomePage({
   onOpenAppearance,
   onLogout
 }) {
+  const [activeCardDetail, setActiveCardDetail] = useState(null);
   const landingRootRef = useRef(null);
   const whoWeAreRef = useRef(null);
 
@@ -421,73 +592,44 @@ export function HomePage({
               </div>
               <h3 className="why-sub-title">What Problem We Have Solved</h3>
               <p className="why-sub-desc">
-                The core structural bottlenecks holding back students, recruiters, and university leadership across the national education ecosystem.
+                The real challenges students, recruiters, and university leadership face every day in higher education and hiring.
               </p>
             </div>
 
             <div className="why-cards-grid">
-              <div className="why-card problem-card">
-                <div className="why-card-icon-box problem">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                    <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
-                    <line x1="12" y1="9" x2="12" y2="13" />
-                    <line x1="12" y1="17" x2="12.01" y2="17" />
-                  </svg>
-                </div>
-                <h4 className="why-card-title">45%+ Graduate Employability Deficit</h4>
-                <p className="why-card-desc">
-                  Traditional curriculum measures rote memorization rather than live technical capability. Students graduate without knowing their actual industry skill gaps or benchmarked standing against corporate standards.
-                </p>
-                <div className="why-card-tag problem">Student &amp; Curriculum Deficit</div>
-              </div>
-
-              <div className="why-card problem-card">
-                <div className="why-card-icon-box problem">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-                    <polyline points="14 2 14 8 20 8" />
-                    <line x1="16" y1="13" x2="8" y2="13" />
-                    <line x1="16" y1="17" x2="8" y2="17" />
-                    <polyline points="10 9 9 9 8 9" />
-                  </svg>
-                </div>
-                <h4 className="why-card-title">Recruiter Overwhelm &amp; Resume Noise</h4>
-                <p className="why-card-desc">
-                  Recruiters sift through thousands of identical, AI-generated resumes with unverified claims. Inability to validate actual coding ability upfront inflates hiring cycle times and recruitment costs.
-                </p>
-                <div className="why-card-tag problem">Hiring Inefficiency</div>
-              </div>
-
-              <div className="why-card problem-card">
-                <div className="why-card-icon-box problem">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
-                    <line x1="16" y1="2" x2="16" y2="6" />
-                    <line x1="8" y1="2" x2="8" y2="6" />
-                    <line x1="3" y1="10" x2="21" y2="10" />
-                  </svg>
-                </div>
-                <h4 className="why-card-title">Manual &amp; Chaotic TPO Accreditation</h4>
-                <p className="why-card-desc">
-                  Training &amp; Placement Officers juggle unorganized spreadsheets and physical paperwork for NIRF Metric 5.2.1 and NAAC Criterion 5 audits, leading to audit stress and inaccurate compliance tracking.
-                </p>
-                <div className="why-card-tag problem">Administrative Burden</div>
-              </div>
-
-              <div className="why-card problem-card">
-                <div className="why-card-icon-box problem">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                    <path d="M18.84 12.25l1.72-1.71a4.5 4.5 0 0 0-6.36-6.36l-1.72 1.71" />
-                    <path d="M5.16 11.75l-1.72 1.71a4.5 4.5 0 0 0 6.36 6.36l1.72-1.71" />
-                    <line x1="2" y1="2" x2="22" y2="22" />
-                  </svg>
-                </div>
-                <h4 className="why-card-title">Siloed Faculty &amp; Idle R&amp;D Potential</h4>
-                <p className="why-card-desc">
-                  Academia and tech enterprises remain isolated. High-level professors lack formal avenues for paid corporate consultancy, while companies miss out on deep academic research talent and sponsored grants.
-                </p>
-                <div className="why-card-tag problem">Academia Disconnect</div>
-              </div>
+              {PROBLEM_CARDS_DATA.map((card, idx) => {
+                const icons = [
+                  <svg key="0" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" /><line x1="12" y1="9" x2="12" y2="13" /><line x1="12" y1="17" x2="12.01" y2="17" /></svg>,
+                  <svg key="1" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" /><line x1="16" y1="13" x2="8" y2="13" /><line x1="16" y1="17" x2="8" y2="17" /><polyline points="10 9 9 9 8 9" /></svg>,
+                  <svg key="2" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" /><line x1="16" y1="2" x2="16" y2="6" /><line x1="8" y1="2" x2="8" y2="6" /><line x1="3" y1="10" x2="21" y2="10" /></svg>,
+                  <svg key="3" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M18.84 12.25l1.72-1.71a4.5 4.5 0 0 0-6.36-6.36l-1.72 1.71" /><path d="M5.16 11.75l-1.72 1.71a4.5 4.5 0 0 0 6.36 6.36l1.72-1.71" /><line x1="2" y1="2" x2="22" y2="22" /></svg>
+                ];
+                return (
+                  <div key={card.id} className="why-card problem-card">
+                    <div className="card-top-row">
+                      <div className="why-card-icon-box problem">
+                        {icons[idx % icons.length]}
+                      </div>
+                      <button
+                        type="button"
+                        className="card-info-btn"
+                        onClick={() => setActiveCardDetail(card)}
+                        title="Click for simple & detailed explanation"
+                        aria-label={`Detailed info on ${card.title}`}
+                      >
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                          <circle cx="12" cy="12" r="10" />
+                          <line x1="12" y1="16" x2="12" y2="12" />
+                          <line x1="12" y1="8" x2="12.01" y2="8" />
+                        </svg>
+                      </button>
+                    </div>
+                    <h4 className="why-card-title">{card.title}</h4>
+                    <p className="why-card-desc">{card.desc}</p>
+                    <div className="why-card-tag problem">{card.tag}</div>
+                  </div>
+                );
+              })}
             </div>
           </div>
 
@@ -502,70 +644,44 @@ export function HomePage({
               </div>
               <h3 className="why-sub-title">How We Have Solved This Problem</h3>
               <p className="why-sub-desc">
-                Production-ready features implemented across our Spring Boot REST API, MySQL relational architecture, and frontend dashboards.
+                Real tools and working features already built into our Spring Boot backend, MySQL database, and frontend dashboard.
               </p>
             </div>
 
             <div className="why-cards-grid">
-              <div className="why-card solution-card">
-                <div className="why-card-icon-box solution">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-                    <polyline points="9 12 11 14 15 10" />
-                  </svg>
-                </div>
-                <h4 className="why-card-title">Cryptographic SHA-256 Skill Badges</h4>
-                <p className="why-card-desc">
-                  Tamper-proof digital credentials verified with cryptographic SHA-256 hashes on MySQL. Anyone can instantly validate student badges through our public verification modal and backend lookup API.
-                </p>
-                <div className="why-card-tag solution">Verified in Backend &amp; UI</div>
-              </div>
-
-              <div className="why-card solution-card">
-                <div className="why-card-icon-box solution">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
-                    <path d="M7 11V7a5 5 0 0 1 10 0v4" />
-                  </svg>
-                </div>
-                <h4 className="why-card-title">Role-Based Auth &amp; Email Security Alerts</h4>
-                <p className="why-card-desc">
-                  Dedicated Spring Boot authentication service for Students, Recruiters, and Faculty. Features secure 3-phase OTP password resets and automated JavaMailSender security notification emails.
-                </p>
-                <div className="why-card-tag solution">Active Spring Boot Security</div>
-              </div>
-
-              <div className="why-card solution-card">
-                <div className="why-card-icon-box solution">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                    <circle cx="12" cy="12" r="10" />
-                    <line x1="14.31" y1="8" x2="20.05" y2="17.94" />
-                    <line x1="9.69" y1="8" x2="21.17" y2="8" />
-                    <line x1="7.38" y1="12" x2="13.12" y2="2.06" />
-                    <line x1="9.69" y1="16" x2="3.95" y2="6.06" />
-                    <line x1="14.31" y1="16" x2="2.83" y2="16" />
-                    <line x1="16.62" y1="12" x2="10.88" y2="21.94" />
-                  </svg>
-                </div>
-                <h4 className="why-card-title">Explainable Skill-Overlap Scoring</h4>
-                <p className="why-card-desc">
-                  Our backend MatchingService evaluates student verified competencies directly against employer posting requirements, calculating exact percentage compatibility without black-box confusion.
-                </p>
-                <div className="why-card-tag solution">Deterministic Matching API</div>
-              </div>
-
-              <div className="why-card solution-card">
-                <div className="why-card-icon-box solution">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-                  </svg>
-                </div>
-                <h4 className="why-card-title">Structured Assessments &amp; Portfolio Hub</h4>
-                <p className="why-card-desc">
-                  Full student achievement portal recording technical MCQ assessment scores, verified GitHub project links, academic certifications, and personal career milestones in a unified profile.
-                </p>
-                <div className="why-card-tag solution">Live Student Portfolio</div>
-              </div>
+              {SOLUTION_CARDS_DATA.map((card, idx) => {
+                const icons = [
+                  <svg key="0" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /><polyline points="9 12 11 14 15 10" /></svg>,
+                  <svg key="1" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2" /><path d="M7 11V7a5 5 0 0 1 10 0v4" /></svg>,
+                  <svg key="2" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><line x1="14.31" y1="8" x2="20.05" y2="17.94" /><line x1="9.69" y1="8" x2="21.17" y2="8" /><line x1="7.38" y1="12" x2="13.12" y2="2.06" /><line x1="9.69" y1="16" x2="3.95" y2="6.06" /><line x1="14.31" y1="16" x2="2.83" y2="16" /><line x1="16.62" y1="12" x2="10.88" y2="21.94" /></svg>,
+                  <svg key="3" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" /></svg>
+                ];
+                return (
+                  <div key={card.id} className="why-card solution-card">
+                    <div className="card-top-row">
+                      <div className="why-card-icon-box solution">
+                        {icons[idx % icons.length]}
+                      </div>
+                      <button
+                        type="button"
+                        className="card-info-btn"
+                        onClick={() => setActiveCardDetail(card)}
+                        title="Click for simple & detailed explanation"
+                        aria-label={`Detailed info on ${card.title}`}
+                      >
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                          <circle cx="12" cy="12" r="10" />
+                          <line x1="12" y1="16" x2="12" y2="12" />
+                          <line x1="12" y1="8" x2="12.01" y2="8" />
+                        </svg>
+                      </button>
+                    </div>
+                    <h4 className="why-card-title">{card.title}</h4>
+                    <p className="why-card-desc">{card.desc}</p>
+                    <div className="why-card-tag solution">{card.tag}</div>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>
@@ -588,72 +704,45 @@ export function HomePage({
             </div>
             <h2 className="section-title">What We Are Thinking To Add</h2>
             <p className="section-subtitle">
-              Our upcoming engineering roadmap designed to push higher education intelligence, AI-driven evaluation, and national accreditation to the next frontier.
+              Our upcoming roadmap designed to bring AI-powered exams, 1-click government accreditation reports, and super-fast hiring to TalentOrbit.
             </p>
           </div>
 
           <div className="roadmap-cards-grid">
-            <div className="roadmap-card">
-              <div className="roadmap-card-icon-box">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                  <path d="M12 2a4 4 0 0 1 4 4c0 1.1-.5 2.1-1.3 2.8L16 11l-2 1-2-1 1.3-2.2C12.5 8.1 12 7.1 12 6a4 4 0 0 1 4-4z" />
-                  <path d="M18 10a6 6 0 0 1-6 6v4h-4v-4a6 6 0 0 1-6-6" />
-                </svg>
-              </div>
-              <div className="roadmap-card-phase-tag">Phase 2 AI Engine</div>
-              <h4 className="roadmap-card-title">Dynamic LLM-Powered Technical Exams</h4>
-              <p className="roadmap-card-desc">
-                Integrating Gemini &amp; OpenAI API webhooks to synthesize real-time, adaptive technical MCQs and sandbox coding challenges tailored dynamically to emerging technology stacks.
-              </p>
-              <div className="roadmap-card-target">In Research &amp; Prototyping</div>
-            </div>
-
-            <div className="roadmap-card">
-              <div className="roadmap-card-icon-box">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-                  <polyline points="14 2 14 8 20 8" />
-                  <line x1="16" y1="13" x2="8" y2="13" />
-                  <line x1="16" y1="17" x2="8" y2="17" />
-                  <polyline points="10 9 9 9 8 9" />
-                </svg>
-              </div>
-              <div className="roadmap-card-phase-tag">Accreditation Automation</div>
-              <h4 className="roadmap-card-title">1-Click NIRF 5.2.1 &amp; NAAC PDF Reports</h4>
-              <p className="roadmap-card-desc">
-                A dedicated Spring Boot PDF compilation pipeline using iText to aggregate placement percentages, median salary distributions, and MoUs directly into official accreditation audit tables.
-              </p>
-              <div className="roadmap-card-target">Institutional Module</div>
-            </div>
-
-            <div className="roadmap-card">
-              <div className="roadmap-card-icon-box">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                  <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
-                </svg>
-              </div>
-              <div className="roadmap-card-phase-tag">High-Performance Scale</div>
-              <h4 className="roadmap-card-title">Sub-2ms Deterministic Vector ATS</h4>
-              <p className="roadmap-card-desc">
-                Upgrading our matching layer with in-memory vector embeddings to rank hundreds of thousands of candidate profiles against multi-skill job descriptions in under 2 milliseconds with zero bias.
-              </p>
-              <div className="roadmap-card-target">Enterprise Recruiter ATS</div>
-            </div>
-
-            <div className="roadmap-card">
-              <div className="roadmap-card-icon-box">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                  <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
-                  <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
-                </svg>
-              </div>
-              <div className="roadmap-card-phase-tag">Academia-Industry Portal</div>
-              <h4 className="roadmap-card-title">Corporate R&amp;D Grants &amp; Consulting Escrow</h4>
-              <p className="roadmap-card-desc">
-                A formal financial exchange enabling companies to contract college professors for paid technical consulting, fund specialized university lab research, and sponsor AICTE-aligned FDPs.
-              </p>
-              <div className="roadmap-card-target">Faculty Marketplace</div>
-            </div>
+            {ROADMAP_CARDS_DATA.map((card, idx) => {
+              const icons = [
+                <svg key="0" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M12 2a4 4 0 0 1 4 4c0 1.1-.5 2.1-1.3 2.8L16 11l-2 1-2-1 1.3-2.2C12.5 8.1 12 7.1 12 6a4 4 0 0 1 4-4z" /><path d="M18 10a6 6 0 0 1-6 6v4h-4v-4a6 6 0 0 1-6-6" /></svg>,
+                <svg key="1" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" /><line x1="16" y1="13" x2="8" y2="13" /><line x1="16" y1="17" x2="8" y2="17" /><polyline points="10 9 9 9 8 9" /></svg>,
+                <svg key="2" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" /></svg>,
+                <svg key="3" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><rect x="2" y="7" width="20" height="14" rx="2" ry="2" /><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" /></svg>
+              ];
+              return (
+                <div key={card.id} className="roadmap-card">
+                  <div className="card-top-row">
+                    <div className="roadmap-card-icon-box">
+                      {icons[idx % icons.length]}
+                    </div>
+                    <button
+                      type="button"
+                      className="card-info-btn"
+                      onClick={() => setActiveCardDetail(card)}
+                      title="Click for simple & detailed explanation"
+                      aria-label={`Detailed info on ${card.title}`}
+                    >
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                        <circle cx="12" cy="12" r="10" />
+                        <line x1="12" y1="16" x2="12" y2="12" />
+                        <line x1="12" y1="8" x2="12.01" y2="8" />
+                      </svg>
+                    </button>
+                  </div>
+                  <div className="roadmap-card-phase-tag">{card.phaseTag}</div>
+                  <h4 className="roadmap-card-title">{card.title}</h4>
+                  <p className="roadmap-card-desc">{card.desc}</p>
+                  <div className="roadmap-card-target">{card.tag}</div>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -722,6 +811,12 @@ export function HomePage({
           <span style={{ color: '#7ce8ff' }}>Production Architecture Verified</span>
         </div>
       </footer>
+
+      {/* Card Detail Modal (Shadcn-style) */}
+      <CardDetailModal
+        data={activeCardDetail}
+        onClose={() => setActiveCardDetail(null)}
+      />
     </div>
   );
 }
