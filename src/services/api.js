@@ -171,6 +171,7 @@ export const studentAPI = {
   },
 
   saveOnboardingSkills: async (userId, payload) => {
+    const targetUserId = userId || 1;
     const allSkills = [
       ...(payload.languages || []),
       ...(payload.libraries || []),
@@ -179,6 +180,7 @@ export const studentAPI = {
     ];
 
     const profilePayload = {
+      fullName: payload.fullName,
       skills: allSkills,
       languages: payload.languages || [],
       libraries: payload.libraries || [],
@@ -188,7 +190,15 @@ export const studentAPI = {
       onboardedAt: payload.onboardedAt || new Date().toISOString(),
     };
 
-    return apiClient.put(`/user-profile/${userId}`, profilePayload);
+    // 1. Sync skills to student controller (persists directly to student_skills in MySQL)
+    try {
+      await apiClient.put(`/students/${targetUserId}`, { skills: allSkills });
+    } catch (err) {
+      console.warn('Student controller skills sync notice:', err.message);
+    }
+
+    // 2. Sync profile attributes to user-profile controller
+    return apiClient.put(`/user-profile/${targetUserId}`, profilePayload);
   },
 
   getStudentSkills: (userId) => {
@@ -234,6 +244,20 @@ export const roadmapAPI = {
   },
 };
 
+export const chatbotAPI = {
+  sendMessage: (payload) => {
+    return apiClient.post('/chatbot/message', payload);
+  },
+
+  getUserSessions: (userId) => {
+    return apiClient.get(`/chatbot/sessions/${userId}`);
+  },
+
+  getSessionMessages: (sessionId) => {
+    return apiClient.get(`/chatbot/sessions/${sessionId}/messages`);
+  },
+};
+
 export default {
   auth: authAPI,
   badges: badgesAPI,
@@ -245,4 +269,5 @@ export default {
   student: studentAPI,
   assessment: assessmentAPI,
   roadmap: roadmapAPI,
+  chatbot: chatbotAPI,
 };

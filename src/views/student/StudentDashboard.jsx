@@ -60,7 +60,13 @@ export default function StudentDashboard({
   const renderActiveFeature = () => {
     switch (activeTab) {
       case 'dashboard':
-        return <StudentOverviewTab currentUser={currentUser} onSelectTab={setActiveTab} />;
+        return (
+          <StudentOverviewTab
+            key={userSkillsData ? JSON.stringify(userSkillsData) : 'initial'}
+            currentUser={currentUser}
+            onSelectTab={setActiveTab}
+          />
+        );
 
       case 'assessment':
         return <StudentAssessmentTab currentUser={currentUser} onSelectTab={setActiveTab} />;
@@ -68,7 +74,9 @@ export default function StudentDashboard({
       case 'skills':
         return (
           <StudentSkillsTab
+            key={userSkillsData ? JSON.stringify(userSkillsData) : 'initial'}
             currentUser={currentUser}
+            userSkillsData={userSkillsData}
             onSelectTab={setActiveTab}
             onOpenSkillsModal={() => setShowSkillOnboardingModal(true)}
           />
@@ -104,7 +112,7 @@ export default function StudentDashboard({
   };
 
   return (
-    <SidebarProvider defaultOpen={true} className="student-dashboard-root w-full min-h-screen">
+    <SidebarProvider defaultOpen={true} className="student-dashboard-root w-full h-screen max-h-screen overflow-hidden">
       {/* 1. Official Shadcn UI Sidebar (Left side) */}
       <StudentSidebar
         activeTab={activeTab}

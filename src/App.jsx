@@ -10,6 +10,7 @@ import AuthPage from './views/public/AuthPage';
 import ProfileSettingsModal from './components/ui/ProfileSettingsModal';
 import AccountSettingsModal from './components/ui/AccountSettingsModal';
 import AppearanceModal from './components/ui/AppearanceModal';
+import TalentOrbitAIChatbot from './components/ui/TalentOrbitAIChatbot';
 
 export default function App() {
   const [currentView, setCurrentView] = useState('home');
@@ -221,6 +222,9 @@ export default function App() {
         currentTheme={currentTheme}
         onThemeChange={setCurrentTheme}
       />
+
+      {/* Floating Multimodal AI Chatbot (Active when user is logged in) */}
+      {currentUser && <TalentOrbitAIChatbot currentUser={currentUser} />}
     </div>
   );
 }

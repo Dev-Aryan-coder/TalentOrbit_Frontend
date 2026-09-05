@@ -1,4 +1,4 @@
-/* Student Career Guidance Tab - Stitch UI Inspired */
+/* Student Career Guidance Tab - Enhanced Shadcn UI Design System */
 .student-career-container {
   display: flex;
   flex-direction: column;
@@ -6,24 +6,56 @@
   width: 100%;
 }
 
-.career-header-area {
+/* Glassmorphic Hero Summary Banner */
+.career-hero-banner {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.08) 0%, rgba(59, 130, 246, 0.05) 100%);
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  border-radius: 16px;
+  padding: 1.75rem 2rem;
   display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  backdrop-filter: blur(8px);
 }
 
-.career-header-title {
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: var(--text-primary, #0f172a);
+[data-theme="dark"] .career-hero-banner {
+  background: linear-gradient(135deg, rgba(30, 27, 75, 0.4) 0%, rgba(30, 58, 138, 0.2) 100%);
+  border-color: rgba(99, 102, 241, 0.3);
 }
 
-.career-header-desc {
-  font-size: 0.85rem;
-  color: var(--text-muted, #64748b);
-  max-width: 650px;
+.career-hero-title {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.25rem;
 }
 
+[data-theme="dark"] .career-hero-title {
+  color: #f8fafc;
+}
+
+.career-hero-desc {
+  font-size: 0.88rem;
+  color: #64748b;
+  max-width: 720px;
+  line-height: 1.5;
+}
+
+[data-theme="dark"] .career-hero-desc {
+  color: #94a3b8;
+}
+
+/* Shadcn-Styled KPI Cards Grid */
+.career-kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+/* Career Roles Responsive Grid */
 .career-roles-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
@@ -37,136 +69,15 @@
 }
 
 .career-role-card {
-  background: var(--bg-card, #ffffff);
-  border: 1px solid var(--border-subtle, rgba(226, 232, 240, 0.8));
   border-radius: 16px;
-  padding: 1.5rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 1.25rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
-  transition: all 0.25s ease;
+  overflow: hidden;
+}
+
+/* Animations and Transitions */
+.career-role-card {
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease;
 }
 
 .career-role-card:hover {
-  transform: translateY(-2px);
-  border-color: rgba(99, 102, 241, 0.35);
-  box-shadow: 0 8px 20px rgba(99, 102, 241, 0.08);
-}
-
-.career-card-header {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 1rem;
-}
-
-.career-role-name {
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: var(--text-primary, #0f172a);
-  margin-bottom: 0.25rem;
-}
-
-.career-role-desc {
-  font-size: 0.82rem;
-  color: var(--text-muted, #64748b);
-  line-height: 1.45;
-}
-
-.career-fit-pill {
-  font-size: 0.8rem;
-  font-weight: 700;
-  padding: 0.25rem 0.75rem;
-  border-radius: 20px;
-  background: rgba(99, 102, 241, 0.1);
-  color: #6366f1;
-  white-space: nowrap;
-}
-
-.career-fit-pill.high {
-  background: rgba(16, 185, 129, 0.12);
-  color: #10b981;
-}
-
-.career-skills-section {
-  display: flex;
-  flex-direction: column;
-  gap: 0.65rem;
-}
-
-.career-skills-lbl {
-  font-size: 0.75rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--text-muted, #64748b);
-}
-
-.career-tags-wrap {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem;
-}
-
-.career-skill-tag {
-  font-size: 0.75rem;
-  font-weight: 600;
-  padding: 0.2rem 0.55rem;
-  border-radius: 6px;
-}
-
-.career-skill-tag.matched {
-  background: rgba(16, 185, 129, 0.1);
-  color: #10b981;
-}
-
-.career-skill-tag.missing {
-  background: rgba(245, 158, 11, 0.1);
-  color: #f59e0b;
-}
-
-.career-card-action-btn {
-  width: 100%;
-  padding: 0.65rem 1rem;
-  border-radius: 10px;
-  background: var(--bg-surface-soft, #f1f5f9);
-  color: #6366f1;
-  font-size: 0.82rem;
-  font-weight: 600;
-  border: 1px solid rgba(99, 102, 241, 0.2);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.4rem;
-  transition: all 0.2s ease;
-}
-
-.career-card-action-btn:hover {
-  background: #6366f1;
-  color: #ffffff;
-}
-
-/* Dark Mode Overrides */
-[data-theme="dark"] .career-role-card {
-  background: #1e1e2e;
-  border-color: rgba(255, 255, 255, 0.08);
-}
-
-[data-theme="dark"] .career-header-title,
-[data-theme="dark"] .career-role-name {
-  color: #f1f5f9;
-}
-
-[data-theme="dark"] .career-card-action-btn {
-  background: #262638;
-  border-color: rgba(99, 102, 241, 0.3);
-  color: #a5b4fc;
-}
-
-[data-theme="dark"] .career-card-action-btn:hover {
-  background: #6366f1;
-  color: #ffffff;
+  transform: translateY(-3px);
 }

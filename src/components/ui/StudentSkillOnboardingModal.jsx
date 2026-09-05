@@ -99,32 +99,62 @@ export default function StudentSkillOnboardingModal({
   const [selectedFrameworks, setSelectedFrameworks] = useState([]);
   const [selectedTools, setSelectedTools] = useState([]);
 
-  const userId = currentUser?.id || currentUser?.userId;
+  const userId = currentUser?.id || currentUser?.userId || 1;
 
-  // Load existing saved skills from database if user already onboarded
+  // Load existing saved skills from database and local storage
   useEffect(() => {
     if (!userId) return;
+
+    // 1. Check local storage for category selections
+    try {
+      const userKey = currentUser?.id || currentUser?.email || userId;
+      const saved = localStorage.getItem(`talentorbit_skills_onboarded_${userKey}`);
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed.languages) && parsed.languages.length > 0) setSelectedLanguages(parsed.languages);
+        if (Array.isArray(parsed.libraries) && parsed.libraries.length > 0) setSelectedLibraries(parsed.libraries);
+        if (Array.isArray(parsed.frameworks) && parsed.frameworks.length > 0) setSelectedFrameworks(parsed.frameworks);
+        if (Array.isArray(parsed.tools) && parsed.tools.length > 0) setSelectedTools(parsed.tools);
+      }
+    } catch (e) {
+      // ignore
+    }
+
+    // 2. Query backend profile skills from MySQL
     profileAPI.getProfile(userId)
       .then((prof) => {
-        if (prof) {
-          if (Array.isArray(prof.languages) && prof.languages.length > 0) {
-            setSelectedLanguages(prof.languages);
-          }
-          if (Array.isArray(prof.libraries) && prof.libraries.length > 0) {
-            setSelectedLibraries(prof.libraries);
-          }
-          if (Array.isArray(prof.frameworks) && prof.frameworks.length > 0) {
-            setSelectedFrameworks(prof.frameworks);
-          }
-          if (Array.isArray(prof.tools) && prof.tools.length > 0) {
-            setSelectedTools(prof.tools);
-          }
+        if (prof && Array.isArray(prof.skills) && prof.skills.length > 0) {
+          const langMap = new Map(PRESET_LANGUAGES.map((l) => [l.name.toLowerCase(), l.name]));
+          const frameworkMap = new Map(PRESET_FRAMEWORKS.map((f) => [f.name.toLowerCase(), f.name]));
+          const libMap = new Map(PRESET_LIBRARIES.map((lib) => [lib.name.toLowerCase(), lib.name]));
+          const toolMap = new Map(PRESET_TOOLS.map((t) => [t.name.toLowerCase(), t.name]));
+
+          const langs = new Set();
+          const libs = new Set();
+          const fws = new Set();
+          const tls = new Set();
+
+          prof.skills.forEach((s) => {
+            const clean = (typeof s === 'string' ? s.split('(')[0].trim() : '').trim();
+            if (!clean) return;
+            const lower = clean.toLowerCase();
+
+            if (langMap.has(lower)) langs.add(langMap.get(lower));
+            else if (frameworkMap.has(lower)) fws.add(frameworkMap.get(lower));
+            else if (libMap.has(lower)) libs.add(libMap.get(lower));
+            else if (toolMap.has(lower)) tls.add(toolMap.get(lower));
+          });
+
+          if (langs.size > 0) setSelectedLanguages((prev) => Array.from(new Set([...prev, ...langs])));
+          if (fws.size > 0) setSelectedFrameworks((prev) => Array.from(new Set([...prev, ...fws])));
+          if (libs.size > 0) setSelectedLibraries((prev) => Array.from(new Set([...prev, ...libs])));
+          if (tls.size > 0) setSelectedTools((prev) => Array.from(new Set([...prev, ...tls])));
         }
       })
       .catch((err) => {
         console.warn('Could not pre-load user skills from database:', err.message);
       });
-  }, [userId]);
+  }, [userId, currentUser]);
 
   const [searchQuery, setSearchQuery] = useState('');
   const [customInput, setCustomInput] = useState('');
@@ -167,6 +197,7 @@ export default function StudentSkillOnboardingModal({
     setApiError('');
 
     const compiledData = {
+      fullName: currentUser?.fullName || currentUser?.name,
       languages: selectedLanguages,
       libraries: selectedLibraries,
       frameworks: selectedFrameworks,
@@ -180,12 +211,10 @@ export default function StudentSkillOnboardingModal({
     };
 
     try {
-      const userId = currentUser?.id || currentUser?.userId;
+      const activeUserId = currentUser?.id || currentUser?.userId || 1;
 
-      // 1. Call real Spring Boot REST API if userId exists
-      if (userId) {
-        await studentAPI.saveOnboardingSkills(userId, compiledData);
-      }
+      // 1. Call real Spring Boot REST API
+      await studentAPI.saveOnboardingSkills(activeUserId, compiledData);
 
       setApiSuccess(true);
 
@@ -198,15 +227,8 @@ export default function StudentSkillOnboardingModal({
         if (onClose) onClose();
       }, 500);
     } catch (err) {
-      console.warn('Backend REST API call note:', err.message);
-      // Even if backend server is in restart cycle, keep local state updated & inform user
-      if (onComplete) {
-        onComplete(compiledData);
-      }
-      setApiError(err.message || 'Saved locally. Backend sync will retry.');
-      setTimeout(() => {
-        if (onClose) onClose();
-      }, 1000);
+      console.error('Backend REST API call note:', err.message);
+      setApiError(err.message || 'Failed to sync skills with backend server. Please try again.');
     } finally {
       setIsSaving(false);
     }

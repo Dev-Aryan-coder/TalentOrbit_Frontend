@@ -73,7 +73,7 @@ export const SidebarProvider = React.forwardRef(
             ...style,
           }}
           className={cn(
-            "group/sidebar-wrapper flex min-h-svh w-full text-slate-900 dark:text-slate-100",
+            "group/sidebar-wrapper flex h-screen max-h-screen w-full overflow-hidden text-slate-900 dark:text-slate-100",
             className
           )}
           ref={ref}
@@ -109,7 +109,7 @@ export const Sidebar = React.forwardRef(
         data-variant={variant}
         data-side={side}
         className={cn(
-          "relative flex h-svh w-[var(--sidebar-width)] flex-col border-r border-slate-200 bg-white transition-[width] duration-200 ease-linear dark:border-slate-800 dark:bg-slate-950",
+          "sticky top-0 left-0 flex h-screen max-h-screen w-[var(--sidebar-width)] flex-shrink-0 flex-col overflow-hidden border-r border-slate-200 bg-white transition-[width] duration-200 ease-linear dark:border-slate-800 dark:bg-slate-950",
           className
         )}
         {...props}
@@ -296,7 +296,7 @@ export const SidebarInset = React.forwardRef(({ className, ...props }, ref) => {
     <main
       ref={ref}
       className={cn(
-        "relative flex min-h-svh flex-1 flex-col bg-slate-50 dark:bg-slate-950",
+        "relative flex h-screen max-h-screen flex-1 flex-col overflow-y-auto bg-slate-50 dark:bg-slate-950",
         className
       )}
       {...props}

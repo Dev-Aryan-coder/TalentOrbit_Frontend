@@ -45,6 +45,7 @@ export default function StudentOverviewTab({ currentUser, onSelectTab }) {
   const [skillGaps, setSkillGaps] = useState([]);
   const [matchedPostings, setMatchedPostings] = useState([]);
   const [nextMilestone, setNextMilestone] = useState(null);
+  const [hasSkills, setHasSkills] = useState(false);
   const [applyingId, setApplyingId] = useState(null);
   const [appliedPostingIds, setAppliedPostingIds] = useState(new Set());
   const [statusMessage, setStatusMessage] = useState(null);
@@ -71,6 +72,7 @@ export default function StudentOverviewTab({ currentUser, onSelectTab }) {
       // Process Stats & Profile
       let readiness = 0;
       let targetRole = '';
+      let studentHasSkills = false;
       if (profileRes.status === 'fulfilled' && profileRes.value) {
         if (profileRes.value.employabilityScore != null) {
           readiness = profileRes.value.employabilityScore;
@@ -78,7 +80,11 @@ export default function StudentOverviewTab({ currentUser, onSelectTab }) {
         if (profileRes.value.targetRole) {
           targetRole = profileRes.value.targetRole;
         }
+        if (Array.isArray(profileRes.value.skills) && profileRes.value.skills.length > 0) {
+          studentHasSkills = true;
+        }
       }
+      setHasSkills(studentHasSkills);
 
       let verifiedCount = 0;
       let matchesCount = 0;
@@ -326,7 +332,7 @@ export default function StudentOverviewTab({ currentUser, onSelectTab }) {
       )}
 
       {/* Milestone Roadmap Banner */}
-      {nextMilestone && (
+      {hasSkills && nextMilestone ? (
         <div className="student-milestone-banner">
           <div className="student-milestone-left">
             <div className="student-milestone-icon">
@@ -347,6 +353,29 @@ export default function StudentOverviewTab({ currentUser, onSelectTab }) {
             <ArrowRight size={15} />
           </button>
         </div>
+      ) : (
+        <div className="student-milestone-banner">
+          <div className="student-milestone-left">
+            <div className="student-milestone-icon">
+              <Sparkles size={22} />
+            </div>
+            <div>
+              <div className="student-milestone-tag">Career Roadmap Setup</div>
+              <div className="student-milestone-title">Define Your Technical Genome</div>
+              <div className="student-milestone-desc">
+                Select your programming languages, frameworks, and developer tools to generate your personalized career progression roadmap.
+              </div>
+            </div>
+          </div>
+          <button
+            type="button"
+            className="student-milestone-action-btn"
+            onClick={() => onSelectTab('skills')}
+          >
+            <span>Configure Skills</span>
+            <ArrowRight size={15} />
+          </button>
+        </div>
       )}
 
       {/* Split Section: Skill Gaps vs Recommended Postings */}
@@ -359,7 +388,7 @@ export default function StudentOverviewTab({ currentUser, onSelectTab }) {
                 <Sliders size={18} className="text-indigo-500" />
                 <span>Market Skill Deficits</span>
               </div>
-              <div className="student-panel-subtitle">Industry hiring demand versus student supply</div>
+              <div className="student-panel-subtitle">National Industry Benchmark • Demand vs Supply</div>
             </div>
             <button
               type="button"
@@ -442,65 +471,77 @@ export default function StudentOverviewTab({ currentUser, onSelectTab }) {
               <RefreshCw size={24} className="animate-spin text-indigo-500 mb-2" />
               <div className="student-empty-title">Loading active opportunities...</div>
             </div>
-          ) : matchedPostings.length > 0 ? (
+          ) : (hasSkills && matchedPostings.filter((p) => (p.matchScore || 0) > 0).length > 0) ? (
             <div className="student-opportunities-stack">
-              {matchedPostings.map((p) => {
-                const score = p.matchScore != null ? p.matchScore : 85;
-                const isApplied = appliedPostingIds.has(p.id);
-                const isApplying = applyingId === p.id;
-                const initial = p.title ? p.title.charAt(0).toUpperCase() : 'O';
+              {matchedPostings
+                .filter((p) => (p.matchScore || 0) > 0)
+                .map((p) => {
+                  const score = p.matchScore != null ? p.matchScore : 85;
+                  const isApplied = appliedPostingIds.has(p.id);
+                  const isApplying = applyingId === p.id;
+                  const initial = p.title ? p.title.charAt(0).toUpperCase() : 'O';
 
-                return (
-                  <div key={p.id} className="student-opportunity-card">
-                    <div className="student-opp-left">
-                      <div className="student-opp-logo">{initial}</div>
-                      <div>
-                        <div className="student-opp-title">{p.title}</div>
-                        <div className="student-opp-meta">
-                          {p.stipend && (
-                            <span className="student-opp-meta-item">
-                              <span>{p.stipend}</span>
-                            </span>
-                          )}
-                          {p.location && (
-                            <span className="student-opp-meta-item">
-                              <span>{p.location}</span>
-                            </span>
-                          )}
-                          {p.deadline && (
-                            <span className="student-opp-meta-item">
-                              <Clock size={12} />
-                              <span>{p.deadline}</span>
-                            </span>
-                          )}
+                  return (
+                    <div key={p.id} className="student-opportunity-card">
+                      <div className="student-opp-left">
+                        <div className="student-opp-logo">{initial}</div>
+                        <div>
+                          <div className="student-opp-title">{p.title}</div>
+                          <div className="student-opp-meta">
+                            {p.stipend && (
+                              <span className="student-opp-meta-item">
+                                <span>{p.stipend}</span>
+                              </span>
+                            )}
+                            {p.location && (
+                              <span className="student-opp-meta-item">
+                                <span>{p.location}</span>
+                              </span>
+                            )}
+                            {p.deadline && (
+                              <span className="student-opp-meta-item">
+                                <Clock size={12} />
+                                <span>{p.deadline}</span>
+                              </span>
+                            )}
+                          </div>
                         </div>
                       </div>
-                    </div>
 
-                    <div className="student-opp-right">
-                      <span className={`student-match-pill ${score >= 80 ? 'high' : ''}`}>
-                        {score}% Match
-                      </span>
-                      <button
-                        type="button"
-                        className={`student-apply-btn ${isApplied ? 'applied' : ''}`}
-                        onClick={() => handleApply(p.id)}
-                        disabled={isApplied || isApplying}
-                      >
-                        {isApplied ? 'Applied' : isApplying ? 'Applying...' : '1-Click Apply'}
-                      </button>
+                      <div className="student-opp-right">
+                        <span className={`student-match-pill ${score >= 80 ? 'high' : ''}`}>
+                          {score}% Match
+                        </span>
+                        <button
+                          type="button"
+                          className={`student-apply-btn ${isApplied ? 'applied' : ''}`}
+                          onClick={() => handleApply(p.id)}
+                          disabled={isApplied || isApplying}
+                        >
+                          {isApplied ? 'Applied' : isApplying ? 'Applying...' : '1-Click Apply'}
+                        </button>
+                      </div>
                     </div>
-                  </div>
-                );
-              })}
+                  );
+                })}
             </div>
           ) : (
             <div className="student-empty-state">
               <Briefcase size={32} className="student-empty-icon" />
-              <div className="student-empty-title">No Postings Found</div>
+              <div className="student-empty-title">No Matched Opportunities Yet</div>
               <div className="student-empty-desc">
-                Complete your skill diagnostic assessment to discover personalized job drives.
+                {hasSkills
+                  ? "Take a 20-question skill diagnostic assessment to verify your competencies and unlock corporate ranking."
+                  : "Complete your 4-step skill onboarding to unlock opportunities matching your technical abilities."}
               </div>
+              <button
+                type="button"
+                onClick={() => onSelectTab(hasSkills ? 'assessment' : 'skills')}
+                className="mt-3 px-3.5 py-1.5 text-xs font-semibold text-white bg-indigo-600 rounded-md hover:bg-indigo-700 transition-colors inline-flex items-center gap-1.5 shadow-sm"
+              >
+                <span>{hasSkills ? 'Start Skill Assessment' : 'Select Skills'}</span>
+                <ArrowRight size={13} />
+              </button>
             </div>
           )}
         </div>
