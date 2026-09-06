@@ -1,0 +1,21 @@
+/* RecruiterDashboard Styling */
+.recruiter-dashboard-root {
+  background-color: var(--background);
+}
+
+.recruiter-dashboard-main::-webkit-scrollbar {
+  width: 6px;
+}
+
+.recruiter-dashboard-main::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.recruiter-dashboard-main::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.25);
+  border-radius: 6px;
+}
+
+.recruiter-dashboard-main::-webkit-scrollbar-thumb:hover {
+  background: rgba(148, 163, 184, 0.45);
+}

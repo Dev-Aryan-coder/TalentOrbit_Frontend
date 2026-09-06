@@ -1,0 +1,15 @@
+/* RecruiterTalentPoolTab Styling */
+.recruiter-talentpool-space {
+  animation: fadeInTalentPool 0.25s ease-out;
+}
+
+@keyframes fadeInTalentPool {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

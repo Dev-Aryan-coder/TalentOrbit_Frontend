@@ -6,6 +6,7 @@ import AboutUsPage from './views/public/AboutUsPage';
 import ContactUsPage from './views/public/ContactUsPage';
 import StudentAchievements from './views/student/StudentAchievements';
 import StudentDashboard from './views/student/StudentDashboard';
+import RecruiterDashboard from './views/recruiter/RecruiterDashboard';
 import AuthPage from './views/public/AuthPage';
 import ProfileSettingsModal from './components/ui/ProfileSettingsModal';
 import AccountSettingsModal from './components/ui/AccountSettingsModal';
@@ -175,6 +176,17 @@ export default function App() {
 
       {(currentView === 'student' || currentView === 'dashboard') && (
         <StudentDashboard
+          currentUser={currentUser}
+          currentTheme={currentTheme}
+          onThemeChange={setCurrentTheme}
+          onNavigateHome={handleNavigateHome}
+          onNavigatePage={handleNavigatePage}
+          onLogout={handleLogout}
+        />
+      )}
+
+      {(currentView === 'recruiter' || currentView === 'industry') && (
+        <RecruiterDashboard
           currentUser={currentUser}
           currentTheme={currentTheme}
           onThemeChange={setCurrentTheme}

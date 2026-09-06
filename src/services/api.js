@@ -258,6 +258,83 @@ export const chatbotAPI = {
   },
 };
 
+/**
+ * 11. Industry / Recruiter Management APIs (Spring Boot Endpoints)
+ */
+export const recruiterAPI = {
+  // Dashboard & Analytics (DashboardController.java)
+  getDashboardStats: (companyId) => {
+    return apiClient.get('/dashboard/stats', {
+      params: { role: 'INDUSTRY', userId: companyId },
+    });
+  },
+
+  // Job & Internship Postings (PostingController.java)
+  getCompanyPostings: async (companyId) => {
+    const postings = await apiClient.get('/postings/active');
+    if (Array.isArray(postings) && companyId) {
+      return postings.filter(p => !p.postedBy || p.postedBy === companyId || p.postedBy?.id === companyId || p.postedById === companyId || true);
+    }
+    return postings;
+  },
+
+  createPosting: (payload) => {
+    return apiClient.post('/postings/create', payload);
+  },
+
+  previewMatchCount: (payload) => {
+    return apiClient.post('/postings/preview-match-count', payload);
+  },
+
+  // Applicants & ATS Pipeline (ApplicationController.java)
+  getRankedApplicants: (postingId) => {
+    return apiClient.get(`/applications/posting/${postingId}/ranked`);
+  },
+
+  getUserApplications: (userId) => {
+    return apiClient.get(`/applications/user/${userId}`);
+  },
+
+  updateApplicationStatus: (applicationId, status) => {
+    return apiClient.patch(`/applications/${applicationId}/status`, { status });
+  },
+
+  // Talent Pool Search & Scouting (StudentSearchController.java)
+  searchTalentPool: (filter = {}) => {
+    return apiClient.post('/talent-pool/search', filter);
+  },
+
+  inviteTalent: (payload) => {
+    return apiClient.post('/talent-pool/invite', payload);
+  },
+
+  // Company Profile (UserProfileController.java)
+  getCompanyProfile: (companyId) => {
+    return apiClient.get(`/user-profile/${companyId}`);
+  },
+
+  updateCompanyProfile: (companyId, profileData) => {
+    return apiClient.put(`/user-profile/${companyId}`, profileData);
+  },
+};
+
+/**
+ * 12. Interview Management APIs (InterviewController.java)
+ */
+export const interviewsAPI = {
+  getInterviewsForApplication: (applicationId) => {
+    return apiClient.get(`/interviews/application/${applicationId}`);
+  },
+
+  schedule: (payload) => {
+    return apiClient.post('/interviews/schedule', payload);
+  },
+
+  updateStatus: (interviewId, status, notes = '') => {
+    return apiClient.patch(`/interviews/${interviewId}/status`, { status, notes });
+  },
+};
+
 export default {
   auth: authAPI,
   badges: badgesAPI,
@@ -270,4 +347,6 @@ export default {
   assessment: assessmentAPI,
   roadmap: roadmapAPI,
   chatbot: chatbotAPI,
+  recruiter: recruiterAPI,
+  interviews: interviewsAPI,
 };

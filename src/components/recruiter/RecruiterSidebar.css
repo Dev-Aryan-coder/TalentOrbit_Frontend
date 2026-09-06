@@ -1,0 +1,30 @@
+/* RecruiterSidebar Styling */
+.recruiter-sidebar-container {
+  transition: width 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  font-family: inherit;
+}
+
+.recruiter-sidebar-header {
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.95), rgba(248, 250, 252, 0.85));
+}
+
+.dark .recruiter-sidebar-header {
+  background: linear-gradient(to bottom, rgba(15, 23, 42, 0.95), rgba(2, 6, 23, 0.85));
+}
+
+.recruiter-sidebar-content::-webkit-scrollbar {
+  width: 4px;
+}
+
+.recruiter-sidebar-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.recruiter-sidebar-content::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.2);
+  border-radius: 4px;
+}
+
+.recruiter-sidebar-content::-webkit-scrollbar-thumb:hover {
+  background: rgba(148, 163, 184, 0.4);
+}

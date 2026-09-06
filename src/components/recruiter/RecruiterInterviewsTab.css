@@ -1,0 +1,15 @@
+/* RecruiterInterviewsTab Styling */
+.recruiter-interviews-space {
+  animation: fadeInInterviews 0.25s ease-out;
+}
+
+@keyframes fadeInInterviews {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
