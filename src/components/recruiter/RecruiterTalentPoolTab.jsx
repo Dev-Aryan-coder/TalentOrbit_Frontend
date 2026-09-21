@@ -26,6 +26,7 @@ import {
   FolderCheck,
 } from 'lucide-react';
 import { recruiterAPI } from '../../services/api';
+import { stripSkillTag } from '@/lib/skillCategories';
 import './RecruiterTalentPoolTab.css';
 
 export default function RecruiterTalentPoolTab({ currentUser, onSelectTab }) {
@@ -73,7 +74,7 @@ export default function RecruiterTalentPoolTab({ currentUser, onSelectTab }) {
     let isMounted = true;
     setLoading(true);
 
-    const filterPayload = {};
+    const filterPayload = { role: 'STUDENT' };
     if (selectedBranch !== 'ALL') filterPayload.branch = selectedBranch;
     if (minCgpa !== 'ALL') filterPayload.minCgpa = parseFloat(minCgpa);
 
@@ -82,19 +83,56 @@ export default function RecruiterTalentPoolTab({ currentUser, onSelectTab }) {
       .then((res) => {
         if (!isMounted) return;
         if (Array.isArray(res)) {
-          const mapped = res.map((s) => ({
-            id: s.userId || s.id,
-            name: s.name || s.fullName || 'Candidate',
-            college: s.institutionName || s.college || '',
-            branch: s.branch || '',
-            cgpa: s.cgpa ?? null,
-            year: s.gradYear || s.graduationYear || null,
-            skills: Array.isArray(s.topSkills) ? s.topSkills : Array.isArray(s.skills) ? s.skills : [],
-            verifiedBadges: Array.isArray(s.verifiedBadges) ? s.verifiedBadges : (s.hasAssessmentData ? ['Assessment Verified'] : []),
-            matchScore: s.matchScore ?? 0,
-            github: s.githubUrl || '',
-            status: s.status || '',
-          }));
+          const mapped = res
+            .filter((s) => {
+              const candId = s.userId || s.id;
+              // 1. Exclude the currently logged-in recruiter / enterprise user
+              if (candId && (candId === currentUser?.id || candId === currentUser?.userId || candId === companyId)) {
+                return false;
+              }
+              // 2. Exclude non-student roles
+              if (s.role && s.role !== 'STUDENT') {
+                return false;
+              }
+              // 3. Exclude HR / recruiter test accounts
+              const nameLower = (s.name || s.fullName || '').toLowerCase().trim();
+              const emailLower = (s.email || '').toLowerCase().trim();
+              if (nameLower === 'hr' || nameLower === 'recruiter' || emailLower.startsWith('hr@') || emailLower.includes('recruiter')) {
+                return false;
+              }
+              return true;
+            })
+            .map((s) => {
+            const rawList = Array.isArray(s.topSkills) && s.topSkills.length > 0
+              ? s.topSkills
+              : Array.isArray(s.skills)
+              ? s.skills
+              : [];
+
+            const seen = new Set();
+            const cleanSkills = [];
+            rawList.forEach((sk) => {
+              const clean = stripSkillTag(sk);
+              if (clean && !seen.has(clean.toLowerCase())) {
+                seen.add(clean.toLowerCase());
+                cleanSkills.push(clean);
+              }
+            });
+
+            return {
+              id: s.userId || s.id,
+              name: s.name || s.fullName || 'Candidate',
+              college: s.institutionName || s.college || '',
+              branch: s.branch || '',
+              cgpa: s.cgpa ?? null,
+              year: s.gradYear || s.graduationYear || null,
+              skills: cleanSkills,
+              verifiedBadges: Array.isArray(s.verifiedBadges) ? s.verifiedBadges : (s.hasAssessmentData ? ['Assessment Verified'] : []),
+              matchScore: s.matchScore ?? 0,
+              github: s.githubUrl || '',
+              status: s.status || '',
+            };
+          });
           setAllTalent(mapped);
         } else {
           setAllTalent([]);
@@ -174,7 +212,7 @@ export default function RecruiterTalentPoolTab({ currentUser, onSelectTab }) {
               Re-Rank Pool Against Job Opening:
             </span>
             <select
-              value={matchAgainstJob}
+              value={matchAgainstJob ?? ''}
               onChange={(e) => setMatchAgainstJob(e.target.value)}
               className="w-full bg-slate-900/90 text-white text-xs font-semibold px-3 py-1.5 rounded-lg border border-white/20 focus:outline-none"
             >
@@ -202,7 +240,7 @@ export default function RecruiterTalentPoolTab({ currentUser, onSelectTab }) {
 
         <div>
           <select
-            value={selectedBranch}
+            value={selectedBranch ?? 'ALL'}
             onChange={(e) => setSelectedBranch(e.target.value)}
             className="w-full h-9 px-3 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-xs text-slate-700 dark:text-slate-300 font-medium"
           >
@@ -215,7 +253,7 @@ export default function RecruiterTalentPoolTab({ currentUser, onSelectTab }) {
 
         <div>
           <select
-            value={minCgpa}
+            value={minCgpa ?? 'ALL'}
             onChange={(e) => setMinCgpa(e.target.value)}
             className="w-full h-9 px-3 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-xs text-slate-700 dark:text-slate-300 font-medium"
           >
@@ -315,21 +353,50 @@ export default function RecruiterTalentPoolTab({ currentUser, onSelectTab }) {
                 </div>
 
                 {/* Skills tags */}
-                <div>
-                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1">
-                    Technical Genome
-                  </span>
-                  <div className="flex flex-wrap gap-1">
-                    {candidate.skills.map((skill) => (
-                      <span
-                        key={skill}
-                        className="px-2 py-0.5 rounded text-[10px] font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300"
-                      >
-                        {skill}
-                      </span>
-                    ))}
-                  </div>
-                </div>
+                {(() => {
+                  const seenRender = new Set();
+                  const distinctSkills = [];
+                  (candidate.skills || []).forEach((sk) => {
+                    const clean = stripSkillTag(sk);
+                    if (clean && !seenRender.has(clean.toLowerCase())) {
+                      seenRender.add(clean.toLowerCase());
+                      distinctSkills.push(clean);
+                    }
+                  });
+
+                  return (
+                    <div>
+                      <div className="flex items-center justify-between mb-1">
+                        <span className="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider">
+                          Technical Genome
+                        </span>
+                        {distinctSkills.length > 7 && (
+                          <span className="text-[10px] font-medium text-slate-400 dark:text-slate-500">
+                            {distinctSkills.length} skills total
+                          </span>
+                        )}
+                      </div>
+                      <div className="flex flex-wrap gap-1">
+                        {distinctSkills.slice(0, 7).map((skill) => (
+                          <span
+                            key={skill}
+                            className="px-2 py-0.5 rounded text-[10px] font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200/60 dark:border-slate-700/60"
+                          >
+                            {skill}
+                          </span>
+                        ))}
+                        {distinctSkills.length > 7 && (
+                          <span
+                            title={distinctSkills.slice(7).join(', ')}
+                            className="px-2 py-0.5 rounded text-[10px] font-semibold bg-blue-50 dark:bg-blue-950/40 text-blue-600 dark:text-blue-400 border border-blue-200/60 dark:border-blue-800/60 cursor-help"
+                          >
+                            +{distinctSkills.length - 7} more
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                  );
+                })()}
               </CardContent>
 
               <CardFooter className="pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">

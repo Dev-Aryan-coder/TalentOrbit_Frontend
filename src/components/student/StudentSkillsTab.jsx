@@ -1,6 +1,11 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { studentAPI, profileAPI } from '../../services/api';
 import {
+  parseSkill,
+  stripSkillTag,
+  formatSkillWithTag,
+} from '@/lib/skillCategories';
+import {
   PRESET_LANGUAGES,
   PRESET_LIBRARIES,
   PRESET_FRAMEWORKS,
@@ -43,44 +48,71 @@ import { SKILL_SUBTOPICS_MAP, getSubtopicsForSkill } from './StudentAssessmentTa
 import './StudentSkillsTab.css';
 
 const categorizeSkills = (rawSkillsList, savedCategories = {}) => {
-  const languages = new Set(Array.isArray(savedCategories.languages) ? savedCategories.languages : []);
-  const frameworks = new Set(Array.isArray(savedCategories.frameworks) ? savedCategories.frameworks : []);
-  const libraries = new Set(Array.isArray(savedCategories.libraries) ? savedCategories.libraries : []);
-  const tools = new Set(Array.isArray(savedCategories.tools) ? savedCategories.tools : []);
-  const aptitude = new Set(Array.isArray(savedCategories.aptitude) ? savedCategories.aptitude : []);
-  const softSkills = new Set(Array.isArray(savedCategories.soft_skills) ? savedCategories.soft_skills : []);
+  const languages = new Set();
+  const frameworks = new Set();
+  const libraries = new Set();
+  const tools = new Set();
+  const aptitude = new Set();
+  const softSkills = new Set();
 
-  const langMap = new Map(PRESET_LANGUAGES.map((l) => [l.name.toLowerCase(), l.name]));
-  const frameworkMap = new Map(PRESET_FRAMEWORKS.map((f) => [f.name.toLowerCase(), f.name]));
-  const libMap = new Map(PRESET_LIBRARIES.map((lib) => [lib.name.toLowerCase(), lib.name]));
-  const toolMap = new Map(PRESET_TOOLS.map((t) => [t.name.toLowerCase(), t.name]));
+  // 1. Seed from explicit savedCategories if present
+  if (Array.isArray(savedCategories.languages)) {
+    savedCategories.languages.forEach((s) => {
+      const { cleanName } = parseSkill(s, 'languages');
+      if (cleanName) languages.add(cleanName);
+    });
+  }
+  if (Array.isArray(savedCategories.frameworks)) {
+    savedCategories.frameworks.forEach((s) => {
+      const { cleanName } = parseSkill(s, 'frameworks');
+      if (cleanName) frameworks.add(cleanName);
+    });
+  }
+  if (Array.isArray(savedCategories.libraries)) {
+    savedCategories.libraries.forEach((s) => {
+      const { cleanName } = parseSkill(s, 'libraries');
+      if (cleanName) libraries.add(cleanName);
+    });
+  }
+  if (Array.isArray(savedCategories.tools)) {
+    savedCategories.tools.forEach((s) => {
+      const { cleanName } = parseSkill(s, 'tools');
+      if (cleanName) tools.add(cleanName);
+    });
+  }
+  if (Array.isArray(savedCategories.aptitude)) {
+    savedCategories.aptitude.forEach((s) => {
+      const { cleanName } = parseSkill(s, 'aptitude');
+      if (cleanName) aptitude.add(cleanName);
+    });
+  }
+  if (Array.isArray(savedCategories.soft_skills)) {
+    savedCategories.soft_skills.forEach((s) => {
+      const { cleanName } = parseSkill(s, 'soft_skills');
+      if (cleanName) softSkills.add(cleanName);
+    });
+  }
 
+  // 2. Categorize all raw skills (evaluating tags, known sets, patterns)
   (rawSkillsList || []).forEach((raw) => {
     if (!raw) return;
-    const cleanName = (typeof raw === 'string' ? raw.split('(')[0].trim() : (raw.name || raw.skillName || '')).trim();
+    const { cleanName, category } = parseSkill(raw);
     if (!cleanName) return;
-    const lower = cleanName.toLowerCase();
 
-    // 1. Check if it is an Aptitude Skill
-    if (lower.includes('aptitude') || lower.includes('quantitative') || lower.includes('numerical') || lower.includes('syllogism') || lower.includes('reasoning')) {
-      aptitude.add(cleanName);
-    }
-    // 2. Check if it is a Workplace Soft Skill
-    else if (lower.includes('soft skill') || lower.includes('communication') || lower.includes('teamwork') || lower.includes('conflict') || lower.includes('workplace') || lower.includes('ethics') || lower.includes('adaptability')) {
-      softSkills.add(cleanName);
-    }
-    // 3. Technical Stack Mapping
-    else if (langMap.has(lower)) {
-      languages.add(langMap.get(lower));
-    } else if (frameworkMap.has(lower)) {
-      frameworks.add(frameworkMap.get(lower));
-    } else if (libMap.has(lower)) {
-      libraries.add(libMap.get(lower));
-    } else if (toolMap.has(lower)) {
-      tools.add(toolMap.get(lower));
-    } else {
-      // Default to Framework if unrecognized technical skill
+    if (category === 'tools') {
+      tools.add(cleanName);
+    } else if (category === 'frameworks') {
       frameworks.add(cleanName);
+    } else if (category === 'libraries') {
+      libraries.add(cleanName);
+    } else if (category === 'languages') {
+      languages.add(cleanName);
+    } else if (category === 'aptitude') {
+      aptitude.add(cleanName);
+    } else if (category === 'soft_skills') {
+      softSkills.add(cleanName);
+    } else {
+      tools.add(cleanName);
     }
   });
 
@@ -115,23 +147,37 @@ export default function StudentSkillsTab({ currentUser, userSkillsData, onSelect
   const [employabilityScore, setEmployabilityScore] = useState(87);
 
   const [profileSkills, setProfileSkills] = useState(() => {
-    try {
-      if (userSkillsData && (userSkillsData.languages || userSkillsData.frameworks || userSkillsData.libraries || userSkillsData.tools)) {
-        return categorizeSkills([], userSkillsData);
-      }
-      const userKey = currentUser?.id || currentUser?.email || activeUserId || 'guest';
-      const saved = localStorage.getItem(`talentorbit_skills_onboarded_${userKey}`);
-      if (saved) {
-        const parsed = JSON.parse(saved);
-        return categorizeSkills([], parsed);
-      }
-    } catch {
-      // ignore
+    if (userSkillsData && (userSkillsData.languages || userSkillsData.frameworks || userSkillsData.libraries || userSkillsData.tools)) {
+      return categorizeSkills([], userSkillsData);
     }
     return { languages: [], frameworks: [], libraries: [], tools: [], aptitude: [], soft_skills: [] };
   });
 
   const [verifiedMap, setVerifiedMap] = useState(new Map()); // skillName -> { isVerified, proficiency }
+
+  // Listen for immediate skill verification events from the Assessment tab
+  useEffect(() => {
+    const handleSkillVerified = (e) => {
+      const detail = e?.detail;
+      if (!detail || !detail.skillTitle) return;
+      const clean = stripSkillTag(detail.skillTitle).toLowerCase().trim();
+      setVerifiedMap((prev) => {
+        const next = new Map(prev);
+        next.set(clean, {
+          isVerified: detail.isVerified,
+          proficiency: detail.proficiency || 'INTERMEDIATE',
+          raw: detail,
+        });
+        return next;
+      });
+      if (detail.isVerified) {
+        setEmployabilityScore((prev) => Math.min(99, Math.max(prev, 87) + 3));
+      }
+    };
+
+    window.addEventListener('talentorbit_skill_verified', handleSkillVerified);
+    return () => window.removeEventListener('talentorbit_skill_verified', handleSkillVerified);
+  }, []);
 
   useEffect(() => {
     setLoading(true);
@@ -144,6 +190,23 @@ export default function StudentSkillsTab({ currentUser, userSkillsData, onSelect
         const vMap = new Map();
         const allSkillNames = [];
 
+        // 0. Seed from verified registry cache
+        try {
+          const regKey = `talentorbit_verified_skills_${activeUserId}`;
+          const reg = JSON.parse(localStorage.getItem(regKey) || '{}');
+          Object.entries(reg).forEach(([k, val]) => {
+            if (val && val.isVerified) {
+              vMap.set(k.toLowerCase().trim(), {
+                isVerified: true,
+                proficiency: val.proficiency || 'INTERMEDIATE',
+                raw: val,
+              });
+            }
+          });
+        } catch (regErr) {
+          console.warn('Could not read verified registry cache:', regErr);
+        }
+
         // 1. Process verified skills from backend student records (student_skills in MySQL)
         if (studRes.status === 'fulfilled' && studRes.value) {
           if (studRes.value.employabilityScore) {
@@ -151,24 +214,16 @@ export default function StudentSkillsTab({ currentUser, userSkillsData, onSelect
           }
           if (Array.isArray(studRes.value.skills)) {
             studRes.value.skills.forEach((s) => {
-              if (typeof s === 'string') {
-                const clean = s.split('(')[0].trim();
-                const isV = s.toLowerCase().includes('verified');
-                let prof = 'BEGINNER';
-                if (s.toLowerCase().includes('advanced')) prof = 'ADVANCED';
-                else if (s.toLowerCase().includes('intermediate')) prof = 'INTERMEDIATE';
+              const { cleanName } = parseSkill(s);
+              if (!cleanName) return;
+              const rawStr = typeof s === 'string' ? s : (s.name || s.skillName || '');
+              const isV = rawStr.toLowerCase().includes('verified') || !!s.isVerified || !!s.verifiedFlag;
+              let prof = 'BEGINNER';
+              if (rawStr.toLowerCase().includes('advanced') || s.proficiencyLevel === 'ADVANCED') prof = 'ADVANCED';
+              else if (rawStr.toLowerCase().includes('intermediate') || s.proficiencyLevel === 'INTERMEDIATE') prof = 'INTERMEDIATE';
 
-                vMap.set(clean.toLowerCase(), { isVerified: isV, proficiency: prof, raw: s });
-                if (clean) allSkillNames.push(clean);
-              } else if (s && (s.name || s.skillName)) {
-                const n = s.name || s.skillName;
-                vMap.set(n.toLowerCase(), {
-                  isVerified: !!s.isVerified,
-                  proficiency: s.proficiencyLevel || s.proficiency || 'BEGINNER',
-                  raw: s,
-                });
-                allSkillNames.push(n);
-              }
+              vMap.set(cleanName.toLowerCase(), { isVerified: isV, proficiency: prof, raw: s });
+              allSkillNames.push(s);
             });
           }
         }
@@ -180,6 +235,30 @@ export default function StudentSkillsTab({ currentUser, userSkillsData, onSelect
             p.skills.forEach((s) => {
               if (typeof s === 'string' && s.trim()) {
                 allSkillNames.push(s.trim());
+                const { cleanName } = parseSkill(s);
+                if (cleanName) {
+                  const rawStr = s.trim();
+                  const isV = rawStr.toLowerCase().includes('verified');
+                  let prof = 'BEGINNER';
+                  if (rawStr.toLowerCase().includes('advanced')) prof = 'ADVANCED';
+                  else if (rawStr.toLowerCase().includes('intermediate')) prof = 'INTERMEDIATE';
+
+                  const existing = vMap.get(cleanName.toLowerCase());
+                  if (!existing || (!existing.isVerified && isV)) {
+                    vMap.set(cleanName.toLowerCase(), { isVerified: isV, proficiency: prof, raw: s });
+                  }
+                }
+              } else if (typeof s === 'object' && s !== null) {
+                const cleanName = s.name || s.skillName;
+                if (cleanName) {
+                  allSkillNames.push(cleanName);
+                  const isV = !!s.isVerified || !!s.verifiedFlag || (s.name && s.name.toLowerCase().includes('verified'));
+                  const prof = s.proficiencyLevel || 'BEGINNER';
+                  const existing = vMap.get(cleanName.toLowerCase());
+                  if (!existing || (!existing.isVerified && isV)) {
+                    vMap.set(cleanName.toLowerCase(), { isVerified: isV, proficiency: prof, raw: s });
+                  }
+                }
               }
             });
           }
@@ -187,19 +266,8 @@ export default function StudentSkillsTab({ currentUser, userSkillsData, onSelect
 
         setVerifiedMap(vMap);
 
-        // 3. Check local storage / prop for category breakdown
-        let savedCategories = userSkillsData || {};
-        if (!savedCategories.languages && !savedCategories.frameworks) {
-          try {
-            const userKey = currentUser?.id || currentUser?.email || activeUserId;
-            const saved = localStorage.getItem(`talentorbit_skills_onboarded_${userKey}`);
-            if (saved) {
-              savedCategories = JSON.parse(saved);
-            }
-          } catch (e) {
-            // ignore
-          }
-        }
+        // 3. Resolve category breakdown directly from backend profile (NO LOCAL STORAGE)
+        const savedCategories = (profRes.status === 'fulfilled' && profRes.value) ? profRes.value : (userSkillsData || {});
 
         if (Array.isArray(savedCategories.languages)) allSkillNames.push(...savedCategories.languages);
         if (Array.isArray(savedCategories.frameworks)) allSkillNames.push(...savedCategories.frameworks);

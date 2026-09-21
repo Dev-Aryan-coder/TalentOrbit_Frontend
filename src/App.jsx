@@ -7,6 +7,7 @@ import ContactUsPage from './views/public/ContactUsPage';
 import StudentAchievements from './views/student/StudentAchievements';
 import StudentDashboard from './views/student/StudentDashboard';
 import RecruiterDashboard from './views/recruiter/RecruiterDashboard';
+import AcademicianDashboard from './views/academician/AcademicianDashboard';
 import AuthPage from './views/public/AuthPage';
 import ProfileSettingsModal from './components/ui/ProfileSettingsModal';
 import AccountSettingsModal from './components/ui/AccountSettingsModal';
@@ -36,17 +37,27 @@ export default function App() {
   const [isAccountModalOpen, setIsAccountModalOpen] = useState(false);
   const [isAppearanceModalOpen, setIsAppearanceModalOpen] = useState(false);
 
-  // Sync theme changes with document data-theme attribute
+  // Sync theme changes with document class (.dark for Tailwind) and data-theme attribute
   useEffect(() => {
-    document.documentElement.setAttribute('data-theme', currentTheme);
+    if (currentTheme === 'dark') {
+      document.documentElement.classList.add('dark');
+      document.documentElement.setAttribute('data-theme', 'dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
     localStorage.setItem('talentorbit_theme', currentTheme);
   }, [currentTheme]);
 
   useEffect(() => {
     const path = window.location.pathname.replace('/', '');
-    if (['how-it-works', 'features', 'about-us', 'contact', 'student', 'dashboard', 'achievements', 'badges', 'login', 'register', 'signup'].includes(path)) {
+    if (['how-it-works', 'features', 'about-us', 'contact', 'student', 'dashboard', 'achievements', 'badges', 'login', 'register', 'signup', 'recruiter', 'industry', 'academician', 'faculty'].includes(path)) {
       if (path === 'dashboard') {
         setCurrentView('student');
+      } else if (path === 'faculty') {
+        setCurrentView('academician');
+      } else if (path === 'industry') {
+        setCurrentView('recruiter');
       } else {
         setCurrentView(path === 'signup' ? 'register' : path);
       }
@@ -111,7 +122,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen w-full bg-white">
+    <div className="min-h-screen w-full bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100">
       {currentView === 'home' && (
         <HomePage 
           onNavigateRole={(role) => setCurrentView(role)} 
@@ -187,6 +198,17 @@ export default function App() {
 
       {(currentView === 'recruiter' || currentView === 'industry') && (
         <RecruiterDashboard
+          currentUser={currentUser}
+          currentTheme={currentTheme}
+          onThemeChange={setCurrentTheme}
+          onNavigateHome={handleNavigateHome}
+          onNavigatePage={handleNavigatePage}
+          onLogout={handleLogout}
+        />
+      )}
+
+      {(currentView === 'academician' || currentView === 'faculty') && (
+        <AcademicianDashboard
           currentUser={currentUser}
           currentTheme={currentTheme}
           onThemeChange={setCurrentTheme}

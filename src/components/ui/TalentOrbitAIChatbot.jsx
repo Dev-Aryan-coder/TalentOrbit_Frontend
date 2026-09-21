@@ -115,7 +115,7 @@ export default function TalentOrbitAIChatbot({ currentUser }) {
     loadSessionMessages(sessionId);
   };
 
-  // Process Image File (from file picker, clipboard paste, or drag & drop)
+  // Process and optimize image (downscales & compresses to keep vision tokens well within Groq limits)
   const processImageFile = (file) => {
     if (!file) return;
 
@@ -124,15 +124,56 @@ export default function TalentOrbitAIChatbot({ currentUser }) {
       return;
     }
 
-    if (file.size > 5 * 1024 * 1024) {
-      alert('Image size exceeds 5MB limit.');
+    if (file.size > 25 * 1024 * 1024) {
+      alert('Image file exceeds 25MB limit.');
       return;
     }
 
     const reader = new FileReader();
-    reader.onload = () => {
-      setSelectedImage(reader.result);
-      setImagePreview(reader.result);
+    reader.onload = (event) => {
+      const rawDataUrl = event.target.result;
+      const img = new Image();
+
+      img.onload = () => {
+        // Downscale image to a max dimension of 960px.
+        // This keeps UI text crisp & readable while reducing Groq vision tokens from ~8,000 down to ~800-1,200!
+        const MAX_DIM = 960;
+        let width = img.width;
+        let height = img.height;
+
+        if (width > MAX_DIM || height > MAX_DIM) {
+          if (width > height) {
+            height = Math.round((height * MAX_DIM) / width);
+            width = MAX_DIM;
+          } else {
+            width = Math.round((width * MAX_DIM) / height);
+            height = MAX_DIM;
+          }
+        }
+
+        const canvas = document.createElement('canvas');
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext('2d');
+
+        // Fill white background for transparent PNG screenshots
+        ctx.fillStyle = '#FFFFFF';
+        ctx.fillRect(0, 0, width, height);
+        ctx.drawImage(img, 0, 0, width, height);
+
+        // Convert to optimized JPEG (quality 0.75 produces ~60-90KB payload with excellent OCR clarity)
+        const compressedDataUrl = canvas.toDataURL('image/jpeg', 0.75);
+        setSelectedImage(compressedDataUrl);
+        setImagePreview(compressedDataUrl);
+      };
+
+      img.onerror = () => {
+        // Fallback to raw data url if canvas fails
+        setSelectedImage(rawDataUrl);
+        setImagePreview(rawDataUrl);
+      };
+
+      img.src = rawDataUrl;
     };
     reader.readAsDataURL(file);
   };
@@ -246,10 +287,19 @@ export default function TalentOrbitAIChatbot({ currentUser }) {
       }
     } catch (err) {
       console.error('Chatbot API communication error:', err);
+      const isConnectionIssue = 
+        err.message?.includes('Could not reach Spring Boot') || 
+        err.message?.includes('Network Error') || 
+        err.message?.includes('ERR_NETWORK');
+
+      const userNotice = isConnectionIssue
+        ? `Backend connectivity notice: Could not reach Spring Boot server at port 8080. Please ensure your backend is running. (Details: ${err.message})`
+        : `TalentOrbit AI Notice: ${err.message || 'Unable to process your request. Please try again with a smaller prompt or screenshot.'}`;
+
       const errorMsg = {
         id: `err_${Date.now()}`,
         sender: 'ASSISTANT',
-        content: `Backend connectivity notice: Could not reach Spring Boot server at port 8080. Please ensure the backend is running. Details: ${err.message}`,
+        content: userNotice,
         imageUrl: null,
         createdAt: new Date().toISOString(),
       };

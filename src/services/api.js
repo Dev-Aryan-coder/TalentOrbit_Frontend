@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { formatSkillWithTag, stripSkillTag } from '../lib/skillCategories';
 
 /**
  * TalentOrbit Axios Client
@@ -172,20 +173,28 @@ export const studentAPI = {
 
   saveOnboardingSkills: async (userId, payload) => {
     const targetUserId = userId || 1;
-    const allSkills = [
-      ...(payload.languages || []),
-      ...(payload.libraries || []),
-      ...(payload.frameworks || []),
-      ...(payload.tools || []),
-    ];
+    const cleanLangs = (payload.languages || []).map((s) => stripSkillTag(s)).filter(Boolean);
+    const cleanLibs = (payload.libraries || []).map((s) => stripSkillTag(s)).filter(Boolean);
+    const cleanFws = (payload.frameworks || []).map((s) => stripSkillTag(s)).filter(Boolean);
+    const cleanTls = (payload.tools || []).map((s) => stripSkillTag(s)).filter(Boolean);
+
+    // Build tagged skills so MySQL student_skills retains explicit category information
+    const allSkills = payload.taggedSkills && payload.taggedSkills.length > 0
+      ? payload.taggedSkills
+      : [
+          ...cleanLangs.map((s) => formatSkillWithTag(s, 'languages')),
+          ...cleanLibs.map((s) => formatSkillWithTag(s, 'libraries')),
+          ...cleanFws.map((s) => formatSkillWithTag(s, 'frameworks')),
+          ...cleanTls.map((s) => formatSkillWithTag(s, 'tools')),
+        ];
 
     const profilePayload = {
       fullName: payload.fullName,
       skills: allSkills,
-      languages: payload.languages || [],
-      libraries: payload.libraries || [],
-      frameworks: payload.frameworks || [],
-      tools: payload.tools || [],
+      languages: cleanLangs,
+      libraries: cleanLibs,
+      frameworks: cleanFws,
+      tools: cleanTls,
       onboardingCompleted: true,
       onboardedAt: payload.onboardedAt || new Date().toISOString(),
     };
@@ -224,6 +233,14 @@ export const assessmentAPI = {
 
   getQuestionsByFramework: (framework) => {
     return apiClient.get(`/assessment/filter/framework/${encodeURIComponent(framework)}`);
+  },
+
+  getOrGenerateQuestions: (skillName, skillType) => {
+    return apiClient.get(
+      `/assessment/skill-assessment?skillName=${encodeURIComponent(skillName)}${
+        skillType ? `&type=${encodeURIComponent(skillType)}` : ''
+      }`
+    );
   },
 
   evaluateWithAi: (payload) => {
@@ -335,6 +352,131 @@ export const interviewsAPI = {
   },
 };
 
+/**
+ * 13. Academician (Faculty) Portal APIs
+ * Backed by Spring Boot com.example.TalentOrbit.controller.AcademicianController & SupportController
+ */
+export const academicianAPI = {
+  // Get faculty dashboard summary & domain distribution metrics
+  getDashboardSummary: async (userId) => {
+    try {
+      if (userId) {
+        return await apiClient.get(`/academician/dashboard-summary/${userId}`);
+      }
+      return await apiClient.get('/dashboard/stats', {
+        params: { role: 'ACADEMICIAN', userId }
+      });
+    } catch (err) {
+      console.warn('Falling back to generic dashboard stats:', err.message);
+      return await apiClient.get('/dashboard/stats', {
+        params: { role: 'ACADEMICIAN', userId }
+      }).catch(() => null);
+    }
+  },
+
+  // Get all opportunities or filter by type (FDP, RESEARCH, CONSULTANCY, TRAINING, WORKSHOP) with match scores
+  getOpportunities: async (type = 'ALL', userId = null) => {
+    try {
+      const res = await apiClient.get('/academician/opportunities', {
+        params: { type: type === 'ALL' ? null : type, userId }
+      });
+      if (Array.isArray(res)) return res;
+    } catch (err) {
+      console.warn('Fallback to /postings/active:', err.message);
+    }
+    // Resilient fallback to active postings
+    const postings = await apiClient.get('/postings/active').catch(() => []);
+    if (!Array.isArray(postings)) return [];
+    if (type && type !== 'ALL') {
+      const targetType = type.toUpperCase();
+      return postings.filter((p) => (p.postingType || p.type || '').toUpperCase() === targetType);
+    }
+    return postings;
+  },
+
+  // Express interest / submit collaboration proposal with notes
+  expressInterest: async (userId, postingId, proposalNote = '') => {
+    try {
+      return await apiClient.post('/academician/express-interest', null, {
+        params: {
+          userId,
+          postingId,
+          notes: proposalNote || ''
+        }
+      });
+    } catch (err) {
+      // Fallback to application endpoint
+      return await apiClient.post('/applications/apply', {
+        userId,
+        postingId,
+        notes: proposalNote,
+      });
+    }
+  },
+
+  // Get faculty's active collaborations & status pipeline
+  getCollaborations: async (userId) => {
+    try {
+      const res = await apiClient.get(`/academician/collaborations/${userId}`);
+      if (Array.isArray(res)) return res;
+    } catch (err) {
+      console.warn('Fallback to /applications/user:', err.message);
+    }
+    return await apiClient.get(`/applications/user/${userId}`).catch(() => []);
+  },
+
+  // Get faculty expertise tags
+  getInterests: async (userId) => {
+    try {
+      const res = await apiClient.get(`/academician/interests/${userId}`);
+      if (Array.isArray(res)) return res;
+    } catch (err) {
+      console.warn('Error fetching academician interests:', err.message);
+    }
+    return [];
+  },
+
+  // Update faculty expertise tags
+  updateInterests: async (userId, tagNames = []) => {
+    return await apiClient.post('/academician/interests/update', {
+      userId,
+      tagNames
+    });
+  },
+
+  // Get faculty profile details
+  getProfile: async (userId) => {
+    try {
+      return await apiClient.get(`/academician/profile/${userId}`);
+    } catch (err) {
+      return await apiClient.get(`/user-profile/${userId}`).catch(() => null);
+    }
+  },
+
+  // Update faculty profile details
+  updateProfile: async (userId, profileData) => {
+    try {
+      return await apiClient.put(`/academician/profile/${userId}`, profileData);
+    } catch (err) {
+      return await apiClient.put(`/user-profile/${userId}`, profileData);
+    }
+  },
+
+  // Submit help / support ticket
+  submitSupportTicket: async (ticketData) => {
+    try {
+      return await apiClient.post('/support/ticket/create', ticketData);
+    } catch (err) {
+      return await apiClient.post('/support/ticket', ticketData);
+    }
+  },
+
+  // Publish a Collaborative Research Call or Training Proposal
+  createCallForOpportunity: (payload) => {
+    return apiClient.post('/postings/create', payload);
+  },
+};
+
 export default {
   auth: authAPI,
   badges: badgesAPI,
@@ -349,4 +491,5 @@ export default {
   chatbot: chatbotAPI,
   recruiter: recruiterAPI,
   interviews: interviewsAPI,
+  academician: academicianAPI,
 };

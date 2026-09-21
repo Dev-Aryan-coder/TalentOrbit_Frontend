@@ -1,5 +1,5 @@
-/* RecruiterSidebar.css - Styling for Industry Enterprise Portal Navigation */
-.recruiter-sidebar-container {
+/* AcademicianSidebar.css - Styling for Faculty & Academician Portal Navigation */
+.academician-sidebar-container {
   width: 270px;
   min-width: 270px;
   transition: width 0.25s cubic-bezier(0.16, 1, 0.3, 1);
@@ -7,45 +7,45 @@
   box-sizing: border-box;
 }
 
-.recruiter-sidebar-container .recruiter-sidebar-header {
+.academician-sidebar-container .academician-sidebar-header {
   display: flex !important;
   flex-direction: column !important;
   width: 100% !important;
   box-sizing: border-box !important;
-  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.98), rgba(248, 250, 252, 0.9));
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.98), rgba(240, 253, 244, 0.7));
 }
 
-.dark .recruiter-sidebar-container .recruiter-sidebar-header {
-  background: linear-gradient(to bottom, rgba(15, 23, 42, 0.98), rgba(2, 6, 23, 0.9));
+.dark .academician-sidebar-container .academician-sidebar-header {
+  background: linear-gradient(to bottom, rgba(15, 23, 42, 0.98), rgba(6, 78, 59, 0.2));
 }
 
-.recruiter-sidebar-content::-webkit-scrollbar {
+.academician-sidebar-content::-webkit-scrollbar {
   width: 4px;
 }
 
-.recruiter-sidebar-content::-webkit-scrollbar-track {
+.academician-sidebar-content::-webkit-scrollbar-track {
   background: transparent;
 }
 
-.recruiter-sidebar-content::-webkit-scrollbar-thumb {
-  background: rgba(148, 163, 184, 0.2);
+.academician-sidebar-content::-webkit-scrollbar-thumb {
+  background: rgba(16, 185, 129, 0.2);
   border-radius: 4px;
 }
 
-.recruiter-sidebar-content::-webkit-scrollbar-thumb:hover {
-  background: rgba(148, 163, 184, 0.4);
+.academician-sidebar-content::-webkit-scrollbar-thumb:hover {
+  background: rgba(16, 185, 129, 0.4);
 }
 
 /* =========================================================
    COLLAPSED STATE: Width = 72px icon sidebar
    ========================================================= */
-.recruiter-sidebar-container[data-state="collapsed"] {
+.academician-sidebar-container[data-state="collapsed"] {
   width: 72px !important;
   min-width: 72px !important;
   max-width: 72px !important;
 }
 
-.recruiter-sidebar-container[data-state="collapsed"] .recruiter-sidebar-header {
+.academician-sidebar-container[data-state="collapsed"] .academician-sidebar-header {
   padding: 12px 6px !important;
   display: flex !important;
   flex-direction: column !important;
@@ -54,7 +54,7 @@
   gap: 8px !important;
 }
 
-.recruiter-sidebar-container[data-state="collapsed"] .recruiter-sidebar-content {
+.academician-sidebar-container[data-state="collapsed"] .academician-sidebar-content {
   padding: 10px 4px !important;
   display: flex !important;
   flex-direction: column !important;
@@ -63,7 +63,7 @@
   overflow-x: hidden !important;
 }
 
-.recruiter-sidebar-container[data-state="collapsed"] .recruiter-nav-group {
+.academician-sidebar-container[data-state="collapsed"] .academician-nav-group {
   width: 100% !important;
   margin: 0 !important;
   padding: 0 !important;
@@ -73,14 +73,14 @@
   gap: 4px !important;
 }
 
-.recruiter-sidebar-container[data-state="collapsed"] [data-sidebar="group-label"] {
+.academician-sidebar-container[data-state="collapsed"] [data-sidebar="group-label"] {
   display: none !important;
   height: 0 !important;
   margin: 0 !important;
   padding: 0 !important;
 }
 
-.recruiter-sidebar-container[data-state="collapsed"] [data-sidebar="menu"] {
+.academician-sidebar-container[data-state="collapsed"] [data-sidebar="menu"] {
   width: 100% !important;
   display: flex !important;
   flex-direction: column !important;
@@ -90,7 +90,7 @@
   padding: 0 !important;
 }
 
-.recruiter-sidebar-container[data-state="collapsed"] [data-sidebar="menu-item"] {
+.academician-sidebar-container[data-state="collapsed"] [data-sidebar="menu-item"] {
   width: 100% !important;
   display: flex !important;
   align-items: center !important;
@@ -99,7 +99,7 @@
   padding: 0 !important;
 }
 
-.recruiter-sidebar-container[data-state="collapsed"] [data-sidebar="menu-button"] {
+.academician-sidebar-container[data-state="collapsed"] [data-sidebar="menu-button"] {
   width: 44px !important;
   height: 44px !important;
   min-width: 44px !important;
@@ -112,18 +112,18 @@
   border-radius: 12px !important;
 }
 
-.recruiter-sidebar-container[data-state="collapsed"] [data-sidebar="menu-button"] span:not(.recruiter-nav-icon) {
+.academician-sidebar-container[data-state="collapsed"] [data-sidebar="menu-button"] span:not(.academician-nav-icon) {
   display: none !important;
 }
 
-.recruiter-sidebar-container[data-state="collapsed"] .recruiter-nav-icon {
+.academician-sidebar-container[data-state="collapsed"] .academician-nav-icon {
   margin: 0 !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
 }
 
-.recruiter-sidebar-container[data-state="collapsed"] .recruiter-sidebar-footer {
+.academician-sidebar-container[data-state="collapsed"] .academician-sidebar-footer {
   padding: 10px 4px !important;
   display: flex !important;
   flex-direction: column !important;

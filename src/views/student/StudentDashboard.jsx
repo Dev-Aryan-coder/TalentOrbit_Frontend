@@ -13,6 +13,7 @@ import StudentPortfolioTab from '../../components/student/StudentPortfolioTab';
 import StudentAchievementsTab from '../../components/student/StudentAchievementsTab';
 import StudentCertificatesTab from '../../components/student/StudentCertificatesTab';
 import StudentSettingsTab from '../../components/student/StudentSettingsTab';
+import { profileAPI } from '../../services/api';
 import './StudentDashboard.css';
 
 export default function StudentDashboard({
@@ -28,32 +29,39 @@ export default function StudentDashboard({
   const [userSkillsData, setUserSkillsData] = useState(null);
 
   const userName = currentUser?.fullName || 'Student';
-  const userKey = currentUser?.id || currentUser?.email || 'guest';
 
-  // Check if current user has already completed the 4-step skill onboarding
+  // Check if current user has already completed the 4-step skill onboarding directly from database (NO LOCAL STORAGE)
   useEffect(() => {
-    try {
-      const saved = localStorage.getItem(`talentorbit_skills_onboarded_${userKey}`);
-      if (saved) {
-        setUserSkillsData(JSON.parse(saved));
-      } else {
-        // Automatically pop up modal for new students who have not completed onboarding
+    const activeUserId = currentUser?.id || currentUser?.userId || 1;
+    profileAPI.getProfile(activeUserId)
+      .then((prof) => {
+        if (prof && (prof.onboardingCompleted || (Array.isArray(prof.skills) && prof.skills.length > 0))) {
+          setUserSkillsData(prof);
+          setShowSkillOnboardingModal(false);
+        } else {
+          // Automatically pop up modal for new students who have not completed onboarding
+          setShowSkillOnboardingModal(true);
+        }
+      })
+      .catch((err) => {
+        console.warn('Could not read onboarding state from database', err);
         setShowSkillOnboardingModal(true);
-      }
-    } catch (err) {
-      console.warn('Could not read onboarding state from storage', err);
-      setShowSkillOnboardingModal(true);
-    }
-  }, [userKey]);
+      });
+  }, [currentUser]);
 
   const handleSkillsOnboardingComplete = (compiledData) => {
     setUserSkillsData(compiledData);
-    try {
-      localStorage.setItem(`talentorbit_skills_onboarded_${userKey}`, JSON.stringify(compiledData));
-    } catch (err) {
-      console.error('Could not persist onboarding state to storage', err);
-    }
     setShowSkillOnboardingModal(false);
+  };
+
+  const handleTabChange = (tab) => {
+    setActiveTab(tab);
+    if (tab === 'skills' || tab === 'dashboard') {
+      const activeUserId = currentUser?.id || currentUser?.userId || 1;
+      profileAPI.getProfile(activeUserId).then((prof) => {
+        if (prof) setUserSkillsData(prof);
+      }).catch(() => {});
+    }
   };
 
   // Functional component switch case rendering the active student feature
@@ -64,12 +72,18 @@ export default function StudentDashboard({
           <StudentOverviewTab
             key={userSkillsData ? JSON.stringify(userSkillsData) : 'initial'}
             currentUser={currentUser}
-            onSelectTab={setActiveTab}
+            onSelectTab={handleTabChange}
           />
         );
 
       case 'assessment':
-        return <StudentAssessmentTab currentUser={currentUser} onSelectTab={setActiveTab} />;
+        return (
+          <StudentAssessmentTab
+            key={userSkillsData ? JSON.stringify(userSkillsData) : 'initial'}
+            currentUser={currentUser}
+            onSelectTab={handleTabChange}
+          />
+        );
 
       case 'skills':
         return (
@@ -77,37 +91,37 @@ export default function StudentDashboard({
             key={userSkillsData ? JSON.stringify(userSkillsData) : 'initial'}
             currentUser={currentUser}
             userSkillsData={userSkillsData}
-            onSelectTab={setActiveTab}
+            onSelectTab={handleTabChange}
             onOpenSkillsModal={() => setShowSkillOnboardingModal(true)}
           />
         );
 
       case 'career':
-        return <StudentCareerTab currentUser={currentUser} onSelectTab={setActiveTab} />;
+        return <StudentCareerTab currentUser={currentUser} onSelectTab={handleTabChange} />;
 
       case 'roadmap':
-        return <StudentRoadmapTab currentUser={currentUser} onSelectTab={setActiveTab} />;
+        return <StudentRoadmapTab currentUser={currentUser} onSelectTab={handleTabChange} />;
 
       case 'opportunities':
-        return <StudentOpportunitiesTab currentUser={currentUser} onSelectTab={setActiveTab} />;
+        return <StudentOpportunitiesTab currentUser={currentUser} onSelectTab={handleTabChange} />;
 
       case 'applications':
-        return <StudentApplicationsTab currentUser={currentUser} onSelectTab={setActiveTab} />;
+        return <StudentApplicationsTab currentUser={currentUser} onSelectTab={handleTabChange} />;
 
       case 'portfolio':
-        return <StudentPortfolioTab currentUser={currentUser} onSelectTab={setActiveTab} />;
+        return <StudentPortfolioTab currentUser={currentUser} onSelectTab={handleTabChange} />;
 
       case 'achievements':
-        return <StudentAchievementsTab currentUser={currentUser} onSelectTab={setActiveTab} />;
+        return <StudentAchievementsTab currentUser={currentUser} onSelectTab={handleTabChange} />;
 
       case 'certificates':
-        return <StudentCertificatesTab currentUser={currentUser} onSelectTab={setActiveTab} />;
+        return <StudentCertificatesTab currentUser={currentUser} onSelectTab={handleTabChange} />;
 
       case 'settings':
-        return <StudentSettingsTab currentUser={currentUser} onSelectTab={setActiveTab} />;
+        return <StudentSettingsTab currentUser={currentUser} onSelectTab={handleTabChange} />;
 
       default:
-        return <StudentOverviewTab currentUser={currentUser} onSelectTab={setActiveTab} />;
+        return <StudentOverviewTab currentUser={currentUser} onSelectTab={handleTabChange} />;
     }
   };
 
@@ -116,7 +130,7 @@ export default function StudentDashboard({
       {/* 1. Official Shadcn UI Sidebar (Left side) */}
       <StudentSidebar
         activeTab={activeTab}
-        onSelectTab={setActiveTab}
+        onSelectTab={handleTabChange}
         currentUser={currentUser}
         currentTheme={currentTheme}
         onThemeChange={onThemeChange}
@@ -166,7 +180,13 @@ export default function StudentDashboard({
       {/* 3. Official 4-Step Student Skill Diagnostic Onboarding Modal */}
       <StudentSkillOnboardingModal
         isOpen={showSkillOnboardingModal}
-        onClose={() => setShowSkillOnboardingModal(false)}
+        onClose={() => {
+          setShowSkillOnboardingModal(false);
+          const activeUserId = currentUser?.id || currentUser?.userId || 1;
+          profileAPI.getProfile(activeUserId).then((prof) => {
+            if (prof) setUserSkillsData(prof);
+          }).catch(() => {});
+        }}
         currentUser={currentUser}
         onComplete={handleSkillsOnboardingComplete}
       />

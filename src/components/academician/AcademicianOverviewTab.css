@@ -1,0 +1,15 @@
+/* AcademicianOverviewTab.css - Styling for Academician Overview Space */
+.academician-overview-space {
+  animation: fadeInAcademicianOverview 0.25s ease-out;
+}
+
+@keyframes fadeInAcademicianOverview {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

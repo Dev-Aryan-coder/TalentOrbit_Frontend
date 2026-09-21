@@ -93,23 +93,42 @@ export default function RecruiterPostingsTab({ currentUser, onSelectTab, onNavig
         if (!isMounted) return;
 
         if (Array.isArray(res)) {
-          const mapped = res.map((p) => ({
-            id: p.id,
-            title: p.title,
-            type: p.postingType || p.type || 'JOB',
-            department: p.department || '',
-            location: p.location || '',
-            compensation: p.stipend || p.stipendAmount || p.compensation || '',
-            deadline: p.deadline || '',
-            minCgpa: p.minCgpa ?? 0,
-            eligibleBatches: p.eligibleBatches || '',
-            status: p.isActive !== false ? 'ACTIVE' : 'PAUSED',
-            applicantCount: p.applicantCount ?? p.applicationsCount ?? 0,
-            shortlistedCount: p.shortlistedCount ?? 0,
-            mandatorySkills: Array.isArray(p.mandatorySkills) ? p.mandatorySkills : Array.isArray(p.requiredSkills) ? p.requiredSkills : [],
-            preferredSkills: Array.isArray(p.preferredSkills) ? p.preferredSkills : [],
-            description: p.description || '',
-          }));
+          const mapped = await Promise.all(
+            res.map(async (p) => {
+              let appCount = p.applicantCount ?? p.applicationsCount ?? 0;
+              let shortCount = p.shortlistedCount ?? 0;
+
+              try {
+                const apps = await recruiterAPI.getRankedApplicants(p.id);
+                if (Array.isArray(apps)) {
+                  appCount = apps.length;
+                  shortCount = apps.filter(
+                    (a) => a.status === 'SHORTLISTED' || a.candidacyStatus === 'SHORTLISTED'
+                  ).length;
+                }
+              } catch {
+                // keep defaults if error
+              }
+
+              return {
+                id: p.id,
+                title: p.title,
+                type: p.postingType || p.type || 'JOB',
+                department: p.department || '',
+                location: p.location || '',
+                compensation: p.stipend || p.stipendAmount || p.compensation || '',
+                deadline: p.deadline || '',
+                minCgpa: p.minCgpa ?? 0,
+                eligibleBatches: p.eligibleBatches || '',
+                status: p.isActive !== false ? 'ACTIVE' : 'PAUSED',
+                applicantCount: appCount,
+                shortlistedCount: shortCount,
+                mandatorySkills: Array.isArray(p.mandatorySkills) ? p.mandatorySkills : Array.isArray(p.requiredSkills) ? p.requiredSkills : [],
+                preferredSkills: Array.isArray(p.preferredSkills) ? p.preferredSkills : [],
+                description: p.description || '',
+              };
+            })
+          );
           setPostings(mapped);
         } else {
           setPostings([]);
@@ -259,7 +278,7 @@ export default function RecruiterPostingsTab({ currentUser, onSelectTab, onNavig
 
         <div className="flex items-center gap-2 w-full sm:w-auto">
           <select
-            value={filterType}
+            value={filterType || 'ALL'}
             onChange={(e) => setFilterType(e.target.value)}
             className="h-9 px-3 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-xs text-slate-700 dark:text-slate-300 font-medium"
           >
@@ -270,7 +289,7 @@ export default function RecruiterPostingsTab({ currentUser, onSelectTab, onNavig
           </select>
 
           <select
-            value={filterStatus}
+            value={filterStatus || 'ALL'}
             onChange={(e) => setFilterStatus(e.target.value)}
             className="h-9 px-3 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-xs text-slate-700 dark:text-slate-300 font-medium"
           >
@@ -480,7 +499,7 @@ export default function RecruiterPostingsTab({ currentUser, onSelectTab, onNavig
                 <div className="space-y-1.5">
                   <label className="font-semibold text-slate-700 dark:text-slate-300">Opportunity Type</label>
                   <select
-                    value={formData.type}
+                    value={formData.type || 'JOB'}
                     onChange={(e) => setFormData({ ...formData, type: e.target.value })}
                     className="w-full h-9 px-3 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-xs text-slate-700 dark:text-slate-300"
                   >

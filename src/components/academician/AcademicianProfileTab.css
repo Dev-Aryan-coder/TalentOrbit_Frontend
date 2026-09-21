@@ -1,0 +1,15 @@
+/* AcademicianProfileTab.css - Styling for Academician Profile Space */
+.academician-profile-space {
+  animation: fadeInAcademicianProfile 0.25s ease-out;
+}
+
+@keyframes fadeInAcademicianProfile {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

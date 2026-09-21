@@ -1,0 +1,15 @@
+/* AcademicianHelpTab.css - Styling for Academician Help Desk Space */
+.academician-help-space {
+  animation: fadeInAcademicianHelp 0.25s ease-out;
+}
+
+@keyframes fadeInAcademicianHelp {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

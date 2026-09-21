@@ -43,7 +43,7 @@ export default function RecruiterAtsPipelineTab({
   const [loading, setLoading] = useState(false);
   const [activeStage, setActiveStage] = useState('ALL');
   const [searchQuery, setSearchQuery] = useState('');
-  const [activeJobId, setActiveJobId] = useState(selectedPostingId || null);
+  const [activeJobId, setActiveJobId] = useState(selectedPostingId || '');
   const [inspectCandidate, setInspectCandidate] = useState(null);
   const [showScheduleModal, setShowScheduleModal] = useState(false);
   const [selectedApplicantForInterview, setSelectedApplicantForInterview] = useState(null);
@@ -64,14 +64,26 @@ export default function RecruiterAtsPipelineTab({
     let isMounted = true;
     recruiterAPI
       .getCompanyPostings(companyId)
-      .then((res) => {
+      .then(async (res) => {
         if (!isMounted) return;
         if (Array.isArray(res) && res.length > 0) {
-          const list = res.map((p) => ({
-            id: p.id,
-            title: p.title,
-            applicants: p.applicantCount ?? p.applicationsCount ?? 0,
-          }));
+          const list = await Promise.all(
+            res.map(async (p) => {
+              let count = p.applicantCount ?? p.applicationsCount ?? 0;
+              try {
+                const apps = await recruiterAPI.getRankedApplicants(p.id);
+                if (Array.isArray(apps)) count = apps.length;
+              } catch {
+                // ignore
+              }
+              return {
+                id: p.id,
+                title: p.title,
+                applicants: count,
+              };
+            })
+          );
+          if (!isMounted) return;
           setJobsList(list);
           if (!activeJobId || !list.some((j) => j.id === activeJobId)) {
             setActiveJobId(list[0].id);
@@ -204,8 +216,8 @@ export default function RecruiterAtsPipelineTab({
             Active Opening:
           </label>
           <select
-            value={activeJobId}
-            onChange={(e) => setActiveJobId(Number(e.target.value))}
+            value={activeJobId ?? ''}
+            onChange={(e) => setActiveJobId(e.target.value ? Number(e.target.value) : '')}
             className="h-10 px-3.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-xs font-semibold text-slate-800 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
             {jobsList.map((job) => (

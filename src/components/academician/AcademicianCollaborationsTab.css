@@ -1,0 +1,15 @@
+/* AcademicianCollaborationsTab.css - Styling for Academician Collaborations Space */
+.academician-collaborations-space {
+  animation: fadeInAcademicianCollab 0.25s ease-out;
+}
+
+@keyframes fadeInAcademicianCollab {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

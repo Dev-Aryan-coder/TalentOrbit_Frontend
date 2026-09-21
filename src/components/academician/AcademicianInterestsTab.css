@@ -1,0 +1,15 @@
+/* AcademicianInterestsTab.css - Styling for Academician Interests & Expertise Space */
+.academician-interests-space {
+  animation: fadeInAcademicianInterests 0.25s ease-out;
+}
+
+@keyframes fadeInAcademicianInterests {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

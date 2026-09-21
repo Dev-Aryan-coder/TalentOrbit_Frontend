@@ -1,0 +1,15 @@
+/* AcademicianOpportunitiesTab.css - Styling for Academician Opportunities Explorer */
+.academician-opportunities-space {
+  animation: fadeInAcademicianOpp 0.25s ease-out;
+}
+
+@keyframes fadeInAcademicianOpp {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
