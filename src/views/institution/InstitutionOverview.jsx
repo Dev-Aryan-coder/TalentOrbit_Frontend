@@ -1,5 +1,6 @@
-﻿import React from 'react';
+import React from 'react';
+import InstitutionOverviewTab from '../../components/institution/InstitutionOverviewTab';
 
-export default function InstitutionOverview() {
-  return null;
+export default function InstitutionOverview(props) {
+  return <InstitutionOverviewTab {...props} />;
 }

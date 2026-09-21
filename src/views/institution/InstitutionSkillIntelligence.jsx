@@ -1,5 +1,6 @@
-﻿import React from 'react';
+import React from 'react';
+import InstitutionSkillHeatmapTab from '../../components/institution/InstitutionSkillHeatmapTab';
 
-export default function InstitutionSkillIntelligence() {
-  return null;
+export default function InstitutionSkillIntelligence(props) {
+  return <InstitutionSkillHeatmapTab {...props} />;
 }

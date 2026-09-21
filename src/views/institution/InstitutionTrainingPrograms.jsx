@@ -1,5 +1,6 @@
-﻿import React from 'react';
+import React from 'react';
+import InstitutionBootcampsTab from '../../components/institution/InstitutionBootcampsTab';
 
-export default function InstitutionTrainingPrograms() {
-  return null;
+export default function InstitutionTrainingPrograms(props) {
+  return <InstitutionBootcampsTab {...props} />;
 }
