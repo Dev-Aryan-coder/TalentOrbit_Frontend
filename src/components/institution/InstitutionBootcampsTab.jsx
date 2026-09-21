@@ -13,8 +13,7 @@ import {
   Sparkles,
 } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
-import { Badge } from '@/components/ui/Badge';
-import { institutionAPI, assessmentAPI } from '../../services/api';
+import { institutionAPI } from '../../services/api';
 
 export default function InstitutionBootcampsTab({ currentUser, onSelectTab }) {
   const userId = currentUser?.id || currentUser?.userId || 1;
@@ -37,10 +36,12 @@ export default function InstitutionBootcampsTab({ currentUser, onSelectTab }) {
     setIsLoading(true);
     setErrorMsg(null);
 
+    const aisheCode = currentUser?.aisheCode || 'C-33772';
+
     Promise.allSettled([
       institutionAPI.getTrainingPrograms(userId),
-      assessmentAPI.getSkills(),
-    ]).then(([bootRes, skillRes]) => {
+      institutionAPI.getSkillHeatmap(aisheCode),
+    ]).then(([bootRes, heatRes]) => {
       if (bootRes.status === 'fulfilled' && bootRes.value) {
         if (Array.isArray(bootRes.value)) {
           setBootcamps(bootRes.value);
@@ -48,8 +49,19 @@ export default function InstitutionBootcampsTab({ currentUser, onSelectTab }) {
           setBootcamps(bootRes.value.data);
         }
       }
-      if (skillRes.status === 'fulfilled' && Array.isArray(skillRes.value)) {
-        setSkillsList(skillRes.value);
+      if (heatRes.status === 'fulfilled' && heatRes.value) {
+        const heatmapList = Array.isArray(heatRes.value)
+          ? heatRes.value
+          : (heatRes.value?.data || []);
+        const extractedSkills = heatmapList
+          .map((g) => ({
+            id: g.skill?.id || g.skillId || g.id,
+            name: g.skill?.name || g.skillName || g.name || 'Core Competency',
+            category: g.skill?.category || g.category || 'Skill Deficit',
+            affectedStudents: g.affectedStudents || 0,
+          }))
+          .filter((s) => s.id && s.name);
+        setSkillsList(extractedSkills);
       }
       setIsLoading(false);
     }).catch((err) => {

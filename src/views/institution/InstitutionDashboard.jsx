@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { SidebarProvider, SidebarInset, SidebarTrigger } from '@/components/ui/sidebar';
+import { SidebarProvider, SidebarInset } from '@/components/ui/sidebar';
 import InstitutionSidebar from '../../components/institution/InstitutionSidebar';
 import InstitutionOverviewTab from '../../components/institution/InstitutionOverviewTab';
 import InstitutionSkillHeatmapTab from '../../components/institution/InstitutionSkillHeatmapTab';
