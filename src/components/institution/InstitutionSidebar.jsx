@@ -211,30 +211,25 @@ export default function InstitutionSidebar({
                   return (
                     <SidebarMenuItem key={item.id}>
                       <SidebarMenuButton
-                        asChild
                         isActive={isActive}
                         tooltip={isCollapsed ? item.label : undefined}
+                        onClick={() => onSelectTab(item.id)}
+                        className={`institution-nav-button ${isActive ? 'active' : ''}`}
                       >
-                        <button
-                          type="button"
-                          className={`institution-nav-button ${isActive ? 'active' : ''}`}
-                          onClick={() => onSelectTab(item.id)}
-                        >
-                          <span className="nav-icon">{item.icon}</span>
-                          {!isCollapsed && (
-                            <>
-                              <span className="flex-1 truncate">{item.label}</span>
-                              {item.highlight && !isActive && (
-                                <span className="flex items-center text-[10px] font-bold px-1.5 py-0.5 rounded bg-indigo-100 text-indigo-700 dark:bg-indigo-900/40 dark:text-indigo-300">
-                                  SIH Core
-                                </span>
-                              )}
-                              {item.badge && !item.highlight && (
-                                <span className="institution-nav-badge">{item.badge}</span>
-                              )}
-                            </>
-                          )}
-                        </button>
+                        <span className="nav-icon">{item.icon}</span>
+                        {!isCollapsed && (
+                          <>
+                            <span className="flex-1 truncate">{item.label}</span>
+                            {item.highlight && !isActive && (
+                              <span className="flex items-center text-[10px] font-bold px-1.5 py-0.5 rounded bg-indigo-100 text-indigo-700 dark:bg-indigo-900/40 dark:text-indigo-300">
+                                SIH Core
+                              </span>
+                            )}
+                            {item.badge && !item.highlight && (
+                              <span className="institution-nav-badge">{item.badge}</span>
+                            )}
+                          </>
+                        )}
                       </SidebarMenuButton>
                     </SidebarMenuItem>
                   );
