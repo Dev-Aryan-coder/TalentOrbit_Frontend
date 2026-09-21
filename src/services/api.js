@@ -477,6 +477,69 @@ export const academicianAPI = {
   },
 };
 
+/**
+ * 15. Institution / TPO Portal APIs (InstitutionIntelligenceController, TrainingProgramController, ReportController)
+ */
+export const institutionAPI = {
+  // 1. Dashboard summary stats
+  getDashboardStats: (userId = null) => {
+    const url = userId ? `/dashboard/stats?role=INSTITUTION_ADMIN&userId=${userId}` : '/dashboard/stats?role=INSTITUTION_ADMIN';
+    return apiClient.get(url);
+  },
+
+  // 2. Skill Deficit Heatmap (Demand vs Supply)
+  getSkillHeatmap: (aisheCode) => {
+    return apiClient.get(`/institution/intelligence/skill-heatmap/${encodeURIComponent(aisheCode || 'ALL')}`);
+  },
+
+  // 3. Macro Industry Hiring Demand trends
+  getMacroIndustryDemand: () => {
+    return apiClient.get('/institution/intelligence/macro-industry-demand');
+  },
+
+  // 4. Placements & Salary (CTC) audit summary
+  getPlacementsSummary: (aisheCode) => {
+    return apiClient.get(`/institution/intelligence/placements-summary/${encodeURIComponent(aisheCode || 'ALL')}`);
+  },
+
+  // 5. Cohort Students Roster
+  getCohortStudents: (aisheCode) => {
+    return apiClient.get(`/institution/intelligence/cohort-students/${encodeURIComponent(aisheCode || 'ALL')}`);
+  },
+
+  // 6. Remedial Training Programs / Bootcamps
+  getTrainingPrograms: (institutionUserId) => {
+    return apiClient.get(`/institution/training-programs/institution/${institutionUserId}`);
+  },
+
+  createTrainingProgram: (payload) => {
+    return apiClient.post('/institution/training-programs/create', payload);
+  },
+
+  // 1-Click Launch Bootcamp directly from Skill Gap Matrix
+  scheduleRemedialTraining: (skillId, payload) => {
+    return apiClient.post(`/admin/skill-gaps/${skillId}/schedule-training`, payload);
+  },
+
+  // 7. Accreditation & Audit Reports (NIRF / NAAC / AICTE)
+  getUserReports: (userId) => {
+    return apiClient.get(`/reports/user/${userId}`);
+  },
+
+  generateReport: (payload) => {
+    return apiClient.post('/reports/generate', payload);
+  },
+
+  // 8. Profile & AISHE details
+  getInstitutionDetails: (userId) => {
+    return apiClient.get(`/user-profile/${userId}`);
+  },
+
+  updateInstitutionDetails: (userId, data) => {
+    return apiClient.put(`/user-profile/${userId}`, data);
+  },
+};
+
 export default {
   auth: authAPI,
   badges: badgesAPI,
@@ -492,4 +555,6 @@ export default {
   recruiter: recruiterAPI,
   interviews: interviewsAPI,
   academician: academicianAPI,
+  institution: institutionAPI,
 };
+

@@ -8,6 +8,7 @@ import StudentAchievements from './views/student/StudentAchievements';
 import StudentDashboard from './views/student/StudentDashboard';
 import RecruiterDashboard from './views/recruiter/RecruiterDashboard';
 import AcademicianDashboard from './views/academician/AcademicianDashboard';
+import InstitutionDashboard from './views/institution/InstitutionDashboard';
 import AuthPage from './views/public/AuthPage';
 import ProfileSettingsModal from './components/ui/ProfileSettingsModal';
 import AccountSettingsModal from './components/ui/AccountSettingsModal';
@@ -209,6 +210,17 @@ export default function App() {
 
       {(currentView === 'academician' || currentView === 'faculty') && (
         <AcademicianDashboard
+          currentUser={currentUser}
+          currentTheme={currentTheme}
+          onThemeChange={setCurrentTheme}
+          onNavigateHome={handleNavigateHome}
+          onNavigatePage={handleNavigatePage}
+          onLogout={handleLogout}
+        />
+      )}
+
+      {(currentView === 'institution' || currentView === 'tpo') && (
+        <InstitutionDashboard
           currentUser={currentUser}
           currentTheme={currentTheme}
           onThemeChange={setCurrentTheme}
