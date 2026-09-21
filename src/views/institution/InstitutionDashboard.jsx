@@ -137,7 +137,7 @@ export default function InstitutionDashboard({
   };
 
   return (
-    <SidebarProvider defaultOpen={true}>
+    <SidebarProvider defaultOpen={true} style={{ "--sidebar-width": "285px", "--sidebar-width-icon": "72px" }}>
       <div className="flex min-h-screen w-full bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 font-sans">
         {/* Left Responsive Navigation Sidebar */}
         <InstitutionSidebar
@@ -153,13 +153,10 @@ export default function InstitutionDashboard({
         {/* Main Content Area */}
         <SidebarInset className="flex-1 overflow-x-hidden min-w-0 bg-slate-50 dark:bg-slate-950">
           {/* Top Operational Header */}
-          <header className="sticky top-0 z-30 flex h-14 items-center gap-4 border-b border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-900/80 px-4 sm:px-6 backdrop-blur-md">
-            <SidebarTrigger className="-ml-1 text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-100" />
-            <Separator orientation="vertical" className="mr-2 h-4" />
-
+          <header className="sticky top-0 z-30 flex h-14 items-center justify-between border-b border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-900/80 px-6 backdrop-blur-md">
             {/* Breadcrumbs / Context */}
             <div className="flex items-center gap-2 text-xs font-semibold text-slate-500 dark:text-slate-400 min-w-0">
-              <span className="truncate max-w-[180px] sm:max-w-xs">{institutionName}</span>
+              <span className="truncate max-w-[200px] sm:max-w-sm font-bold text-slate-900 dark:text-white">{institutionName}</span>
               <span>/</span>
               <span className="text-indigo-600 dark:text-indigo-400 capitalize">
                 {activeTab.replace(/_/g, ' ')}

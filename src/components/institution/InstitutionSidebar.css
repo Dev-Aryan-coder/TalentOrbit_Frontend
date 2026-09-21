@@ -1,208 +1,156 @@
-/* InstitutionSidebar.css - TalentOrbit Design System */
+/* InstitutionSidebar.css - Pixel-Perfect Responsive Styling & Zero Glitch Layout */
 
-.institution-sidebar {
-  background: var(--sidebar-bg, #ffffff);
-  border-right: 1px solid var(--sidebar-border, #e2e8f0);
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+.institution-sidebar-container {
+  width: 285px !important;
+  min-width: 285px !important;
+  max-width: 285px !important;
+  transition: width 0.22s cubic-bezier(0.16, 1, 0.3, 1) !important;
   font-family: inherit;
+  box-sizing: border-box;
 }
 
-.dark .institution-sidebar {
-  background: #090d16;
-  border-right-color: #1e293b;
+.institution-sidebar-container .institution-sidebar-header {
+  display: flex !important;
+  flex-direction: column !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.98), rgba(238, 242, 255, 0.7));
 }
 
-.institution-sidebar-header {
-  padding: 1.25rem 1rem 1rem 1rem;
-  border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+.dark .institution-sidebar-container .institution-sidebar-header {
+  background: linear-gradient(to bottom, rgba(15, 23, 42, 0.98), rgba(49, 46, 129, 0.2));
 }
 
-.dark .institution-sidebar-header {
-  border-bottom-color: rgba(30, 41, 59, 0.8);
+/* Completely hide ugly browser scrollbars across all browsers while keeping smooth mouse/touch scroll */
+.institution-sidebar-content {
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
 }
 
-.institution-brand-badge {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
+.institution-sidebar-content::-webkit-scrollbar {
+  display: none !important;
+  width: 0px !important;
+  height: 0px !important;
+  background: transparent !important;
 }
 
-.institution-brand-icon {
-  width: 2.5rem;
-  height: 2.5rem;
-  border-radius: 0.75rem;
-  background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
-  color: #ffffff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25);
-  flex-shrink: 0;
+/* Expanded state button styling */
+.institution-sidebar-container:not([data-state="collapsed"]) [data-sidebar="menu-button"] {
+  width: 100% !important;
+  height: auto !important;
+  min-height: 40px !important;
+  padding: 8px 12px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  border-radius: 10px !important;
+  box-sizing: border-box !important;
+  transition: all 0.18s ease;
 }
 
-.institution-brand-info {
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-  overflow: hidden;
+.institution-sidebar-container [data-sidebar="menu-button"][data-active="true"],
+.institution-sidebar-container [data-sidebar="menu-button"].active {
+  background: linear-gradient(135deg, #4f46e5 0%, #4338ca 100%) !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.28) !important;
 }
 
-.institution-brand-name {
-  font-size: 0.9375rem;
-  font-weight: 700;
-  color: #0f172a;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  letter-spacing: -0.01em;
+/* =========================================================
+   COLLAPSED STATE: Width = 72px Centered Icon Sidebar
+   ========================================================= */
+.institution-sidebar-container[data-state="collapsed"] {
+  width: 72px !important;
+  min-width: 72px !important;
+  max-width: 72px !important;
 }
 
-.dark .institution-brand-name {
-  color: #f8fafc;
+.institution-sidebar-container[data-state="collapsed"] .institution-sidebar-header {
+  padding: 12px 6px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
 }
 
-.institution-aishe-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.25rem;
-  font-size: 0.7rem;
-  font-weight: 600;
-  color: #4338ca;
-  background: #eef2ff;
-  padding: 0.125rem 0.5rem;
-  border-radius: 9999px;
-  width: fit-content;
-  margin-top: 0.125rem;
+.institution-sidebar-container[data-state="collapsed"] .institution-sidebar-content {
+  padding: 8px 4px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  gap: 4px !important;
+  overflow-x: hidden !important;
 }
 
-.dark .institution-aishe-pill {
-  color: #a5b4fc;
-  background: rgba(99, 102, 241, 0.15);
+.institution-sidebar-container[data-state="collapsed"] .institution-nav-group {
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  gap: 4px !important;
 }
 
-/* Nav Item Styling */
-.institution-nav-button {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  width: 100%;
-  padding: 0.625rem 0.875rem;
-  border-radius: 0.625rem;
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: #475569;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  transition: all 0.15s ease;
-  text-align: left;
+.institution-sidebar-container[data-state="collapsed"] [data-sidebar="group-label"] {
+  display: none !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
-.dark .institution-nav-button {
-  color: #94a3b8;
+.institution-sidebar-container[data-state="collapsed"] [data-sidebar="menu"] {
+  width: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  gap: 4px !important;
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
-.institution-nav-button:hover {
-  color: #0f172a;
-  background: #f1f5f9;
+.institution-sidebar-container[data-state="collapsed"] [data-sidebar="menu-item"] {
+  width: 100% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
-.dark .institution-nav-button:hover {
-  color: #f8fafc;
-  background: #1e293b;
+.institution-sidebar-container[data-state="collapsed"] [data-sidebar="menu-button"] {
+  width: 44px !important;
+  height: 44px !important;
+  min-width: 44px !important;
+  max-width: 44px !important;
+  padding: 0 !important;
+  margin: 0 auto !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 12px !important;
+  box-sizing: border-box !important;
 }
 
-.institution-nav-button.active {
-  color: #ffffff;
-  background: linear-gradient(135deg, #4f46e5 0%, #6366f1 100%);
-  font-weight: 600;
-  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25);
+.institution-sidebar-container[data-state="collapsed"] [data-sidebar="menu-button"] .institution-nav-label-container {
+  display: none !important;
 }
 
-.dark .institution-nav-button.active {
-  color: #ffffff;
-  background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+.institution-sidebar-container[data-state="collapsed"] .institution-nav-icon {
+  margin: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
 }
 
-.institution-nav-button .nav-icon {
-  flex-shrink: 0;
-}
-
-.institution-nav-badge {
-  margin-left: auto;
-  font-size: 0.6875rem;
-  font-weight: 700;
-  padding: 0.125rem 0.375rem;
-  border-radius: 9999px;
-  background: #e2e8f0;
-  color: #334155;
-}
-
-.institution-nav-button.active .institution-nav-badge {
-  background: rgba(255, 255, 255, 0.25);
-  color: #ffffff;
-}
-
-.dark .institution-nav-badge {
-  background: #1e293b;
-  color: #94a3b8;
-}
-
-/* Footer & Officer Profile */
-.institution-officer-card {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 0.75rem;
-  border-radius: 0.75rem;
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
-  margin-top: 0.5rem;
-}
-
-.dark .institution-officer-card {
-  background: #0f172a;
-  border-color: #1e293b;
-}
-
-.institution-officer-avatar {
-  width: 2.25rem;
-  height: 2.25rem;
-  border-radius: 0.5rem;
-  background: linear-gradient(135deg, #0284c7 0%, #2563eb 100%);
-  color: #ffffff;
-  font-weight: 700;
-  font-size: 0.8125rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-
-.institution-officer-meta {
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-  overflow: hidden;
-}
-
-.institution-officer-name {
-  font-size: 0.8125rem;
-  font-weight: 600;
-  color: #0f172a;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.dark .institution-officer-name {
-  color: #f8fafc;
-}
-
-.institution-officer-role {
-  font-size: 0.71875rem;
-  color: #64748b;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+.institution-sidebar-container[data-state="collapsed"] .institution-sidebar-footer {
+  padding: 10px 4px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  box-sizing: border-box !important;
 }
