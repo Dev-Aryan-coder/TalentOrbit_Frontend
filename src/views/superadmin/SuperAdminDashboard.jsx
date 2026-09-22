@@ -83,8 +83,8 @@ export default function SuperAdminDashboard({
   };
 
   return (
-    <div className="flex min-h-screen w-full bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 font-sans">
-      {/* Left Responsive God Mode Sidebar */}
+    <div className="flex h-screen max-h-screen w-full overflow-hidden bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 font-sans">
+      {/* Left Responsive God Mode Sidebar - Permanently Fixed */}
       <SuperAdminSidebar
         activeTab={activeTab}
         onSelectTab={setActiveTab}
@@ -95,10 +95,10 @@ export default function SuperAdminDashboard({
         onLogout={onLogout}
       />
 
-      {/* Main Content Pane */}
-      <div className="flex-1 flex flex-col min-w-0 overflow-x-hidden">
+      {/* Main Content Pane - Dedicated Independent Scrolling Area */}
+      <div className="flex-1 flex flex-col min-w-0 h-screen overflow-y-auto bg-slate-50/50 dark:bg-slate-950">
         {/* Top Government Executive Header */}
-        <header className="sticky top-0 z-30 flex h-16 items-center justify-between border-b border-slate-200 dark:border-slate-800 bg-white/90 dark:bg-slate-900/90 px-6 backdrop-blur-md">
+        <header className="sticky top-0 z-30 flex h-16 items-center justify-between border-b border-slate-200/80 dark:border-slate-800 bg-white/95 dark:bg-slate-950/95 px-6 backdrop-blur-md">
           {/* Breadcrumb Context */}
           <div className="flex items-center gap-2 text-xs font-semibold text-slate-500 dark:text-slate-400 min-w-0">
             <span className="flex items-center gap-1.5 font-bold text-slate-900 dark:text-white">

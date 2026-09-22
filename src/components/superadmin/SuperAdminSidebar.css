@@ -5,20 +5,23 @@
 }
 
 .superadmin-sidebar-wrapper {
-  position: sticky;
-  top: 0;
+  position: relative;
   height: 100vh;
+  max-height: 100vh;
   z-index: 40;
   flex-shrink: 0;
   transition: width 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
 }
 
 .superadmin-sidebar-wrapper.expanded {
   width: var(--sa-sidebar-width);
+  min-width: var(--sa-sidebar-width);
 }
 
 .superadmin-sidebar-wrapper.collapsed {
   width: var(--sa-sidebar-collapsed);
+  min-width: var(--sa-sidebar-collapsed);
 }
 
 .superadmin-sidebar-card {
