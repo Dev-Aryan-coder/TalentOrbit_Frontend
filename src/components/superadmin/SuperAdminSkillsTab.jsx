@@ -109,16 +109,16 @@ export default function SuperAdminSkillsTab() {
       )}
 
       {/* Header Banner */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-xs">
         <div>
           <div className="flex items-center gap-2">
-            <div className="h-8 w-8 rounded-lg bg-violet-100 dark:bg-violet-950/80 text-violet-600 dark:text-violet-400 flex items-center justify-center font-black">
+            <div className="h-8 w-8 rounded-lg bg-emerald-100 dark:bg-emerald-950/80 text-emerald-700 dark:text-emerald-300 flex items-center justify-center font-black">
               <Layers size={18} />
             </div>
             <h1 className="text-xl font-bold text-slate-900 dark:text-slate-100">
               Master Skill Taxonomy & Governance
             </h1>
-            <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-violet-100 dark:bg-violet-950/80 text-violet-700 dark:text-violet-300">
+            <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-100 dark:bg-emerald-950/80 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">
               {skills.length} Canonical Skills
             </span>
           </div>
@@ -142,7 +142,7 @@ export default function SuperAdminSkillsTab() {
           <Button
             size="sm"
             onClick={() => setIsModalOpen(true)}
-            className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs shadow-md shadow-indigo-500/20"
+            className="bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs shadow-xs"
           >
             <Plus size={14} className="mr-1" />
             Add Canonical Skill
@@ -152,19 +152,19 @@ export default function SuperAdminSkillsTab() {
 
       {/* Mini Stats Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-        <div className="p-4 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+        <div className="p-4 rounded-xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800">
           <div className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Master Taxonomy Size</div>
           <div className="text-2xl font-black text-slate-900 dark:text-white mt-1">{skills.length} Standards</div>
         </div>
-        <div className="p-4 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
-          <div className="text-[11px] font-bold text-violet-500 uppercase tracking-wider flex items-center gap-1">
+        <div className="p-4 rounded-xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800">
+          <div className="text-[11px] font-bold text-teal-600 uppercase tracking-wider flex items-center gap-1">
             <Briefcase size={12} />
             Live Industry Postings Demand
           </div>
-          <div className="text-2xl font-black text-violet-600 dark:text-violet-400 mt-1">{totalDemand} Citations</div>
+          <div className="text-2xl font-black text-teal-600 dark:text-teal-400 mt-1">{totalDemand} Citations</div>
         </div>
-        <div className="p-4 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
-          <div className="text-[11px] font-bold text-emerald-500 uppercase tracking-wider flex items-center gap-1">
+        <div className="p-4 rounded-xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800">
+          <div className="text-[11px] font-bold text-emerald-600 uppercase tracking-wider flex items-center gap-1">
             <GraduationCap size={12} />
             Student Verifications Issued
           </div>
@@ -182,7 +182,7 @@ export default function SuperAdminSkillsTab() {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search taxonomy by skill name or category..."
-            className="w-full pl-10 pr-4 py-2 text-sm bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/20 text-slate-900 dark:text-slate-100"
+            className="w-full pl-10 pr-4 py-2 text-sm bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500/20 text-slate-900 dark:text-slate-100"
           />
         </div>
 
@@ -194,8 +194,8 @@ export default function SuperAdminSkillsTab() {
               onClick={() => setSelectedCategory(cat)}
               className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
                 selectedCategory === cat
-                  ? 'bg-slate-900 text-white dark:bg-indigo-600 dark:text-white shadow-sm'
-                  : 'bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800'
+                  ? 'bg-emerald-600 text-white shadow-xs'
+                  : 'bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 border border-slate-200/80 dark:border-slate-800 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 hover:text-emerald-700'
               }`}
             >
               {cat === 'ALL' ? 'All Categories' : cat}
@@ -313,7 +313,7 @@ export default function SuperAdminSkillsTab() {
           <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 w-full max-w-md shadow-2xl overflow-hidden">
             <div className="p-5 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <div className="h-8 w-8 rounded-lg bg-indigo-100 dark:bg-indigo-950/80 text-indigo-600 dark:text-indigo-400 flex items-center justify-center">
+                <div className="h-8 w-8 rounded-lg bg-emerald-100 dark:bg-emerald-950/80 text-emerald-700 dark:text-emerald-300 flex items-center justify-center">
                   <Plus size={18} />
                 </div>
                 <div>
@@ -342,7 +342,7 @@ export default function SuperAdminSkillsTab() {
                   value={newSkillName}
                   onChange={(e) => setNewSkillName(e.target.value)}
                   placeholder="e.g. Distributed Consensus (Raft), LangChain, PyTorch"
-                  className="w-full px-3.5 py-2 text-xs bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/20 text-slate-900 dark:text-slate-100"
+                  className="w-full px-3.5 py-2 text-xs bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500/20 text-slate-900 dark:text-slate-100"
                 />
                 <span className="text-[10px] text-slate-400 mt-1 block">
                   Parenthetical tags and whitespace are automatically normalized.
@@ -356,7 +356,7 @@ export default function SuperAdminSkillsTab() {
                 <select
                   value={newSkillCategory}
                   onChange={(e) => setNewSkillCategory(e.target.value)}
-                  className="w-full px-3.5 py-2 text-xs bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/20 text-slate-900 dark:text-slate-100"
+                  className="w-full px-3.5 py-2 text-xs bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500/20 text-slate-900 dark:text-slate-100"
                 >
                   <option value="TECHNICAL">TECHNICAL (Core Engineering & Software)</option>
                   <option value="SOFT_SKILLS">SOFT_SKILLS (Communication & Leadership)</option>
@@ -382,7 +382,7 @@ export default function SuperAdminSkillsTab() {
                   type="submit"
                   size="sm"
                   disabled={isSubmitting}
-                  className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold"
+                  className="bg-emerald-600 hover:bg-emerald-500 text-white font-bold"
                 >
                   {isSubmitting ? 'Saving...' : 'Create Master Skill'}
                 </Button>

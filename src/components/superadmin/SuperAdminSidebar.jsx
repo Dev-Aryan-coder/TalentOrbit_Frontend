@@ -70,17 +70,17 @@ export default function SuperAdminSidebar({
         <div className="superadmin-sidebar-header">
           {!isCollapsed && (
             <div className="flex items-center gap-2.5 overflow-hidden">
-              <div className="h-9 w-9 rounded-xl bg-gradient-to-tr from-indigo-600 via-violet-600 to-amber-500 flex items-center justify-center text-white shadow-md shadow-indigo-500/20 flex-shrink-0">
+              <div className="h-9 w-9 rounded-xl bg-gradient-to-tr from-emerald-600 via-teal-600 to-emerald-500 flex items-center justify-center text-white shadow-md shadow-emerald-500/20 flex-shrink-0">
                 <ShieldAlert size={20} />
               </div>
               <div className="truncate">
                 <div className="text-sm font-black text-slate-900 dark:text-slate-100 leading-none tracking-tight flex items-center gap-1.5">
                   <span>TalentOrbit</span>
-                  <span className="px-1.5 py-0.5 rounded text-[10px] font-extrabold bg-amber-100 text-amber-800 dark:bg-amber-950/80 dark:text-amber-300">
+                  <span className="px-1.5 py-0.5 rounded text-[10px] font-extrabold bg-emerald-100 text-emerald-800 dark:bg-emerald-950/80 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">
                     GOD MODE
                   </span>
                 </div>
-                <div className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 mt-0.5">
+                <div className="text-[11px] font-semibold text-emerald-700 dark:text-emerald-400 mt-0.5">
                   Super Administrator
                 </div>
               </div>
@@ -140,7 +140,7 @@ export default function SuperAdminSidebar({
         <div className="superadmin-sidebar-footer">
           {!isCollapsed && (
             <div className="mb-3 px-2 py-2 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800 flex items-center gap-2.5">
-              <div className="h-8 w-8 rounded-lg bg-indigo-100 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 flex items-center justify-center font-bold text-xs flex-shrink-0">
+              <div className="h-8 w-8 rounded-lg bg-emerald-100 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 flex items-center justify-center font-bold text-xs flex-shrink-0">
                 SA
               </div>
               <div className="truncate text-xs">

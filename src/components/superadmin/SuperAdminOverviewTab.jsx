@@ -65,35 +65,43 @@ export default function SuperAdminOverviewTab({ onSelectTab }) {
   const totalAcademicians = stats?.totalAcademicians ?? 0;
 
   return (
-    <div className="space-y-6 animate-fade-in">
-      {/* Executive Header Banner */}
-      <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 border border-slate-800 p-6 md:p-8 text-white shadow-xl">
-        <div className="absolute top-0 right-0 -mt-10 -mr-10 h-64 w-64 rounded-full bg-indigo-500/10 blur-3xl pointer-events-none" />
+    <div className="space-y-6 p-6 max-w-7xl mx-auto animate-fade-in">
+      {/* Executive Header Banner - Faculty Emerald/Teal Theme */}
+      <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-emerald-900 via-teal-900 to-slate-900 border border-emerald-800/40 p-6 md:p-8 text-white shadow-md">
+        <div className="absolute -right-10 -bottom-10 w-64 h-64 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
         <div className="relative z-10 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
           <div>
             <div className="flex items-center gap-2 mb-2">
-              <span className="px-2.5 py-0.5 rounded-full text-xs font-black bg-amber-400 text-slate-950 uppercase tracking-wide">
+              <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-500/20 border border-emerald-400/30 text-emerald-300 uppercase tracking-wide flex items-center gap-1">
+                <Sparkles size={12} />
                 Centralized God Mode
               </span>
-              <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-white/10 text-slate-200 border border-white/10">
+              <span className="px-2.5 py-0.5 rounded-full text-xs font-medium border border-emerald-400/20 text-emerald-100/90">
                 SIH Problem Statement #26044
               </span>
             </div>
-            <h1 className="text-2xl md:text-3xl font-black tracking-tight">
-              National Portal Command & Verification Center
+            <h1 className="text-2xl md:text-3xl font-bold tracking-tight">
+              National Portal Command & Verification Center 🏛️
             </h1>
-            <p className="text-slate-300 text-sm max-w-2xl mt-1.5 leading-relaxed">
+            <p className="text-emerald-100/80 text-sm max-w-2xl mt-1.5 leading-relaxed">
               Global governance portal for cross-role user verifications (AISHE & MCA CIN), master skill taxonomies, multi-tenant opportunity moderation, and cryptographic security audit logs.
             </p>
           </div>
 
           <div className="flex items-center gap-3">
             <Button
-              className="bg-rose-600 hover:bg-rose-500 text-white font-bold flex items-center gap-2 shadow-lg shadow-rose-900/30"
+              className="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold flex items-center gap-2 shadow-sm text-xs h-9"
               onClick={() => onSelectTab('verifications')}
             >
-              <Clock size={16} />
+              <Clock size={15} />
               <span>Review KYC Queue ({pendingCount})</span>
+            </Button>
+            <Button
+              variant="outline"
+              className="border-emerald-400/40 text-emerald-100 hover:bg-emerald-800/40 text-xs h-9 font-medium"
+              onClick={() => onSelectTab('users')}
+            >
+              User Directory
             </Button>
           </div>
         </div>
@@ -106,7 +114,7 @@ export default function SuperAdminOverviewTab({ onSelectTab }) {
         </div>
       )}
 
-      {/* 6 Key Stat Cards */}
+      {/* 6 Key Stat Cards - Faculty Emerald/Teal Palette */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4">
         {[
           {
@@ -114,8 +122,8 @@ export default function SuperAdminOverviewTab({ onSelectTab }) {
             value: totalUsers,
             sub: `${totalStudents} students, ${totalIndustry} employers`,
             icon: Users,
-            color: 'text-indigo-600 dark:text-indigo-400',
-            bg: 'bg-indigo-50 dark:bg-indigo-950/40',
+            color: 'text-emerald-600 dark:text-emerald-400',
+            bg: 'bg-emerald-50 dark:bg-emerald-950/40',
             tab: 'users',
           },
           {
@@ -123,8 +131,8 @@ export default function SuperAdminOverviewTab({ onSelectTab }) {
             value: pendingCount,
             sub: pendingCount > 0 ? 'Requires root approval' : 'All accounts verified',
             icon: ShieldCheck,
-            color: pendingCount > 0 ? 'text-rose-600 dark:text-rose-400' : 'text-emerald-600 dark:text-emerald-400',
-            bg: pendingCount > 0 ? 'bg-rose-50 dark:bg-rose-950/40' : 'bg-emerald-50 dark:bg-emerald-950/40',
+            color: pendingCount > 0 ? 'text-amber-600 dark:text-amber-400' : 'text-emerald-600 dark:text-emerald-400',
+            bg: pendingCount > 0 ? 'bg-amber-50 dark:bg-amber-950/40' : 'bg-emerald-50 dark:bg-emerald-950/40',
             tab: 'verifications',
           },
           {
@@ -132,8 +140,8 @@ export default function SuperAdminOverviewTab({ onSelectTab }) {
             value: activePostings,
             sub: 'Jobs, Internships & FDPs',
             icon: Briefcase,
-            color: 'text-amber-600 dark:text-amber-400',
-            bg: 'bg-amber-50 dark:bg-amber-950/40',
+            color: 'text-teal-600 dark:text-teal-400',
+            bg: 'bg-teal-50 dark:bg-teal-950/40',
             tab: 'moderation',
           },
           {
@@ -141,8 +149,8 @@ export default function SuperAdminOverviewTab({ onSelectTab }) {
             value: totalSkills,
             sub: 'Canonical competencies',
             icon: Layers,
-            color: 'text-sky-600 dark:text-sky-400',
-            bg: 'bg-sky-50 dark:bg-sky-950/40',
+            color: 'text-emerald-600 dark:text-emerald-400',
+            bg: 'bg-emerald-50 dark:bg-emerald-950/40',
             tab: 'skills',
           },
           {
@@ -150,8 +158,8 @@ export default function SuperAdminOverviewTab({ onSelectTab }) {
             value: totalInstitutions,
             sub: 'AISHE certified portals',
             icon: Building2,
-            color: 'text-emerald-600 dark:text-emerald-400',
-            bg: 'bg-emerald-50 dark:bg-emerald-950/40',
+            color: 'text-teal-600 dark:text-teal-400',
+            bg: 'bg-teal-50 dark:bg-teal-950/40',
             tab: 'users',
           },
           {
@@ -159,8 +167,8 @@ export default function SuperAdminOverviewTab({ onSelectTab }) {
             value: recentLogs.length > 0 ? `${recentLogs.length}+` : 'Active',
             sub: 'Immutable security log',
             icon: Lock,
-            color: 'text-purple-600 dark:text-purple-400',
-            bg: 'bg-purple-50 dark:bg-purple-950/40',
+            color: 'text-slate-600 dark:text-slate-400',
+            bg: 'bg-slate-100 dark:bg-slate-800',
             tab: 'audit',
           },
         ].map((card, idx) => {
@@ -169,15 +177,15 @@ export default function SuperAdminOverviewTab({ onSelectTab }) {
             <div
               key={idx}
               onClick={() => onSelectTab(card.tab)}
-              className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-4 shadow-sm hover:shadow-md transition-all cursor-pointer group"
+              className="bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-2xl p-4 shadow-xs hover:border-emerald-500/50 hover:shadow-md transition-all cursor-pointer group"
             >
               <div className="flex items-center justify-between mb-2">
                 <div className={`p-2 rounded-xl ${card.bg} ${card.color}`}>
-                  <Icon size={20} />
+                  <Icon size={18} />
                 </div>
-                <ArrowRight size={14} className="text-slate-400 group-hover:translate-x-1 transition-transform" />
+                <ArrowRight size={14} className="text-slate-300 dark:text-slate-600 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 group-hover:translate-x-0.5 transition" />
               </div>
-              <div className="text-2xl font-black text-slate-900 dark:text-slate-100">
+              <div className="text-2xl font-extrabold text-slate-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition">
                 {isLoading ? <div className="h-7 w-16 bg-slate-200 dark:bg-slate-800 rounded animate-pulse" /> : card.value}
               </div>
               <div className="text-xs font-bold text-slate-700 dark:text-slate-300 mt-0.5">
@@ -194,7 +202,7 @@ export default function SuperAdminOverviewTab({ onSelectTab }) {
       {/* Role Breakdown & System Health Matrix */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Left 2 Cols: Role Distribution & Ecosystem Balance */}
-        <div className="lg:col-span-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-sm">
+        <div className="lg:col-span-2 bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-2xl p-6 shadow-xs">
           <div className="flex items-center justify-between mb-4">
             <div>
               <h2 className="text-lg font-bold text-slate-900 dark:text-slate-100">
@@ -204,25 +212,25 @@ export default function SuperAdminOverviewTab({ onSelectTab }) {
                 Live database breakdown of entities registered in TalentOrbit.
               </p>
             </div>
-            <span className="px-2.5 py-1 rounded-full text-xs font-bold bg-indigo-50 text-indigo-700 dark:bg-indigo-950 dark:text-indigo-300">
+            <span className="px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-50 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">
               100% Real MySQL Data
             </span>
           </div>
 
-          <div className="space-y-4">
+          <div className="space-y-3.5">
             {[
-              { label: 'Students (Talent Pool)', count: totalStudents, total: totalUsers, color: 'bg-indigo-600', icon: Users },
-              { label: 'Industry Employers & Recruiters', count: totalIndustry, total: totalUsers, color: 'bg-amber-500', icon: Briefcase },
-              { label: 'Academician Faculty Members', count: totalAcademicians, total: totalUsers, color: 'bg-purple-600', icon: Sparkles },
-              { label: 'Colleges & Higher Ed Institutions (TPOs)', count: totalInstitutions, total: totalUsers, color: 'bg-emerald-600', icon: Building2 },
+              { label: 'Students (Talent Pool)', count: totalStudents, total: totalUsers, color: 'bg-emerald-600', icon: Users },
+              { label: 'Industry Employers & Recruiters', count: totalIndustry, total: totalUsers, color: 'bg-teal-500', icon: Briefcase },
+              { label: 'Academician Faculty Members', count: totalAcademicians, total: totalUsers, color: 'bg-emerald-500', icon: Sparkles },
+              { label: 'Colleges & Higher Ed Institutions (TPOs)', count: totalInstitutions, total: totalUsers, color: 'bg-teal-600', icon: Building2 },
             ].map((role, idx) => {
               const pct = totalUsers > 0 ? Math.round((role.count / totalUsers) * 100) : 0;
               const Icon = role.icon;
               return (
-                <div key={idx} className="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-800">
+                <div key={idx} className="p-3.5 rounded-xl bg-slate-50/80 dark:bg-slate-800/40 border border-slate-100 dark:border-slate-800">
                   <div className="flex items-center justify-between text-xs font-bold text-slate-800 dark:text-slate-200 mb-1.5">
                     <div className="flex items-center gap-2">
-                      <Icon size={16} className="text-slate-500" />
+                      <Icon size={16} className="text-emerald-600 dark:text-emerald-400" />
                       <span>{role.label}</span>
                     </div>
                     <span>{role.count} entities ({pct}%)</span>
@@ -237,10 +245,10 @@ export default function SuperAdminOverviewTab({ onSelectTab }) {
         </div>
 
         {/* Right Col: System Diagnostics & Security Health */}
-        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-sm flex flex-col justify-between">
+        <div className="bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-2xl p-6 shadow-xs flex flex-col justify-between">
           <div>
             <div className="flex items-center gap-2 mb-1">
-              <Server className="text-indigo-600 dark:text-indigo-400" size={20} />
+              <Server className="text-emerald-600 dark:text-emerald-400" size={20} />
               <h2 className="text-lg font-bold text-slate-900 dark:text-slate-100">
                 Core System Telemetry
               </h2>
@@ -249,28 +257,28 @@ export default function SuperAdminOverviewTab({ onSelectTab }) {
               Real-time engine status and cryptographic audit posture.
             </p>
 
-            <div className="space-y-3">
-              <div className="flex items-center justify-between p-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-100 dark:border-slate-700 text-xs">
+            <div className="space-y-2.5">
+              <div className="flex items-center justify-between p-3 rounded-xl bg-slate-50/80 dark:bg-slate-800/40 border border-slate-100 dark:border-slate-800 text-xs">
                 <span className="font-semibold text-slate-600 dark:text-slate-400">MySQL Server Connection</span>
                 <span className="flex items-center gap-1.5 font-bold text-emerald-600 dark:text-emerald-400">
                   <CheckCircle2 size={14} /> Port 3306 Healthy
                 </span>
               </div>
-              <div className="flex items-center justify-between p-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-100 dark:border-slate-700 text-xs">
+              <div className="flex items-center justify-between p-3 rounded-xl bg-slate-50/80 dark:bg-slate-800/40 border border-slate-100 dark:border-slate-800 text-xs">
                 <span className="font-semibold text-slate-600 dark:text-slate-400">Spring Boot REST Engine</span>
                 <span className="flex items-center gap-1.5 font-bold text-emerald-600 dark:text-emerald-400">
                   <CheckCircle2 size={14} /> Port 8080 Active
                 </span>
               </div>
-              <div className="flex items-center justify-between p-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-100 dark:border-slate-700 text-xs">
+              <div className="flex items-center justify-between p-3 rounded-xl bg-slate-50/80 dark:bg-slate-800/40 border border-slate-100 dark:border-slate-800 text-xs">
                 <span className="font-semibold text-slate-600 dark:text-slate-400">Cryptographic Audit Logger</span>
                 <span className="flex items-center gap-1.5 font-bold text-emerald-600 dark:text-emerald-400">
                   <Lock size={14} /> Immutable Trail Live
                 </span>
               </div>
-              <div className="flex items-center justify-between p-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-100 dark:border-slate-700 text-xs">
+              <div className="flex items-center justify-between p-3 rounded-xl bg-slate-50/80 dark:bg-slate-800/40 border border-slate-100 dark:border-slate-800 text-xs">
                 <span className="font-semibold text-slate-600 dark:text-slate-400">KYC Verification Gate</span>
-                <span className={`flex items-center gap-1.5 font-bold ${pendingCount > 0 ? 'text-rose-600 dark:text-rose-400' : 'text-emerald-600 dark:text-emerald-400'}`}>
+                <span className={`flex items-center gap-1.5 font-bold ${pendingCount > 0 ? 'text-amber-600 dark:text-amber-400' : 'text-emerald-600 dark:text-emerald-400'}`}>
                   {pendingCount > 0 ? <AlertTriangle size={14} /> : <CheckCircle2 size={14} />}
                   {pendingCount > 0 ? `${pendingCount} In Review Queue` : 'Queue Cleared'}
                 </span>
@@ -279,21 +287,21 @@ export default function SuperAdminOverviewTab({ onSelectTab }) {
           </div>
 
           <Button
-            className="w-full mt-6 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold flex items-center justify-center gap-2"
+            className="w-full mt-6 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold flex items-center justify-center gap-2 h-9 text-xs shadow-xs"
             onClick={() => onSelectTab('audit')}
           >
-            <Lock size={15} />
-            <span>View Full Security Audit Trail</span>
+            <Lock size={14} />
+            <span>View Security Audit Trail</span>
           </Button>
         </div>
       </div>
 
       {/* Pending Verifications Quick-Action Callout */}
       {pendingQueue.length > 0 && (
-        <div className="bg-white dark:bg-slate-900 border border-rose-200 dark:border-rose-900/60 rounded-2xl p-6 shadow-sm">
+        <div className="bg-white dark:bg-slate-900 border border-emerald-200/80 dark:border-emerald-900/40 rounded-2xl p-6 shadow-xs">
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-2.5">
-              <div className="p-2 rounded-xl bg-rose-100 dark:bg-rose-950/60 text-rose-600">
+              <div className="p-2 rounded-xl bg-emerald-100 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300">
                 <ShieldCheck size={20} />
               </div>
               <div>
@@ -308,7 +316,7 @@ export default function SuperAdminOverviewTab({ onSelectTab }) {
 
             <Button
               size="sm"
-              className="bg-rose-600 hover:bg-rose-500 text-white font-bold"
+              className="bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs h-8"
               onClick={() => onSelectTab('verifications')}
             >
               Open Full Queue
@@ -323,11 +331,11 @@ export default function SuperAdminOverviewTab({ onSelectTab }) {
                     {item.organizationOrName || item.email}
                   </div>
                   <div className="text-xs text-slate-500">
-                    {item.email} &bull; <span className="font-semibold text-indigo-600 dark:text-indigo-400">{item.role}</span>
+                    {item.email} &bull; <span className="font-semibold text-emerald-600 dark:text-emerald-400">{item.role}</span>
                   </div>
                 </div>
 
-                <span className="px-2.5 py-1 rounded-full text-xs font-bold bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-300">
+                <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-300">
                   PENDING_VERIFICATION
                 </span>
               </div>

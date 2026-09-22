@@ -153,16 +153,16 @@ export default function SuperAdminVerificationsTab({ onSelectTab, onUpdatePendin
       )}
 
       {/* Header Banner */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-xs">
         <div>
           <div className="flex items-center gap-2">
-            <div className="h-8 w-8 rounded-lg bg-rose-100 dark:bg-rose-950/80 text-rose-600 dark:text-rose-400 flex items-center justify-center font-black">
+            <div className="h-8 w-8 rounded-lg bg-emerald-100 dark:bg-emerald-950/80 text-emerald-700 dark:text-emerald-300 flex items-center justify-center font-black">
               <UserCheck size={18} />
             </div>
             <h1 className="text-xl font-bold text-slate-900 dark:text-slate-100">
               Universal KYC Verification Queue
             </h1>
-            <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-rose-100 dark:bg-rose-950/80 text-rose-700 dark:text-rose-300">
+            <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-100 dark:bg-emerald-950/80 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">
               {queue.length} Pending
             </span>
           </div>
@@ -195,7 +195,7 @@ export default function SuperAdminVerificationsTab({ onSelectTab, onUpdatePendin
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search pending by user ID, email, or institution name..."
-            className="w-full pl-10 pr-4 py-2 text-sm bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/20 text-slate-900 dark:text-slate-100"
+            className="w-full pl-10 pr-4 py-2 text-sm bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500/20 text-slate-900 dark:text-slate-100"
           />
         </div>
 
@@ -207,8 +207,8 @@ export default function SuperAdminVerificationsTab({ onSelectTab, onUpdatePendin
               onClick={() => setSelectedRole(role)}
               className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
                 selectedRole === role
-                  ? 'bg-slate-900 text-white dark:bg-indigo-600 dark:text-white shadow-sm'
-                  : 'bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800'
+                  ? 'bg-emerald-600 text-white shadow-xs'
+                  : 'bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 border border-slate-200/80 dark:border-slate-800 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 hover:text-emerald-700'
               }`}
             >
               {role === 'ALL' ? 'All Roles' : role}

@@ -102,11 +102,11 @@ export default function SuperAdminDashboard({
           {/* Breadcrumb Context */}
           <div className="flex items-center gap-2 text-xs font-semibold text-slate-500 dark:text-slate-400 min-w-0">
             <span className="flex items-center gap-1.5 font-bold text-slate-900 dark:text-white">
-              <span className="h-2 w-2 rounded-full bg-amber-500 animate-pulse" />
+              <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
               TalentOrbit God Mode
             </span>
             <span>/</span>
-            <span className="text-indigo-600 dark:text-indigo-400 capitalize font-medium">
+            <span className="text-emerald-600 dark:text-emerald-400 capitalize font-semibold">
               {getTabTitle()}
             </span>
           </div>
@@ -124,9 +124,9 @@ export default function SuperAdminDashboard({
               <button
                 type="button"
                 onClick={() => setIsRoleDropdownOpen(!isRoleDropdownOpen)}
-                className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-bold bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 transition-colors"
+                className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-bold bg-slate-100 hover:bg-emerald-50 hover:text-emerald-700 dark:bg-slate-800 dark:hover:bg-emerald-950/50 text-slate-800 dark:text-slate-200 transition-colors"
               >
-                <Users size={13} className="text-indigo-500" />
+                <Users size={13} className="text-emerald-600 dark:text-emerald-400" />
                 <span>Switch View</span>
                 <ChevronDown size={12} className="text-slate-400" />
               </button>
@@ -141,28 +141,28 @@ export default function SuperAdminDashboard({
                   </div>
                   <button
                     onClick={() => onNavigatePage && onNavigatePage('student')}
-                    className="w-full text-left px-3 py-2 hover:bg-slate-50 dark:hover:bg-slate-800 font-medium text-slate-700 dark:text-slate-200 flex items-center justify-between"
+                    className="w-full text-left px-3 py-2 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 font-medium text-slate-700 dark:text-slate-200 flex items-center justify-between"
                   >
                     <span>Student Dashboard</span>
                     <span className="text-[10px] text-slate-400">/student</span>
                   </button>
                   <button
                     onClick={() => onNavigatePage && onNavigatePage('recruiter')}
-                    className="w-full text-left px-3 py-2 hover:bg-slate-50 dark:hover:bg-slate-800 font-medium text-slate-700 dark:text-slate-200 flex items-center justify-between"
+                    className="w-full text-left px-3 py-2 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 font-medium text-slate-700 dark:text-slate-200 flex items-center justify-between"
                   >
                     <span>Recruiter / Industry</span>
                     <span className="text-[10px] text-slate-400">/industry</span>
                   </button>
                   <button
                     onClick={() => onNavigatePage && onNavigatePage('academician')}
-                    className="w-full text-left px-3 py-2 hover:bg-slate-50 dark:hover:bg-slate-800 font-medium text-slate-700 dark:text-slate-200 flex items-center justify-between"
+                    className="w-full text-left px-3 py-2 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 font-medium text-slate-700 dark:text-slate-200 flex items-center justify-between"
                   >
                     <span>Academician Dashboard</span>
                     <span className="text-[10px] text-slate-400">/faculty</span>
                   </button>
                   <button
                     onClick={() => onNavigatePage && onNavigatePage('tpo')}
-                    className="w-full text-left px-3 py-2 hover:bg-slate-50 dark:hover:bg-slate-800 font-medium text-slate-700 dark:text-slate-200 flex items-center justify-between"
+                    className="w-full text-left px-3 py-2 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 font-medium text-slate-700 dark:text-slate-200 flex items-center justify-between"
                   >
                     <span>Institution / TPO</span>
                     <span className="text-[10px] text-slate-400">/tpo</span>
@@ -182,14 +182,14 @@ export default function SuperAdminDashboard({
 
             {/* SuperAdmin User Chip */}
             <div className="flex items-center gap-2 pl-2 border-l border-slate-200 dark:border-slate-800">
-              <div className="h-8 w-8 rounded-full bg-gradient-to-tr from-amber-500 to-rose-600 text-white font-black text-xs flex items-center justify-center shadow-sm">
+              <div className="w-8 h-8 rounded-full bg-emerald-700 text-white font-bold text-xs flex items-center justify-center shadow-xs">
                 SA
               </div>
               <div className="hidden xl:block text-left">
                 <div className="text-xs font-bold text-slate-900 dark:text-slate-100 leading-none">
                   National SuperAdmin
                 </div>
-                <div className="text-[10px] text-slate-500 dark:text-slate-400 mt-0.5 font-mono">
+                <div className="text-[10px] text-emerald-700 dark:text-emerald-400 mt-0.5 font-mono font-medium">
                   {adminEmail}
                 </div>
               </div>

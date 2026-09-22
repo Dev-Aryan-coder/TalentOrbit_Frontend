@@ -1,4 +1,4 @@
-/* SuperAdmin Portal Sidebar Styling */
+/* SuperAdmin Portal Sidebar Styling - Matching Faculty (Academician) Emerald/Teal UI */
 :root {
   --sa-sidebar-width: 285px;
   --sa-sidebar-collapsed: 72px;
@@ -24,11 +24,11 @@
 .superadmin-sidebar-card {
   height: 100%;
   background: #ffffff;
-  border-right: 1px solid #e2e8f0;
+  border-right: 1px solid rgba(226, 232, 240, 0.8);
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.03);
 }
 
 .dark .superadmin-sidebar-card {
@@ -42,23 +42,35 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid #f1f5f9;
+  border-bottom: 1px solid rgba(241, 245, 249, 0.9);
   min-height: 72px;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.98), rgba(240, 253, 244, 0.7));
 }
 
 .dark .superadmin-sidebar-header {
   border-bottom-color: #1e293b;
+  background: linear-gradient(to bottom, rgba(15, 23, 42, 0.98), rgba(6, 78, 59, 0.2));
 }
 
 .superadmin-sidebar-nav {
   flex: 1;
   padding: 1rem 0.75rem;
   overflow-y: auto;
-  scrollbar-width: none;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(16, 185, 129, 0.2) transparent;
 }
 
 .superadmin-sidebar-nav::-webkit-scrollbar {
-  display: none;
+  width: 4px;
+}
+
+.superadmin-sidebar-nav::-webkit-scrollbar-thumb {
+  background: rgba(16, 185, 129, 0.2);
+  border-radius: 4px;
+}
+
+.superadmin-sidebar-nav::-webkit-scrollbar-thumb:hover {
+  background: rgba(16, 185, 129, 0.4);
 }
 
 .superadmin-nav-item {
@@ -71,7 +83,7 @@
   border-radius: 0.75rem;
   font-size: 0.875rem;
   font-weight: 600;
-  color: #64748b;
+  color: #475569;
   transition: all 0.15s ease-in-out;
   cursor: pointer;
   border: none;
@@ -90,8 +102,8 @@
 }
 
 .superadmin-nav-item:hover {
-  background: #f8fafc;
-  color: #0f172a;
+  background: #f0fdf4;
+  color: #047857;
 }
 
 .dark .superadmin-nav-item {
@@ -99,29 +111,32 @@
 }
 
 .dark .superadmin-nav-item:hover {
-  background: #111827;
-  color: #f1f5f9;
+  background: rgba(6, 78, 59, 0.25);
+  color: #34d399;
 }
 
+/* Active Nav Item - Faculty Emerald Style */
 .superadmin-nav-item.active {
-  background: #6366f1;
+  background: linear-gradient(135deg, #059669 0%, #0d9488 100%);
   color: #ffffff;
-  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.28);
+  box-shadow: 0 4px 14px rgba(5, 150, 105, 0.3);
 }
 
 .dark .superadmin-nav-item.active {
-  background: #6366f1;
+  background: linear-gradient(135deg, #059669 0%, #0d9488 100%);
   color: #ffffff;
-  box-shadow: 0 4px 16px rgba(99, 102, 241, 0.35);
+  box-shadow: 0 4px 16px rgba(5, 150, 105, 0.4);
 }
 
 .superadmin-sidebar-footer {
   padding: 1rem 0.75rem;
-  border-top: 1px solid #f1f5f9;
+  border-top: 1px solid rgba(241, 245, 249, 0.9);
+  background: rgba(255, 255, 255, 0.5);
 }
 
 .dark .superadmin-sidebar-footer {
   border-top-color: #1e293b;
+  background: transparent;
 }
 
 .superadmin-toggle-btn {
@@ -131,24 +146,25 @@
   width: 32px;
   height: 32px;
   border-radius: 8px;
-  background: #f1f5f9;
-  color: #64748b;
-  border: none;
+  background: #f0fdf4;
+  color: #059669;
+  border: 1px solid #d1fae5;
   cursor: pointer;
   transition: all 0.15s ease;
 }
 
 .superadmin-toggle-btn:hover {
-  background: #e2e8f0;
-  color: #0f172a;
+  background: #d1fae5;
+  color: #047857;
 }
 
 .dark .superadmin-toggle-btn {
-  background: #1e293b;
-  color: #94a3b8;
+  background: rgba(6, 78, 59, 0.3);
+  color: #34d399;
+  border-color: rgba(5, 150, 105, 0.4);
 }
 
 .dark .superadmin-toggle-btn:hover {
-  background: #334155;
-  color: #f1f5f9;
+  background: rgba(6, 78, 59, 0.5);
+  color: #6ee7b7;
 }
