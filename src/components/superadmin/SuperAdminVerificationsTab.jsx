@@ -66,7 +66,8 @@ export default function SuperAdminVerificationsTab({ onSelectTab, onUpdatePendin
     try {
       await superAdminAPI.decideVerification({
         userId,
-        decision: 'APPROVE',
+        status: 'VERIFIED',
+        decision: 'VERIFIED',
         reason: 'KYC verified and approved by SuperAdmin God Mode.',
       });
       setSuccessToast(`Successfully approved and verified ${userEmail}!`);
@@ -91,7 +92,8 @@ export default function SuperAdminVerificationsTab({ onSelectTab, onUpdatePendin
     try {
       await superAdminAPI.decideVerification({
         userId: rejectingUser.userId,
-        decision: 'REJECT',
+        status: 'REJECTED',
+        decision: 'REJECTED',
         reason: rejectionReason || 'KYC verification rejected by SuperAdmin.',
       });
       setSuccessToast(`Application for ${rejectingUser.email} has been REJECTED.`);
