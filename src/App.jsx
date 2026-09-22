@@ -9,6 +9,7 @@ import StudentDashboard from './views/student/StudentDashboard';
 import RecruiterDashboard from './views/recruiter/RecruiterDashboard';
 import AcademicianDashboard from './views/academician/AcademicianDashboard';
 import InstitutionDashboard from './views/institution/InstitutionDashboard';
+import SuperAdminDashboard from './views/superadmin/SuperAdminDashboard';
 import AuthPage from './views/public/AuthPage';
 import ProfileSettingsModal from './components/ui/ProfileSettingsModal';
 import AccountSettingsModal from './components/ui/AccountSettingsModal';
@@ -52,13 +53,15 @@ export default function App() {
 
   useEffect(() => {
     const path = window.location.pathname.replace('/', '');
-    if (['how-it-works', 'features', 'about-us', 'contact', 'student', 'dashboard', 'achievements', 'badges', 'login', 'register', 'signup', 'recruiter', 'industry', 'academician', 'faculty'].includes(path)) {
+    if (['how-it-works', 'features', 'about-us', 'contact', 'student', 'dashboard', 'achievements', 'badges', 'login', 'register', 'signup', 'recruiter', 'industry', 'academician', 'faculty', 'institution', 'tpo', 'superadmin', 'admin', 'godmode'].includes(path)) {
       if (path === 'dashboard') {
         setCurrentView('student');
       } else if (path === 'faculty') {
         setCurrentView('academician');
       } else if (path === 'industry') {
         setCurrentView('recruiter');
+      } else if (path === 'admin' || path === 'godmode') {
+        setCurrentView('superadmin');
       } else {
         setCurrentView(path === 'signup' ? 'register' : path);
       }
@@ -81,6 +84,10 @@ export default function App() {
     setCurrentUser(userData);
     localStorage.setItem('talentorbit_user', JSON.stringify(userData));
     const r = (userData.role || 'student').toLowerCase();
+    if (r === 'superadmin') {
+      handleNavigatePage('superadmin');
+      return;
+    }
     if (r === 'student') {
       handleNavigateHome();
       return;
@@ -107,7 +114,7 @@ export default function App() {
       return;
     }
     const r = (currentUser.role || 'student').toLowerCase();
-    const target = r === 'industry' ? 'recruiter' : r === 'academician' ? 'academician' : r === 'institution_admin' ? 'tpo' : 'student';
+    const target = r === 'superadmin' ? 'superadmin' : r === 'industry' ? 'recruiter' : r === 'academician' ? 'academician' : r === 'institution_admin' ? 'tpo' : 'student';
     handleNavigatePage(target);
   };
 
@@ -221,6 +228,17 @@ export default function App() {
 
       {(currentView === 'institution' || currentView === 'tpo') && (
         <InstitutionDashboard
+          currentUser={currentUser}
+          currentTheme={currentTheme}
+          onThemeChange={setCurrentTheme}
+          onNavigateHome={handleNavigateHome}
+          onNavigatePage={handleNavigatePage}
+          onLogout={handleLogout}
+        />
+      )}
+
+      {(currentView === 'superadmin' || currentView === 'admin' || currentView === 'godmode') && (
+        <SuperAdminDashboard
           currentUser={currentUser}
           currentTheme={currentTheme}
           onThemeChange={setCurrentTheme}

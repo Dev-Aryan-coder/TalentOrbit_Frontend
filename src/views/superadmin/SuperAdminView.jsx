@@ -1,5 +1,4 @@
-﻿import React from 'react';
+import SuperAdminDashboard from './SuperAdminDashboard';
 
-export default function SuperAdminView() {
-  return null;
-}
+export default SuperAdminDashboard;
+export { SuperAdminDashboard };

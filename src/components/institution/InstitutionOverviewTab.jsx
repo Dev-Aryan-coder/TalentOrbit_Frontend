@@ -19,7 +19,6 @@ import {
 import { Badge } from '@/components/ui/Badge';
 import { Button } from '@/components/ui/Button';
 import { institutionAPI } from '../../services/api';
-import { stripSkillTag } from '@/lib/skillCategories';
 import './InstitutionOverviewTab.css';
 
 export default function InstitutionOverviewTab({
@@ -101,10 +100,10 @@ export default function InstitutionOverviewTab({
   const averageCtc = placements?.averageCtc ?? 0;
   const highestCtc = placements?.highestCtc ?? 0;
 
-  // Filter top critical gaps (deficit > 0)
+  // Filter top critical gaps (deficit >= 20%)
   const criticalGaps = skillGaps
-    .filter((g) => (g.deficitPercentage ?? g.netDeficitPercentage ?? g.gapPercentage ?? 0) > 0)
-    .sort((a, b) => (b.deficitPercentage ?? b.netDeficitPercentage ?? b.gapPercentage ?? 0) - (a.deficitPercentage ?? a.netDeficitPercentage ?? a.gapPercentage ?? 0))
+    .filter((g) => (g.gapPercentage || 0) > 0)
+    .sort((a, b) => (b.gapPercentage || 0) - (a.gapPercentage || 0))
     .slice(0, 4);
 
   return (
@@ -348,23 +347,20 @@ export default function InstitutionOverviewTab({
                 </thead>
                 <tbody>
                   {criticalGaps.map((gap, idx) => {
-                    const cleanName = stripSkillTag(gap.skillName || 'Competency');
-                    const demand = gap.demandPercentage || 0;
-                    const supply = gap.supplyPercentage ?? gap.studentPercentage ?? 0;
-                    const gapVal = gap.deficitPercentage ?? gap.netDeficitPercentage ?? gap.gapPercentage ?? 0;
+                    const gapVal = gap.gapPercentage || 0;
                     return (
                       <tr key={gap.skillId || idx}>
                         <td className="font-bold text-slate-800 dark:text-slate-200">
-                          {cleanName}
+                          {gap.skillName}
                         </td>
                         <td>
                           <span className="font-semibold text-indigo-600 dark:text-indigo-400">
-                            {demand}%
+                            {gap.demandPercentage}%
                           </span>
                         </td>
                         <td>
                           <span className="text-slate-600 dark:text-slate-400">
-                            {supply}%
+                            {gap.studentPercentage}%
                           </span>
                         </td>
                         <td>

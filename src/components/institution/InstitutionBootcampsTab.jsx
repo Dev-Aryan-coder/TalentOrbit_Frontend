@@ -14,7 +14,6 @@ import {
 } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { institutionAPI } from '../../services/api';
-import { stripSkillTag } from '@/lib/skillCategories';
 
 export default function InstitutionBootcampsTab({ currentUser, onSelectTab }) {
   const userId = currentUser?.id || currentUser?.userId || 1;
@@ -56,9 +55,9 @@ export default function InstitutionBootcampsTab({ currentUser, onSelectTab }) {
           : (heatRes.value?.data || []);
         const extractedSkills = heatmapList
           .map((g) => ({
-            id: g.skillId || g.id || g.skill?.id,
-            name: stripSkillTag(g.skillName || g.skill?.name || g.name || 'Core Competency'),
-            category: g.category || g.skill?.category || 'Skill Deficit',
+            id: g.skill?.id || g.skillId || g.id,
+            name: g.skill?.name || g.skillName || g.name || 'Core Competency',
+            category: g.skill?.category || g.category || 'Skill Deficit',
             affectedStudents: g.affectedStudents || 0,
           }))
           .filter((s) => s.id && s.name);
@@ -242,13 +241,12 @@ export default function InstitutionBootcampsTab({ currentUser, onSelectTab }) {
                     </td>
                     <td>
                       <span
-                        className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold ${
-                          prog.status === 'COMPLETED'
+                        className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold ${prog.status === 'COMPLETED'
                             ? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-950/60 dark:text-emerald-300'
                             : prog.status === 'ONGOING'
-                            ? 'bg-amber-100 text-amber-800 dark:bg-amber-950/60 dark:text-amber-300'
-                            : 'bg-indigo-100 text-indigo-800 dark:bg-indigo-950/60 dark:text-indigo-300'
-                        }`}
+                              ? 'bg-amber-100 text-amber-800 dark:bg-amber-950/60 dark:text-amber-300'
+                              : 'bg-indigo-100 text-indigo-800 dark:bg-indigo-950/60 dark:text-indigo-300'
+                          }`}
                       >
                         <Clock size={12} />
                         {prog.status || 'PLANNED'}

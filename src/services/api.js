@@ -540,6 +540,22 @@ export const institutionAPI = {
   },
 };
 
+// ==========================================
+// SUPERADMIN ("GOD MODE") API (100% REAL REST DRIVEN)
+// ==========================================
+export const superAdminAPI = {
+  getDashboardStats: () => apiClient.get('/admin/dashboard-stats'),
+  getPendingVerifications: () => apiClient.get('/admin/verifications/pending'),
+  decideVerification: (payload) => apiClient.post('/admin/verifications/decide', payload),
+  getAllUsers: (role) => apiClient.get('/admin/users' + (role && role !== 'ALL' ? `?role=${role}` : '')),
+  toggleSuspendUser: (userId) => apiClient.patch(`/admin/user/${userId}/toggle-suspend`),
+  getMasterSkills: () => apiClient.get('/admin/skills'),
+  createMasterSkill: (data) => apiClient.post('/admin/skills', data),
+  getAllPostings: () => apiClient.get('/admin/postings'),
+  togglePostingActive: (postingId) => apiClient.patch(`/admin/posting/${postingId}/toggle-active`),
+  getAuditLogs: () => apiClient.get('/admin/audit-logs'),
+};
+
 export default {
   auth: authAPI,
   badges: badgesAPI,
@@ -556,5 +572,6 @@ export default {
   interviews: interviewsAPI,
   academician: academicianAPI,
   institution: institutionAPI,
+  superAdmin: superAdminAPI,
 };
 

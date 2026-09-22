@@ -1,0 +1,154 @@
+/* SuperAdmin Portal Sidebar Styling */
+:root {
+  --sa-sidebar-width: 285px;
+  --sa-sidebar-collapsed: 72px;
+}
+
+.superadmin-sidebar-wrapper {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  z-index: 40;
+  flex-shrink: 0;
+  transition: width 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.superadmin-sidebar-wrapper.expanded {
+  width: var(--sa-sidebar-width);
+}
+
+.superadmin-sidebar-wrapper.collapsed {
+  width: var(--sa-sidebar-collapsed);
+}
+
+.superadmin-sidebar-card {
+  height: 100%;
+  background: #ffffff;
+  border-right: 1px solid #e2e8f0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.04);
+}
+
+.dark .superadmin-sidebar-card {
+  background: #090d16;
+  border-right-color: #1e293b;
+  box-shadow: 0 4px 25px -2px rgba(0, 0, 0, 0.4);
+}
+
+.superadmin-sidebar-header {
+  padding: 1.25rem 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #f1f5f9;
+  min-height: 72px;
+}
+
+.dark .superadmin-sidebar-header {
+  border-bottom-color: #1e293b;
+}
+
+.superadmin-sidebar-nav {
+  flex: 1;
+  padding: 1rem 0.75rem;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+.superadmin-sidebar-nav::-webkit-scrollbar {
+  display: none;
+}
+
+.superadmin-nav-item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 0.85rem;
+  margin-bottom: 0.35rem;
+  border-radius: 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #64748b;
+  transition: all 0.15s ease-in-out;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  text-align: left;
+}
+
+.superadmin-sidebar-wrapper.collapsed .superadmin-nav-item {
+  justify-content: center;
+  padding: 0.75rem 0;
+  width: 44px;
+  height: 44px;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 0.75rem;
+}
+
+.superadmin-nav-item:hover {
+  background: #f8fafc;
+  color: #0f172a;
+}
+
+.dark .superadmin-nav-item {
+  color: #94a3b8;
+}
+
+.dark .superadmin-nav-item:hover {
+  background: #111827;
+  color: #f1f5f9;
+}
+
+.superadmin-nav-item.active {
+  background: #6366f1;
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.28);
+}
+
+.dark .superadmin-nav-item.active {
+  background: #6366f1;
+  color: #ffffff;
+  box-shadow: 0 4px 16px rgba(99, 102, 241, 0.35);
+}
+
+.superadmin-sidebar-footer {
+  padding: 1rem 0.75rem;
+  border-top: 1px solid #f1f5f9;
+}
+
+.dark .superadmin-sidebar-footer {
+  border-top-color: #1e293b;
+}
+
+.superadmin-toggle-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: #f1f5f9;
+  color: #64748b;
+  border: none;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.superadmin-toggle-btn:hover {
+  background: #e2e8f0;
+  color: #0f172a;
+}
+
+.dark .superadmin-toggle-btn {
+  background: #1e293b;
+  color: #94a3b8;
+}
+
+.dark .superadmin-toggle-btn:hover {
+  background: #334155;
+  color: #f1f5f9;
+}
