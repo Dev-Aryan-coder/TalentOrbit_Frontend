@@ -280,35 +280,60 @@ export default function InstitutionSkillHeatmapTab({
                           >
                             -{netGap}% Deficit
                           </span>
+                        ) : supply > demand ? (
+                          <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-extrabold skill-gap-badge-balanced">
+                            Surplus (+{supply - demand}%)
+                          </span>
                         ) : (
                           <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-extrabold skill-gap-badge-balanced">
-                            Balanced (+{Math.abs(netGap)}%)
+                            Balanced (0%)
                           </span>
                         )}
                       </td>
 
                       <td>
-                        <div className="font-bold text-slate-800 dark:text-slate-200 text-sm">
-                          {gap.affectedStudents} students
-                        </div>
-                        <div className="text-[11px] text-slate-500">
-                          Lacking verified badge
-                        </div>
+                        {gap.affectedStudents > 0 ? (
+                          <>
+                            <div className="font-bold text-slate-800 dark:text-slate-200 text-sm">
+                              {gap.affectedStudents} {gap.affectedStudents === 1 ? 'student' : 'students'}
+                            </div>
+                            <div className="text-[11px] text-rose-500 font-medium">
+                              Lacking verified badge
+                            </div>
+                          </>
+                        ) : (
+                          <>
+                            <div className="font-bold text-emerald-600 dark:text-emerald-400 text-sm flex items-center gap-1">
+                              <CheckCircle2 size={14} className="text-emerald-500" />
+                              <span>100% Verified</span>
+                            </div>
+                            <div className="text-[11px] text-slate-400">
+                              Cohort requirement met
+                            </div>
+                          </>
+                        )}
                       </td>
 
                       <td>
-                        <Button
-                          size="sm"
-                          className={`text-xs font-bold shadow-sm flex items-center gap-1.5 ${
-                            isCritical
-                              ? 'bg-rose-600 hover:bg-rose-500 text-white'
-                              : 'bg-indigo-600 hover:bg-indigo-500 text-white'
-                          }`}
-                          onClick={() => handleOpenBootcampModal(gap)}
-                        >
-                          <Zap size={14} />
-                          <span>1-Click Launch Bootcamp</span>
-                        </Button>
+                        {gap.affectedStudents > 0 && netGap > 0 ? (
+                          <Button
+                            size="sm"
+                            className={`text-xs font-bold shadow-sm flex items-center gap-1.5 ${
+                              isCritical
+                                ? 'bg-rose-600 hover:bg-rose-500 text-white'
+                                : 'bg-indigo-600 hover:bg-indigo-500 text-white'
+                            }`}
+                            onClick={() => handleOpenBootcampModal(gap)}
+                          >
+                            <Zap size={14} />
+                            <span>1-Click Launch Bootcamp</span>
+                          </Button>
+                        ) : (
+                          <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">
+                            <CheckCircle2 size={13} className="text-emerald-500" />
+                            <span>Benchmark Met</span>
+                          </span>
+                        )}
                       </td>
                     </tr>
                   );
