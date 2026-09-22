@@ -14,6 +14,7 @@ import {
 } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { institutionAPI } from '../../services/api';
+import { stripSkillTag } from '@/lib/skillCategories';
 
 export default function InstitutionBootcampsTab({ currentUser, onSelectTab }) {
   const userId = currentUser?.id || currentUser?.userId || 1;
@@ -55,9 +56,9 @@ export default function InstitutionBootcampsTab({ currentUser, onSelectTab }) {
           : (heatRes.value?.data || []);
         const extractedSkills = heatmapList
           .map((g) => ({
-            id: g.skill?.id || g.skillId || g.id,
-            name: g.skill?.name || g.skillName || g.name || 'Core Competency',
-            category: g.skill?.category || g.category || 'Skill Deficit',
+            id: g.skillId || g.id || g.skill?.id,
+            name: stripSkillTag(g.skillName || g.skill?.name || g.name || 'Core Competency'),
+            category: g.category || g.skill?.category || 'Skill Deficit',
             affectedStudents: g.affectedStudents || 0,
           }))
           .filter((s) => s.id && s.name);

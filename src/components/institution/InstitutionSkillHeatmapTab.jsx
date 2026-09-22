@@ -17,6 +17,7 @@ import {
 import { Button } from '@/components/ui/Button';
 import { Badge } from '@/components/ui/Badge';
 import { institutionAPI } from '../../services/api';
+import { stripSkillTag } from '@/lib/skillCategories';
 import './InstitutionSkillHeatmapTab.css';
 
 export default function InstitutionSkillHeatmapTab({
@@ -69,8 +70,10 @@ export default function InstitutionSkillHeatmapTab({
   }, [userId, currentUser]);
 
   const handleOpenBootcampModal = (gap) => {
-    setSelectedSkillForBootcamp(gap);
-    setBootcampTitle(`${gap.skillName} Industry-Ready Remedial Bootcamp`);
+    const clean = stripSkillTag(gap.skillName || '');
+    const netGap = gap.deficitPercentage ?? gap.netDeficitPercentage ?? gap.gapPercentage ?? 0;
+    setSelectedSkillForBootcamp({ ...gap, cleanSkillName: clean, displayGap: netGap });
+    setBootcampTitle(`${clean} Industry-Ready Remedial Bootcamp`);
     // Default scheduled date to 7 days from now
     const nextWeek = new Date();
     nextWeek.setDate(nextWeek.getDate() + 7);
@@ -91,10 +94,11 @@ export default function InstitutionSkillHeatmapTab({
         scheduledDate: bootcampDate,
       };
 
-      const skillId = selectedSkillForBootcamp.skillId || 1;
+      const skillId = selectedSkillForBootcamp.skillId || selectedSkillForBootcamp.id || 1;
       await institutionAPI.scheduleRemedialTraining(skillId, payload);
 
-      setActionSuccessMsg(`Bootcamp successfully registered and scheduled for ${selectedSkillForBootcamp.skillName}!`);
+      const displayName = selectedSkillForBootcamp.cleanSkillName || selectedSkillForBootcamp.skillName;
+      setActionSuccessMsg(`Bootcamp successfully registered and scheduled for ${displayName}!`);
       setTimeout(() => {
         setSelectedSkillForBootcamp(null);
         if (onSelectTab) onSelectTab('bootcamps');
@@ -108,8 +112,9 @@ export default function InstitutionSkillHeatmapTab({
 
   // Filter skills based on search & severity
   const filteredSkills = skillGaps.filter((g) => {
-    const nameMatch = (g.skillName || '').toLowerCase().includes(searchQuery.toLowerCase());
-    const gapVal = g.gapPercentage || 0;
+    const clean = stripSkillTag(g.skillName || '');
+    const nameMatch = clean.toLowerCase().includes(searchQuery.toLowerCase());
+    const gapVal = g.deficitPercentage ?? g.netDeficitPercentage ?? g.gapPercentage ?? 0;
 
     if (!nameMatch) return false;
 
@@ -225,9 +230,10 @@ export default function InstitutionSkillHeatmapTab({
               </thead>
               <tbody>
                 {filteredSkills.map((gap, idx) => {
+                  const cleanName = stripSkillTag(gap.skillName || 'Competency');
                   const demand = gap.demandPercentage || 0;
-                  const supply = gap.studentPercentage || 0;
-                  const netGap = gap.gapPercentage || 0;
+                  const supply = gap.supplyPercentage ?? gap.studentPercentage ?? 0;
+                  const netGap = gap.deficitPercentage ?? gap.netDeficitPercentage ?? gap.gapPercentage ?? 0;
                   const isCritical = netGap >= 25;
                   const isModerate = netGap > 0 && netGap < 25;
 
@@ -235,7 +241,7 @@ export default function InstitutionSkillHeatmapTab({
                     <tr key={gap.skillId || idx}>
                       <td>
                         <div className="font-bold text-slate-900 dark:text-slate-100 text-sm">
-                          {gap.skillName}
+                          {cleanName}
                         </div>
                         <div className="text-[11px] text-slate-500">
                           {gap.recommendedAction || (isCritical ? 'Immediate Bootcamp Recommended' : 'Routine Curriculum Alignment')}
@@ -345,7 +351,7 @@ export default function InstitutionSkillHeatmapTab({
                   Target Skill
                 </label>
                 <div className="p-2.5 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 font-bold text-sm text-indigo-600 dark:text-indigo-400">
-                  {selectedSkillForBootcamp.skillName} (Current Net Deficit: -{selectedSkillForBootcamp.gapPercentage}%)
+                  {selectedSkillForBootcamp.cleanSkillName || selectedSkillForBootcamp.skillName} (Current Net Deficit: -{selectedSkillForBootcamp.displayGap ?? selectedSkillForBootcamp.deficitPercentage ?? selectedSkillForBootcamp.gapPercentage ?? 0}%)
                 </div>
               </div>
 
